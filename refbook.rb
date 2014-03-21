@@ -8,18 +8,12 @@ require 'haml'
 include Mongo
 
 configure do
-  # conn = MongoClient.from_uri(ENV['KINECT_URI'])
-  # set :mongo_connection, conn
-  # set :mongo_collection, conn.db('kinect')['db_cookie']
-  # set :cookie, {}
-  # set :user, {}
   enable :sessions
   set :session_secret, 'this_is_secret'
 
   Parse.init :application_id => '7Wm6hqr7ij43PkytuISZAO0dIAr8JJtkDlJVClox',
            :api_key        => 'VzsXMh7mzyuJ6qKToCOZQQrrpd7YRGamzzsnpJVG'
-  # set_cookie
-  # settings.dict[:cookie] = settings.mongo_collection.find_one
+
   if settings.development?
     set :env_db, 'localhost:4567'
     # this is so we can test on multiple local computers
@@ -29,6 +23,15 @@ configure do
   end
 end
 
+# helpers do
+
+# end
+
+def logged_in?
+    session[:user] != nil
+    # 'yep'
+end
+
 get '/' do
   # if session[:user] == nil
   #   haml :index
@@ -36,4 +39,36 @@ get '/' do
   #   redirect '/nav',303
   # end
   haml :index
+end
+
+get '/create' do
+  haml :create
+end
+
+post '/create' do
+    user = Parse::User.new({
+    :username => params[:username],
+    :password => params[:password],
+    :assRef => false,
+    :snitchRef => false,
+    :headRef => false
+  })
+  session[:user] = user.save
+  redirect '/'
+end
+
+get '/login' do
+  session[:user] = {username: 'david', team: 'michigan'}
+
+  redirect '/'
+end
+
+get '/logout' do 
+  session[:user] = nil
+  redirect '/'
+end
+
+# renders css
+get '/styles.css' do
+  scss :refbook
 end

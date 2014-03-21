@@ -1,0 +1,22 @@
+!!!
+
+%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
+
+%script{src: "http://code.jquery.com/jquery-1.10.2.min.js", type:"text/javascript"}
+
+
+.header
+  %p
+    Ref Development Site - 
+    %a{href: '/'}
+      home
+  %p
+    Hello, #{session[:user] != nil ? session[:user][:username] : 'user'}
+
+  %p
+    - if logged_in?
+      %a{href: '/logout'}
+        Logout
+    - else
+      %a{href: '/login'}
+        Login

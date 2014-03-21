@@ -1,0 +1,14 @@
+=haml :_header
+
+%form{name: "create", action: "create", method: "post"}
+  %ul
+    %li
+      %label{for: "Username"}
+        Username:
+      %input{type: "username", name: "username", placeholder:"username"}
+      %br
+      %label{for: "Password:"}
+        Password:
+      %input{type: "password", name: "passowrd", placeholder: "pw"}
+    %li
+      %input.button{type: "submit", value: "Create User"}
