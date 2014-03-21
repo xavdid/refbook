@@ -1,5 +1,10 @@
 =haml :_header
 
+%h1
+  Create
+-# #{flash[:issue]}
+=styled_flash
+
 %form{name: "create", action: "create", method: "post"}
   %ul
     %li

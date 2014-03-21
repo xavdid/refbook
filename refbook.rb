@@ -4,6 +4,7 @@ require 'mongo'
 require 'sass'
 require 'parse-ruby-client'
 require 'haml'
+require 'sinatra/flash'
 
 include Mongo
 
@@ -53,8 +54,15 @@ post '/create' do
     :snitchRef => false,
     :headRef => false
   })
-  session[:user] = user.save
-  redirect '/'
+  begin
+    session[:user] = user.save
+    redirect '/'
+  rescue
+    flash[:issue] = "Try an original name, dummy"
+    redirect '/create'
+  end
+  
+
 end
 
 get '/tests' do
@@ -86,8 +94,14 @@ get '/login' do
 end
 
 post '/login' do
-  session[:user] = Parse::User.authenticate(params[:username], params[:password])
-  redirect '/'
+  begin
+    session[:user] = Parse::User.authenticate(params[:username], params[:password])
+    redirect '/'
+  rescue
+    flash[:issue] = "Invalid login credientials"
+    redirect '/login'
+  end
+  
 end
 
 get '/logout' do 

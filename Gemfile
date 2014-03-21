@@ -4,5 +4,6 @@ gem 'sinatra'
 gem 'json'
 gem 'mongo'
 gem 'sass'
-gem "parse-ruby-client"
+gem 'parse-ruby-client'
 gem 'haml'
+gem 'sinatra-flash'
