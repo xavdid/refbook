@@ -1,0 +1,44 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bson (1.9.2)
+    haml (4.0.5)
+      tilt
+    iron_core (1.0.3)
+      rest (>= 2.6.4)
+    iron_mq (5.0.1)
+      iron_core (>= 0.5.1)
+    json (1.8.1)
+    mongo (1.9.2)
+      bson (~> 1.9.2)
+    net-http-persistent (2.9.4)
+    netrc (0.7.7)
+    parse-ruby-client (0.2.0)
+      iron_mq
+      patron
+    patron (0.4.18)
+    rack (1.5.2)
+    rack-protection (1.5.2)
+      rack
+    rest (2.7.1)
+      net-http-persistent (>= 2.9.1)
+      rest_client (>= 1.7.1)
+    rest_client (1.7.3)
+      netrc (~> 0.7.7)
+    sass (3.3.3)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    tilt (1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  haml
+  json
+  mongo
+  parse-ruby-client
+  sass
+  sinatra
