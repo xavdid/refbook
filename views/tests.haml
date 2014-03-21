@@ -1,0 +1,59 @@
+=haml :_header
+
+%p
+  Let's get you certified! This'll be through classmarker and there'll be a built-in timer to space out re-takes.
+
+.question
+
+%ul
+  %li
+    %input{type: "radio", id: "q1", value: "a", name: "q1"}
+    .ans#a1
+  %li
+    %input{type: "radio", id: "q2", value: "b", name: "q1"}
+    .ans#a2
+  %li
+    %input{type: "radio", id: "q3", value: "c", name: "q1"}
+    .ans#a3
+
+%button{type: "button", id: "submit"}
+  Submit
+
+
+:javascript
+  var q = {
+    "ass":[
+      "What is this game called?",
+      "polo",
+      "quidditch",
+      "how I met your mother"
+    ],
+    "head":[
+      "Who's the most important?",
+      "Santa",
+      "you",
+      "we're all equally important"
+    ],
+    "snitch":[
+      "What color is the snitch?",
+      "Blue",
+      "Yellow",
+      "Green"
+    ]
+  };
+
+  $('.question').text(q['#{@type}'][0]);
+  $('#a1').text(q['#{@type}'][1]);
+  $('#a2').text(q['#{@type}'][2]);
+  $('#a3').text(q['#{@type}'][3]);
+
+  $('#submit').click(function(){
+    var a = $('#q2').is(":checked");
+    window.location.href = '/grade?test=#{@type}&pass='+a;
+  });
+
+
+
+
+
+

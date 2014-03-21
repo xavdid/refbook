@@ -3,8 +3,8 @@
 %h1
   RDT
 
-%p
-  This is the site for the RDT. It'll have stuff one day.
+-# %p
+  -# This is the site for the RDT. It'll have stuff one day.
 
 -# %p
 -#   - if logged_in?
@@ -14,5 +14,30 @@
 -#     %a{href: '/login'}
 -#       Login
 
-%p
-  #{session[:user]}
+- if logged_in?
+  - if session[:user]['headRef']
+    %p
+      Looks like you're fully certified!
+  - elsif session[:user]['assRef'] and session[:user]['snitchRef']
+    %p
+      You've passed two of the tests, why not take a swing at the
+      %a{href: '/tests?test=head'}
+        Head Ref Test
+  - else
+    - if not session[:user]['assRef']
+      %p
+        The greatest journey begins with but a single step, or the 
+        %a{href: '/tests?test=ass'}
+          Assistant Ref Test
+    - else
+      %p
+        You're a certified assistant ref!
+
+    - if not session[:user]['snitchRef']
+      %p
+        Follow that tail! Take the 
+        %a{href: '/tests?test=snitch'}
+          Snitch Ref Test
+    - else
+      %p
+        You're a certified snitch ref!

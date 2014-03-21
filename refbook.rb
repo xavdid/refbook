@@ -12,7 +12,7 @@ configure do
   set :session_secret, 'this_is_secret'
 
   Parse.init :application_id => '7Wm6hqr7ij43PkytuISZAO0dIAr8JJtkDlJVClox',
-           :api_key        => 'VzsXMh7mzyuJ6qKToCOZQQrrpd7YRGamzzsnpJVG'
+           :master_key        => 'PMmErBeV7KbgPN7XcZXG2qbcYkLzs1Er6gpzs0Jx'
 
   if settings.development?
     set :env_db, 'localhost:4567'
@@ -57,9 +57,36 @@ post '/create' do
   redirect '/'
 end
 
-get '/login' do
-  session[:user] = {username: 'david', team: 'michigan'}
+get '/tests' do
+  @type = params[:test]
+  haml :tests
+end
 
+get '/grade' do
+  @test = params[:test]
+  if params[:pass] == 'true'
+    @pass = true
+    session[:user][@test+'Ref'] = true
+    session[:user] = session[:user].save
+  else
+    @pass = false
+  end
+
+  
+
+  haml :grade
+  # parse stuff
+end
+
+get '/login' do
+  # session[:user] = {username: 'david', team: 'michigan'}
+
+  # redirect '/'
+  haml :login
+end
+
+post '/login' do
+  session[:user] = Parse::User.authenticate(params[:username], params[:password])
   redirect '/'
 end
 

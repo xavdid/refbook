@@ -11,12 +11,15 @@
     %a{href: '/'}
       home
   %p
-    Hello, #{session[:user] != nil ? session[:user][:username] : 'user'}
+    Hello, #{session[:user] != nil ? session[:user]['username'] : 'user'}
 
   %p
     - if logged_in?
       %a{href: '/logout'}
         Logout
     - else
-      %a{href: '/login'}
+      %a{href: '/login'}<
         Login
+      or
+      %a{href: '/create'}
+        Create Account

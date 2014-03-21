@@ -1,0 +1,7 @@
+=haml :_header
+  
+%h2
+  - if @pass
+    "passed the #{@test} ref test!"
+  - else
+    "failed the #{@test} ref test!"
