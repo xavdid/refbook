@@ -3,17 +3,17 @@
 %h1
   Login
 
-=styled_flash
+.issue
+  =flash[:issue]
 
-%form{name: "login", action: "login", method: "post"}
-  %ul
-    %li
-      %label{for: "Username"}
-        Username:
-      %input{type: "username", name: "username", placeholder:"username"}
-      %br
-      %label{for: "Password:"}
-        Password:
-      %input{type: "password", name: "password", placeholder: "pw"}
-    %li
-      %input.button{type: "submit", value: "Create User"}
+.form_box
+  %form{name: "login", action: "login", method: "post"}
+    %label{for: "Username"}
+      Username
+    %input{type: "username", name: "username", placeholder:"username"}
+
+    %label{for: "Password:"}
+      Password
+    %input{type: "password", name: "pw", placeholder: "password"}
+
+    %input.button{type: "submit", value: "Login"}

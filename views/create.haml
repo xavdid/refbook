@@ -5,31 +5,61 @@
 -# #{flash[:issue]}
 .issue
   =flash[:issue]
+
 .form_box
   %form{name: "create", action: "create", method: "post", onsubmit: "return validate();"}
-    %label{for: "Username"}
-      Username:
-    %input{type: "username", name: "username", placeholder:"username"}
+    %label{for: "Email"}
+      Email
+    %input{type: "email", name: "email", placeholder:"email"}
 
-    %label{for: "Password:"}
-      Password:
+    %label{for: "Password"}
+      Password
     %input{type: "password", name: "pw", placeholder: "password"}
 
-    %label{for: "Confirm Password:"}
-      Confirm:
+    %label{for: "Confirm Password"}
+      Confirm
     %input{type: "password", name: "pw2", placeholder: "confirmed password"}
+
+    %label{for: "team"}
+      Associated Team
+    %input{type: "text", name: "team", placeholder: "team", id: "team"}
+
     %input.button{type: "submit", value: "Create User"}
 
 :javascript
-  function validate()
-  {
-    if (!($("form")[0]["pw"].value == $("form")[0]["pw2"].value))
-    {
+  var teams = #{@team_list};
+  teams += "none";
+  $('#team').autocomplete({source: teams});
+  function validate() {
+    // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
+    var f = $("form")[0];
+    var filled = true;
+
+    var e = f["email"].value;
+    var p = f["pw"].value;
+    var p2 = f["pw2"].value;
+    var t = f["team"].value;
+
+    var fields = [e, p, p2, t];
+
+    fields.forEach(function(field){
+      if (field == null || field == "") {
+        filled = false;
+      }
+    });
+
+    if (!filled) {
+      $(".issue").text("All fields are required");
+      return false;
+    }
+
+    else if (!(f["pw"].value == f["pw2"].value)) {
       $(".issue").text("Passwords don't match");
       return false;
     }
-    else
-    {
+
+    else {
       return true;
     }    
+    
   }

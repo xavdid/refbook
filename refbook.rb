@@ -43,6 +43,15 @@ get '/' do
 end
 
 get '/create' do
+  @team_list = []
+  teams = Parse::Query.new("_User").tap do |team|
+    team.exists("Team")
+  end.get
+  teams.each do |t|
+    @team_list << t["Team"]
+  end
+  @team_list = @team_list.to_set.to_a
+  puts @team_list
   haml :create
 end
 
@@ -52,7 +61,8 @@ post '/create' do
     :password => params[:password],
     :assRef => false,
     :snitchRef => false,
-    :headRef => false
+    :headRef => false,
+    :team => params[:team]
   })
   begin
     session[:user] = user.save
