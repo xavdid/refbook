@@ -3,17 +3,33 @@
 %h1
   Create
 -# #{flash[:issue]}
-=styled_flash
+.issue
+  =flash[:issue]
+.form_box
+  %form{name: "create", action: "create", method: "post", onsubmit: "return validate();"}
+    %label{for: "Username"}
+      Username:
+    %input{type: "username", name: "username", placeholder:"username"}
 
-%form{name: "create", action: "create", method: "post"}
-  %ul
-    %li
-      %label{for: "Username"}
-        Username:
-      %input{type: "username", name: "username", placeholder:"username"}
-      %br
-      %label{for: "Password:"}
-        Password:
-      %input{type: "password", name: "password", placeholder: "pw"}
-    %li
-      %input.button{type: "submit", value: "Create User"}
+    %label{for: "Password:"}
+      Password:
+    %input{type: "password", name: "pw", placeholder: "password"}
+
+    %label{for: "Confirm Password:"}
+      Confirm:
+    %input{type: "password", name: "pw2", placeholder: "confirmed password"}
+    %input.button{type: "submit", value: "Create User"}
+
+:javascript
+  function validate()
+  {
+    if (!($("form")[0]["pw"].value == $("form")[0]["pw2"].value))
+    {
+      $(".issue").text("Passwords don't match");
+      return false;
+    }
+    else
+    {
+      return true;
+    }    
+  }

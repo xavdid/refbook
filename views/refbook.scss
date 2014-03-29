@@ -26,4 +26,16 @@ body {
 
 .issue {
     color: red;
+    height: 20px;
+}
+
+.form_box {
+    width: 250px;
+    clear: both;
+
+    input {
+        width: 100%;
+        clear: both;
+        margin-bottom: 20px;
+    }
 }
