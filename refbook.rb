@@ -57,12 +57,14 @@ end
 
 post '/create' do
     user = Parse::User.new({
+    # username is actually email, secretly
     :username => params[:username],
     :password => params[:password],
     :assRef => false,
     :snitchRef => false,
     :headRef => false,
-    :team => params[:team]
+    :admin => false,
+    :team => params[:team].split(/(\W)/).map(&:capitalize).join
   })
   begin
     session[:user] = user.save
@@ -71,8 +73,6 @@ post '/create' do
     flash[:issue] = "Try an original name, dummy"
     redirect '/create'
   end
-  
-
 end
 
 get '/tests' do
@@ -90,11 +90,14 @@ get '/grade' do
     @pass = false
   end
 
-  
-
   haml :grade
   # parse stuff
 end
+
+# get '/admin' do
+  # this'll list links to important stuff
+  # also, unique team names to catch typos/etc
+# end
 
 get '/login' do
   # session[:user] = {username: 'david', team: 'michigan'}

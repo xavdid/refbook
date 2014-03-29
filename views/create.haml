@@ -6,11 +6,14 @@
 .issue
   =flash[:issue]
 
+%p
+  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. 
+
 .form_box
   %form{name: "create", action: "create", method: "post", onsubmit: "return validate();"}
     %label{for: "Email"}
       Email
-    %input{type: "email", name: "email", placeholder:"email"}
+    %input{type: "email", name: "username", placeholder:"email"}
 
     %label{for: "Password"}
       Password
@@ -21,14 +24,14 @@
     %input{type: "password", name: "pw2", placeholder: "confirmed password"}
 
     %label{for: "team"}
-      Associated Team
+      Associated Team (or none)
     %input{type: "text", name: "team", placeholder: "team", id: "team"}
 
     %input.button{type: "submit", value: "Create User"}
 
 :javascript
   var teams = #{@team_list};
-  teams += "none";
+  teams.push("none");
   $('#team').autocomplete({source: teams});
   function validate() {
     // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
@@ -61,5 +64,5 @@
     else {
       return true;
     }    
-    
+
   }
