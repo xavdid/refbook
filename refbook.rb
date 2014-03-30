@@ -5,6 +5,7 @@ require 'sass'
 require 'parse-ruby-client'
 require 'haml'
 require 'sinatra/flash'
+require 'pp'
 
 include Mongo
 
@@ -51,7 +52,7 @@ get '/create' do
     @team_list << t["Team"]
   end
   @team_list = @team_list.to_set.to_a
-  puts @team_list
+  # puts @team_list
   haml :create
 end
 
@@ -64,8 +65,13 @@ post '/create' do
     :snitchRef => false,
     :headRef => false,
     :admin => false,
-    :team => params[:team].split(/(\W)/).map(&:capitalize).join
+    :firstName => params[:fn].capitalize,
+    :lastName => params[:ln].capitalize,
+    # the regex titlecases
+    :team => params[:team].split(/(\W)/).map(&:capitalize).join,
+    :region => params[:region].upcase
   })
+
   begin
     session[:user] = user.save
     redirect '/'
@@ -98,6 +104,31 @@ end
   # this'll list links to important stuff
   # also, unique team names to catch typos/etc
 # end
+
+get '/search' do 
+  haml :si
+end
+
+get '/search/:region' do 
+  # maybe declare array of regions?
+
+  if params[:region] == "all"
+    puts 'all!'
+    q = Parse::Query.new("_User").get
+  else
+    puts 'not all!'
+    q = Parse::Query.new("_User").eq("region",params[:region]).get
+  end
+
+  @a = []
+  q.each do |person|
+      @a << [person["firstName"]||'d', person["lastName"]||'b', person["region"]||'r', person["team"]||'t']
+  end
+
+  puts @a
+
+  haml :search
+end
 
 get '/login' do
   # session[:user] = {username: 'david', team: 'michigan'}

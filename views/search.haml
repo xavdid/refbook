@@ -1,0 +1,36 @@
+=haml :_header
+
+%h1
+  Search
+
+.issue
+  =flash[:issue]
+
+%table#theTable
+  %thead
+    %tr
+      %td
+        First Name
+      %td
+        Last Name
+      %td
+        Region
+      %td
+        Associated Team
+  %tbody
+
+:javascript
+  var refs = #{@a};
+  var odd = false;
+  $("#theTable tbody").empty();
+  for (var i = 0; i < refs.length; i++) {
+    var r = ["<tr class=\"", (odd) ? "odd" : "even","\">",
+      "<td>",refs[i][0],"</td>",
+      "<td>",refs[i][1],"</td>",
+      "<td>",refs[i][2],"</td>",
+      "<td>",refs[i][3],"</td>",
+      "</tr>"].join(' ');
+    odd = !odd;  
+    $("#theTable tbody").append(r);
+  };
+

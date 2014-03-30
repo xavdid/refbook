@@ -1,0 +1,42 @@
+=haml :_header
+
+%h1
+  Search
+
+.issue
+  =flash[:issue]
+
+%p
+  See refs from a region:
+
+  %ul
+    %li
+      %a{href: "/search/all"}
+        All Regions
+    %li
+      %a{href: "/search/USWE"}
+        US West
+    %li
+      %a{href: "/search/USMW"}
+        US Midwest
+    %li
+      %a{href: "/search/USSW"}
+        US Southwest
+    %li
+      %a{href: "/search/USSO"}
+        US South
+    %li
+      %a{href: "/search/USMA"}
+        US Mid-Atlantic
+    %li
+      %a{href: "/search/USNE"}
+        US Northeast
+    %li
+      %a{href: "/search/CANA"}
+        Canada
+    %li
+      %a{href: "/search/OCEA"}
+        Oceana
+    %li
+      %a{href: "/search/ITAL"}
+        Italy

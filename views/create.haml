@@ -23,9 +23,25 @@
       Confirm
     %input{type: "password", name: "pw2", placeholder: "confirmed password"}
 
+    %label{for: "fn"}
+      First Name
+    %input{type: "text", name: "fn", placeholder: "First Name", id: "fn"}
+
+    %label{for: "ln"}
+      Last Name
+    %input{type: "text", name: "ln", placeholder: "Last Name", id: "ln"}
+
     %label{for: "team"}
       Associated Team (or none)
     %input{type: "text", name: "team", placeholder: "team", id: "team"}
+
+    %label{for: "region"}
+      Region
+    %input{type: "text", name: "region", placeholder: "region", id: "region"}
+
+    %label{for: "agreement"}
+      Referee Agreement (mentioned either here or elsewehre)
+    %input{type: "checkbox", name: "agreement", placeholder: "agreement", id: "agreement"}
 
     %input.button{type: "submit", value: "Create User"}
 
@@ -33,17 +49,26 @@
   var teams = #{@team_list};
   teams.push("none");
   $('#team').autocomplete({source: teams});
+
+  var regions = ["US West", "US Midwest", "US Southwest", "US South", "US Northeast", "US Mid-Atlantic", "Eastern Canada", "Oceana", "Mexico" ];
+  $('#region').autocomplete({source: regions});
+
   function validate() {
     // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
     var f = $("form")[0];
     var filled = true;
 
-    var e = f["email"].value;
+    var e = f["username"].value;
     var p = f["pw"].value;
     var p2 = f["pw2"].value;
-    var t = f["team"].value;
+    
+    var fn = f["fn"].value;
+    var ln = f["ln"].value;
 
-    var fields = [e, p, p2, t];
+    var t = f["team"].value;
+    var r = f["region"].value;
+
+    var fields = [e, p, p2, fn, ln, t, r];
 
     fields.forEach(function(field){
       if (field == null || field == "") {
@@ -58,6 +83,11 @@
 
     else if (!(f["pw"].value == f["pw2"].value)) {
       $(".issue").text("Passwords don't match");
+      return false;
+    }
+
+    else if (!f["agreement"].checked) {
+      $(".issue").text("Must Agree to Ref Agreement");
       return false;
     }
 

@@ -39,3 +39,25 @@ body {
         margin-bottom: 20px;
     }
 }
+
+#theTable {
+    td {
+        padding-left: 10px;
+        padding-right: 20px;
+    }
+    thead {
+        // border-bottom: 1px solid #000;
+        background: black;
+        color: white;
+    }
+
+    tbody {
+        .odd {
+            background: #bcbcbc;
+        }
+        .even {
+            // background: #808080;
+        }
+    }
+    
+}

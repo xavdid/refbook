@@ -3,17 +3,6 @@
 %h1
   RDT
 
--# %p
-  -# This is the site for the RDT. It'll have stuff one day.
-
--# %p
--#   - if logged_in?
--#     %a{href: '/logout'}
--#       Logout
--#   - else
--#     %a{href: '/login'}
--#       Login
-
 - if logged_in?
   - if session[:user]['headRef']
     %p
