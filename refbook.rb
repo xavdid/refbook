@@ -46,10 +46,10 @@ end
 get '/create' do
   @team_list = []
   teams = Parse::Query.new("_User").tap do |team|
-    team.exists("Team")
+    team.exists("team")
   end.get
   teams.each do |t|
-    @team_list << t["Team"]
+    @team_list << t["team"]
   end
   @team_list = @team_list.to_set.to_a
   # puts @team_list
