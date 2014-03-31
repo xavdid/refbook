@@ -12,6 +12,7 @@ include Mongo
 configure do
   enable :sessions
   set :session_secret, 'this_is_secret'
+  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceana" => "OCEA", "Italy" => "ITAL"}
 
   Parse.init :application_id => '7Wm6hqr7ij43PkytuISZAO0dIAr8JJtkDlJVClox',
            :master_key        => 'PMmErBeV7KbgPN7XcZXG2qbcYkLzs1Er6gpzs0Jx'
@@ -61,6 +62,7 @@ post '/create' do
     # username is actually email, secretly
     :username => params[:username],
     :password => params[:password],
+    :email => params[:username],
     :assRef => false,
     :snitchRef => false,
     :headRef => false,
@@ -69,15 +71,30 @@ post '/create' do
     :lastName => params[:ln].capitalize,
     # the regex titlecases
     :team => params[:team].split(/(\W)/).map(&:capitalize).join,
-    :region => params[:region].upcase
+    :region => settings.region_keys[params[:region]]
   })
 
   begin
     session[:user] = user.save
     redirect '/'
   rescue
-    flash[:issue] = "Try an original name, dummy"
+    flash[:issue] = "Email already in use (or invalid)"
     redirect '/create'
+  end
+end
+
+get '/reset' do 
+  haml :reset
+end
+
+post '/reset' do
+  begin
+    Parse::User.reset_password(params[:email])
+    flash[:issue] = "You have been logged out, log in with new credentials"
+    redirect '/logout'
+  rescue
+    flash[:issue] = "No user with that email"
+    redirect '/reset'
   end
 end
 
@@ -110,13 +127,13 @@ get '/search' do
 end
 
 get '/search/:region' do 
-  # maybe declare array of regions?
+  # maybe declare array of regions? can be done on settings
 
   if params[:region] == "all"
-    puts 'all!'
+    # puts 'all!'
     q = Parse::Query.new("_User").get
   else
-    puts 'not all!'
+    # puts 'not all!'
     q = Parse::Query.new("_User").eq("region",params[:region]).get
   end
 
@@ -125,15 +142,12 @@ get '/search/:region' do
       @a << [person["firstName"]||'d', person["lastName"]||'b', person["region"]||'r', person["team"]||'t']
   end
 
-  puts @a
+  # puts @a
 
   haml :search
 end
 
 get '/login' do
-  # session[:user] = {username: 'david', team: 'michigan'}
-
-  # redirect '/'
   haml :login
 end
 

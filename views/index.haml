@@ -3,6 +3,9 @@
 %h1
   RDT
 
+.issue
+  =flash[:issue]
+
 - if logged_in?
   - if session[:user]['headRef']
     %p
@@ -36,6 +39,12 @@
 
 %p
   Do you want to 
-  %a{href: '/search'}
+  %a{href: '/search'}<
     search
   for some refs?
+
+%p
+  You can now
+  %a{href: '/reset'}<
+    reset
+  your password!
