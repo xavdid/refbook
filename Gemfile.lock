@@ -2,6 +2,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     bson (1.9.2)
+    bson_ext (1.9.2)
+      bson (~> 1.9.2)
     haml (4.0.5)
       tilt
     iron_core (1.0.3)
@@ -38,6 +40,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   haml
   json
   mongo
