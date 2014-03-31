@@ -127,7 +127,6 @@ get '/search' do
 end
 
 get '/search/:region' do 
-  # maybe declare array of regions? can be done on settings
 
   if params[:region] == "all"
     # puts 'all!'
@@ -139,12 +138,14 @@ get '/search/:region' do
 
   @a = []
   q.each do |person|
-      @a << [person["firstName"]||'d', person["lastName"]||'b', person["region"]||'r', person["team"]||'t']
+      @a << [person["firstName"], person["lastName"], person["team"], person["username"]]
   end
 
   # puts @a
 
   haml :search
+
+  s = "hello, #{n!=nil ? n : 'user'} #{e!=nil ? "(#{e})" : ''}"
 end
 
 get '/login' do

@@ -15,7 +15,7 @@
     %a{href: '/'}
       home
   %p
-    Hello, #{session[:user] != nil ? session[:user]['username'] : 'user'}
+    Hello, #{logged_in? ? session[:user]['firstName'] : 'user'} #{logged_in? ? "(#{session[:user]['username']})" : ''}
 
   %p
     - if logged_in?

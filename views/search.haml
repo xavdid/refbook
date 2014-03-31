@@ -6,6 +6,9 @@
 .issue
   =flash[:issue]
 
+%h2
+  #{params[:region]}
+
 %table#theTable
   %thead
     %tr
@@ -14,9 +17,9 @@
       %td
         Last Name
       %td
-        Region
+        Team
       %td
-        Associated Team
+        Email
   %tbody
 
 :javascript
@@ -28,7 +31,7 @@
       "<td>",refs[i][0],"</td>",
       "<td>",refs[i][1],"</td>",
       "<td>",refs[i][2],"</td>",
-      "<td>",refs[i][3],"</td>",
+      "<td><a href=\"mailto:",refs[i][3],"\">",refs[i][3],"</a></td>",
       "</tr>"].join(' ');
     odd = !odd;  
     $("#theTable tbody").append(r);
