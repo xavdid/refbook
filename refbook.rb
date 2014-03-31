@@ -144,8 +144,6 @@ get '/search/:region' do
   # puts @a
 
   haml :search
-
-  s = "hello, #{n!=nil ? n : 'user'} #{e!=nil ? "(#{e})" : ''}"
 end
 
 get '/login' do
