@@ -12,7 +12,7 @@ include Mongo
 configure do
   enable :sessions
   set :session_secret, 'this_is_secret'
-  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceana" => "OCEA", "Italy" => "ITAL"}
+  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceana" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL"}
 
   Parse.init :application_id => '7Wm6hqr7ij43PkytuISZAO0dIAr8JJtkDlJVClox',
            :master_key        => 'PMmErBeV7KbgPN7XcZXG2qbcYkLzs1Er6gpzs0Jx'
@@ -33,6 +33,12 @@ end
 def logged_in?
     session[:user] != nil
     # 'yep'
+end
+
+def reg_reverse(reg)
+  settings.region_keys.select do |k, v|
+    v == reg
+  end.keys.first
 end
 
 get '/' do
@@ -128,7 +134,14 @@ end
 
 get '/search/:region' do 
 
-  if params[:region] == "all"
+  @region_title = reg_reverse(params[:region])
+  # puts 'test',@region_title
+  if @region_title.nil?
+    flash[:issue] = "Invalid region code: #{params[:region]}"
+    redirect '/search'
+  end
+
+  if params[:region] == 'ALL'
     # puts 'all!'
     q = Parse::Query.new("_User").get
   else
@@ -138,7 +151,16 @@ get '/search/:region' do
 
   @a = []
   q.each do |person|
-      @a << [person["firstName"], person["lastName"], person["team"], person["username"]]
+      @a << [person["firstName"], person["lastName"], 
+        person["team"], person["username"]]
+      
+      if params[:region] == 'ALL'
+        r = settings.region_keys.select do |k, v|
+          v == person["region"]
+        end
+        # puts r,'here!'
+        @a.last << r.keys.first
+      end
   end
 
   # puts @a

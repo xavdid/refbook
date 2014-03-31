@@ -7,7 +7,7 @@
   =flash[:issue]
 
 %h2
-  #{params[:region]}
+  #{@region_title}
 
 %table#theTable
   %thead
@@ -20,6 +20,9 @@
         Team
       %td
         Email
+      - if params[:region] == 'ALL'
+        %td
+          Region
   %tbody
 
 :javascript
@@ -32,7 +35,11 @@
       "<td>",refs[i][1],"</td>",
       "<td>",refs[i][2],"</td>",
       "<td><a href=\"mailto:",refs[i][3],"\">",refs[i][3],"</a></td>",
-      "</tr>"].join(' ');
+      ].join(' ');
+      if (#{params[:region] == 'ALL'}) {
+        r += ["<td>",refs[i][4],"</td>"].join(' ');
+      };
+      r += "</tr>";
     odd = !odd;  
     $("#theTable tbody").append(r);
   };
