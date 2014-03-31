@@ -149,9 +149,9 @@ get '/search/:region' do
     q = Parse::Query.new("_User").eq("region",params[:region]).get
   end
 
-  @a = []
+  @refs = []
   q.each do |person|
-      @a << [person["firstName"], person["lastName"], 
+      @refs << [person["firstName"], person["lastName"], 
         person["team"], person["username"]]
       
       if params[:region] == 'ALL'
@@ -159,11 +159,13 @@ get '/search/:region' do
           v == person["region"]
         end
         # puts r,'here!'
-        @a.last << r.keys.first
+        @refs.last << r.keys.first
       end
+  @refs.sort_by{|i| i[1]}
+
   end
 
-  # puts @a
+  # puts @refs
 
   haml :search
 end
