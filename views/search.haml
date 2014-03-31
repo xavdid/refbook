@@ -9,6 +9,13 @@
 %h2
   #{@region_title}
 
+%p
+  %a.all{href: '#'}<
+    Show All Refs
+%p
+  %a.head{href: '#'}<
+    Show Only Certified Head Refs
+
 %table#theTable
   %thead
     %tr
@@ -20,6 +27,12 @@
         Team
       %td
         Email
+      %td
+        AR
+      %td
+        SR
+      %td
+        HR
       - if params[:region] == 'ALL'
         %td
           Region
@@ -30,17 +43,27 @@
   var odd = false;
   $("#theTable tbody").empty();
   for (var i = 0; i < refs.length; i++) {
-    var r = ["<tr class=\"", (odd) ? "odd" : "even","\">",
+    var r = [
+      "<tr class=\"",(odd) ? "odd" : "even",refs[i][6],"\">",
       "<td>",refs[i][0],"</td>",
       "<td>",refs[i][1],"</td>",
       "<td>",refs[i][2],"</td>",
       "<td><a href=\"mailto:",refs[i][3],"\">",refs[i][3],"</a></td>",
+      "<td>",refs[i][4],"</td>", //ar
+      "<td>",refs[i][5],"</td>", //sr
+      "<td>",refs[i][6],"</td>", //hr
       ].join(' ');
       if (#{params[:region] == 'ALL'}) {
-        r += ["<td>",refs[i][4],"</td>"].join(' ');
+        r += ["<td>",refs[i][7],"</td>"].join(' ');
       };
       r += "</tr>";
     odd = !odd;  
     $("#theTable tbody").append(r);
   };
 
+  $('.all').click(function(){
+    $('.N').show();
+  });
+  $('.head').click(function(){
+    $('.N').hide();
+  });

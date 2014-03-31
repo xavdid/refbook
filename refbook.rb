@@ -110,16 +110,19 @@ get '/tests' do
 end
 
 get '/grade' do
-  @test = params[:test]
   if params[:pass] == 'true'
-    @pass = true
     session[:user][@test+'Ref'] = true
     session[:user] = session[:user].save
-  else
-    @pass = false
   end
 
-  haml :grade
+  if params[:pass] == 'true'
+    flash[:issue] = "passed the #{params[:test]} ref test!"
+  else
+    flash[:issue] = "failed the #{params[:test]} ref test!"
+  end
+
+  # haml :grade
+  redirect '/'
   # parse stuff
 end
 
@@ -133,6 +136,8 @@ get '/search' do
 end
 
 get '/search/:region' do 
+
+  # could add head/snitch/ass status to class to easily hide/show rows
 
   @region_title = reg_reverse(params[:region])
   # puts 'test',@region_title
@@ -151,22 +156,21 @@ get '/search/:region' do
 
   @refs = []
   q.each do |person|
-      @refs << [person["firstName"], person["lastName"], 
+      a = [person["firstName"], person["lastName"], 
         person["team"], person["username"]]
       
+      a << j = person['assRef'] ? 'Y' : 'N'
+      a << j = person['snitchRef'] ? 'Y' : 'N'
+      a << j = person['headRef'] ? 'Y' : 'N'
+
       if params[:region] == 'ALL'
-        r = settings.region_keys.select do |k, v|
-          v == person["region"]
-        end
-        # puts r,'here!'
-        @refs.last << r.keys.first
+        a << reg_reverse(person['region'])
       end
+
+      @refs << a
   end
-  # puts 'before'
-  # pp @refs
+
   @refs = @refs.sort_by{|i| i[1]}
-  # puts 'after'
-  # pp @refs
 
   haml :search
 end
