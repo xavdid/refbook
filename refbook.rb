@@ -161,11 +161,12 @@ get '/search/:region' do
         # puts r,'here!'
         @refs.last << r.keys.first
       end
-  @refs.sort_by{|i| i[1]}
-
   end
-
-  # puts @refs
+  # puts 'before'
+  # pp @refs
+  @refs = @refs.sort_by{|i| i[1]}
+  # puts 'after'
+  # pp @refs
 
   haml :search
 end
