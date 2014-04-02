@@ -54,12 +54,14 @@ get '/create' do
     @team_list << t["team"]
   end
   @team_list = @team_list.to_set.to_a
-  @region_list = settings.region_keys.keys
+  @region_keys = settings.region_keys.keys
   # puts @team_list
   haml :create
 end
 
 post '/create' do
+    # could have lastAss, lastHead, lastSnitch to enforce retake time
+    # also, i'll check CM, but we may want to store all of the attempts for our records
     user = Parse::User.new({
     # username is actually email, secretly
     :username => params[:username],
@@ -68,16 +70,21 @@ post '/create' do
     :assRef => false,
     :snitchRef => false,
     :headRef => false,
+    :passedFieldTest => false,
     :admin => false,
     :firstName => params[:fn].capitalize,
     :lastName => params[:ln].capitalize,
     # the regex titlecases
     :team => params[:team].split(/(\W)/).map(&:capitalize).join,
+    # because of dropdown, there shouldn't ever be no region, but this is 
+    # just in case. Region errors really break stuff.
     :region => settings.region_keys[params[:region]] || "NONE"
+    # :last_ass => T
   })
 
   begin
     session[:user] = user.save
+    flash[:issue] = "Account creation successful"
     redirect '/'
   rescue
     # usually only fails for invalid email, but it could be other stuff
@@ -124,7 +131,7 @@ get '/grade' do
 end
 
 get '/cm' do 
-  if params[:cm_tp] > 80
+  if params[:cm_tp].to_i > 80
     flash[:issue] = "You passed!, #{Time.now}"
   else
     flash[:issue] = "You failed, #{Time.now}"
@@ -138,6 +145,8 @@ end
 # end
 
 get '/search' do 
+  @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
+  @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
   haml :si
 end
 
@@ -160,16 +169,16 @@ get '/search/:region' do
 
   @refs = []
   q.each do |person|
-      a = [person["firstName"], person["lastName"], 
+      entry = [person["firstName"], person["lastName"], 
         person["team"], person["username"]]
       
       # assignment because reuby returns are weird
-      a << j = person['assRef'] ? 'Y' : 'N'
-      a << j = person['snitchRef'] ? 'Y' : 'N'
-      a << j = person['headRef'] ? 'Y' : 'N'
+      entry << j = person['assRef'] ? 'Y' : 'N'
+      entry << j = person['snitchRef'] ? 'Y' : 'N'
+      entry << j = person['headRef'] ? 'Y' : 'N'
 
       if params[:region] == 'ALL'
-        a << reg_reverse(person['region'])
+        entry << reg_reverse(person['region'])
       end
 
       @refs << a

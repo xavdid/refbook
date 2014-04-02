@@ -50,7 +50,7 @@
     %input.button{type: "submit", value: "Create User"}
 
 :javascript
-  var regions = #{@region_list};
+  var region_keys = #{@region_keys};
   var teams = #{@team_list};
 
   teams.push("None");
@@ -59,11 +59,10 @@
   // pop pop!
   regions.pop();
   regions.pop();
-  for (var i = 0; i < regions.length; i++) {
-    var reg = regions[i];
+  for (var i = 0; i < region_keys.length; i++) {
     var el = document.createElement("option");
-    el.textContent = reg;
-    el.value = reg;
+    el.textContent = region_keys[i];
+    el.value = region_keys[i];
     $("#region").append(el);
   }
 

@@ -9,34 +9,26 @@
 %p
   See refs from a region:
 
-  %ul
+  %ul#regions
     %li
       %a{href: "/search/ALL"}
         All Regions
-    %li
-      %a{href: "/search/USWE"}
-        US West
-    %li
-      %a{href: "/search/USMW"}
-        US Midwest
-    %li
-      %a{href: "/search/USSW"}
-        US Southwest
-    %li
-      %a{href: "/search/USSO"}
-        US South
-    %li
-      %a{href: "/search/USMA"}
-        US Mid-Atlantic
-    %li
-      %a{href: "/search/USNE"}
-        US Northeast
-    %li
-      %a{href: "/search/CANA"}
-        Canada
-    %li
-      %a{href: "/search/OCEA"}
-        Oceania
-    %li
-      %a{href: "/search/ITAL"}
-        Italy
+    -# the rest of the regions
+
+:javascript
+  var region_keys = #{@region_keys};
+  var region_values = #{@region_values};
+  
+  for (var i = 0; i < region_keys.length; i++) {
+    var r = [
+      "<li><a href=\"/search/",region_values[i],"\">",
+      region_keys[i],
+      "</a></li>"
+    ].join('');
+    $('#regions').append(r);
+  }
+
+
+
+
+
