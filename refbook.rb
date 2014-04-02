@@ -12,7 +12,7 @@ include Mongo
 configure do
   enable :sessions
   set :session_secret, 'this_is_secret'
-  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","none" => "NONE"}
+  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
 
   Parse.init :application_id => '7Wm6hqr7ij43PkytuISZAO0dIAr8JJtkDlJVClox',
            :master_key        => 'PMmErBeV7KbgPN7XcZXG2qbcYkLzs1Er6gpzs0Jx'
@@ -32,7 +32,6 @@ end
 
 def logged_in?
     session[:user] != nil
-    # 'yep'
 end
 
 def reg_reverse(reg)
@@ -42,11 +41,6 @@ def reg_reverse(reg)
 end
 
 get '/' do
-  # if session[:user] == nil
-  #   haml :index
-  # else
-  #   redirect '/nav',303
-  # end
   haml :index
 end
 
@@ -59,6 +53,7 @@ get '/create' do
     @team_list << t["team"]
   end
   @team_list = @team_list.to_set.to_a
+  @region_list = settings.region_keys.keys
   # puts @team_list
   haml :create
 end
@@ -84,6 +79,8 @@ post '/create' do
     session[:user] = user.save
     redirect '/'
   rescue
+    # usually only fails for invalid email, but it could be other stuff
+    # may way to rescue specific parse errors
     flash[:issue] = "Email already in use (or invalid)"
     redirect '/create'
   end
@@ -123,7 +120,6 @@ get '/grade' do
 
   # haml :grade
   redirect '/'
-  # parse stuff
 end
 
 # get '/admin' do
@@ -140,17 +136,15 @@ get '/search/:region' do
   # could add head/snitch/ass status to class to easily hide/show rows
 
   @region_title = reg_reverse(params[:region])
-  # puts 'test',@region_title
+
   if @region_title.nil?
     flash[:issue] = "Invalid region code: #{params[:region]}"
     redirect '/search'
   end
 
   if params[:region] == 'ALL'
-    # puts 'all!'
     q = Parse::Query.new("_User").get
   else
-    # puts 'not all!'
     q = Parse::Query.new("_User").eq("region",params[:region]).get
   end
 
@@ -159,6 +153,7 @@ get '/search/:region' do
       a = [person["firstName"], person["lastName"], 
         person["team"], person["username"]]
       
+      # assignment because reuby returns are weird
       a << j = person['assRef'] ? 'Y' : 'N'
       a << j = person['snitchRef'] ? 'Y' : 'N'
       a << j = person['headRef'] ? 'Y' : 'N'
@@ -192,6 +187,7 @@ end
 
 get '/logout' do 
   session[:user] = nil
+  flash[:issue] = "Successfully logged out!"
   redirect '/'
 end
 

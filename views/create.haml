@@ -2,7 +2,7 @@
 
 %h1
   Create
--# #{flash[:issue]}
+  
 .issue
   =flash[:issue]
 
@@ -37,21 +37,35 @@
 
     %label{for: "region"}
       Region
-    %input{type: "text", name: "region", placeholder: "region", id: "region"}
+    %select{name: "region", id: "region"}
 
     %label{for: "agreement"}
-      Referee Agreement (mentioned either here or elsewehre)
-    %input{type: "checkbox", name: "agreement", placeholder: "agreement", id: "agreement"}
+      I agree that I've read the 
+      %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank", onclick: "return false;"}<
+        Referee's Code
+      and agree to all statements therein.
+
+    %input{type: "checkbox", name: "agreement", id: "agreement"}
 
     %input.button{type: "submit", value: "Create User"}
 
 :javascript
+  var regions = #{@region_list};
   var teams = #{@team_list};
-  teams.push("none");
+
+  teams.push("None");
   $('#team').autocomplete({source: teams});
 
-  var regions = ["US West", "US Midwest", "US Southwest", "US South", "US Northeast", "US Mid-Atlantic", "Canada", "Oceana", "Italy"];
-  $('#region').autocomplete({source: regions});
+  // pop pop!
+  regions.pop();
+  regions.pop();
+  for (var i = 0; i < regions.length; i++) {
+    var reg = regions[i];
+    var el = document.createElement("option");
+    el.textContent = reg;
+    el.value = reg;
+    $("#region").append(el);
+  }
 
   function validate() {
     // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
@@ -76,6 +90,8 @@
       }
     });
 
+    // checking forms are full, passwords match, and checkbox is checked
+
     if (!filled) {
       $(".issue").text("All fields are required");
       return false;
@@ -91,11 +107,7 @@
       return false;
     }
 
-    // else if (regions.indexOf(f["region"]) == -1)
-    // {
-      // $(".issue").text("Invalid region, use an autocomplete option");
-      // return false;
-    // }
+    
 
     else {
       return true;
