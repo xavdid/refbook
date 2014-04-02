@@ -6,6 +6,7 @@ require 'parse-ruby-client'
 require 'haml'
 require 'sinatra/flash'
 require 'pp'
+require 'time'
 
 include Mongo
 
@@ -119,6 +120,15 @@ get '/grade' do
   end
 
   # haml :grade
+  redirect '/'
+end
+
+get '/cm' do 
+  if params[:cm_tp] > 80
+    flash[:issue] = "You passed!, #{Time.now}"
+  else
+    flash[:issue] = "You failed, #{Time.now}"
+  end
   redirect '/'
 end
 
