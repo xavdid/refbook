@@ -12,7 +12,7 @@ include Mongo
 configure do
   enable :sessions
   set :session_secret, 'this_is_secret'
-  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL"}
+  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","none" => "NONE"}
 
   Parse.init :application_id => '7Wm6hqr7ij43PkytuISZAO0dIAr8JJtkDlJVClox',
            :master_key        => 'PMmErBeV7KbgPN7XcZXG2qbcYkLzs1Er6gpzs0Jx'
@@ -77,7 +77,7 @@ post '/create' do
     :lastName => params[:ln].capitalize,
     # the regex titlecases
     :team => params[:team].split(/(\W)/).map(&:capitalize).join,
-    :region => settings.region_keys[params[:region]]
+    :region => settings.region_keys[params[:region]] || "NONE"
   })
 
   begin
