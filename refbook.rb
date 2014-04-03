@@ -119,11 +119,15 @@ get '/tests/:which' do
   #   ^ mostly for interesting stat purposes
   #   time: Time.now.to_s
 
-  # sets some bools to only show the tests for whic you are eligible and qualified for
+  #   find all test attempts from that user id, find the (single) type attempt, 
+  #   then, update it with most recent attempt (and Time.now) for comparison.
+  #   If they pass, display the link for the relevant test(s). When they finish, 
+  #   update the relevent test entry wtih the most recent test
 
-#   p = Parse::Query.new("test",{taker: session[:user]["objectId"]}).tap do |att|
-#     att.type == params[:which]
-#   end.get
+  # p = Parse::Query.new("testAttempt",{taker: '7ZELn11laF'}).tap do |att|
+    # att.type == params[:which]
+    # att.type == 'ass'
+  # end.get
 
 #   if not p.empty?
 #     if Time.now - Time.parse(p.first["time"]) > 604800
@@ -132,8 +136,8 @@ get '/tests/:which' do
 #       flash[:issue] = "It hasn't been long enough since your last attempt"
 #   end
 
-#   @type = params[:test]
-#   haml :tests
+  @type = params[:test]
+  haml :tests
 end
 
 get '/grade' do
@@ -153,9 +157,18 @@ get '/grade' do
 end
 
 get '/cm' do 
-  # FIX - should update most recent user's test of that type with new time
-  p = Parse::Object.new("testAttempt")
-  p["taker"] = params[:cm_user_id]
+  # FIX - should update most recent user's test of that type with new time, not
+  # not make a new one
+
+  # TODO: make sure user is logged in (so you can update cookie). 
+  p = {}
+  p = Parse::Query.new("testAttempt").eq("taker", params[:cm_user_id]).get
+  # there's at least one attempty by this person
+  if p.empty?
+    p = Parse::Object.new("testAttempt")
+    p["taker"] = params[:cm_user_id]
+  end
+
   p["score"] = params[:cm_ts].to_i
   p["percentage"] = params[:cm_tp].to_i
   p["duration"] = params[:cm_td]

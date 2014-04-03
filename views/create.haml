@@ -50,6 +50,7 @@
     %input.button{type: "submit", value: "Create User"}
 
 :javascript
+  // team should be dropdown too, get team list/region from Pyne
   var region_keys = #{@region_keys};
   var teams = #{@team_list};
 
@@ -57,8 +58,8 @@
   $('#team').autocomplete({source: teams});
 
   // pop pop!
-  regions.pop();
-  regions.pop();
+  region_keys.pop();
+  region_keys.pop();
   for (var i = 0; i < region_keys.length; i++) {
     var el = document.createElement("option");
     el.textContent = region_keys[i];
