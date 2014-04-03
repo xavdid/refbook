@@ -13,13 +13,13 @@
   - elsif session[:user]['assRef'] and session[:user]['snitchRef']
     %p
       You've passed two of the tests, why not take a swing at the
-      %a{href: "/tests?test=head&cm_user_id=#{session[:user]['objectId']}"}
+      %a{href: "/tests?test=head&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=head"}
         Head Ref Test
   - else
     - if not session[:user]['assRef']
       %p
         The greatest journey begins with but a single step, or the 
-        %a{href: "/tests?test=ass&cm_user_id=#{session[:user]['objectId']}"}
+        %a{href: "/tests?test=ass&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=ass"}
           Assistant Ref Test
     - else
       %p
@@ -28,7 +28,7 @@
     - if not session[:user]['snitchRef']
       %p
         Follow that tail! Take the 
-        %a{href: "/tests?test=snitch&cm_user_id=#{session[:user]['objectId']}"}
+        %a{href: "/tests?test=snitch&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=snitch"}
           Snitch Ref Test
     - else
       %p

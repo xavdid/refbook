@@ -109,10 +109,32 @@ post '/reset' do
   end
 end
 
-get '/tests' do
-  @type = params[:test]
-  haml :tests
-end
+get '/tests/:which' do
+  # tests table (probably needed) will have the following rows:
+  #   taker: (objectId of test taker)
+  #   type: ass|head|snitch
+  #   score: int
+  #   percentage: int
+  #   duration?: h-m-s (can probably convert to second/Time value
+  #   ^ mostly for interesting stat purposes
+  #   time: Time.now.to_s
+
+  # sets some bools to only show the tests for whic you are eligible and qualified for
+
+#   p = Parse::Query.new("test",{taker: session[:user]["objectId"]}).tap do |att|
+#     att.type == params[:which]
+#   end.get
+
+#   if not p.empty?
+#     if Time.now - Time.parse(p.first["time"]) > 604800
+
+#     else
+#       flash[:issue] = "It hasn't been long enough since your last attempt"
+#   end
+
+#   @type = params[:test]
+#   haml :tests
+# end
 
 get '/grade' do
   if params[:pass] == 'true'
@@ -131,6 +153,16 @@ get '/grade' do
 end
 
 get '/cm' do 
+  # FIX - should update most recent user's test of that type with new time
+  # p = Parse::Object.new("test_attempt")
+  # p.taker = params[:cm_user_id]
+  # p.score = params[:cm_ts].to_i
+  # p.percentage = params[:cm_tp].to_i
+  # p.duration = params[:cm_td]
+  # p.type = params[:cm_return_test_type]
+  # p.time = Time.now.to_s
+  # attempt = p.save
+
   if params[:cm_tp].to_i > 80
     flash[:issue] = "You passed!, #{Time.now}"
   else
