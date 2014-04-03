@@ -62,7 +62,7 @@ end
 post '/create' do
     # could have lastAss, lastHead, lastSnitch to enforce retake time
     # also, i'll check CM, but we may want to store all of the attempts for our records
-    user = Parse::User.new({
+  user = Parse::User.new({
     # username is actually email, secretly
     :username => params[:username],
     :password => params[:password],
@@ -134,7 +134,7 @@ get '/tests/:which' do
 
 #   @type = params[:test]
 #   haml :tests
-# end
+end
 
 get '/grade' do
   if params[:pass] == 'true'
@@ -154,19 +154,24 @@ end
 
 get '/cm' do 
   # FIX - should update most recent user's test of that type with new time
-  # p = Parse::Object.new("test_attempt")
-  # p.taker = params[:cm_user_id]
-  # p.score = params[:cm_ts].to_i
-  # p.percentage = params[:cm_tp].to_i
-  # p.duration = params[:cm_td]
-  # p.type = params[:cm_return_test_type]
-  # p.time = Time.now.to_s
-  # attempt = p.save
+  p = Parse::Object.new("testAttempt")
+  p["taker"] = params[:cm_user_id]
+  p["score"] = params[:cm_ts].to_i
+  p["percentage"] = params[:cm_tp].to_i
+  p["duration"] = params[:cm_td]
+  p["type"] = params[:cm_return_test_type]
+  p["time"] = Time.now.to_s
+  p.save
+
+  pp p
+  user_to_update = Parse::Query.new("_User").eq("objectId", params[:cm_user_id]).get.first
 
   if params[:cm_tp].to_i > 80
-    flash[:issue] = "You passed!, #{Time.now}"
+    flash[:issue] = "You passed the #{params[:cm_return_test_type]} ref test, go you!"
+    user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
+    user_to_update.save
   else
-    flash[:issue] = "You failed, #{Time.now}"
+    flash[:issue] = "You failed, try again in a week!"
   end
   redirect '/'
 end
@@ -213,7 +218,7 @@ get '/search/:region' do
         entry << reg_reverse(person['region'])
       end
 
-      @refs << a
+      @refs << entry
   end
 
   @refs = @refs.sort_by{|i| i[1]}
