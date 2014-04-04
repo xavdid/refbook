@@ -161,25 +161,45 @@ get '/cm' do
   # not make a new one
 
   # TODO: make sure user is logged in (so you can update cookie). 
-  p = {}
-  p = Parse::Query.new("testAttempt").eq("taker", params[:cm_user_id]).get
-  # there's at least one attempty by this person
-  if p.empty?
-    p = Parse::Object.new("testAttempt")
-    p["taker"] = params[:cm_user_id]
+
+  # cases:
+  #   A: no attempts at all
+  #   B: no attempts for this test
+  #   C: attempted this test
+
+  attempt_list = Parse::Query.new("testAttempt").eq("taker", params[:cm_user_id]).get
+  if attempt_list.empty?
+    # A
+    att = Parse::Object.new("testAttempt")
+    att["taker"] = params[:cm_user_id]
+  else
+    # C
+    att = attempt_list.select do |a|
+      a["type"] == params[:cm_return_test_type]
+    end
+    if att.empty?
+      # B
+      att = Parse::Object.new("testAttempt")
+      att["taker"] = params[:cm_user_id]
+    else
+      att = att.first
+    end
   end
 
-  p["score"] = params[:cm_ts].to_i
-  p["percentage"] = params[:cm_tp].to_i
-  p["duration"] = params[:cm_td]
-  p["type"] = params[:cm_return_test_type]
-  p["time"] = Time.now.to_s
-  p.save
 
-  pp p
+  puts att
+
+  att["score"] = params[:cm_ts].to_i
+  att["percentage"] = params[:cm_tp].to_i
+  att["duration"] = params[:cm_td]
+  att["type"] = params[:cm_return_test_type]
+  att["time"] = Time.now.to_s
+  att.save
+  pp 'afster'
+  pp att
   user_to_update = Parse::Query.new("_User").eq("objectId", params[:cm_user_id]).get.first
 
-  if params[:cm_tp].to_i > 80
+  if params[:cm_tp].to_i >= 80
     flash[:issue] = "You passed the #{params[:cm_return_test_type]} ref test, go you!"
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     user_to_update.save

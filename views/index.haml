@@ -7,32 +7,36 @@
   =flash[:issue]
 
 - if logged_in?
-  - if session[:user]['headRef']
-    %p
-      Looks like you're fully certified!
-  - elsif session[:user]['assRef'] and session[:user]['snitchRef']
-    %p
-      You've passed two of the tests, why not take a swing at the
-      %a{href: "/tests?test=head&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=head"}
-        Head Ref Test
-  - else
-    - if not session[:user]['assRef']
-      %p
-        The greatest journey begins with but a single step, or the 
-        %a{href: "/tests?test=ass&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=ass"}
-          Assistant Ref Test
-    - else
-      %p
-        You're a certified assistant ref!
+  Hey, take the 
+  %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
+    test
+  test! It'll redirect here with a red message as to your success, hopefully without error.
+  -# - if session[:user]['headRef']
+  -#   %p
+  -#     Looks like you're fully certified!
+  -# - elsif session[:user]['assRef'] and session[:user]['snitchRef']
+  -#   %p
+  -#     You've passed two of the tests, why not take a swing at the
+  -#     %a{href: "/tests?test=head&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=head"}
+  -#       Head Ref Test
+  -# - else
+  -#   - if not session[:user]['assRef']
+  -#     %p
+  -#       The greatest journey begins with but a single step, or the 
+  -#       %a{href: "/tests?test=ass&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=ass"}
+  -#         Assistant Ref Test
+  -#   - else
+  -#     %p
+  -#       You're a certified assistant ref!
 
-    - if not session[:user]['snitchRef']
-      %p
-        Follow that tail! Take the 
-        %a{href: "/tests?test=snitch&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=snitch"}
-          Snitch Ref Test
-    - else
-      %p
-        You're a certified snitch ref!
+  -#   - if not session[:user]['snitchRef']
+  -#     %p
+  -#       Follow that tail! Take the 
+  -#       %a{href: "/tests?test=snitch&cm_user_id=#{session[:user]['objectId']}&cm_return_test_type=snitch"}
+  -#         Snitch Ref Test
+  -#   - else
+  -#     %p
+  -#       You're a certified snitch ref!
 - else
   %p
     Log in to see your testing status!
