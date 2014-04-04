@@ -7,10 +7,11 @@
   =flash[:issue]
 
 - if logged_in?
-  Hey, take the 
-  %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
-    test
-  test! It'll redirect here with a red message as to your success, hopefully without error.
+  %p
+    Hey, take the 
+    %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
+      test
+    test! It'll redirect here with a red message as to your success, hopefully without error.
   -# - if session[:user]['headRef']
   -#   %p
   -#     Looks like you're fully certified!
