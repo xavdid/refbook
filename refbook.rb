@@ -110,6 +110,10 @@ post '/reset' do
 end
 
 get '/tests/:which' do
+  if not logged_in?
+    flash[:issue] = "Must log in to test"
+    redirect '/'
+  end
   # tests table (probably needed) will have the following rows:
   #   taker: (objectId of test taker)
   #   type: ass|head|snitch
@@ -124,10 +128,25 @@ get '/tests/:which' do
   #   If they pass, display the link for the relevant test(s). When they finish, 
   #   update the relevent test entry wtih the most recent test
 
-  # p = Parse::Query.new("testAttempt",{taker: '7ZELn11laF'}).tap do |att|
-    # att.type == params[:which]
-    # att.type == 'ass'
-  # end.get
+  @good = true
+
+  attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
+  if not attempt_list.empty?
+    # at least 1 attempt
+    att = attempt_list.select do |a|
+      a["type"] == params[:which]
+    end
+    if not att.empty?
+      # they've taken this test sometime
+      att = att.first
+      if Time.now - Time.parse(att['time']) < 3600
+        @good = false
+        @try_unlocked = Time.parse(att['time']) + 3600
+        @t1 = Time.now
+        @t2 = Time.parse(att['time'])
+      end
+    end
+  end
 
 #   if not p.empty?
 #     if Time.now - Time.parse(p.first["time"]) > 604800
@@ -136,7 +155,7 @@ get '/tests/:which' do
 #       flash[:issue] = "It hasn't been long enough since your last attempt"
 #   end
 
-  @type = params[:test]
+  # @type = params[:test]
   haml :tests
 end
 
