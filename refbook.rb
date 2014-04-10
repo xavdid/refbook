@@ -45,136 +45,6 @@ get '/' do
   haml :index
 end
 
-get '/create' do
-  @team_list = []
-  teams = Parse::Query.new("_User").tap do |team|
-    team.exists("team")
-  end.get
-  teams.each do |t|
-    @team_list << t["team"]
-  end
-  @team_list = @team_list.to_set.to_a
-  @region_keys = settings.region_keys.keys
-  # puts @team_list
-  haml :create
-end
-
-post '/create' do
-    # could have lastAss, lastHead, lastSnitch to enforce retake time
-    # also, i'll check CM, but we may want to store all of the attempts for our records
-  user = Parse::User.new({
-    # username is actually email, secretly
-    :username => params[:username],
-    :password => params[:password],
-    :email => params[:username],
-    :assRef => false,
-    :snitchRef => false,
-    :headRef => false,
-    :passedFieldTest => false,
-    :admin => false,
-    :firstName => params[:fn].capitalize,
-    :lastName => params[:ln].capitalize,
-    # the regex titlecases
-    :team => params[:team].split(/(\W)/).map(&:capitalize).join,
-    # because of dropdown, there shouldn't ever be no region, but this is 
-    # just in case. Region errors really break stuff.
-    :region => settings.region_keys[params[:region]] || "NONE"
-    # :last_ass => T
-  })
-
-  begin
-    session[:user] = user.save
-    flash[:issue] = "Account creation successful"
-    redirect '/'
-  rescue
-    # usually only fails for invalid email, but it could be other stuff
-    # may way to rescue specific parse errors
-    flash[:issue] = "Email already in use (or invalid)"
-    redirect '/create'
-  end
-end
-
-get '/reset' do 
-  haml :reset
-end
-
-post '/reset' do
-  begin
-    Parse::User.reset_password(params[:email])
-    flash[:issue] = "You have been logged out, log in with new credentials"
-    redirect '/logout'
-  rescue
-    flash[:issue] = "No user with that email"
-    redirect '/reset'
-  end
-end
-
-get '/tests/:which' do
-  if not logged_in?
-    flash[:issue] = "Must log in to test"
-    redirect '/'
-  end
-  # tests table (probably needed) will have the following rows:
-  #   taker: (objectId of test taker)
-  #   type: ass|head|snitch
-  #   score: int
-  #   percentage: int
-  #   duration?: h-m-s (can probably convert to second/Time value
-  #   ^ mostly for interesting stat purposes
-  #   time: Time.now.to_s
-
-  #   find all test attempts from that user id, find the (single) type attempt, 
-  #   then, update it with most recent attempt (and Time.now) for comparison.
-  #   If they pass, display the link for the relevant test(s). When they finish, 
-  #   update the relevent test entry wtih the most recent test
-
-  @good = true
-
-  attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
-  if not attempt_list.empty?
-    # at least 1 attempt
-    att = attempt_list.select do |a|
-      a["type"] == params[:which]
-    end
-    if not att.empty?
-      # they've taken this test sometime
-      att = att.first
-      if Time.now - Time.parse(att['time']) < 3600
-        @good = false
-        @try_unlocked = Time.parse(att['time']) + 3600
-        @t1 = Time.now
-        @t2 = Time.parse(att['time'])
-      end
-    end
-  end
-
-#   if not p.empty?
-#     if Time.now - Time.parse(p.first["time"]) > 604800
-
-#     else
-#       flash[:issue] = "It hasn't been long enough since your last attempt"
-#   end
-
-  # @type = params[:test]
-  haml :tests
-end
-
-get '/grade' do
-  if params[:pass] == 'true'
-    session[:user][@test+'Ref'] = true
-    session[:user] = session[:user].save
-  end
-
-  if params[:pass] == 'true'
-    flash[:issue] = "passed the #{params[:test]} ref test!"
-  else
-    flash[:issue] = "failed the #{params[:test]} ref test!"
-  end
-
-  # haml :grade
-  redirect '/'
-end
-
 get '/cm' do 
   # FIX - should update most recent user's test of that type with new time, not
   # not make a new one
@@ -228,10 +98,109 @@ get '/cm' do
   redirect '/'
 end
 
-# get '/admin' do
-  # this'll list links to important stuff
-  # also, unique team names to catch typos/etc
-# end
+get '/create' do
+  @team_list = []
+  teams = Parse::Query.new("_User").tap do |team|
+    team.exists("team")
+  end.get
+  teams.each do |t|
+    @team_list << t["team"]
+  end
+  @team_list = @team_list.to_set.to_a
+  @region_keys = settings.region_keys.keys
+  # puts @team_list
+  haml :create
+end
+
+post '/create' do
+    # could have lastAss, lastHead, lastSnitch to enforce retake time
+    # also, i'll check CM, but we may want to store all of the attempts for our records
+  user = Parse::User.new({
+    # username is actually email, secretly
+    :username => params[:username],
+    :password => params[:password],
+    :email => params[:username],
+    :assRef => false,
+    :snitchRef => false,
+    :headRef => false,
+    :passedFieldTest => false,
+    :admin => false,
+    :firstName => params[:fn].capitalize,
+    :lastName => params[:ln].capitalize,
+    # the regex titlecases
+    :team => params[:team].split(/(\W)/).map(&:capitalize).join,
+    # because of dropdown, there shouldn't ever be no region, but this is 
+    # just in case. Region errors really break stuff.
+    :region => settings.region_keys[params[:region]] || "NONE"
+    # :last_ass => T
+  })
+
+  begin
+    session[:user] = user.save
+    flash[:issue] = "Account creation successful"
+    redirect '/'
+  rescue
+    # usually only fails for invalid email, but it could be other stuff
+    # may way to rescue specific parse errors
+    flash[:issue] = "Email already in use (or invalid)"
+    redirect '/create'
+  end
+end
+
+get '/grade' do
+  if params[:pass] == 'true'
+    session[:user][@test+'Ref'] = true
+    session[:user] = session[:user].save
+  end
+
+  if params[:pass] == 'true'
+    flash[:issue] = "passed the #{params[:test]} ref test!"
+  else
+    flash[:issue] = "failed the #{params[:test]} ref test!"
+  end
+
+  # haml :grade
+  redirect '/'
+end
+
+get '/info' do 
+  haml :info
+end
+
+get '/login' do
+  haml :login
+end
+
+post '/login' do
+  begin
+    session[:user] = Parse::User.authenticate(params[:username], params[:password])
+    redirect '/'
+  rescue
+    flash[:issue] = "Invalid login credientials"
+    redirect '/login'
+  end
+end
+
+get '/logout' do 
+  session[:user] = nil
+  flash[:issue] = "Successfully logged out!"
+  redirect '/'
+end
+
+get '/reset' do 
+  haml :reset
+end
+
+post '/reset' do
+  begin
+    Parse::User.reset_password(params[:email])
+    flash[:issue] = "You have been logged out, log in with new credentials"
+    redirect '/logout'
+  rescue
+    flash[:issue] = "No user with that email"
+    redirect '/reset'
+  end
+end
 
 get '/search' do 
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
@@ -278,26 +247,64 @@ get '/search/:region' do
   haml :search
 end
 
-get '/login' do
-  haml :login
+get '/settings' do 
+  haml :settings
 end
 
-post '/login' do
-  begin
-    session[:user] = Parse::User.authenticate(params[:username], params[:password])
+get '/tests/:which' do
+  if not logged_in?
+    flash[:issue] = "Must log in to test"
     redirect '/'
-  rescue
-    flash[:issue] = "Invalid login credientials"
-    redirect '/login'
   end
-  
+  # tests table (probably needed) will have the following rows:
+  #   taker: (objectId of test taker)
+  #   type: ass|head|snitch
+  #   score: int
+  #   percentage: int
+  #   duration?: h-m-s (can probably convert to second/Time value
+  #   ^ mostly for interesting stat purposes
+  #   time: Time.now.to_s
+
+  #   find all test attempts from that user id, find the (single) type attempt, 
+  #   then, update it with most recent attempt (and Time.now) for comparison.
+  #   If they pass, display the link for the relevant test(s). When they finish, 
+  #   update the relevent test entry wtih the most recent test
+
+  @good = true
+
+  attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
+  if not attempt_list.empty?
+    # at least 1 attempt
+    att = attempt_list.select do |a|
+      a["type"] == params[:which]
+    end
+    if not att.empty?
+      # they've taken this test sometime
+      att = att.first
+      if Time.now - Time.parse(att['time']) < 3600
+        @good = false
+        @try_unlocked = Time.parse(att['time']) + 3600
+        @t1 = Time.now
+        @t2 = Time.parse(att['time'])
+      end
+    end
+  end
+
+#   if not p.empty?
+#     if Time.now - Time.parse(p.first["time"]) > 604800
+
+#     else
+#       flash[:issue] = "It hasn't been long enough since your last attempt"
+#   end
+
+  # @type = params[:test]
+  haml :tests
 end
 
-get '/logout' do 
-  session[:user] = nil
-  flash[:issue] = "Successfully logged out!"
-  redirect '/'
-end
+# get '/admin' do
+  # this'll list links to important stuff
+  # also, unique team names to catch typos/etc
+# end
 
 # renders css
 get '/styles.css' do

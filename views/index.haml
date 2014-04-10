@@ -1,17 +1,17 @@
 =haml :_header
 
 %h1
-  RDT
+  Home
 
 .issue
   =flash[:issue]
 
-- if logged_in?
-  %p
-    Hey, take the 
-    %a{href: "/tests/ass"}<
-      test
-    test! It'll redirect here with a red message as to your success, hopefully without error.
+  -# - if logged_in?
+  -#   %p
+  -#     Hey, take the 
+  -#     %a{href: "/tests/ass"}<
+  -#       test
+  -#     test! It'll redirect here with a red message as to your success, hopefully without error.
   -# - if session[:user]['headRef']
   -#   %p
   -#     Looks like you're fully certified!
@@ -38,18 +38,5 @@
   -#   - else
   -#     %p
   -#       You're a certified snitch ref!
-- else
-  %p
-    Log in to see your testing status!
-
 %p
-  Do you want to 
-  %a{href: '/search'}<
-    search
-  for some refs?
-
-%p
-  You can now
-  %a{href: '/reset'}<
-    reset
-  your password!
+  Here is maybe some most sought after links (ref evals, certification info, etc)

@@ -64,6 +64,30 @@ body {
         .even {
             // background: #808080;
         }
-    }
-    
+    } 
 }
+
+.topbar {
+    height: 50px;
+    color: #fff;
+    background-color: #000;
+    clear: both;
+    margin-left: -30px;
+    a {
+        color: #fff;
+    }
+
+    ul {
+        padding-top: 17px;
+        margin-left: -2em;
+        li {
+            display: inline-block;
+        }
+        .right {
+            float: right;
+            padding-right: 10px;
+        }
+    }
+}
+
+

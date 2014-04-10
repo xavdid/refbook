@@ -1,40 +1,22 @@
 =haml :_header
 
--# %p
--#   Let's get you certified! This'll be through classmarker and there'll be a built-in timer to space out re-takes.
-
--# .question
-
--# %ul
--#   %li
--#     %input{type: "radio", id: "q1", value: "a", name: "q1"}
--#     .ans#a1
--#   %li
--#     %input{type: "radio", id: "q2", value: "b", name: "q1"}
--#     .ans#a2
--#   %li
--#     %input{type: "radio", id: "q3", value: "c", name: "q1"}
--#     .ans#a3
-
--# %button{type: "button", id: "submit"}
--#   Submit
 %p
-  yep
-%p
-  - if @good
-    Hey, take the 
-    %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=#{params[:which]}&cm_user_id=#{session[:user]['objectId']}"}<
-      test
-    test! It'll redirect home with a red message as to your success, hopefully without error.
+  - if logged_in?
+    - if @good
+      Hey, take the 
+      %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=#{params[:which]}&cm_user_id=#{session[:user]['objectId']}"}<
+        sample
+      test!
+    - else
+      Looks like it hasn't been long enough since your last try! 
+      %br
+      Give it another go at #{@try_unlocked}.
+      %br
+      Now: #{@t1}.
+      %br
+      Then: #{@t2}
   - else
-    Looks like it hasn't been long enough since your last try! 
-    %br
-    Give it another go at #{@try_unlocked}.
-    %br
-    Now: #{@t1}.
-    %br
-    Then: #{@t2}
-
+    Log in to see testing status!
 
 :javascript
   // var q = {
