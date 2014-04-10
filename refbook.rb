@@ -333,23 +333,16 @@ get '/tests/:which' do
     if not att.empty?
       # they've taken this test sometime
       att = att.first
-      if Time.now - Time.parse(att['time']) < 3600
+      # TIME BETWEEN ATTEMPTS
+      if Time.now - Time.parse(att['time']) < 30
         @good = false
-        @try_unlocked = Time.parse(att['time']) + 3600
+        @try_unlocked = Time.parse(att['time']) + 30
         @t1 = Time.now
         @t2 = Time.parse(att['time'])
       end
     end
   end
-
-#   if not p.empty?
-#     if Time.now - Time.parse(p.first["time"]) > 604800
-
-#     else
-#       flash[:issue] = "It hasn't been long enough since your last attempt"
-#   end
-
-  # @type = params[:test]
+  
   haml :tests
 end
 
