@@ -7,26 +7,46 @@
   =flash[:issue]
 
 %p
-  See refs from a region:
+  %a{href: "/search/ALL"}
+    All Certified Refs
 
-  %ul#regions
-    %li
-      %a{href: "/search/ALL"}
-        All Regions
-    -# the rest of the regions
+%h3
+  USQ
+
+%ul#us_regions
+  -# the rest of the regions
+
+%h3
+  National Leagues
+
+%ul#other_regions
+
+
 
 :javascript
   var region_keys = #{@region_keys};
   var region_values = #{@region_values};
+  var us_regions_count = 6;
   
-  for (var i = 0; i < region_keys.length; i++) {
+  for (var i = 0; i < us_regions_count; i++) {
     var r = [
       "<li><a href=\"/search/",region_values[i],"\">",
       region_keys[i],
       "</a></li>"
     ].join('');
-    $('#regions').append(r);
+    $('#us_regions').append(r);
+  };
+
+  for (var j = us_regions_count; j < region_keys.length; j++) {
+    var r = [
+      "<li><a href=\"/search/",region_values[j],"\">",
+      region_keys[j],
+      "</a></li>"
+    ].join('');
+    $('#other_regions').append(r);
   }
+
+
 
 
 

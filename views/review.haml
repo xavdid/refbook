@@ -1,0 +1,41 @@
+=haml :_header
+
+%h1
+  Review
+
+.issue
+  =flash[:issue]
+
+%p
+  Region: 
+%select{name: "region", id: "region"}
+
+%p
+  Refs:
+%select{name: "referees", id: "referees"}
+
+
+:javascript
+  var region_keys = #{@region_keys};
+
+  var refs = {"US West":['seq','dan','etc'], "US Midwest":['davy','samy','larry']};
+
+  for (var i = 0; i < region_keys.length; i++) {
+    var el = document.createElement("option");
+    el.textContent = region_keys[i];
+    el.value = region_keys[i];
+    $("#region").append(el);
+  };
+
+  // contxt is f+l name, key should be... user id?
+
+  $("#region").change(function(){
+    $("#referees").empty();
+    for (var i = 0; i < refs[$("#region").val()].length; i++) {
+      var el = document.createElement("option");
+      el.textContent = refs[$("#region").val()][i];
+      el.value = refs[$("#region").val()][i];
+      $("#referees").append(el);
+    };
+  });
+

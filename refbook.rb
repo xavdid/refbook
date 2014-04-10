@@ -202,7 +202,14 @@ post '/reset' do
   end
 end
 
-get '/search' do 
+get '/review/?' do 
+  @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
+  @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
+  haml :review
+end
+
+get '/search/?' do 
+  # THIS ASSUMES that all and none are the last two regions, take care
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
   haml :si
@@ -227,6 +234,7 @@ get '/search/:region' do
 
   @refs = []
   q.each do |person|
+    if person["assRef"] or person["snitchRef"]
       entry = [person["firstName"], person["lastName"], 
         person["team"], person["username"]]
       
@@ -240,6 +248,7 @@ get '/search/:region' do
       end
 
       @refs << entry
+    end
   end
 
   @refs = @refs.sort_by{|i| i[1]}
