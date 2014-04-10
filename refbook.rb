@@ -202,10 +202,53 @@ post '/reset' do
   end
 end
 
-get '/review/?' do 
+get '/review' do 
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
-  @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
+  # @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
+  q = Parse::Query.new("_User").get
+  @refs = {}
+
+  @region_keys.each do |r|
+    @refs[r] = []
+  end
+
+
+  q.each do |person|
+    if person["assRef"] or person["snitchRef"]
+      # [id, fN + lN]
+      p = [person['objectId'], "#{person['firstName']} #{person['lastName']}"]
+
+      @refs[reg_reverse(person['region'])] << p
+    end
+  end
+
+  @refs = @refs.to_json
   haml :review
+end
+
+post '/review' do 
+  rev = Parse::Object.new('review')
+  rev['reviewerName'] = params[:name]
+  rev['reviewerEmail'] = params[:email]
+  rev['isCaptain'] = params[:captain] ? true : false
+  rev['region'] = settings.region_keys[params[:region]]
+
+  p = Parse::Pointer.new({})
+  p.class_name = "_User"
+  p.parse_object_id = params[:referee]
+  rev['referee'] = p
+
+  rev['date'] = params[:date]
+  rev['team'] = params[:team]
+  rev['opponent'] = params[:opponent]
+  rev['rating'] = params[:rating]
+  rev['comments'] = params[:comments]
+
+  rev.save
+
+  flash[:issue] = "Thanks for your review!"
+  redirect '/review'
+  # params.to_s
 end
 
 get '/search/?' do 

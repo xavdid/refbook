@@ -11,15 +11,15 @@
 
 .form_box
   %form{name: "create", action: "create", method: "post", onsubmit: "return validate();"}
-    %label{for: "Email"}
+    %label{for: "email"}
       Email
     %input{type: "email", name: "username", placeholder:"email"}
 
-    %label{for: "Password"}
+    %label{for: "cassword"}
       Password
     %input{type: "password", name: "password", placeholder: "password"}
 
-    %label{for: "Confirm Password"}
+    %label{for: "pw2"}
       Confirm
     %input{type: "password", name: "pw2", placeholder: "confirmed password"}
 
