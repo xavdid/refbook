@@ -41,8 +41,32 @@ def reg_reverse(reg)
   end.keys.first
 end
 
+def name_maker(person)
+  "#{person['firstName']} #{person['lastName']}"
+end
+
 get '/' do
   haml :index
+end
+
+get '/admin' do
+  # this'll list links to important stuff
+  # also, unique team names to catch typos/etc
+  if not logged_in? or not session[:user]['admin']
+    flash[:issue] = "Admins only, kid"
+    redirect '/'
+  else
+    @review_list = []
+    reviews = Parse::Query.new("review").get
+
+    reviews.each do |r|
+      q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
+      a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments']]
+      @review_list << a
+    end
+
+    haml :admin
+  end
 end
 
 get '/cm' do 
@@ -187,6 +211,15 @@ get '/logout' do
   redirect '/'
 end
 
+get '/profile' do 
+  if not logged_in?
+    flash[:issue] = "Log in to see your profile"
+    redirect '/'
+  else
+    haml :profile
+  end
+end
+
 get '/reset' do 
   haml :reset
 end
@@ -204,7 +237,6 @@ end
 
 get '/review' do 
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
-  # @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
   q = Parse::Query.new("_User").get
   @refs = {}
 
@@ -216,7 +248,7 @@ get '/review' do
   q.each do |person|
     if person["assRef"] or person["snitchRef"]
       # [id, fN + lN]
-      p = [person['objectId'], "#{person['firstName']} #{person['lastName']}"]
+      p = [person['objectId'], name_maker(person)]
 
       @refs[reg_reverse(person['region'])] << p
     end
@@ -342,14 +374,9 @@ get '/tests/:which' do
       end
     end
   end
-  
+
   haml :tests
 end
-
-# get '/admin' do
-  # this'll list links to important stuff
-  # also, unique team names to catch typos/etc
-# end
 
 # renders css
 get '/styles.css' do
