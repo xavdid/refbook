@@ -46,19 +46,17 @@
     %label{for: "rating"}
       How did the ref do?
     %select{name: "rating", id: "rating"}
-      %option{value: "great"}
-        Great!
+      %option{value: "excellent"}
+        Excellent!
       %option{value: "good"}
         Good
       %option{value: "average"}
         Average
-      %option{value: "bad"}
-        Bad
-      %option{value: "terrible"}
-        Terrible!
+      %option{value: "poor"}
+        Poor
 
     %label{for: "comments"}
-      Give us some details
+      Specific instructions for things to rate
     %textarea{form: "rater", cols: 32, rows: 7, name: "comments"}
 
     %input.button{type: "submit", value: "Submit Review"}
