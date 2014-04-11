@@ -216,6 +216,21 @@ get '/profile' do
     flash[:issue] = "Log in to see your profile"
     redirect '/'
   else
+    @review_list = []
+
+    reviews = Parse::Query.new("review").tap do |q|
+      q.eq("referee", Parse::Pointer.new({
+        "className" => "_User",
+        "objectId"  => session[:user]['objectId']
+      }))
+    end.get
+
+    reviews.each do |r|
+      q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
+      a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments']]
+      @review_list << a
+    end
+
     haml :profile
   end
 end
@@ -333,6 +348,10 @@ end
 
 get '/settings' do 
   haml :settings
+end
+
+post '/settings' do 
+
 end
 
 get '/tests/:which' do

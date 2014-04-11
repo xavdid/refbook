@@ -13,7 +13,7 @@
 .topbar
   %ul
     %li
-      Ref Development Site - 
+      iRDP - 
       %a{href: '/'}
         Home
     %li
@@ -39,15 +39,20 @@
     
     %li.right
       Hello, #{logged_in? ? session[:user]['firstName'] : 'user'} #{logged_in? ? "(#{session[:user]['username']})" : ''}
+    
     - if logged_in?
+      - if session[:user]['admin']
+        %li.right
+          %a{href: '/admin'}
+            %i.fa.fa-gavel.fa-lg
+
       %li.right
         %a{href: '/settings'}
           %i.fa.fa-cog.fa-lg
 
-      - if session[:user]['admin']
-        %li.right
-          %a{href: '/admin'}
-            %i.fa.fa-cogs.fa-lg
+      %li.right
+        %a{href: '/profile'}
+          %i.fa.fa-user.fa-lg
 
 .header
   %p

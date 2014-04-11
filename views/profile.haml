@@ -1,0 +1,76 @@
+=haml :_header
+
+%h1
+  Profile
+
+.issue
+  =flash[:issue]
+
+%p
+  You've got #{@review_list.length} review#{@review_list.length == 1 ? '' : 's'}. #{@review_list.length == 1 ? "It's" : "They're"} listed below.
+
+%p
+  %a.more{href: "#"}
+    Show extra info
+
+%p
+  %a.less{href: "#"}
+    Show less info
+
+%table#theTable
+  %thead
+    %tr
+      %td
+        Reviewer Name
+      %td
+        Reviewer Email
+      %td.small
+        Captain?
+      %td.small
+        Referee Region
+      %td.light
+        Referee Name
+      %td.small
+        Team
+      %td.small
+        Opponent
+      %td
+        Rating
+      %td
+        Comments
+      
+  %tbody
+
+
+:javascript
+  var reviews = #{@review_list};
+  var odd = false;
+  // $("#theTable tbody").empty();
+  for (var i = 0; i < reviews.length; i++) {
+    var r = [
+      "<tr class=\"",(odd) ? "odd" : "even","\">",
+      "<td>",reviews[i][0],"</td>",
+      "<td><a href=\"mailto:",reviews[i][1],"\">",reviews[i][1],"</a></td>",
+      "<td class=\"small\">",reviews[i][2],"</td>", //captain?
+      "<td class=\"small\">",reviews[i][3],"</td>", //region
+      "<td>",reviews[i][4],"</td>", //name
+      "<td class=\"small\">",reviews[i][5],"</td>", //team
+      "<td class=\"small\">",reviews[i][6],"</td>", //opponent
+      "<td>",reviews[i][7],"</td>", //rating
+      "<td>",reviews[i][8],"</td>", //comments
+    ].join(' ');
+      
+      r += "</tr>";
+    odd = !odd;  
+    $("#theTable tbody").append(r);
+  };
+
+  $('.small').hide();
+
+  $('.more').click(function(){
+    $('.small').show();
+  });
+
+  $('.less').click(function(){
+    $('.small').hide();
+  });
