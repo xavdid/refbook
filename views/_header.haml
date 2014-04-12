@@ -44,21 +44,23 @@
       - if session[:user]['admin']
         %li.right
           %a{href: '/admin'}
-            %i.fa.fa-gavel.fa-lg
+            %i.fa.fa-gavel.fa-lg{title: "Admin Console"}
 
       %li.right
         %a{href: '/settings'}
-          %i.fa.fa-cog.fa-lg
+          %i.fa.fa-cog.fa-lg{title: "Settings Console"}
 
       %li.right
         %a{href: '/profile'}
-          %i.fa.fa-user.fa-lg
+          %i.fa.fa-user.fa-lg{title: "Profile Console"}
 
 .header
   %p
     - if logged_in?
       %a{href: '/logout'}
         Logout
+        %i.fa.fa-sign-out.fa-lg
+        
     - else
       %a{href: '/login'}<
         Login
