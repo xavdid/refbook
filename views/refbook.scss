@@ -59,10 +59,18 @@ body {
 
     tbody {
         .odd {
-            background: #bcbcbc;
+            // background: #bcbcbc;
+            background: lightgrey;
         }
         .even {
             // background: #808080;
+        }
+        .name {
+            color: darkgreen;
+        }
+        .mine {
+            background-color: #00274c;
+            color: #ffcb05;
         }
     }
     .light {

@@ -38,6 +38,10 @@
         Rating
       %td
         Comments
+      %td
+        Show?
+      %td
+        Link
       
   %tbody
 
@@ -49,19 +53,25 @@
   for (var i = 0; i < reviews.length; i++) {
     var r = [
       "<tr class=\"",(odd) ? "odd" : "even","\">",
-      "<td>",reviews[i][0],"</td>",
+      "<td>",reviews[i][0],"</td>", //reviewer
       "<td><a href=\"mailto:",reviews[i][1],"\">",reviews[i][1],"</a></td>",
       "<td class=\"small\">",reviews[i][2],"</td>", //captain?
       "<td class=\"small\">",reviews[i][3],"</td>", //region
-      "<td>",reviews[i][4],"</td>", //name
+      "<td class=\"name ", (reviews[i][10] == "#{session[:user]['objectId']}") ? "mine" : "",
+      "\">",reviews[i][4],"</td>", //referee
       "<td class=\"small\">",reviews[i][5],"</td>", //team
       "<td class=\"small\">",reviews[i][6],"</td>", //opponent
       "<td>",reviews[i][7],"</td>", //rating
       "<td>",reviews[i][8],"</td>", //comments
+      "<td>",reviews[i][9],"</td>", //show?
+      "<td><a href=\"/reviews/"+reviews[i][10],"\">Edit</a></td>", //link
+
+
     ].join(' ');
-      
-      r += "</tr>";
-    odd = !odd;  
+    
+
+    r += "</tr>";
+    odd = !odd;
     $("#theTable tbody").append(r);
   };
 

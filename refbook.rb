@@ -49,6 +49,8 @@ get '/' do
   haml :index
 end
 
+def admin
+end
 get '/admin' do
   # this'll list links to important stuff
   # also, unique team names to catch typos/etc
@@ -61,7 +63,12 @@ get '/admin' do
 
     reviews.each do |r|
       q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
-      a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments']]
+      a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments'], r['show'], r['objectId']]
+      # hide the name of reviews made about you
+      if r['referee'].parse_object_id == session[:user]['objectId']
+        a[0] = "REDACTED"
+        a[1] = "REDACTED"
+      end
       @review_list << a
     end
 
@@ -69,10 +76,9 @@ get '/admin' do
   end
 end
 
+def cm
+end
 get '/cm' do 
-  # FIX - should update most recent user's test of that type with new time, not
-  # not make a new one
-
   # TODO: make sure user is logged in (so you can update cookie). 
 
   # cases:
@@ -99,9 +105,6 @@ get '/cm' do
     end
   end
 
-
-  puts att
-
   att["score"] = params[:cm_ts].to_i
   att["percentage"] = params[:cm_tp].to_i
   att["duration"] = params[:cm_td]
@@ -122,6 +125,8 @@ get '/cm' do
   redirect '/'
 end
 
+def create
+end
 get '/create' do
   @team_list = []
   teams = Parse::Query.new("_User").tap do |team|
@@ -195,6 +200,8 @@ get '/login' do
   haml :login
 end
 
+def login
+end
 post '/login' do
   begin
     session[:user] = Parse::User.authenticate(params[:username], params[:password])
@@ -205,12 +212,16 @@ post '/login' do
   end
 end
 
+def logout
+end
 get '/logout' do 
   session[:user] = nil
   flash[:issue] = "Successfully logged out!"
   redirect '/'
 end
 
+def profile
+end
 get '/profile' do 
   if not logged_in?
     flash[:issue] = "Log in to see your profile"
@@ -226,15 +237,20 @@ get '/profile' do
     end.get
 
     reviews.each do |r|
-      q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
-      a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments']]
-      @review_list << a
+      if r['show']
+      # q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
+      # a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments']]
+        a = [r['rating'], r['comments']]
+        @review_list << a
+      end
     end
 
     haml :profile
   end
 end
 
+def reset
+end
 get '/reset' do 
   haml :reset
 end
@@ -250,6 +266,8 @@ post '/reset' do
   end
 end
 
+def review
+end
 get '/review' do 
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   q = Parse::Query.new("_User").get
@@ -298,6 +316,13 @@ post '/review' do
   # params.to_s
 end
 
+get '/reviews/:review_id' do
+  review = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
+  review.to_json
+end
+
+def search
+end
 get '/search/?' do 
   # THIS ASSUMES that all and none are the last two regions, take care
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
@@ -346,6 +371,8 @@ get '/search/:region' do
   haml :search
 end
 
+def settings
+end
 get '/settings' do 
   haml :settings
 end
@@ -354,6 +381,8 @@ post '/settings' do
 
 end
 
+def tests
+end
 get '/tests/:which' do
   if not logged_in?
     flash[:issue] = "Must log in to test"
