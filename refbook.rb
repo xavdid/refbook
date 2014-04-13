@@ -63,7 +63,7 @@ get '/admin' do
 
     reviews.each do |r|
       q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
-      a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments'], r['show'], r['objectId']]
+      a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments'], r['show'], r['objectId'], q['objectId']]
       # hide the name of reviews made about you
       if r['referee'].parse_object_id == session[:user]['objectId']
         a[0] = "REDACTED"
