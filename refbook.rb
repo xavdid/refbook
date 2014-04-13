@@ -308,7 +308,8 @@ post '/review' do
   rev['opponent'] = params[:opponent]
   rev['rating'] = params[:rating]
   rev['comments'] = params[:comments]
-
+  # show should be false by default, true for testing
+  rev['show'] = true
   rev.save
 
   flash[:issue] = "Thanks for your review!"
