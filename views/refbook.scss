@@ -46,6 +46,15 @@ body {
     }
 }
 
+.name {
+    color: red;
+    text-decoration: underline;
+}
+
+.rating {
+    text-decoration: underline;
+}
+
 #theTable {
     td {
         padding-left: 10px;
@@ -66,11 +75,19 @@ body {
             // background: #808080;
         }
         .name {
-            color: darkgreen;
+            color: purple;
+            text-decoration: none;
         }
         .mine {
             background-color: #00274c;
             color: #ffcb05;
+        }
+        .Y {
+            background-color: #50e000;
+        }
+
+        .N {
+            background-color: #ff2100;
         }
     }
     .light {

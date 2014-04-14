@@ -45,6 +45,10 @@ def name_maker(person)
   "#{person['firstName']} #{person['lastName']}"
 end
 
+def to_bool(str)
+  str.downcase == 'true' || str == '1'
+end
+
 get '/' do
   haml :index
 end
@@ -235,13 +239,14 @@ get '/profile' do
         "objectId"  => session[:user]['objectId']
       }))
     end.get
-
+    @total = 0
     reviews.each do |r|
       if r['show']
       # q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
       # a = [r['reviewerName'], r['reviewerEmail'], r['isCaptain'], r['region'], name_maker(q), r['team'], r['opponent'], r['rating'], r['comments']]
         a = [r['rating'], r['comments']]
         @review_list << a
+        @total += 1
       end
     end
 
@@ -317,9 +322,31 @@ post '/review' do
   # params.to_s
 end
 
+def reviews
+end
 get '/reviews/:review_id' do
-  review = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
-  review.to_json
+  if not logged_in? or not session[:user]['admin']
+    flash[:issue] = "Admins only, kid"
+    redirect '/'
+  else
+    @r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
+    q = Parse::Query.new("_User").eq("objectId",@r['referee'].parse_object_id).get.first
+    @name = name_maker(q)
+    @review = @r.to_json
+    # review.to_json
+    haml :edit_review
+  end
+end
+
+post '/reviews/:review_id' do
+  r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
+
+  r['show'] = to_bool(params[:show])
+  r['comments'] = params[:comments]
+  r.save
+
+  flash[:issue] = "Review saved, it will #{r['show'] ? "" : "not"} be shown"
+  redirect '/admin'
 end
 
 def search

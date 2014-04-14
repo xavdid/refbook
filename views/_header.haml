@@ -38,7 +38,7 @@
         Information
     
     %li.right
-      Hello, #{logged_in? ? session[:user]['firstName'] : 'user'}
+      | #{logged_in? ? name_maker(session[:user]) : 'Not Signed In'}
       -# show email
       -# #{logged_in? ? "(#{session[:user]['username']})" : ''}
     
