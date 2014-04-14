@@ -7,6 +7,7 @@ require 'haml'
 require 'sinatra/flash'
 require 'pp'
 require 'time'
+require 'mail'
 
 include Mongo
 
@@ -24,6 +25,18 @@ configure do
     set :bind, '0.0.0.0'
   else
     set :env_db, 'refbook.herokuapp.com'
+  end
+
+  Mail.defaults do
+    delivery_method :smtp, { 
+      :address   => "smtp.sendgrid.net",
+      :port      => 587,
+      :domain    => "refdevelopment.com",
+      :user_name => ENV['SENDGRID_USERNAME'],
+      :password  => ENV['SENDGRID_PASSWORD'],
+      :authentication => 'plain',
+      :enable_starttls_auto => true 
+    }
   end
 end
 
@@ -140,7 +153,7 @@ get '/create' do
     @team_list << t["team"]
   end
   @team_list = @team_list.to_set.to_a
-  @region_keys = settings.region_keys.keys
+  @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   # puts @team_list
   haml :create
 end
@@ -406,7 +419,17 @@ get '/settings' do
 end
 
 post '/settings' do 
-
+  begin
+    session[:user]['email'] = params[:username]
+    session[:user]['username'] = params[:username]
+    session[:user] = session[:user].save
+    flash[:issue] = "Email sucessfully updated!"
+    redirect '/'
+  rescue
+    session[:user] = Parse::Query.new("_User").eq("objectId",session[:user]['objectId']).get.first
+    flash[:issue] = "There was an error (possibly because that email is improperly formatted or already in use by another user). Try again, then contact the administrator."
+    redirect '/settings'
+  end
 end
 
 def tests

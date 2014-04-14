@@ -11,6 +11,10 @@ GEM
     iron_mq (5.0.1)
       iron_core (>= 0.5.1)
     json (1.8.1)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.25.1)
     mongo (1.9.2)
       bson (~> 1.9.2)
     net-http-persistent (2.9.4)
@@ -19,6 +23,7 @@ GEM
       iron_mq
       patron
     patron (0.4.18)
+    polyglot (0.3.3)
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
@@ -35,6 +40,9 @@ GEM
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
     tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
 
 PLATFORMS
   ruby
@@ -43,6 +51,7 @@ DEPENDENCIES
   bson_ext
   haml
   json
+  mail
   mongo
   parse-ruby-client
   sass

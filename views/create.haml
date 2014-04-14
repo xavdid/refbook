@@ -58,8 +58,8 @@
   $('#team').autocomplete({source: teams});
 
   // pop pop!
-  region_keys.pop();
-  region_keys.pop();
+  // this doesn't actually make sense anymore.
+  
   for (var i = 0; i < region_keys.length; i++) {
     var el = document.createElement("option");
     el.textContent = region_keys[i];
