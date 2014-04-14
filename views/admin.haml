@@ -55,7 +55,7 @@
       "<tr class=\"",(odd) ? "odd" : "even","\">",
       "<td>",reviews[i][0],"</td>", //reviewer
       "<td><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
-      "<td class=\"small",(reviews[i][2]) ? "Y" : "N","\">",(reviews[i][2]) ? "T" : "F","</td>", //captain?
+      "<td class=\"small",(reviews[i][2]) ? "y" : "n","\">",(reviews[i][2]) ? "T" : "F","</td>", //captain?
       "<td class=\"small\">",reviews[i][3],"</td>", //region
       "<td class=\"name ", (reviews[i][11] == "#{session[:user]['objectId']}") ? "mine" : "",
       "\">",reviews[i][4],"</td>", //referee
@@ -63,7 +63,7 @@
       "<td class=\"small\">",reviews[i][6],"</td>", //opponent
       "<td>",reviews[i][7],"</td>", //rating
       "<td>",reviews[i][8],"</td>", //comments
-      "<td class=\"",(reviews[i][9]) ? "Y" : "N","\">",(reviews[i][9]) ? "T" : "F","</td>", //show?
+      "<td class=\"",(reviews[i][9]) ? "y" : "n","\">",(reviews[i][9]) ? "T" : "F","</td>", //show?
       "<td><a href=\"/reviews/"+reviews[i][10],"\">Edit</a></td>", //link
 
 
