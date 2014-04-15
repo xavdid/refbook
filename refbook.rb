@@ -62,6 +62,13 @@ def to_bool(str)
   str.downcase == 'true' || str == '1'
 end
 
+before do 
+  @killed = false
+  if @killed and request.path_info != '/off'
+    redirect '/off'
+  end
+end
+
 get '/' do
   haml :index
 end
@@ -193,6 +200,15 @@ post '/create' do
   end
 end
 
+get '/off' do
+  if not @killed
+    flash[:issue] = "Maintenance is done, carry on!"
+    redirect '/'
+  else
+    haml :off
+  end
+end
+
 get '/grade' do
   if params[:pass] == 'true'
     session[:user][@test+'Ref'] = true
@@ -314,11 +330,11 @@ post '/review' do
   rev['reviewerName'] = params[:name]
   rev['reviewerEmail'] = params[:email]
   rev['isCaptain'] = params[:captain] ? true : false
-  rev['region'] = settings.region_keys[params[:region]]
+  rev['region'] = settings.region_keys[params[:region]] || "None"
 
   p = Parse::Pointer.new({})
   p.class_name = "_User"
-  p.parse_object_id = params[:referee]
+  p.parse_object_id = params[:referee] || 'Sb33WyBziN'
   rev['referee'] = p
 
   rev['date'] = params[:date]
