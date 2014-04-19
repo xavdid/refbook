@@ -142,7 +142,7 @@ get '/cm' do
   if params[:cm_tp].to_i >= 80
     flash[:issue] = "You passed the #{params[:cm_return_test_type]} ref test, go you!"
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
-    user_to_update.save
+    session[:user] = user_to_update.save
   else
     flash[:issue] = "You failed, try again in a week!"
   end
@@ -180,6 +180,7 @@ post '/create' do
     :admin => false,
     :firstName => params[:fn].capitalize,
     :lastName => params[:ln].capitalize,
+    :attemptsLeft => 0,
     # the regex titlecases
     :team => params[:team].split(/(\W)/).map(&:capitalize).join,
     # because of dropdown, there shouldn't ever be no region, but this is 
