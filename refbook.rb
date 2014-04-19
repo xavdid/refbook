@@ -8,6 +8,7 @@ require 'sinatra/flash'
 require 'pp'
 require 'time'
 require 'mail'
+require 'rack-google-analytics'
 
 include Mongo
 
@@ -38,6 +39,8 @@ configure do
       :enable_starttls_auto => true 
     }
   end
+
+  use Rack::GoogleAnalytics, :tracker => 'UA-42341849-2'
 end
 
 # helpers do
