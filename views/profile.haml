@@ -1,11 +1,3 @@
-=haml :_header
-
-%h1
-  Profile
-
-.issue
-  =flash[:issue]
-
 %p
   You've got #{@total} review#{@total == 1 ? '' : 's'}. 
   - if @total > 0

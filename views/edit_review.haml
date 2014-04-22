@@ -1,11 +1,3 @@
-=haml :_header
-
-%h1
-  Edit Review
-
-.issue
-  =flash[:issue]
-
 %p
   Edit the comment and mark whether or not it should be displayed.
 
@@ -17,7 +9,7 @@
   %span.rating<
     #{@r['rating']}
 
--# .form_box
+-# This isn't in a formbox beause of the weird radio buttons
 %form{name: "review", action: "/reviews/#{params[:review_id]}", method: "post", id: "editor"}
   
   %label{for: "show"}

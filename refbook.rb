@@ -131,6 +131,11 @@ get '/cm' do
   #   B: no attempts for this test
   #   C: attempted this test
 
+  if not params.include? :cm_user_id
+    flash[:issue] = "Error, no user ID. If you feel like you've reached this in error, contact an administrator"
+    redirect '/'
+  end
+
   attempt_list = Parse::Query.new("testAttempt").eq("taker", params[:cm_user_id]).get
   if attempt_list.empty?
     # A
@@ -173,6 +178,7 @@ end
 def create
 end
 get '/create' do
+  @title = "Create an account!"
   @team_list = []
   teams = Parse::Query.new("_User").tap do |team|
     team.exists("team")
@@ -248,10 +254,12 @@ get '/grade' do
 end
 
 get '/info' do 
+  @title = "Information"
   haml :info
 end
 
 get '/login' do
+  @title = "Login"
   haml :login
 end
 
@@ -277,7 +285,8 @@ end
 
 def profile
 end
-get '/profile' do 
+get '/profile' do
+  @title = "Profile"
   if not logged_in?
     flash[:issue] = "Log in to see your profile"
     redirect '/'
@@ -308,6 +317,7 @@ end
 def reset
 end
 get '/reset' do 
+  @title = "Reset Your Password"
   haml :reset
 end
 
@@ -325,6 +335,7 @@ end
 def review
 end
 get '/review' do 
+  @title = "Review a Referee"
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   q = Parse::Query.new("_User").get
   @refs = {}
@@ -376,6 +387,7 @@ end
 def reviews
 end
 get '/reviews/:review_id' do
+  @title = "Edit a Review"
   if not logged_in? or not session[:user]['admin']
     flash[:issue] = "Admins only, kid"
     redirect '/'
@@ -403,6 +415,7 @@ end
 def search
 end
 get '/search/?' do 
+  @title = "Referee Directory"
   # THIS ASSUMES that all and none are the last two regions, take care
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
@@ -410,20 +423,20 @@ get '/search/?' do
 end
 
 get '/search/:region' do 
-
+  @title = "Search by Region"
   # could add head/snitch/ass status to class to easily hide/show rows
-
-  @region_title = reg_reverse(params[:region])
+  reg = params[:region].upcase
+  @region_title = reg_reverse(reg)
 
   if @region_title.nil?
-    flash[:issue] = "Invalid region code: #{params[:region]}"
+    flash[:issue] = "Invalid region code: #{reg}"
     redirect '/search'
   end
 
-  if params[:region] == 'ALL'
+  if reg == 'ALL'
     q = Parse::Query.new("_User").get
   else
-    q = Parse::Query.new("_User").eq("region",params[:region]).get
+    q = Parse::Query.new("_User").eq("region",reg).get
   end
 
   @refs = []
@@ -437,7 +450,7 @@ get '/search/:region' do
       entry << j = person['snitchRef'] ? 'Y' : 'N'
       entry << j = person['headRef'] ? 'Y' : 'N'
 
-      if params[:region] == 'ALL'
+      if reg == 'ALL'
         entry << reg_reverse(person['region'])
       end
 
@@ -453,10 +466,11 @@ end
 def settings
 end
 get '/settings' do 
+  @title = "Settings"
   haml :settings
 end
 
-post '/settings' do 
+post '/settings' do  
   begin
     session[:user]['email'] = params[:username]
     session[:user]['username'] = params[:username]
@@ -473,6 +487,8 @@ end
 def tests
 end
 get '/tests/:which' do
+  @title = "Testing Center"
+  # right now, which can be anything. Nbd?
   if not logged_in?
     flash[:issue] = "Must log in to test"
     redirect '/'

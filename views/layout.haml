@@ -77,6 +77,8 @@
             Create Account
 
   .mid
+    /[if lt IE 8]
+      <p>We detect you're using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> as the one you are using isn't supported (and causes errors) on our site. C'mon.</p>
     %h1
       #{@title || 'Missing Title'}
 
@@ -88,7 +90,14 @@
 
   .bot
     %p
-      feet are here
+      -# All rights reserved. We just ref stuff, and don't own (or claim any right to) the word 'quidditch'. Site created by 
+      %a{href: "http://davidbrownman.com", target: "_blank"}<
+        David Brownman
+      made this site. The code is available
+      %a{href: "https://github.com/Xavdidtheshadow/refbook", target: "_blank"}<
+        here
+      if you're into that sort of thing.
+      &copy; 2014 IRDP, all rights reserved. 
 
 
 

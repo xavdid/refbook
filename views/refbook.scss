@@ -1,6 +1,6 @@
 // Refbook CSS
 
-$footer-height: 60px;
+$footer-height: 36px;
 $slide-left: 30px;
 
 * {
@@ -74,8 +74,9 @@ html, body {
     .form_box {
         padding-left: 30px;
         padding-right: 30px;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
+        // thought I might like these, I don't. 
+        // border-left: 1px solid black;
+        // border-right: 1px solid black;
         width: 250px;
         clear: both;
 
@@ -149,12 +150,23 @@ html, body {
     bottom: 0;
     width: 100%;
     height: $footer-height;
-    background: blue;
+    background: black;
     color: white;
 
     p {
-        padding-left: $slide-left;
+        // padding-left: $slide-left;
+        padding-left: 10px;
+        // margin-left: -2em;
+        font-size: 12px;
     }
+
+    a {
+        color: #fff;
+        &:visited {
+            color: #fff;
+        }
+    }
+
 }
 
 
