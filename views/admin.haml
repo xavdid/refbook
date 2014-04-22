@@ -1,11 +1,3 @@
-=haml :_header
-
-%h1
-  Admin Console
-
-.issue
-  =flash[:issue]
-
 %p
   Here are all reviews (viewable only if you're an admin). There'll be other info.
 
@@ -45,7 +37,9 @@
       
   %tbody
 
-
+%p
+  there could be more info here
+  
 :javascript
   var reviews = #{@review_list};
   var odd = false;

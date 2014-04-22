@@ -1,121 +1,168 @@
+// Refbook CSS
+
+$footer-height: 60px;
+$slide-left: 30px;
+
 * {
     font-family: monospace, sans-serif;
 }
 
-ul {
-    list-style-type: none;
-}
+html, body {
+    // padding-left: 30px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 
-.header {
-    float: right;
-    padding-right: 20px;
-    text-align: right;
-}
-
-.ans {
-    display: inline;
-}
-
-a:visited {
-    color: blue;
-}
-
-body {
-    padding-left: 30px;
-}
-
-.issue {
-    color: red;
-    height: 20px;
-}
-
-.form_box {
-    width: 250px;
-    clear: both;
-
-    input {
-        width: 100%;
-        clear: both;
-        margin-bottom: 20px;
-    }
-
-    select {
-        width: 100%;
-        clear: both;
-        margin-bottom: 20px;
-    }
-}
-
-.name {
-    color: red;
-    text-decoration: underline;
-}
-
-.rating {
-    text-decoration: underline;
-}
-
-#theTable {
-    td {
-        padding-left: 10px;
-        padding-right: 20px;
-    }
-    thead {
-        // border-bottom: 1px solid #000;
-        background: black;
-        color: white;
-    }
-
-    tbody {
-        .odd {
-            // background: #bcbcbc;
-            background: lightgrey;
-        }
-        .even {
-            // background: #808080;
-        }
-        .name {
-            color: purple;
-            text-decoration: none;
-        }
-        .mine {
-            background-color: #00274c;
-            color: #ffcb05;
-        }
-        .y {
-            background-color: #50e000;
-        }
-
-        .n {
-            background-color: #ff2100;
-        }
-    }
-    .light {
-        // something
-    } 
-}
-
-.topbar {
-    height: 50px;
-    color: #fff;
-    background-color: #000;
-    clear: both;
-    margin-left: -30px;
-    a {
-        color: #fff;
+    a:visited {
+        color: blue;
     }
 
     ul {
-        padding-top: 17px;
-        margin-left: -2em;
-        li {
-            display: inline-block;
+        list-style-type: none;
+        margin: 0;
+        // padding: 0;
+    }
+}
+
+.content {
+    min-height: 100%;
+    position: relative;
+}
+
+.top {
+    // the big black bar
+    // padding: 10px;
+    .topbar {
+        height: 50px;
+        color: #fff;
+        background-color: #000;
+        clear: both;
+        // margin-left: -30px;
+        a {
+            color: #fff;
         }
-        .right {
-            float: right;
-            padding-right: 10px;
+
+        ul {
+            padding-top: 17px;
+            margin-left: -2em;
+            li {
+                display: inline-block;
+            }
+            .right {
+                float: right;
+                padding-right: 10px;
+            }
+        }
+    }
+    // login/logout text
+    .header {
+        float: right;
+        padding-right: 20px;
+        text-align: right;
+    }
+}
+
+.mid {
+    padding-bottom: $footer-height;
+    padding-left: $slide-left;
+
+    p {
+        width: 60%;
+        padding-left: 30px;
+    }
+
+    .form_box {
+        padding-left: 30px;
+        padding-right: 30px;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        width: 250px;
+        clear: both;
+
+        input {
+            width: 100%;
+            clear: both;
+            margin-bottom: 20px;
+        }
+
+        select {
+            width: 100%;
+            clear: both;
+            margin-bottom: 20px;
+        }
+    }
+
+    .name {
+        color: red;
+        text-decoration: underline;
+    }
+
+    .rating {
+        text-decoration: underline;
+    }
+
+    .issue {
+        color: red;
+        height: 20px;
+    }
+
+    #theTable {
+        td {
+            padding-left: 10px;
+            padding-right: 20px;
+        }
+        thead {
+            // border-bottom: 1px solid #000;
+            background: black;
+            color: white;
+        }
+        tbody {
+            .odd {
+                // background: #bcbcbc;
+                background: lightgrey;
+            }
+            .even {
+                // background: #808080;
+            }
+            .name {
+                // go blue, baby
+                color: purple;
+                text-decoration: none;
+            }
+            .mine {
+                background-color: #00274c;
+                color: #ffcb05;
+            }
+            .y {
+                background-color: #50e000;
+            }
+            .n {
+                background-color: #ff2100;
+            }
         }
     }
 }
+
+
+.bot {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $footer-height;
+    background: blue;
+    color: white;
+
+    p {
+        padding-left: $slide-left;
+    }
+}
+
+
+
+
+
+
+
+
 
 

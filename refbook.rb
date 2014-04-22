@@ -43,9 +43,7 @@ configure do
   use Rack::GoogleAnalytics, :tracker => 'UA-42341849-2'
 end
 
-# helpers do
-
-# end
+# helpers
 
 def logged_in?
     session[:user] != nil
@@ -65,6 +63,8 @@ def to_bool(str)
   str.downcase == 'true' || str == '1'
 end
 
+# kill switch
+
 before do 
   @killed = false
   if @killed and request.path_info != '/off'
@@ -72,13 +72,18 @@ before do
   end
 end
 
+
+# routes
+
 get '/' do
+  @title = "Index"
   haml :index
 end
 
 def admin
 end
 get '/admin' do
+  @title = "Admin"
   # this'll list links to important stuff
   # also, unique team names to catch typos/etc
   if not logged_in? or not session[:user]['admin']
@@ -351,7 +356,7 @@ post '/review' do
 
   p = Parse::Pointer.new({})
   p.class_name = "_User"
-  p.parse_object_id = params[:referee] || 'Sb33WyBziN'
+  p.parse_object_id = params[:referee] || 'Sb33WyBziN' #hardcoded unnamed ref
   rev['referee'] = p
 
   rev['date'] = params[:date]
