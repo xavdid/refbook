@@ -131,7 +131,7 @@ get '/cm' do
   #   B: no attempts for this test
   #   C: attempted this test
 
-  if not params.include? :cm_user_id
+  if not params.include? 'cm_user_id'
     flash[:issue] = "Error, no user ID. If you feel like you've reached this in error, contact an administrator"
     redirect '/'
   end
