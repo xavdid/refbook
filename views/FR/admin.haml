@@ -1,0 +1,82 @@
+%p
+  Here are all reviews (viewable only if you're an admin). There'll be other info.
+
+%p
+  %a.more{href: "#"}
+    Show extra info
+
+%p
+  %a.less{href: "#"}
+    Show less info
+
+%table#theTable
+  %thead
+    %tr
+      %td
+        Reviewer Name
+      %td
+        Reviewer Email
+      %td.small{title: "Team Captain?"}
+        C?
+      %td.small
+        Referee Region
+      %td.light
+        Referee Name
+      %td.small
+        Team
+      %td.small
+        Opponent
+      %td
+        Rating
+      %td
+        Comments
+      %td{title: "Display to that referee?"}
+        D?
+      %td
+        Link
+      
+  %tbody
+
+%p
+  there could be more info here
+  
+:javascript
+  // $('#the_title').text("French Index haw haw haw");
+  var reviews = #{@review_list};
+  var odd = false;
+  // $("#theTable tbody").empty();
+  for (var i = 0; i < reviews.length; i++) {
+    var r = [
+      "<tr class=\"",(odd) ? "odd" : "even","\">",
+      "<td>",reviews[i][0],"</td>", //reviewer
+      "<td><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
+      "<td class=\"small",(reviews[i][2]) ? "y" : "n","\">",(reviews[i][2]) ? "T" : "F","</td>", //captain?
+      "<td class=\"small\">",reviews[i][3],"</td>", //region
+      "<td class=\"name ", (reviews[i][11] == "#{session[:user]['objectId']}") ? "mine" : "",
+      "\">",reviews[i][4],"</td>", //referee
+      "<td class=\"small\">",reviews[i][5],"</td>", //team
+      "<td class=\"small\">",reviews[i][6],"</td>", //opponent
+      "<td>",reviews[i][7],"</td>", //rating
+      "<td>",reviews[i][8],"</td>", //comments
+      "<td class=\"",(reviews[i][9]) ? "y" : "n","\">",(reviews[i][9]) ? "T" : "F","</td>", //show?
+      "<td><a href=\"/reviews/"+reviews[i][10],"\">Edit</a></td>", //link
+
+
+    ].join(' ');
+    
+
+    r += "</tr>";
+    odd = !odd;
+    $("#theTable tbody").append(r);
+  };
+
+  $('.small').hide();
+
+  $('.more').click(function(){
+    $('.small').show();
+  });
+
+  $('.less').click(function(){
+    $('.small').hide();
+  });
+

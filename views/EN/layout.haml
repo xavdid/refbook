@@ -21,22 +21,22 @@
           |
         %li
           %a{href: '/'}
-            Acceuil
+            Home
         %li
           |
         %li
           %a{href: '/tests/ass'}
-            Évaluation
+            Testing
         %li
           |
         %li
           %a{href: '/search'}
-            Liste d'Arbitre
+            Referee Directory
         %li
           |
         %li
           %a{href: '/review'}
-            Critiquez un Arbitre
+            Review a Referee
         %li
           |
         %li
@@ -79,7 +79,7 @@
   .mid
     /[if lt IE 9]
       <p>We detect you're using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> as the one you are using isn't supported (and causes errors) on our site. C'mon.</p>
-    %h1
+    %h1#the_title
       #{@title || 'Missing Title'}
 
     .issue

@@ -81,7 +81,7 @@ end
 
 get '/' do
   @title = "Home"
-  haml :index, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/index".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 def admin
@@ -121,7 +121,7 @@ get '/admin' do
       @review_list << a
     end
 
-    haml :admin, layout: "#{@lang}_layout".to_sym
+    haml "#{@lang}/admin".to_sym, layout: "#{@lang}/layout".to_sym
   end
 end
 
@@ -193,7 +193,7 @@ get '/create' do
   @team_list = @team_list.to_set.to_a
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   # puts @team_list
-  haml :create, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/create".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 post '/create' do
@@ -233,15 +233,15 @@ post '/create' do
   end
 end
 
-def off
+def field
 end
-get '/off' do
-  if not @killed
-    flash[:issue] = "Maintenance is done, carry on!"
-    redirect '/'
-  else
-    haml :off, layout: false
-  end
+get '/field/:referee' do 
+  ref = Parse::Query.new("_User").eq("objectId", params[:referee]).get.first
+  puts ref
+  ref['passedFieldTest'] = true
+  ref.save
+  flash[:issue] = "#{name_maker(ref)} has passed their field test!"
+  redirect "/search/#{params[:reg]}"
 end
 
 get '/grade' do
@@ -256,18 +256,18 @@ get '/grade' do
     flash[:issue] = "failed the #{params[:test]} ref test!"
   end
 
-  # haml :grade, layout: "#{@lang}_layout".to_sym
+  # haml "#{@lang}/grade".to_sym, layout: "#{@lang}/layout".to_sym
   redirect '/'
 end
 
 get '/info' do 
   @title = "Information"
-  haml :info, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/info".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 get '/login' do
   @title = "Login"
-  haml :login, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/login".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 def login
@@ -288,6 +288,17 @@ get '/logout' do
   session[:user] = nil
   flash[:issue] = "Successfully logged out!"
   redirect '/'
+end
+
+def off
+end
+get '/off' do
+  if not @killed
+    flash[:issue] = "Maintenance is done, carry on!"
+    redirect '/'
+  else
+    haml "#{@lang}/off".to_sym, layout: false
+  end
 end
 
 def profile
@@ -317,7 +328,7 @@ get '/profile' do
       end
     end
 
-    haml :profile, layout: "#{@lang}_layout".to_sym
+    haml "#{@lang}/profile".to_sym, layout: "#{@lang}/layout".to_sym
   end
 end
 
@@ -325,7 +336,7 @@ def reset
 end
 get '/reset' do 
   @title = "Reset Your Password"
-  haml :reset, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/reset".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 post '/reset' do
@@ -362,7 +373,7 @@ get '/review' do
   end
 
   @refs = @refs.to_json
-  haml :review, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/review".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 post '/review' do 
@@ -404,7 +415,7 @@ get '/reviews/:review_id' do
     @name = name_maker(q)
     @review = @r.to_json
     # review.to_json
-    haml :edit_review, layout: "#{@lang}_layout".to_sym
+    haml "#{@lang}/edit_review".to_sym, layout: "#{@lang}/layout".to_sym
   end
 end
 
@@ -426,40 +437,46 @@ get '/search/?' do
   # THIS ASSUMES that all and none are the last two regions, take care
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
-  haml :si, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/si".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 get '/search/:region' do 
   @title = "Search by Region"
   # could add head/snitch/ass status to class to easily hide/show rows
-  reg = params[:region].upcase
-  @region_title = reg_reverse(reg)
+  @reg = params[:region].upcase
+  @region_title = reg_reverse(@reg)
 
   if @region_title.nil?
-    flash[:issue] = "Invalid region code: #{reg}"
+    flash[:issue] = "Invalid region code: #{@reg}"
     redirect '/search'
   end
 
-  if reg == 'ALL'
+  if @reg == 'ALL'
     q = Parse::Query.new("_User").get
   else
-    q = Parse::Query.new("_User").eq("region",reg).get
+    q = Parse::Query.new("_User").eq("region",@reg).get
   end
 
   @refs = []
   q.each do |person|
     if person["assRef"] or person["snitchRef"]
-      entry = [person["firstName"], person["lastName"], 
-        person["team"], person["username"]]
+      entry = [
+        person["firstName"], 
+        person["lastName"], 
+        person["team"], 
+        person["username"]
+      ]
       
       # assignment because reuby returns are weird
       entry << j = person['assRef'] ? 'Y' : 'N'
       entry << j = person['snitchRef'] ? 'Y' : 'N'
       entry << j = person['headRef'] ? 'Y' : 'N'
 
-      if reg == 'ALL'
-        entry << reg_reverse(person['region'])
-      end
+      
+      entry << reg_reverse(person['region'])
+      
+
+      entry << person["objectId"]
 
       @refs << entry
     end
@@ -467,14 +484,14 @@ get '/search/:region' do
 
   @refs = @refs.sort_by{|i| i[1]}
 
-  haml :search, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/search".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 def settings
 end
 get '/settings' do 
   @title = "Settings"
-  haml :settings, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/settings".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 post '/settings' do  
@@ -483,7 +500,7 @@ post '/settings' do
     session[:user]['username'] = params[:username]
     session[:user]['lang'] = params[:lang]
     session[:user] = session[:user].save
-    flash[:issue] = "Email sucessfully updated!"
+    flash[:issue] = "Settings sucessfully updated!"
     redirect '/'
   rescue
     session[:user] = Parse::Query.new("_User").eq("objectId",session[:user]['objectId']).get.first
@@ -536,7 +553,7 @@ get '/tests/:which' do
     end
   end
 
-  haml :tests, layout: "#{@lang}_layout".to_sym
+  haml "#{@lang}/tests".to_sym, layout: "#{@lang}/layout".to_sym
 end
 
 # renders css

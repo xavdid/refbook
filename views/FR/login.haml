@@ -1,0 +1,20 @@
+.form_box
+  %form{name: "login", action: "login", method: "post"}
+    %label{for: "Email"}
+      Email
+    %input{type: "email", name: "username", placeholder:"email"}
+
+    %label{for: "Password:"}
+      Password
+    %input{type: "password", name: "password", placeholder: "password"}
+
+    %input.button{type: "submit", value: "Login"}
+
+%p
+  Forgot your password? Do you need to 
+  %a{href: '/reset'}<
+    reset
+  it?
+
+:javascript
+  // $('#the_title').text("French Index haw haw haw");

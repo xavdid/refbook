@@ -1,0 +1,90 @@
+%p
+  Keep all information factual and specific. Angry reviews get much less weight than level-headed ones. Also, if you can't remember the ref's name that's fine, just include as much identifying information as you can and we'll make sure it gets to the right place. 
+
+.form_box
+  %form{name: "review", action: "review", method: "post", onsubmit: "", id: "rater"}
+    %label{for: "name"}
+      Your Name
+    %input{type: "text", name: "name", placeholder:"first and last"}
+
+    %label{for: "email"}
+      Your Email
+    %input{type: "email", name: "email", placeholder:"name@example.com"}
+
+    %label{for: "captain"}
+      I am my team's captain
+    %input{type: "checkbox", name: "captain", id: "captain", form: "rater"}
+
+    %label{for: "region"}
+      Ref's Region
+    %select{name: "region", id: "region"}
+
+    %label{for: "referee"}
+      Ref's Name
+    %select{name: "referee", id: "referee"}
+
+    %label{for: "date"}
+      Date of Game
+    %input{type: "text", name: "date", placeholder: "MM/DD/YY"}
+
+    %label{for: "team"}
+      Your Team's Name
+    %input{type: "text", name: "team"}
+
+    %label{for: "opponent"}
+      Opponent Team's Name
+    %input{type: "text", name: "opponent"}
+
+    %label{for: "rating"}
+      How did the ref do?
+    %select{name: "rating", id: "rating"}
+      %option{value: "excellent"}
+        Excellent!
+      %option{value: "good"}
+        Good
+      %option{value: "average"}
+        Average
+      %option{value: "poor"}
+        Poor
+
+    %label{for: "comments"}
+      Specific instructions for things to rate
+    %textarea{form: "rater", cols: 32, rows: 7, name: "comments"}
+
+    %input.button{type: "submit", value: "Submit Review"}
+
+
+:javascript
+  // $('#the_title').text("French Index haw haw haw");
+  var region_keys = #{@region_keys};
+
+  var refs = #{@refs};
+
+  $("#region").append(generateBlank());
+  for (var i = 0; i < region_keys.length; i++) {
+    var el = document.createElement("option");
+    el.textContent = region_keys[i];
+    el.value = region_keys[i];
+    $("#region").append(el);
+  };
+
+  // fills the dropdown with refs from that region
+  $("#region").change(function(){
+    $("#referee").empty();
+    $("#referee").append(generateBlank());
+    for (var i = 0; i < refs[$("#region").val()].length; i++) {
+      var el = document.createElement("option");
+      el.textContent = refs[$("#region").val()][i][1];
+      el.value = refs[$("#region").val()][i][0];
+      $("#referee").append(el);
+    };
+  });
+
+  function generateBlank(){
+    var el = document.createElement("option");
+    el.textContent = "";
+    el.value = "";
+    return el;
+  };
+
+  // function validate(){};

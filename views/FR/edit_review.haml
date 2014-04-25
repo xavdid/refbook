@@ -1,0 +1,39 @@
+%p
+  Edit the comment and mark whether or not it should be displayed.
+
+%p
+  Review for 
+  %span.name<
+    #{@name} 
+  by #{@r['reviewerName']} for which they were rated 
+  %span.rating<
+    #{@r['rating']}
+
+-# This isn't in a formbox beause of the weird radio buttons
+%form{name: "review", action: "/reviews/#{params[:review_id]}", method: "post", id: "editor"}
+  
+  %label{for: "show"}
+    Show?
+  %br
+  %input{type: "radio", name: "show", value: "true", id: "Y"}
+  Yes
+  %br
+  %input{type: "radio", name: "show", value: "false", id: "N"}
+  No
+  %br
+  %br
+  %label{for: "comments"}
+    Text of the review
+  %br
+  %textarea{form: "editor", cols: 32, rows: 7, name: "comments", id: "comments"}
+  %br
+  %br
+  %input.button{type: "submit", value: "Submit", title: "Will submit current state of review, regardless of what it was before"}
+
+:javascript
+  // $('#the_title').text("French Index haw haw haw");
+  var r = #{@review};
+
+  $((r['show']) ? "#Y" : "#N").prop("checked", true);
+
+  $("#comments").text(r['comments']);

@@ -1,0 +1,109 @@
+%p
+  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. 
+
+.form_box
+  %form{name: "create", action: "create", method: "post", onsubmit: "return validate();"}
+    %label{for: "email"}
+      Email
+    %input{type: "email", name: "username", placeholder:"email"}
+
+    %label{for: "password"}
+      Password
+    %input{type: "password", name: "password", placeholder: "password"}
+
+    %label{for: "pw2"}
+      Confirm
+    %input{type: "password", name: "pw2", placeholder: "confirmed password"}
+
+    %label{for: "fn"}
+      First Name
+    %input{type: "text", name: "fn", placeholder: "First Name", id: "fn"}
+
+    %label{for: "ln"}
+      Last Name
+    %input{type: "text", name: "ln", placeholder: "Last Name", id: "ln"}
+
+    %label{for: "team"}
+      Associated Team (or none)
+    %input{type: "text", name: "team", placeholder: "team", id: "team"}
+
+    %label{for: "region"}
+      Region
+    %select{name: "region", id: "region"}
+
+    %label{for: "agreement"}
+      I agree that I've read the 
+      %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank", onclick: "return false;"}<
+        Referee's Code
+      and agree to all statements therein.
+
+    %input{type: "checkbox", name: "agreement", id: "agreement"}
+
+    %input.button{type: "submit", value: "Create User"}
+
+:javascript
+  // $('#the_title').text("French Index haw haw haw");
+  // team should be dropdown too, get team list/region from Pyne
+  var region_keys = #{@region_keys};
+  var teams = #{@team_list};
+
+  teams.push("None");
+  $('#team').autocomplete({source: teams});
+
+  // pop pop!
+  // this doesn't actually make sense anymore.
+  
+  for (var i = 0; i < region_keys.length; i++) {
+    var el = document.createElement("option");
+    el.textContent = region_keys[i];
+    el.value = region_keys[i];
+    $("#region").append(el);
+  }
+
+  function validate() {
+    // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
+    var f = $("form")[0];
+    var filled = true;
+
+    var e = f["username"].value;
+    var p = f["password"].value;
+    var p2 = f["pw2"].value;
+    
+    var fn = f["fn"].value;
+    var ln = f["ln"].value;
+
+    var t = f["team"].value;
+    var r = f["region"].value;
+
+    var fields = [e, p, p2, fn, ln, t, r];
+
+    fields.forEach(function(field){
+      if (field == null || field == "") {
+        filled = false;
+      }
+    });
+
+    // checking forms are full, passwords match, and checkbox is checked
+
+    if (!filled) {
+      $(".issue").text("All fields are required");
+      return false;
+    }
+
+    else if (!(f["password"].value == f["pw2"].value)) {
+      $(".issue").text("Passwords don't match");
+      return false;
+    }
+
+    else if (!f["agreement"].checked) {
+      $(".issue").text("Must agree to ref agreement");
+      return false;
+    }
+
+    
+
+    else {
+      return true;
+    }    
+
+  }
