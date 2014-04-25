@@ -473,10 +473,12 @@ get '/search/:region' do
       entry << j = person['headRef'] ? 'Y' : 'N'
 
       
-      entry << reg_reverse(person['region'])
+      entry << reg_reverse(person['region']) # 7
       
 
-      entry << person["objectId"]
+      entry << person["objectId"] # 8
+      
+      entry << j = person['passedFieldTest'] ? 'Y' : 'N' # 9
 
       @refs << entry
     end

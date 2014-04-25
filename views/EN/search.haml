@@ -28,9 +28,8 @@
       - if @reg == 'ALL'
         %td
           Region
-      - if not session[:user].nil? and session[:user]['admin']
-        %td
-          FT
+      %td
+        FT
   %tbody
 
 :javascript
@@ -51,14 +50,24 @@
       if (#{@reg == 'ALL'}) {
         r += ["<td>",refs[i][7],"</td>"].join(' ');
       };
-      if (#{not session[:user].nil? and session[:user]['admin']}) {
-        r += [
+
+      if (refs[i][9] == "N") {
+        if (#{not session[:user].nil? and session[:user]['admin']}) {
+          r += [
                 "<td>",
                 "<div class=\"field_test\"><a href=\"/field/"+refs[i][8]+"?reg=#{@reg}\">",
                 "Passed Field Test",
                 "</a></div></td>"
               ].join(' ');
+        }
+        else {
+          r += ["<td>",refs[i][9],"</td>"].join(' ');
+        }
+      }
+      else {
+        r += ["<td>",refs[i][9],"</td>"].join(' ');
       };
+
       r += "</tr>";
     odd = !odd;  
     $("#theTable tbody").append(r);
