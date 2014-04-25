@@ -207,12 +207,12 @@ post '/create' do
     :assRef => false,
     :snitchRef => false,
     :headRef => false,
+    :attemptsRemaining => 0,
     :passedFieldTest => false,
     :admin => false,
     :lang => params[:lang] || 'EN',
     :firstName => params[:fn].capitalize,
     :lastName => params[:ln].capitalize,
-    :attemptsLeft => 0,
     # the regex titlecases
     :team => params[:team].split(/(\W)/).map(&:capitalize).join,
     # because of dropdown, there shouldn't ever be no region, but this is 
@@ -277,7 +277,7 @@ post '/login' do
     session[:user] = Parse::User.authenticate(params[:username], params[:password])
     redirect '/'
   rescue
-    flash[:issue] = "Invalid login credientials"
+    flash[:issue] = "Invalid login credentials"
     redirect '/login'
   end
 end
@@ -477,7 +477,7 @@ get '/search/:region' do
       
 
       entry << person["objectId"] # 8
-      
+
       entry << j = person['passedFieldTest'] ? 'Y' : 'N' # 9
 
       @refs << entry
