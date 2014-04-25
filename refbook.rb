@@ -64,9 +64,13 @@ def to_bool(str)
 end
 
 # kill switch
-
 before do 
   @killed = false
+  if not session[:user].nil?
+    @lang = session[:user]['lang']
+  else
+    @lang = "EN"
+  end
   if @killed and request.path_info != '/off'
     redirect '/off'
   end
@@ -76,8 +80,8 @@ end
 # routes
 
 get '/' do
-  @title = "Index"
-  haml :index
+  @title = "Home"
+  haml :index, layout: "#{@lang}_layout".to_sym
 end
 
 def admin
@@ -117,7 +121,7 @@ get '/admin' do
       @review_list << a
     end
 
-    haml :admin
+    haml :admin, layout: "#{@lang}_layout".to_sym
   end
 end
 
@@ -189,7 +193,7 @@ get '/create' do
   @team_list = @team_list.to_set.to_a
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   # puts @team_list
-  haml :create
+  haml :create, layout: "#{@lang}_layout".to_sym
 end
 
 post '/create' do
@@ -205,6 +209,7 @@ post '/create' do
     :headRef => false,
     :passedFieldTest => false,
     :admin => false,
+    :lang => params[:lang] || 'EN',
     :firstName => params[:fn].capitalize,
     :lastName => params[:ln].capitalize,
     :attemptsLeft => 0,
@@ -228,12 +233,14 @@ post '/create' do
   end
 end
 
+def off
+end
 get '/off' do
   if not @killed
     flash[:issue] = "Maintenance is done, carry on!"
     redirect '/'
   else
-    haml :off
+    haml :off, layout: false
   end
 end
 
@@ -249,18 +256,18 @@ get '/grade' do
     flash[:issue] = "failed the #{params[:test]} ref test!"
   end
 
-  # haml :grade
+  # haml :grade, layout: "#{@lang}_layout".to_sym
   redirect '/'
 end
 
 get '/info' do 
   @title = "Information"
-  haml :info
+  haml :info, layout: "#{@lang}_layout".to_sym
 end
 
 get '/login' do
   @title = "Login"
-  haml :login
+  haml :login, layout: "#{@lang}_layout".to_sym
 end
 
 def login
@@ -310,7 +317,7 @@ get '/profile' do
       end
     end
 
-    haml :profile
+    haml :profile, layout: "#{@lang}_layout".to_sym
   end
 end
 
@@ -318,7 +325,7 @@ def reset
 end
 get '/reset' do 
   @title = "Reset Your Password"
-  haml :reset
+  haml :reset, layout: "#{@lang}_layout".to_sym
 end
 
 post '/reset' do
@@ -355,7 +362,7 @@ get '/review' do
   end
 
   @refs = @refs.to_json
-  haml :review
+  haml :review, layout: "#{@lang}_layout".to_sym
 end
 
 post '/review' do 
@@ -397,7 +404,7 @@ get '/reviews/:review_id' do
     @name = name_maker(q)
     @review = @r.to_json
     # review.to_json
-    haml :edit_review
+    haml :edit_review, layout: "#{@lang}_layout".to_sym
   end
 end
 
@@ -419,7 +426,7 @@ get '/search/?' do
   # THIS ASSUMES that all and none are the last two regions, take care
   @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
   @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
-  haml :si
+  haml :si, layout: "#{@lang}_layout".to_sym
 end
 
 get '/search/:region' do 
@@ -460,20 +467,21 @@ get '/search/:region' do
 
   @refs = @refs.sort_by{|i| i[1]}
 
-  haml :search
+  haml :search, layout: "#{@lang}_layout".to_sym
 end
 
 def settings
 end
 get '/settings' do 
   @title = "Settings"
-  haml :settings
+  haml :settings, layout: "#{@lang}_layout".to_sym
 end
 
 post '/settings' do  
   begin
     session[:user]['email'] = params[:username]
     session[:user]['username'] = params[:username]
+    session[:user]['lang'] = params[:lang]
     session[:user] = session[:user].save
     flash[:issue] = "Email sucessfully updated!"
     redirect '/'
@@ -528,7 +536,7 @@ get '/tests/:which' do
     end
   end
 
-  haml :tests
+  haml :tests, layout: "#{@lang}_layout".to_sym
 end
 
 # renders css

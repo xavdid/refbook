@@ -1,0 +1,104 @@
+!!!
+
+%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
+-# %link{:rel => 'stylesheet', :type => 'text/css', :href => '/reset.css'}
+%link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css'}
+%link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'}
+-# %link{:rel => 'stylesheet', :type => 'text/css', :href => 'tablesorter.style.css'}
+
+%script{src: "http://code.jquery.com/jquery-1.10.2.min.js", type:"text/javascript"}
+-# %script{src: "jquery-1.10.2.min.js", type:"text/javascript"}
+%script{src: "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js", type:"text/javascript"}
+-# %script{src: "/jquery.tablesorter.min.js", type:"text/javascript"}
+
+.content
+  .top
+    .topbar
+      %ul
+        %li
+          IRDP 
+        %li
+          |
+        %li
+          %a{href: '/'}
+            Home
+        %li
+          |
+        %li
+          %a{href: '/tests/ass'}
+            Testing
+        %li
+          |
+        %li
+          %a{href: '/search'}
+            Referee Directory
+        %li
+          |
+        %li
+          %a{href: '/review'}
+            Review a Referee
+        %li
+          |
+        %li
+          %a{href: '/info'}
+            Information
+        
+        %li.right
+          | #{logged_in? ? name_maker(session[:user]) : 'Not Signed In'}
+          -# show email
+          -# #{logged_in? ? "(#{session[:user]['username']})" : ''}
+        
+        - if logged_in?
+          - if session[:user]['admin']
+            %li.right
+              %a{href: '/admin'}
+                %i.fa.fa-gavel.fa-lg{title: "Admin Console"}
+
+          %li.right
+            %a{href: '/settings'}
+              %i.fa.fa-cog.fa-lg{title: "Settings Console"}
+
+          %li.right
+            %a{href: '/profile'}
+              %i.fa.fa-user.fa-lg{title: "Profile Console"}
+
+    .header
+      %p
+        - if logged_in?
+          %a{href: '/logout'}
+            Logout
+            %i.fa.fa-sign-out.fa-lg
+            
+        - else
+          %a{href: '/login'}<
+            Login
+          or
+          %a{href: '/create'}
+            Create Account
+
+  .mid
+    /[if lt IE 9]
+      <p>We detect you're using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> as the one you are using isn't supported (and causes errors) on our site. C'mon.</p>
+    %h1
+      #{@title || 'Missing Title'}
+
+    .issue
+      =flash[:issue]
+
+    #{yield}
+
+
+  .bot
+    %p
+      -# All rights reserved. We just ref stuff, and don't own (or claim any right to) the word 'quidditch'. Site created by 
+      %a{href: "http://davidbrownman.com", target: "_blank"}<
+        David Brownman
+      made this site. The code is available
+      %a{href: "https://github.com/Xavdidtheshadow/refbook", target: "_blank"}<
+        here
+      if you're into that sort of thing.
+      &copy; 2014 IRDP, all rights reserved. 
+
+
+
+
