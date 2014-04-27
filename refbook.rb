@@ -17,8 +17,8 @@ configure do
   set :session_secret, 'this_is_secret'
   set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
 
-  Parse.init :application_id => '7Wm6hqr7ij43PkytuISZAO0dIAr8JJtkDlJVClox',
-           :master_key        => 'PMmErBeV7KbgPN7XcZXG2qbcYkLzs1Er6gpzs0Jx'
+  Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
+           :master_key        => ENV['REFBOOK_PARSE_API_KEY']
 
   if settings.development?
     # set :env_db, 'localhost:4567'
@@ -330,6 +330,11 @@ get '/profile' do
 
     haml "#{@lang}/profile".to_sym, layout: "#{@lang}/layout".to_sym
   end
+end
+
+get '/profile/:ref_id' do
+  ref = Parse::Query.new('_User').eq("objectId",:ref_id).get.first
+  # if ref.empty?
 end
 
 def reset

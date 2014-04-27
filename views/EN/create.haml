@@ -33,7 +33,7 @@
 
     %label{for: "agreement"}
       I agree that I've read the 
-      %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank", onclick: "return false;"}<
+      %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank"}<
         Referee's Code
       and agree to all statements therein.
 
@@ -46,7 +46,6 @@
   var region_keys = #{@region_keys};
   var teams = #{@team_list};
 
-  teams.push("None");
   $('#team').autocomplete({source: teams});
 
   // pop pop!
