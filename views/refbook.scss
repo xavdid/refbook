@@ -2,16 +2,17 @@
 
 $footer-height: 36px;
 $slide-left: 30px;
+@import url("http://fonts.googleapis.com/css?family=Exo+2:400,700&subset=latin,latin-ext");
 
 * {
-    font-family: monospace, sans-serif;
+    font-family: 'Exo 2', 'sans-serif';
 }
 
 html, body {
-    // padding-left: 30px;
     margin: 0;
     padding: 0;
     height: 100%;
+    font-size: 18px;
 
     a:visited {
         color: blue;
@@ -20,7 +21,15 @@ html, body {
     ul {
         list-style-type: none;
         margin: 0;
-        // padding: 0;
+    }
+
+    .error {
+        width: 60%;
+        margin: 0 auto;
+        h1, h2 {
+            text-align: center; 
+            padding-top: 50px;
+        }
     }
 }
 
@@ -44,7 +53,7 @@ html, body {
 
         ul {
             padding-top: 17px;
-            margin-left: -2em;
+            margin-left: -1.5em;
             li {
                 display: inline-block;
             }
@@ -65,6 +74,12 @@ html, body {
 .mid {
     padding-bottom: $footer-height;
     padding-left: $slide-left;
+
+    h1, h2 {
+        font-family: 'Flagship', monospace, serif;
+    }
+    h1 {font-size: 48px;}
+    h2 {font-size: 36px;}
 
     p {
         width: 60%;
@@ -103,6 +118,7 @@ html, body {
     }
 
     .issue {
+        // padding-top: 30px;
         color: red;
         height: 20px;
     }

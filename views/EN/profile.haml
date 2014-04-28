@@ -5,33 +5,11 @@
   - else
     Encourage people to review you!
 
--# %p
--#   %a.more{href: "#"}
--#     Show extra info
-
--# %p
--#   %a.less{href: "#"}
--#     Show less info
-
 %img#prof_pic{src: '/images/person_blank.png', height: 300}
 
 %table.skinny#theTable
   %thead
     %tr
-      -# %td
-      -#   Reviewer Name
-      -# %td
-      -#   Reviewer Email
-      -# %td.small
-      -#   Captain?
-      -# %td.small
-      -#   Referee Region
-      -# %td.light
-      -#   Referee Name
-      -# %td.small
-      -#   Team
-      -# %td.small
-      -#   Opponent
       %td
         Rating
       %td
@@ -43,17 +21,9 @@
 :javascript
   var reviews = #{@review_list};
   var odd = false;
-  // $("#theTable tbody").empty();
   for (var i = 0; i < reviews.length; i++) {
     var r = [
       "<tr class=\"",(odd) ? "odd" : "even","\">",
-      // "<td>",reviews[i][0],"</td>",
-      // "<td><a href=\"mailto:",reviews[i][1],"\">",reviews[i][1],"</a></td>",
-      // "<td class=\"small\">",reviews[i][2],"</td>", //captain?
-      // "<td class=\"small\">",reviews[i][3],"</td>", //region
-      // "<td>",reviews[i][4],"</td>", //name
-      // "<td class=\"small\">",reviews[i][5],"</td>", //team
-      // "<td class=\"small\">",reviews[i][6],"</td>", //opponent
       "<td>",reviews[i][0],"</td>", //rating
       "<td>",reviews[i][1],"</td>", //comments
     ].join(' ');

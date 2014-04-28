@@ -63,7 +63,25 @@ def to_bool(str)
   str.downcase == 'true' || str == '1'
 end
 
+def display(path, layout = true)
+  if layout
+    haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
+  else
+    haml "#{@lang}/#{path}".to_sym, layout: false
+  end
+end
+
+not_found do
+  display(404, false)
+end
+
+error 500 do
+  display(:'500',false)
+end
+
 # kill switch
+def before
+end
 before do 
   @killed = false
   if not session[:user].nil?
@@ -71,7 +89,7 @@ before do
   else
     @lang = "EN"
   end
-  if @killed and request.path_info != '/off'
+  if @killed and !['/off','/styles.css'].include? request.path_info
     redirect '/off'
   end
 end
@@ -81,7 +99,8 @@ end
 
 get '/' do
   @title = "Home"
-  haml "#{@lang}/index".to_sym, layout: "#{@lang}/layout".to_sym
+  # haml "#{@lang}/index".to_sym, layout: "#{@lang}/layout".to_sym
+  display('index')
 end
 
 def admin
@@ -121,7 +140,8 @@ get '/admin' do
       @review_list << a
     end
 
-    haml "#{@lang}/admin".to_sym, layout: "#{@lang}/layout".to_sym
+    # haml "#{@lang}/admin".to_sym, layout: "#{@lang}/layout".to_sym
+    display 'admin'
   end
 end
 
@@ -297,7 +317,8 @@ get '/off' do
     flash[:issue] = "Maintenance is done, carry on!"
     redirect '/'
   else
-    haml "#{@lang}/off".to_sym, layout: false
+    # haml "#{@lang}/off".to_sym, layout: false
+    display('off',false)
   end
 end
 
@@ -333,8 +354,14 @@ get '/profile' do
 end
 
 get '/profile/:ref_id' do
-  ref = Parse::Query.new('_User').eq("objectId",:ref_id).get.first
-  # if ref.empty?
+  @ref = Parse::Query.new('_User').eq("objectId",params[:ref_id]).get.first
+  if @ref.nil?
+    flash[:issue] = "Profile not found"
+    redirect '/search/ALL'
+  else
+    @title = "#{@ref['firstName']} #{@ref['lastName']}"
+    haml "#{@lang}/public_profile".to_sym, layout: "#{@lang}/layout".to_sym
+  end
 end
 
 def reset
