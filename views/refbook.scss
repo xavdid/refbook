@@ -39,7 +39,7 @@ html, body {
     // the big black bar
     // padding: 10px;
     .topbar {
-        height: 50px;
+        height: 48px;
         color: #fff;
         background-color: #000;
         clear: both;
@@ -49,7 +49,7 @@ html, body {
         }
 
         ul {
-            padding-top: 17px;
+            padding-top: 12px;
             margin-left: -1.5em;
             li {
                 display: inline-block;
@@ -189,6 +189,11 @@ html, body {
         float: right;
         margin-right: 120px;
         border: 1px solid #000;
+    }
+
+    .bullets {
+        list-style-type: disc;
+        padding-left: 80px;
     }
 }
 

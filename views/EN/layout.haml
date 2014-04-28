@@ -29,7 +29,7 @@
         %li
           |
         %li
-          %a{href: '/tests/ass'}
+          %a{href: '/testing'}
             Testing
         %li
           |
@@ -46,6 +46,14 @@
         %li
           %a{href: '/info'}
             Information
+        %li
+          |
+        %li
+          %a{href: '/faq'}
+            FAQ
+        %li
+          .issue
+            =flash[:issue]
         
         %li.right
           | #{logged_in? ? name_maker(session[:user]) : 'Not Signed In'}
@@ -83,11 +91,11 @@
   .mid
     /[if lt IE 9]
       <p>We detect you're using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> as the one you are using isn't supported (and causes errors) on our site. C'mon.</p>
+    
     %h1#the_title
       #{@title || 'Missing Title'}
 
-    .issue
-      =flash[:issue]
+    
 
     #{yield}
 

@@ -252,6 +252,13 @@ post '/create' do
   end
 end
 
+def faq
+end
+get '/faq' do
+  @title = "FAQ"
+  display
+end
+
 def field
 end
 get '/field/:referee' do 
@@ -535,9 +542,9 @@ post '/settings' do
   end
 end
 
-def tests
+def testing
 end
-get '/tests/:which' do
+get '/testing' do
   @title = "Testing Center"
   # right now, which can be anything. Nbd?
   if not logged_in?
@@ -564,22 +571,26 @@ get '/tests/:which' do
   if not attempt_list.empty?
     # at least 1 attempt
     att = attempt_list.select do |a|
-      a["type"] == params[:which]
+      # hardcoded - will do actual test discrim later
+      a['type'] == 'ass'
+      # a["type"] == params[:which]
     end
     if not att.empty?
       # they've taken this test sometime
       att = att.first
       # TIME BETWEEN ATTEMPTS
-      if Time.now - Time.parse(att['time']) < 30
+      # 604800 sec = 1 week
+      waiting = 300
+      if Time.now - Time.parse(att['time']) < waiting
         @good = false
-        @try_unlocked = Time.parse(att['time']) + 30
+        @try_unlocked = Time.parse(att['time']) + waiting
         @t1 = Time.now
         @t2 = Time.parse(att['time'])
       end
     end
   end
 
-  haml "#{@lang}/tests".to_sym, layout: "#{@lang}/layout".to_sym
+  display
 end
 
 # renders css

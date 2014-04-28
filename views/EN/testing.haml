@@ -1,0 +1,96 @@
+-# %p
+  -# Hey, take the 
+  -# %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
+    -# sample
+  -# test!
+%p
+  - if @good
+    Hey, take the 
+    -# %a{href: "http://www.classmarker.com/online-test/start/?quiz=afd51c7d951f264b&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
+    -#   Assistant
+    %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
+      sample
+    test!
+  - else
+    Looks like it hasn't been long enough since your last try! 
+    %br
+    Give it another go at #{@try_unlocked.strftime("%b %e,%l:%M %p")}.
+    -# %br
+    -# Now: #{@t1}.
+    -# %br
+    -# Then: #{@t2}
+
+%h2
+  The Testing Process
+%p
+  In order to become an IRDP certified Head Referee, candidates must pass both the Assistant Referee and Snitch Referee tests before taking the Head Referee test.
+%p
+  If the candidate fails any test, there is a mandatory one-week waiting period before that test may be attempted again.
+%p
+  Snitch Referees and Assistant Referees are independent tests, and have no pre-requisites. Therefore, it is not necessary for a Snitch Referee to be an Assistant Referee as well, or vice versa.
+%p
+  The Assistant Referee and Snitch Referee tests are free, and can be taken 6 times per person, while the Head Referee test costs $25, and allows that candidate to take the written Head Referee test 4 times. Head Referee Payments can be sent to [irdp@gmail.com?] If the candidate fails any test more than the allotted attempts, they may not attempt to certify at that position again for the remainder of that season.
+
+%h2
+  Testing Materials
+%p
+  All interested IRDP referee candidates are encouraged to study the current version of the rules that are out for their league.
+  %a{href: "http://www.google.com/url?q=http%3A%2F%2Fiqaquidditch.com%2Ffiles%2FIQA_Rulebook_7_web.pdf&sa=D&sntz=1&usg=AFQjCNE6I2c3aCWE4xId3CgfNU9lIj8LQA", target: "_blank"}<
+    Here
+  is a PDF of the IQA's rulebook v7.
+%p
+  The IRDP also provides additional training materials, included below.
+%ul.bullets
+  %li
+    %a{href: "https://www.google.com/url?q=https%3A%2F%2Fdocs.google.com%2Fa%2Finternationalquidditch.org%2Fdocument%2Fd%2F1UDbK4w9UswZcnAUZQJRaK--EwzA6GA64qO7PXv1V0rg%2Fedit", target: "_blank"}<
+      This
+    is a copy of the Referee Training Packet.
+  %li
+    %a{href: "https://www.google.com/url?q=https%3A%2F%2Fdocs.google.com%2Fa%2Finternationalquidditch.org%2Fviewer%3Furl%3Dhttps%253A%252F%252Ftrello-attachments.s3.amazonaws.com%252F51fe79e99c6157565b000ee3%252F520030c8627d0e250a001524%252F891189fb5d06cca1282e7358f6aaa00a%252FRDP-Field_Test_and_Rubric.docx%26docid%3Db0d9c60105e57f2dc24dccff6d82515f%26a%3Dbi%26pagenumber%3D1%26w%3D1244", target: "_blank"}<
+      This
+    is a copy of the Field Test Rubric that you will be graded with.
+
+%h2
+  Future Projects
+%p
+  In the near future, we will also be adding video training for some of the more complex rules and interpretations in quidditch such as advantage and third bludger guarding.
+
+
+
+:javascript
+  // var q = {
+  //   "ass":[
+  //     "What is this game called?",
+  //     "polo",
+  //     "quidditch",
+  //     "how I met your mother"
+  //   ],
+  //   "head":[
+  //     "Who's the most important?",
+  //     "Santa",
+  //     "you",
+  //     "we're all equally important"
+  //   ],
+  //   "snitch":[
+  //     "What color is the snitch?",
+  //     "Blue",
+  //     "Yellow",
+  //     "Green"
+  //   ]
+  // };
+
+  // $('.question').text(q['#{@type}'][0]);
+  // $('#a1').text(q['#{@type}'][1]);
+  // $('#a2').text(q['#{@type}'][2]);
+  // $('#a3').text(q['#{@type}'][3]);
+
+  // $('#submit').click(function(){
+  //   var a = $('#q2').is(":checked");
+  //   window.location.href = '/grade?test=#{@type}&pass='+a;
+  // });
+
+
+
+
+
+
