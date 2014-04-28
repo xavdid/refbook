@@ -3,6 +3,7 @@
 $footer-height: 36px;
 $slide-left: 30px;
 @import url("http://fonts.googleapis.com/css?family=Exo+2:400,700&subset=latin,latin-ext");
+@import url("http://fonts.googleapis.com/css?family=Fenix&subset=latin,latin-ext");
 
 * {
     font-family: 'Exo 2', 'sans-serif';
@@ -75,11 +76,10 @@ html, body {
     padding-bottom: $footer-height;
     padding-left: $slide-left;
 
-    h1, h2 {
-        font-family: 'Flagship', monospace, serif;
+    h1 {
+        font-family: 'Fenix', monospace, serif;
+        font-size: 48px;
     }
-    h1 {font-size: 48px;}
-    h2 {font-size: 36px;}
 
     p {
         width: 60%;
