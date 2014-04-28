@@ -135,18 +135,19 @@ get '/admin' do
     reviews.each do |r|
       q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
       a = [
-        r['reviewerName'], 
-        r['reviewerEmail'], 
-        r['isCaptain'], 
-        r['region'], 
-        name_maker(q), 
-        r['team'], 
-        r['opponent'], 
-        r['rating'], 
-        r['comments'], 
-        r['show'], 
-        r['objectId'], 
-        q['objectId']
+        r['reviewerName'], #0
+        r['reviewerEmail'], #1
+        r['isCaptain'], #2
+        r['region'], #3
+        name_maker(q), #4
+        r['team'], #5
+        r['opponent'], #6
+        r['rating'], #7
+        r['comments'], #8
+        r['show'], #9
+        r['objectId'], #10
+        q['objectId'], #11
+        r['now'] #12
       ]
       # hide the name of reviews made about you
       if r['referee'].parse_object_id == session[:user]['objectId']
@@ -456,6 +457,7 @@ post '/review' do
   rev['comments'] = params[:comments]
   # show should be false by default, true for testing
   rev['show'] = true
+  rev['now'] = Time.now.strftime('%b %e,%l:%M %p')
   rev.save
 
   flash[:issue] = "Thanks for your review!"
@@ -537,8 +539,8 @@ get '/search/:region' do
       @refs << entry
     end
   end
-
-  @refs = @refs.sort_by{|i| i[1]}
+  # @refs << @refs
+  # @refs = @refs.sort_by{|i| i[1]}
 
   display :search
 end

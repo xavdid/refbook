@@ -150,6 +150,10 @@ html, body {
         text-decoration: none;
     }
 
+    .table_box {
+        width: 80%;
+    }
+
     #theTable {
         td {
             padding-left: 10px;
@@ -180,12 +184,12 @@ html, body {
                 background-color: #00274c;
                 color: #ffcb05;
             }
-            .y {
-                background-color: #50e000;
-            }
-            .n {
-                background-color: #ff2100;
-            }
+            // .y {
+            //     background-color: #50e000;
+            // }
+            // .n {
+            //     background-color: #ff2100;
+            // }
         }
     }
 

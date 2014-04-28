@@ -13,6 +13,8 @@
   %thead
     %tr
       %td
+        Submit Date
+      %td
         Reviewer Name
       %td
         Reviewer Email
@@ -46,7 +48,9 @@
   // $("#theTable tbody").empty();
   for (var i = 0; i < reviews.length; i++) {
     var r = [
-      "<tr class=\"",(odd) ? "odd" : "even","\">",
+      // "<tr class=\"",(odd) ? "odd" : "even","\">",
+      "<tr>",
+      "<td>",reviews[i][12],"</td>",
       "<td>",reviews[i][0],"</td>", //reviewer
       "<td><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
       "<td class=\"small",(reviews[i][2]) ? "y" : "n","\">",(reviews[i][2]) ? "T" : "F","</td>", //captain?
@@ -79,3 +83,9 @@
     $('.small').hide();
   });
 
+  $('#theTable').tablesorter({
+    ignoreCase: true,
+    widthFixed: false,
+    widgets: ['stickyHeaders'],
+    sortList: [[0,1]],
+  });
