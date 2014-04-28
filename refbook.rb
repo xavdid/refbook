@@ -25,6 +25,8 @@ configure do
   if settings.development?
     # this is so we can test on multiple local computers
     set :bind, '0.0.0.0'
+  else
+    require 'newrelic_rpm'
   end
 
   Mail.defaults do
@@ -184,16 +186,29 @@ get '/cm' do
   att["type"] = params[:cm_return_test_type]
   att["time"] = Time.now.to_s
   att.save
-  pp 'afster'
-  pp att
+
   user_to_update = Parse::Query.new("_User").eq("objectId", params[:cm_user_id]).get.first
 
   if params[:cm_tp].to_i >= 80
+    pass = true
     flash[:issue] = "You passed the #{params[:cm_return_test_type]} ref test, go you!"
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     session[:user] = user_to_update.save
   else
+    pass = false
     flash[:issue] = "You failed, try again in a week!"
+  end
+  mail = Mail.deliver do
+    to session[:user]['email']
+    from 'IRDP <beamneocube@gmail.com>'
+    subject 'Referee Test Results'
+    text_part do
+      if pass
+        body "You passed with a score of #{params[:cm_tp]}! Why don't you give the snitch test a go?\n\nHope to hear from you soon!"
+      else
+        body "You didn't pass with a score of #{params[:cm_tp]}! Take a week to think about the test and give it another go at #{(Time.parse(att['time']) + waiting).strftime('%b %e,%l:%M %p')}"
+      end
+    end
   end
   redirect '/'
 end
@@ -580,7 +595,7 @@ get '/testing' do
       att = att.first
       # TIME BETWEEN ATTEMPTS
       # 604800 sec = 1 week
-      waiting = 300
+      waiting = 30
       if Time.now - Time.parse(att['time']) < waiting
         @good = false
         @try_unlocked = Time.parse(att['time']) + waiting
