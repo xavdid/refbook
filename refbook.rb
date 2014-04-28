@@ -72,6 +72,21 @@ def display(path = request.path_info[1..-1], layout = true)
   end
 end
 
+def email_results(email, pass, score, unlock)
+  mail = Mail.deliver do
+    to email
+    from 'IRDP <beamneocube@gmail.com>'
+    subject 'Referee Test Results'
+    text_part do
+      if pass
+        body "You passed with a score of #{score}! Why don't you give the snitch test a go?\n\nHope to hear from you soon!"
+      else
+        body "Unfortunately, you didn't pass the test (you got a score of #{score}). Take a week to think about the test and give it another go at #{unlock} (US Eastern Time)."
+      end
+    end
+  end
+end
+
 not_found do
   display(404, false)
 end
@@ -188,28 +203,21 @@ get '/cm' do
   att.save
 
   user_to_update = Parse::Query.new("_User").eq("objectId", params[:cm_user_id]).get.first
-
+  @email = session[:user]['email']
+  @score = params[:cm_tp]
+  puts 'to', @email, @score
   if params[:cm_tp].to_i >= 80
     pass = true
     flash[:issue] = "You passed the #{params[:cm_return_test_type]} ref test, go you!"
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     session[:user] = user_to_update.save
+    @unlock = ''
   else
     pass = false
+    @unlock = (Time.parse(att['time']) + 300).strftime('%b %e,%l:%M %p')
     flash[:issue] = "You failed, try again in a week!"
   end
-  mail = Mail.deliver do
-    to session[:user]['email']
-    from 'IRDP <beamneocube@gmail.com>'
-    subject 'Referee Test Results'
-    text_part do
-      if pass
-        body "You passed with a score of #{params[:cm_tp]}! Why don't you give the snitch test a go?\n\nHope to hear from you soon!"
-      else
-        body "You didn't pass with a score of #{params[:cm_tp]}! Take a week to think about the test and give it another go at #{(Time.parse(att['time']) + waiting).strftime('%b %e,%l:%M %p')}"
-      end
-    end
-  end
+  email_results(@email, pass, @score, @unlock)
   redirect '/'
 end
 

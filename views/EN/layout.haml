@@ -52,8 +52,7 @@
           %a{href: '/faq'}
             FAQ
         %li
-          .issue
-            =flash[:issue]
+          
         
         %li.right
           | #{logged_in? ? name_maker(session[:user]) : 'Not Signed In'}
@@ -87,6 +86,8 @@
           or
           %a{href: '/create'}
             Create Account
+        .issue
+          =flash[:issue]
 
   .mid
     /[if lt IE 9]

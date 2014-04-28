@@ -59,12 +59,26 @@ html, body {
                 padding-right: 10px;
             }
         }
+
+        i:hover {
+            color: cyan;
+            // border-bottom: 1px solid white;
+        }
     }
     // login/logout text
     .header {
         float: right;
         padding-right: 20px;
         text-align: right;
+        .issue {
+            color: red;
+        }
+        a {
+            color: #767676;
+            &:hover {
+                color: blue;
+            }
+        }
     }
 }
 
@@ -120,12 +134,6 @@ html, body {
 
     .rating {
         text-decoration: underline;
-    }
-
-    .issue {
-        // padding-top: 30px;
-        color: red;
-        height: 20px;
     }
 
     #regions {
