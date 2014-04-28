@@ -1,2 +1,8 @@
+%img#prof_pic{src: '/images/person_blank.png', height: 300}
+
 %h2
   Region: #{reg_reverse(@ref['region'])}
+
+%p
+  %a{href: "mailto: #{@ref['username']}"}
+    Email #{@ref['firstName']}

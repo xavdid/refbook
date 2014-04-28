@@ -15,17 +15,13 @@ html, body {
     height: 100%;
     font-size: 18px;
 
-    a:visited {
-        color: blue;
-    }
-
     ul {
         list-style-type: none;
         margin: 0;
     }
 
     .error {
-        width: 60%;
+        width: 63%;
         margin: 0 auto;
         h1, h2 {
             text-align: center; 
@@ -79,6 +75,15 @@ html, body {
     h1 {
         font-family: 'Fenix', monospace, serif;
         font-size: 48px;
+        margin-top: .3em;
+        margin-bottom: .3em;
+    }
+
+    a {
+        color: #767676;
+        &:hover {
+            color: blue;
+        }
     }
 
     p {
@@ -123,6 +128,20 @@ html, body {
         height: 20px;
     }
 
+    #regions {
+        padding-left: 0;
+        color: darkgray;
+
+        li {
+            display: inline;
+        }
+    }
+
+    .current {
+        color: blue;
+        text-decoration: none;
+    }
+
     #theTable {
         td {
             padding-left: 10px;
@@ -134,12 +153,15 @@ html, body {
             color: white;
         }
         tbody {
-            .odd {
-                // background: #bcbcbc;
-                background: lightgrey;
-            }
-            .even {
-                // background: #808080;
+            // .odd {
+            //     // background: #bcbcbc;
+            //     background: #cdcdcd;
+            // }
+            // .even {
+            //     // background: #808080;
+            // }
+            tr {
+                background: #cdcdcd;
             }
             .name {
                 // go blue, baby

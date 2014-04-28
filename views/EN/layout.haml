@@ -1,11 +1,7 @@
 !!!
 
+/css
 %link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
-/ fonts
-%link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://fontbeard.herokuapp.com/flagship.css'}
-
-/ css 
-
 %link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css'}
 %link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'}
 -# %link{:rel => 'stylesheet', :type => 'text/css', :href => 'tablesorter.style.css'}
@@ -15,6 +11,9 @@
 -# %script{src: "jquery-1.10.2.min.js", type:"text/javascript"}
 %script{src: "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js", type:"text/javascript"}
 -# %script{src: "/jquery.tablesorter.min.js", type:"text/javascript"}
+
+/ favicon
+%link{:rel => 'shortcut icon', :type => 'image/png', :href => '/images/favicon.png'}
 
 .content
   .top
@@ -35,7 +34,7 @@
         %li
           |
         %li
-          %a{href: '/search'}
+          %a{href: '/search/ALL'}
             Referee Directory
         %li
           |

@@ -15,17 +15,16 @@ include Mongo
 configure do
   enable :sessions
   set :session_secret, 'this_is_secret'
-  set :region_keys, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
+  set :region_names, ["US West", "US Midwest", "US Southwest", "US South", "US Northeast", "US Mid-Atlantic", "Canada", "Oceania", "Italy"]
+  set :region_codes, ["USWE", "USMW", "USSW", "USSO", "USNE", "USMA", "CANA", "OCEA", "ITAL"]
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
 
   if settings.development?
-    # set :env_db, 'localhost:4567'
     # this is so we can test on multiple local computers
     set :bind, '0.0.0.0'
-  # else
-    # set :env_db, 'refbook.herokuapp.com'
   end
 
   Mail.defaults do
@@ -50,7 +49,7 @@ def logged_in?
 end
 
 def reg_reverse(reg)
-  settings.region_keys.select do |k, v|
+  settings.region_hash.select do |k, v|
     v == reg
   end.keys.first
 end
@@ -63,7 +62,7 @@ def to_bool(str)
   str.downcase == 'true' || str == '1'
 end
 
-def display(path, layout = true)
+def display(path = request.path_info[1..-1], layout = true)
   if layout
     haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
   else
@@ -76,7 +75,7 @@ not_found do
 end
 
 error 500 do
-  display(:'500',false)
+  display(500,false)
 end
 
 # kill switch
@@ -100,7 +99,7 @@ end
 get '/' do
   @title = "Home"
   # haml "#{@lang}/index".to_sym, layout: "#{@lang}/layout".to_sym
-  display('index')
+  display :index
 end
 
 def admin
@@ -141,7 +140,7 @@ get '/admin' do
     end
 
     # haml "#{@lang}/admin".to_sym, layout: "#{@lang}/layout".to_sym
-    display 'admin'
+    display
   end
 end
 
@@ -211,9 +210,9 @@ get '/create' do
     @team_list << t["team"]
   end
   @team_list = @team_list.to_set.to_a
-  @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
+  @region_keys = settings.region_names
   # puts @team_list
-  haml "#{@lang}/create".to_sym, layout: "#{@lang}/layout".to_sym
+  display
 end
 
 post '/create' do
@@ -237,7 +236,7 @@ post '/create' do
     :team => params[:team].split(/(\W)/).map(&:capitalize).join,
     # because of dropdown, there shouldn't ever be no region, but this is 
     # just in case. Region errors really break stuff.
-    :region => settings.region_keys[params[:region]] || "NONE"
+    :region => settings.region_hash[params[:region]] || "NONE"
     # :last_ass => T
   })
 
@@ -282,12 +281,12 @@ end
 
 get '/info' do 
   @title = "Information"
-  haml "#{@lang}/info".to_sym, layout: "#{@lang}/layout".to_sym
+  display
 end
 
 get '/login' do
   @title = "Login"
-  haml "#{@lang}/login".to_sym, layout: "#{@lang}/layout".to_sym
+  display
 end
 
 def login
@@ -318,7 +317,7 @@ get '/off' do
     redirect '/'
   else
     # haml "#{@lang}/off".to_sym, layout: false
-    display('off',false)
+    display(:off, false)
   end
 end
 
@@ -349,7 +348,7 @@ get '/profile' do
       end
     end
 
-    haml "#{@lang}/profile".to_sym, layout: "#{@lang}/layout".to_sym
+    display
   end
 end
 
@@ -360,7 +359,7 @@ get '/profile/:ref_id' do
     redirect '/search/ALL'
   else
     @title = "#{@ref['firstName']} #{@ref['lastName']}"
-    haml "#{@lang}/public_profile".to_sym, layout: "#{@lang}/layout".to_sym
+    display :public_profile
   end
 end
 
@@ -368,7 +367,7 @@ def reset
 end
 get '/reset' do 
   @title = "Reset Your Password"
-  haml "#{@lang}/reset".to_sym, layout: "#{@lang}/layout".to_sym
+  display
 end
 
 post '/reset' do
@@ -386,7 +385,7 @@ def review
 end
 get '/review' do 
   @title = "Review a Referee"
-  @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
+  @region_keys = settings.region_names
   q = Parse::Query.new("_User").get
   @refs = {}
 
@@ -405,7 +404,7 @@ get '/review' do
   end
 
   @refs = @refs.to_json
-  haml "#{@lang}/review".to_sym, layout: "#{@lang}/layout".to_sym
+  display
 end
 
 post '/review' do 
@@ -413,7 +412,7 @@ post '/review' do
   rev['reviewerName'] = params[:name]
   rev['reviewerEmail'] = params[:email]
   rev['isCaptain'] = params[:captain] ? true : false
-  rev['region'] = settings.region_keys[params[:region]] || "None"
+  rev['region'] = settings.region_hash[params[:region]] || "None"
 
   p = Parse::Pointer.new({})
   p.class_name = "_User"
@@ -431,7 +430,6 @@ post '/review' do
 
   flash[:issue] = "Thanks for your review!"
   redirect '/review'
-  # params.to_s
 end
 
 def reviews
@@ -446,8 +444,7 @@ get '/reviews/:review_id' do
     q = Parse::Query.new("_User").eq("objectId",@r['referee'].parse_object_id).get.first
     @name = name_maker(q)
     @review = @r.to_json
-    # review.to_json
-    haml "#{@lang}/edit_review".to_sym, layout: "#{@lang}/layout".to_sym
+    display :edit_review
   end
 end
 
@@ -464,19 +461,14 @@ end
 
 def search
 end
-get '/search/?' do 
-  @title = "Referee Directory"
-  # THIS ASSUMES that all and none are the last two regions, take care
-  @region_keys = settings.region_keys.keys[0..settings.region_keys.values.size-3]
-  @region_values = settings.region_keys.values[0..settings.region_keys.values.size-3]
-  haml "#{@lang}/si".to_sym, layout: "#{@lang}/layout".to_sym
-end
 
 get '/search/:region' do 
-  @title = "Search by Region"
-  # could add head/snitch/ass status to class to easily hide/show rows
+  @title = "Directory by Region"
   @reg = params[:region].upcase
   @region_title = reg_reverse(@reg)
+
+  @region_keys = settings.region_names
+  @region_values = settings.region_codes
 
   if @region_title.nil?
     flash[:issue] = "Invalid region code: #{@reg}"
@@ -518,14 +510,14 @@ get '/search/:region' do
 
   @refs = @refs.sort_by{|i| i[1]}
 
-  haml "#{@lang}/search".to_sym, layout: "#{@lang}/layout".to_sym
+  display :search
 end
 
 def settings
 end
 get '/settings' do 
   @title = "Settings"
-  haml "#{@lang}/settings".to_sym, layout: "#{@lang}/layout".to_sym
+  display
 end
 
 post '/settings' do  
