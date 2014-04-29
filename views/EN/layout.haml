@@ -4,14 +4,14 @@
 %link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
 %link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css'}
 %link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'}
-%link{:rel => 'stylesheet', :type => 'text/css', :href => '/theme.default.css'}
+%link{:rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/theme.default.css'}
 
 / js
 %script{src: "http://code.jquery.com/jquery-1.10.2.min.js", type:"text/javascript"}
 -# %script{src: "jquery-1.10.2.min.js", type:"text/javascript"}
 %script{src: "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js", type:"text/javascript"}
-%script{src: "/tablesorter.min.js", type:"text/javascript"}
-%script{src: "/tablesorter.widgets.min.js", type:"text/javascript"}
+%script{src: "/js/tablesorter.min.js", type:"text/javascript"}
+%script{src: "/js/tablesorter.widgets.min.js", type:"text/javascript"}
 
 / favicon
 %link{:rel => 'shortcut icon', :type => 'image/png', :href => '/images/favicon.png'}
@@ -19,40 +19,50 @@
 .content
   .top
     .topbar
-      %ul
-        %li
-          IRDP 
-        %li
-          |
-        %li
+      %ul#menu
+        %li.no-kids#index
           %a{href: '/'}
-            Home
+            IRDP 
         %li
           |
-        %li
+        %li.kids#testing
           %a{href: '/testing'}
-            Testing
+            Testing Center
+          %ul.sub-menu
+            %li
+              %a{href: "/testing/ass"}
+                Assistant Ref Test
+            %li
+              %a{href: "/testing/ass"}
+                Snitch Ref Test
+            %li
+              %a{href: "/testing/ass"}
+                Head Ref Test
         %li
           |
-        %li
+        %li.no-kids#search
           %a{href: '/search/ALL'}
             Referee Directory
         %li
           |
-        %li
+        %li.no-kids#review
           %a{href: '/review'}
             Review a Referee
         %li
           |
-        %li
-          %a{href: '/info'}
+        %li.kids#info
+          %a{href: '/info'}<
             Information
-        %li
-          |
-        %li
-          %a{href: '/faq'}
-            FAQ
-        %li
+          %ul.sub-menu
+            %li
+              %a{href: '/faq'}
+                FAQ
+            %li
+              %a{href: '/history'}
+                History
+            %li
+              %a{href: '/asdf'}
+                Else
           
         
         %li.right
@@ -62,16 +72,16 @@
         
         - if logged_in?
           - if session[:user]['admin']
-            %li.right
-              %a{href: '/admin'}
+            %li.right.icon
+              %a{href: '/admin'}<
                 %i.fa.fa-gavel.fa-lg{title: "Admin Console"}
 
-          %li.right
-            %a{href: '/settings'}
+          %li.right.icon
+            %a{href: '/settings'}<
               %i.fa.fa-cog.fa-lg{title: "Settings Console"}
 
-          %li.right
-            %a{href: '/profile'}
+          %li.right.icon
+            %a{href: '/profile'}<
               %i.fa.fa-user.fa-lg{title: "Profile Console"}
 
     .header
@@ -119,5 +129,5 @@
       &copy; 2014 IRDP, all rights reserved. 
 
 
-
-
+:javascript
+  $('##{@section}').addClass('active');

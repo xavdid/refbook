@@ -112,9 +112,11 @@ end
 
 
 # routes
-
+def index 
+end
 get '/' do
   @title = "Home"
+  @section = "index"
   # haml "#{@lang}/index".to_sym, layout: "#{@lang}/layout".to_sym
   display :index
 end
@@ -310,8 +312,11 @@ get '/grade' do
   redirect '/'
 end
 
+def info
+end
 get '/info' do 
   @title = "Information"
+  @section = 'info'
   display
 end
 
@@ -416,6 +421,8 @@ def review
 end
 get '/review' do 
   @title = "Review a Referee"
+  @section = 'review'
+
   @region_keys = settings.region_names
   q = Parse::Query.new("_User").get
   @refs = {}
@@ -493,9 +500,10 @@ end
 
 def search
 end
-
 get '/search/:region' do 
   @title = "Directory by Region"
+  @section = 'search'
+
   @reg = params[:region].upcase
   @region_title = reg_reverse(@reg)
 
@@ -571,11 +579,8 @@ def testing
 end
 get '/testing' do
   @title = "Testing Center"
+  @section = 'testing'
   # right now, which can be anything. Nbd?
-  if not logged_in?
-    flash[:issue] = "Must log in to test"
-    redirect '/'
-  end
   # tests table (probably needed) will have the following rows:
   #   taker: (objectId of test taker)
   #   type: ass|head|snitch
@@ -590,6 +595,18 @@ get '/testing' do
   #   If they pass, display the link for the relevant test(s). When they finish, 
   #   update the relevent test entry wtih the most recent test
 
+  display
+end
+
+get '/testing/:which' do
+  @title = "Testing Center"
+  @section = 'testing'
+  # right now, which can be anything. Nbd?
+  if not logged_in?
+    flash[:issue] = "Must log in to test"
+    redirect '/'
+  end
+
   @good = true
 
   attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
@@ -597,7 +614,7 @@ get '/testing' do
     # at least 1 attempt
     att = attempt_list.select do |a|
       # hardcoded - will do actual test discrim later
-      a['type'] == 'ass'
+      a['type'] == params[:which]
       # a["type"] == params[:which]
     end
     if not att.empty?
@@ -605,7 +622,7 @@ get '/testing' do
       att = att.first
       # TIME BETWEEN ATTEMPTS
       # 604800 sec = 1 week
-      waiting = 30
+      waiting = 300
       if Time.now - Time.parse(att['time']) < waiting
         @good = false
         @try_unlocked = Time.parse(att['time']) + waiting
@@ -615,7 +632,7 @@ get '/testing' do
     end
   end
 
-  display
+  display :test_links
 end
 
 # renders css

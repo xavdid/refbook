@@ -3,22 +3,28 @@
   -# %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
     -# sample
   -# test!
-%p
-  - if @good
-    Hey, take the 
-    -# %a{href: "http://www.classmarker.com/online-test/start/?quiz=afd51c7d951f264b&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
-    -#   Assistant
-    %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
-      sample
-    test!
-  - else
-    Looks like it hasn't been long enough since your last try! 
-    %br
-    Give it another go at #{@try_unlocked.strftime("%b %e,%l:%M %p")}.
+-# %p
+-#   - if @good
+-#     Hey, take the 
+-#     -# %a{href: "http://www.classmarker.com/online-test/start/?quiz=afd51c7d951f264b&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
+-#     -#   Assistant
+-#     %a{href: "http://www.classmarker.com/online-test/start/?quiz=xnj533d065451038&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
+-#       sample
+-#     test!
+-#   - else
+-#     Looks like it hasn't been long enough since your last try! 
+-#     %br
+-#     Give it another go at #{@try_unlocked.strftime("%b %e,%l:%M %p")}.
     -# %br
     -# Now: #{@t1}.
     -# %br
     -# Then: #{@t2}
+
+%p
+  The 
+  %a{href: "/test_links/ass"}<
+    Assitant
+  test
 
 %h2
   The Testing Process

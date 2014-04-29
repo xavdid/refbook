@@ -5,6 +5,14 @@ $slide-left: 30px;
 @import url("http://fonts.googleapis.com/css?family=Exo+2:400,700&subset=latin,latin-ext");
 @import url("http://fonts.googleapis.com/css?family=Fenix&subset=latin,latin-ext");
 
+// colors
+$orange: #ff6600; //orance
+$red: red;
+$cyan: #00ff00; //green
+$gray: #767676; //gray
+// $links: #000066;
+$links: #000;
+
 * {
     font-family: 'Exo 2', 'sans-serif';
 }
@@ -14,6 +22,14 @@ html, body {
     padding: 0;
     height: 100%;
     font-size: 18px;
+    // background-image: url("../images/satinweave.png"); 
+    
+    a {
+        color: $gray;
+        &:hover {
+            color: $links;
+        }
+    }
 
     ul {
         list-style-type: none;
@@ -46,24 +62,94 @@ html, body {
         // margin-left: -30px;
         a {
             color: #fff;
+            // color: green;
+        }
+
+        
+
+        .no-kids {
+            border-bottom: 1px solid #fff;
+            &:hover {
+                border-bottom: 1px solid #000;
+            }
+        }
+
+        .kids {
+            border-bottom: 1px solid $cyan;
+        }
+
+        .active {
+            border-bottom: 1px solid #000; 
+            // color: $cyan;
+        }
+
+        .kids.active {
+            border-bottom: 1px dashed $cyan;
         }
 
         ul {
-            padding-top: 12px;
+            padding-top: 6px;
             margin-left: -1.5em;
             li {
                 display: inline-block;
             }
             .right {
                 float: right;
-                padding-right: 10px;
+                margin-right: 10px;
+                padding: 5px;
+            }
+            .icon {
+                padding: 0;
+                border-bottom: 1px solid #fff; 
+                &:hover {
+                    border-bottom: 1px solid #000;
+                }
             }
         }
 
-        i:hover {
-            color: cyan;
-            // border-bottom: 1px solid white;
+        // dropdown code adapted from: http://code-tricks.com/simple-css-drop-down-menu/
+        #menu {
+            a {
+                text-decoration: none;
+                padding: 5px;
+                display: inline-block;
+            }            
+
+            li {
+                position: relative;
+                background-color: #000;
+                &:hover {
+                    & > a {
+                        color: $cyan;
+                    }
+                    .sub-menu {
+                        display: block;
+                    }
+                }
+            }
+
+            .sub-menu {
+                padding: 0;
+                margin: 0;
+                display: none;
+                position: absolute;
+                top: 30px;
+                left: 0;
+                // width: 100px;
+                width: 100%;
+                a {
+                    // padding: 5px;
+                    &:hover {
+                        color: $cyan;
+                    }
+                }
+                li {
+                    width: inherit;
+                }
+            }
         }
+
+        
     }
     // login/logout text
     .header {
@@ -71,12 +157,12 @@ html, body {
         padding-right: 20px;
         text-align: right;
         .issue {
-            color: red;
+            color: $red;
         }
         a {
-            color: #767676;
+            color: $gray;
             &:hover {
-                color: blue;
+                color: $links;
             }
         }
     }
@@ -93,12 +179,12 @@ html, body {
         margin-bottom: .3em;
     }
 
-    a {
-        color: #767676;
-        &:hover {
-            color: blue;
-        }
-    }
+    // a {
+    //     color: $gray;
+    //     &:hover {
+    //         color: $links;
+    //     }
+    // }
 
     p {
         width: 60%;
@@ -128,7 +214,7 @@ html, body {
     }
 
     .name {
-        color: red;
+        color: $red;
         text-decoration: underline;
     }
 
@@ -139,14 +225,17 @@ html, body {
     #regions {
         padding-left: 0;
         color: darkgray;
-
+        // a:hover {
+            // text-decoration: none;
+            // color: darkgray;
+        // }
         li {
             display: inline;
         }
     }
 
-    .current {
-        color: blue;
+    .active {
+        color: #000;
         text-decoration: none;
     }
 
@@ -176,7 +265,7 @@ html, body {
                 background: #cdcdcd;
             }
             .name {
-                // go blue, baby
+                // go $links, baby
                 color: purple;
                 text-decoration: none;
             }
