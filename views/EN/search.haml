@@ -3,35 +3,39 @@
 %h2
   #{@region_title}
 
-%p
-  %a.all{href: '#'}<
-    Show All Certified Refs
-%p
-  %a.head{href: '#'}<
-    Show Only Certified Head Refs
+- if @refs.length > 0
+  %p
+    %a.all{href: '#'}<
+      Show All Certified Refs
+  %p
+    %a.head{href: '#'}<
+      Show Only Certified Head Refs
 
-.table_box
-  %table#theTable
-    %thead
-      %tr
-        %td{title: "Profile Link"}
-          First Name
-        %td
-          Last Name
-        %td
-          Team
-        %td{title: "Assistant Ref Certified"}
-          AR
-        %td{title: "Snitch Ref Certified"}
-          SR
-        %td{title: "Head Ref Certified"}
-          HR
-        - if @reg == 'ALL'
+  .table_box
+    %table#theTable
+      %thead
+        %tr
+          %td{title: "Profile Link"}
+            First Name
           %td
-            Region
-        %td
-          FT
-    %tbody
+            Last Name
+          %td
+            Team
+          %td{title: "Assistant Ref Certified"}
+            AR
+          %td{title: "Snitch Ref Certified"}
+            SR
+          %td{title: "Head Ref Certified"}
+            HR
+          - if @reg == 'ALL'
+            %td
+              Region
+          %td
+            FT
+      %tbody
+- else
+  %p
+    Womp womp, this region has no certified refs yet!
 
 :javascript
   var refs = #{@refs};

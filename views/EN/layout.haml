@@ -25,6 +25,29 @@
             IRDP 
         %li
           |
+        %li.kids#info
+          %a{href: '/info'}<
+            Information
+          %ul.sub-menu
+            %li
+              %a{href: '/about'}
+                About
+            %li
+              %a{href: '/faq'}
+                FAQ
+            %li
+              %a{href: '/contact'}
+                Contact
+            -# %li
+              -# %a{href: '/asdf'}
+                -# Else
+        %li
+          |
+        %li.no-kids#review
+          %a{href: '/review'}
+            Review a Referee
+        %li
+          |
         %li.kids#testing
           %a{href: '/testing'}
             Testing Center
@@ -33,36 +56,17 @@
               %a{href: "/testing/ass"}
                 Assistant Ref Test
             %li
-              %a{href: "/testing/ass"}
+              %a{href: "/testing/snitch"}
                 Snitch Ref Test
             %li
-              %a{href: "/testing/ass"}
+              %a{href: "/testing/head"}
                 Head Ref Test
         %li
           |
         %li.no-kids#search
           %a{href: '/search/ALL'}
             Referee Directory
-        %li
-          |
-        %li.no-kids#review
-          %a{href: '/review'}
-            Review a Referee
-        %li
-          |
-        %li.kids#info
-          %a{href: '/info'}<
-            Information
-          %ul.sub-menu
-            %li
-              %a{href: '/faq'}
-                FAQ
-            %li
-              %a{href: '/history'}
-                History
-            %li
-              %a{href: '/asdf'}
-                Else
+        
           
         
         %li.right
@@ -97,15 +101,18 @@
           or
           %a{href: '/create'}
             Create Account
-        .issue
-          =flash[:issue]
+        
 
   .mid
     /[if lt IE 9]
-      <p>We detect you're using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> as the one you are using isn't supported (and causes errors) on our site. C'mon.</p>
+      <p style="color: red;">We detect you're using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> as the one you are using isn't supported (and causes errors) on our site. C'mon.</p>
     
     %h1#the_title
       #{@title || 'Missing Title'}
+
+    .issue
+      %h2
+        =flash[:issue]
 
     
 
@@ -126,7 +133,10 @@
       %a{href: "https://github.com/Xavdidtheshadow/refbook", target: "_blank"}<
         here
       if you're into that sort of thing.
-      &copy; 2014 IRDP, all rights reserved. 
+      &copy; 2014 IRDP, all rights reserved.
+      %a{href: "/contact"}<
+        Contact
+      us here.
 
 
 :javascript

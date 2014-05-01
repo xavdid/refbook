@@ -3,14 +3,16 @@
 $footer-height: 36px;
 $slide-left: 30px;
 @import url("http://fonts.googleapis.com/css?family=Exo+2:400,700&subset=latin,latin-ext");
-@import url("http://fonts.googleapis.com/css?family=Fenix&subset=latin,latin-ext");
+@import url("http://fonts.googleapis.com/css?family=Fanwood+Text");
 
 // colors
-$orange: #ff6600; //orance
+$orange: #ff6600; //orange
 $red: red;
-$cyan: #00ff00; //green
+$cyan: cyan;
+// $cyan: #00ff00; //lime green
 $gray: #767676; //gray
 // $links: #000066;
+// $links: #ff8000;
 $links: #000;
 
 * {
@@ -24,10 +26,13 @@ html, body {
     font-size: 18px;
     // background-image: url("../images/satinweave.png"); 
     
+    
+
     a {
         color: $gray;
         &:hover {
             color: $links;
+            // text-decoration: none;
         }
     }
 
@@ -43,6 +48,10 @@ html, body {
             text-align: center; 
             padding-top: 50px;
         }
+    }
+
+    .issue {
+        color: $red;
     }
 }
 
@@ -65,8 +74,6 @@ html, body {
             // color: green;
         }
 
-        
-
         .no-kids {
             border-bottom: 1px solid #fff;
             &:hover {
@@ -76,6 +83,13 @@ html, body {
 
         .kids {
             border-bottom: 1px solid $cyan;
+            &:hover {
+                & > a {
+                    // color: $cyan;
+                    
+                    // border-bottom: 1px solid #fff;
+                }
+           }
         }
 
         .active {
@@ -119,9 +133,6 @@ html, body {
                 position: relative;
                 background-color: #000;
                 &:hover {
-                    & > a {
-                        color: $cyan;
-                    }
                     .sub-menu {
                         display: block;
                     }
@@ -130,6 +141,7 @@ html, body {
 
             .sub-menu {
                 padding: 0;
+                // padding-top: 5px;
                 margin: 0;
                 display: none;
                 position: absolute;
@@ -156,9 +168,6 @@ html, body {
         float: right;
         padding-right: 20px;
         text-align: right;
-        .issue {
-            color: $red;
-        }
         a {
             color: $gray;
             &:hover {
@@ -172,8 +181,18 @@ html, body {
     padding-bottom: $footer-height;
     padding-left: $slide-left;
 
+    ::selection {
+        color: #fff;
+        background: #000;
+    }
+    
+    ::-moz-selection {
+        color: #fff;
+        background: #000;
+    }
+
     h1 {
-        font-family: 'Fenix', monospace, serif;
+        font-family: 'Fanwood Text', serif;
         font-size: 48px;
         margin-top: .3em;
         margin-bottom: .3em;
@@ -240,7 +259,7 @@ html, body {
     }
 
     .table_box {
-        width: 80%;
+        width: 85%;
     }
 
     #theTable {

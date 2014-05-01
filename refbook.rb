@@ -14,10 +14,14 @@ include Mongo
 
 configure do
   enable :sessions
+  
+
   set :session_secret, 'this_is_secret'
   set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
   set :region_names, ["US West", "US Midwest", "US Southwest", "US South", "US Northeast", "US Mid-Atlantic", "Canada", "Oceania", "Italy"]
   set :region_codes, ["USWE", "USMW", "USSW", "USSO", "USNE", "USMA", "CANA", "OCEA", "ITAL"]
+  set :waiting, 300
+  set :names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
@@ -121,6 +125,14 @@ get '/' do
   display :index
 end
 
+def about
+end
+get '/about' do
+  @title = "About the IRDP"
+  @section = "info"
+  display
+end
+
 def admin
 end
 get '/admin' do
@@ -211,17 +223,26 @@ get '/cm' do
   puts 'to', @email, @score
   if params[:cm_tp].to_i >= 80
     pass = true
-    flash[:issue] = "You passed the #{params[:cm_return_test_type]} ref test, go you!"
+    flash[:issue] = "You passed the #{settings.names[params[:cm_return_test_type].to_sym]} ref test, go you!"
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     session[:user] = user_to_update.save
     @unlock = ''
   else
     pass = false
-    @unlock = (Time.parse(att['time']) + 300).strftime('%b %e,%l:%M %p')
+    @unlock = (Time.parse(att['time']) + settings.waiting).strftime('%b %e,%l:%M %p')
     flash[:issue] = "You failed, try again in a week!"
   end
   email_results(@email, pass, @score, @unlock)
   redirect '/'
+end
+
+def contact
+end
+get '/contact' do
+  @title = "Contact the IRDP"
+  @section = "info"
+
+  display
 end
 
 def create
@@ -282,6 +303,7 @@ def faq
 end
 get '/faq' do
   @title = "FAQ"
+  @section = "info"
   display
 end
 
@@ -294,22 +316,6 @@ get '/field/:referee' do
   ref.save
   flash[:issue] = "#{name_maker(ref)} has passed their field test!"
   redirect "/search/#{params[:reg]}"
-end
-
-get '/grade' do
-  if params[:pass] == 'true'
-    session[:user][@test+'Ref'] = true
-    session[:user] = session[:user].save
-  end
-
-  if params[:pass] == 'true'
-    flash[:issue] = "passed the #{params[:test]} ref test!"
-  else
-    flash[:issue] = "failed the #{params[:test]} ref test!"
-  end
-
-  # haml "#{@lang}/grade".to_sym, layout: "#{@lang}/layout".to_sym
-  redirect '/'
 end
 
 def info
@@ -330,6 +336,7 @@ end
 post '/login' do
   begin
     session[:user] = Parse::User.authenticate(params[:username], params[:password])
+    session.options[:expire_after] = 2592000 # 30 days
     redirect '/'
   rescue
     flash[:issue] = "Invalid login credentials"
@@ -607,7 +614,13 @@ get '/testing/:which' do
     redirect '/'
   end
 
+  if !["head", "snitch", "ass"].include? params[:which]
+    halt 404
+  end
+
   @good = true
+  @tests = {ass: "afd51c7d951f264b", snitch: "ykg51c7e006504d2", head: "x", sample: "xnj533d065451038"}
+  @names = {ass: "Assistant", snitch: "Snitch", head: "Head"}
 
   attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
   if not attempt_list.empty?
@@ -622,10 +635,9 @@ get '/testing/:which' do
       att = att.first
       # TIME BETWEEN ATTEMPTS
       # 604800 sec = 1 week
-      waiting = 300
-      if Time.now - Time.parse(att['time']) < waiting
+      if Time.now - Time.parse(att['time']) < settings.waiting
         @good = false
-        @try_unlocked = Time.parse(att['time']) + waiting
+        @try_unlocked = Time.parse(att['time']) + settings.waiting
         @t1 = Time.now
         @t2 = Time.parse(att['time'])
       end
