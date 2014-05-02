@@ -103,7 +103,7 @@ end
 def before
 end
 before do 
-  @killed = true
+  @killed = false
   if not session[:user].nil?
     @lang = session[:user]['lang']
   else
@@ -356,7 +356,7 @@ def off
 end
 get '/off' do
   if not @killed
-    flash[:issue] = "Maintenance is done, carry on!"
+    # flash[:issue] = "Maintenance is done, carry on!"
     redirect '/'
   else
     # haml "#{@lang}/off".to_sym, layout: false
