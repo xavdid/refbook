@@ -448,6 +448,10 @@ get '/review' do
     end
   end
 
+  # @refs.each do |i|
+    # @refs[i] = i.sort_by{|j| j[1]}
+  # end
+
   @refs = @refs.to_json
   display
 end
@@ -461,7 +465,8 @@ post '/review' do
 
   p = Parse::Pointer.new({})
   p.class_name = "_User"
-  p.parse_object_id = params[:referee] || 'Sb33WyBziN' #hardcoded unnamed ref
+  p.parse_object_id = params[:referee]
+
   rev['referee'] = p
 
   rev['date'] = params[:date]
@@ -585,7 +590,7 @@ end
 def testing
 end
 get '/testing' do
-  @title = "Testing Center"
+  @title = "Testing Information Center"
   @section = 'testing'
   # right now, which can be anything. Nbd?
   # tests table (probably needed) will have the following rows:
@@ -606,7 +611,8 @@ get '/testing' do
 end
 
 get '/testing/:which' do
-  @title = "Testing Center"
+  @names = {ass: "Assistant", snitch: "Snitch", head: "Head"}
+  @title = "#{params[:which].to_sym} Referee Test"
   @section = 'testing'
   # right now, which can be anything. Nbd?
   if not logged_in?
@@ -620,7 +626,7 @@ get '/testing/:which' do
 
   @good = true
   @tests = {ass: "afd51c7d951f264b", snitch: "ykg51c7e006504d2", head: "x", sample: "xnj533d065451038"}
-  @names = {ass: "Assistant", snitch: "Snitch", head: "Head"}
+  
 
   attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
   if not attempt_list.empty?

@@ -1,14 +1,23 @@
 %p
   Here you can provide feedback for any referee that has been IRDP certified at any level. Please keep reviews as specific and calm as possible. While all reviews are taken seriously, it is important to remember that the IRDP has to garner quantitative and qualitative data from the information provided. Angry and/or emotional reviews tend to make correcting issues more difficult.
 
+%p
+  %span{style: "color: red;"}
+    * Required
+
 .form_box
-  %form{name: "review", action: "review", method: "post", onsubmit: "", id: "rater"}
+  %form{name: "review", action: "review", method: "post", onsubmit: "return validate();", id: "rater"}
     %label{for: "name"}
       Your Name
+      %span{style: "color: red;"}
+        *
+
     %input{type: "text", name: "name", placeholder:"first and last"}
 
     %label{for: "email"}
       Your Email
+      %span{style: "color: red;"}
+        *
     %input{type: "email", name: "email", placeholder:"name@example.com"}
 
     %label{for: "captain"}
@@ -17,6 +26,8 @@
 
     %label{for: "region"}
       Ref's Region
+      %span{style: "color: red;"}
+        *
     %select{name: "region", id: "region"}
 
     %label{for: "referee"}
@@ -37,7 +48,11 @@
 
     %label{for: "rating"}
       How did the ref do?
+      %span{style: "color: red;"}
+        *
     %select{name: "rating", id: "rating"}
+      %option{value: ""}
+
       %option{value: "excellent"}
         Excellent!
       %option{value: "good"}
@@ -48,7 +63,7 @@
         Poor
 
     %label{for: "comments"}
-      Your comments about the ref. Good qualities to focus on: positioning, professionalism, confidence, consistency, and overall communication.
+      Here you can include specific comments about the referee. Qualities that you should focus on include the Positioning, Professionalism, Confidence, Consistency, and Communication of the referee. You can also include any other information that you deem to be relevant.
     %textarea{form: "rater", cols: 37, rows: 9, name: "comments"}
 
     %input.button{type: "submit", value: "Submit Review"}
@@ -71,6 +86,7 @@
   $("#region").change(function(){
     $("#referee").empty();
     $("#referee").append(generateBlank());
+    $("#referee").append("<option value=\"Sb33WyBziN\">Unnamed Ref</option>")
     for (var i = 0; i < refs[$("#region").val()].length; i++) {
       var el = document.createElement("option");
       el.textContent = refs[$("#region").val()][i][1];
@@ -86,4 +102,34 @@
     return el;
   };
 
-  // function validate(){};
+  function validate() {
+    // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
+    var f = $("form")[0];
+    var filled = true;
+
+    var n = f["name"].value;
+    var e = f["email"].value;
+    var r = f["region"].value;
+    var ra = f["rating"].value;
+
+    var fields = [n, e, r, ra];
+
+    fields.forEach(function(field){
+      if (field == null || field == "") {
+        filled = false;
+      }
+    });
+
+    // checking forms are full, passwords match, and checkbox is checked
+
+    if (!filled) {
+      $(".issue").text("Required field is missing");
+      return false;
+    }
+
+    else {
+      return true;
+    }    
+
+  }
+

@@ -1,5 +1,5 @@
 %p
-  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. 
+  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. All information is required.
 
 .form_box
   %form{name: "create", action: "create", method: "post", onsubmit: "return validate();"}
@@ -97,8 +97,6 @@
       $(".issue").text("Must agree to ref agreement");
       return false;
     }
-
-    
 
     else {
       return true;

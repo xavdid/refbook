@@ -3,6 +3,9 @@
 %h2
   #{@region_title}
 
+%p
+  This table shows only refs who have been certified. If you haven't yet passed any tests, you won't show up!
+
 - if @refs.length > 0
   %p
     %a.all{href: '#'}<
