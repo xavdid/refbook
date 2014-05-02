@@ -103,7 +103,11 @@ end
 def before
 end
 before do 
-  @killed = false
+  if settings.development?
+    @killed = false
+  else
+    @killed = true
+  end
   if not session[:user].nil?
     @lang = session[:user]['lang']
   else
