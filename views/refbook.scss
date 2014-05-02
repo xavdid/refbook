@@ -48,6 +48,10 @@ html, body {
             text-align: center; 
             padding-top: 50px;
         }
+        .right {
+            float: right;
+            padding-right: 20px;
+        }
     }
 
     .issue {
@@ -208,6 +212,9 @@ html, body {
     p {
         width: 60%;
         padding-left: 30px;
+        li {
+            width: 60%;
+        }
     }
 
     .form_box {
@@ -285,7 +292,7 @@ html, body {
             }
             .name {
                 // go $links, baby
-                color: purple;
+                color: #000;
                 text-decoration: none;
             }
             .mine {

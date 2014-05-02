@@ -103,7 +103,7 @@ end
 def before
 end
 before do 
-  @killed = false
+  @killed = true
   if not session[:user].nil?
     @lang = session[:user]['lang']
   else
@@ -612,7 +612,7 @@ end
 
 get '/testing/:which' do
   @names = {ass: "Assistant", snitch: "Snitch", head: "Head"}
-  @title = "#{params[:which].to_sym} Referee Test"
+  @title = "#{@names[params[:which].to_sym]} Referee Test"
   @section = 'testing'
   # right now, which can be anything. Nbd?
   if not logged_in?
