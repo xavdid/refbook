@@ -104,8 +104,10 @@ def before
 end
 before do 
   if settings.development?
+    # this is the local switch
     @killed = false
   else
+    # this is the production (live) switch
     @killed = true
   end
   if not session[:user].nil?
