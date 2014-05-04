@@ -105,7 +105,7 @@ end
 before do 
   if settings.development?
     # this is the local switch
-    @killed = false
+    @killed = true
   else
     # this is the production (live) switch
     @killed = true
