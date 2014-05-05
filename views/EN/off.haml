@@ -2,7 +2,9 @@
 %script{src: "http://code.jquery.com/jquery-1.10.2.min.js", type:"text/javascript"}
 
 .error
-  
+  %p.right#ne
+    %a{href:"#"}<
+      NE
   %p.right#it
     %a{href:"#"}<
       IT
@@ -15,13 +17,17 @@
   %p.right#en
     %a{href:"#"}<
       EN
-  .mid
-    %h2#title
+      
+  %h2#title
   %p#p1
   %p#p2
   %p#p3
 
 :javascript
+  // You're reading the source? Go you! If you're excited about reffing and want to work on a sweet Ruby/Sinatra/Haml project, let David Brownman know. Also, the rest of the code isn't this haphazard. Normally the text would be in a hash and there wouldn't be so much repetition.
+
+  // If you're not that committed but still want to see the source, it'll be released once the site goes live.
+
   $('#en').click(function(){
     $('#title').text("REFEREE DEVELOPMENT TEAM MEMBERS ANNOUNCE FORMATION OF INDEPENDENT REFEREEING ORGANIZATION");
     $('#p1').text("May 5, 2014 – Members of the Referee Development Team (\"RDT\"), a division of the International Quidditch Association (\"IQA\"), announced that they will create an independent international refereeing body, called the International Referee Development Program (\"IRDP\"). The structural change will coincide with the formation of United States Quidditch (\"USQ\"), which is scheduled for July 1, 2014.");
@@ -50,8 +56,13 @@
     $('#p3').text("La neo-formata IRDP consisterà di membri del corrente RDT della IQA. Inoltre, il gruppo ha annunciato che Andrew Canto, il quale ha lavorato come membro e manager dell'RDT, rientrerà a far parte dell gruppo per collaborare a questa iniziativa globale. Questo gruppo formato da 10 membri, guidato dalla Manager Sequoia Thomas e dall'Assistant Manager Chris Beesley, è costituito da membri provenienti da diverse nazioni con membri da Stati Uniti, Canada, Italia e Australia. Il gruppo continuerà a fornire agli arbitri materiali per la certificazione e l'addestramento, ed ha la necessaria infrastruttura per fornire servizi agli arbitri su scala globale.");
   });
 
+  $('#ne').click(function(){
+    $('#title').text("REFEREE DEVELOPMENT TEAM”-LEDEN KONDIGEN EEN ONTWIKKELING VAN EEN ONAFHANKELIJKE SCHEIDSRECHTERSORGANISATIE AAN");
+    $('#p1').text("5 maart 2014 - Leden van het \"Referee Development Team\" (“RDT”), een divisie van de International Quidditch Association (\"IQA\") deelden mee dat ze een onafhankelijke, internationale organisatie zouden creëren met de naam “International Referee Development Program\" (\"IRDP\" afgekort). De verandering in structuur zal gebeuren naast de ontwikkeling van \"United States Quidditch\" (\"USQ\"), dit betekende dat dit zal gebeuren op 1 juli 2014.");
+    $('#p2').text("Door het snel verspreiden van de sport, is een wereldwijde scheidsrechtersvereniging broodnodig om het verbeteren van de gameplay te bevorderen in de verschillende ontwikkelende naties. De ontwikkeling van een onafhankelijke, globale organisatie zal de \"IRDP\" toestaan om te focussen op de training, certificatie en ontwikkeling van de quidditch-officials op globaal niveau. De \"IRDP\" hoopt erop dat ze kunnen samenwerken met nieuwe nationale competities, en is nu al connecties aan het bouwen en plannen aan het maken met het Verenigd Koninkrijk, Australië, België, Frankrijk, Italië en Canada.");
+    $('#p3').text("Het nieuwgevormde “IRDP” zal bestaan uit leden van de huidige “RDT”. Bijkomend, heeft ook Andrew Canto, wie eerder al zijn dienst deed als \"RDT\"-lid en manager, zich aangesloten bij de groep om hen te assisteren in het globale gebeuren. Het 10-ledige team, geleid door manager Sequoia Thomas en assistent-manager Chris Beesley, bevindt zich over heel de wereld, met leden in de Verenigde Staten, Canada, Italë en Australië. Het team zal scheidsrechters blijven ondersteunen door proeven en trainingsmaterialen te voorzien. Het geheel heeft de infrastructuur die nodig is om efficiënt zich in dienst te stellen van alle scheidsrechters op globale schaal.");
+  });
+
   $('#en').click();
 
-  // You're reading the source? Go you! If you're excited about reffing and want to work on a sweet Ruby/Sinatra/Haml project, let David Brownman know. 
-
-  // If you're not that committed but still want to see the source, it'll be released once the site goes live. 
+   
