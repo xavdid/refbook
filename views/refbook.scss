@@ -183,7 +183,7 @@ html, body {
 }
 
 .mid {
-    padding-bottom: $footer-height;
+    padding-bottom: $footer-height+30;
     padding-left: $slide-left;
 
     ::selection {

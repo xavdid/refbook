@@ -17,10 +17,10 @@
           Submit Date
         %td
           Reviewer Name
-        %td
+        %td.small
           Reviewer Email
-        %td.small{title: "Team Captain?"}
-          Captain?
+        %td.small
+          Team Captain?
         %td.small
           Referee Region
         %td.light
@@ -53,7 +53,7 @@
       "<tr>",
       "<td>",reviews[i][12],"</td>",
       "<td>",reviews[i][0],"</td>", //reviewer
-      "<td><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
+      "<td class=\"small\"><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
       "<td class=\"small",(reviews[i][2]) ? "y" : "n","\">",(reviews[i][2]) ? "T" : "F","</td>", //captain?
       "<td class=\"small\">",reviews[i][3],"</td>", //region
       "<td class=\"name ", (reviews[i][11] == "#{session[:user]['objectId']}") ? "mine" : "",

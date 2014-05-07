@@ -50,24 +50,44 @@ end
 
 # helpers
 
+# returns true if and only if the user is logged in
 def logged_in?
     session[:user] != nil
 end
 
+# gets the nice name from the key
+# passing "USMW" returns "US Midwest"
+# I don't love this system and may redo it
 def reg_reverse(reg)
   settings.region_hash.select do |k, v|
     v == reg
   end.keys.first
 end
 
+# given a person (parse) object, returns their full name
 def name_maker(person)
   "#{person['firstName']} #{person['lastName']}"
 end
 
+# originally created to ease the transition between js bools and 
+# ruby bools, I'm not sure if I need it anymore
 def to_bool(str)
   str.downcase == 'true' || str == '1'
 end
 
+# IMPORTANT
+# renders the view and layout in the correct language
+# views are in the following setup:
+# /views
+# |-- /EN
+#   |--a.haml
+#   |--b.haml
+# |-- /FR
+#   |--a.haml
+#   |--b.haml
+# 
+# and so forth for all language codes available
+# (which will probably be [EN|FR|IT|ES])
 def display(path = request.path_info[1..-1], layout = true)
   if layout
     haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
@@ -76,6 +96,8 @@ def display(path = request.path_info[1..-1], layout = true)
   end
 end
 
+# For whatever reason, we need the mail gem in it's own little function
+# this is just for test results, could add other message stuff
 def email_results(email, pass, score, unlock)
   mail = Mail.deliver do
     to email
@@ -105,7 +127,7 @@ end
 before do 
   if settings.development?
     # this is the local switch
-    @killed = true
+    @killed = false
   else
     # this is the production (live) switch
     @killed = true
@@ -145,8 +167,10 @@ get '/admin' do
   @title = "Admin"
   # this'll list links to important stuff
   # also, unique team names to catch typos/etc
-  if not logged_in? or not session[:user]['admin']
-    flash[:issue] = "Admins only, kid"
+  if not logged_in?
+    redirect '/login?d=/admin'
+  elsif not session[:user]['admin']
+    flash[:issue] = "Admins only"
     redirect '/'
   else
     @review_list = []
@@ -301,7 +325,7 @@ post '/create' do
     # usually only fails for invalid email, but it could be other stuff
     # may way to rescue specific parse errors
     flash[:issue] = "Email already in use (or invalid)"
-    redirect '/create'
+    redirect back
   end
 end
 
@@ -332,21 +356,29 @@ get '/info' do
   display
 end
 
-get '/login' do
-  @title = "Login"
+def leagues
+end
+get '/leagues' do
+  @title = 'Affiliate Leagues'
+  @section = 'info'
   display
 end
 
 def login
 end
+get '/login' do
+  @title = "Login"
+  display
+end
+
 post '/login' do
   begin
     session[:user] = Parse::User.authenticate(params[:username], params[:password])
     session.options[:expire_after] = 2592000 # 30 days
-    redirect '/'
+    redirect params[:d]
   rescue
     flash[:issue] = "Invalid login credentials"
-    redirect '/login'
+    redirect "/login?d=#{params[:d]}"
   end
 end
 
@@ -375,8 +407,7 @@ end
 get '/profile' do
   @title = "Profile"
   if not logged_in?
-    flash[:issue] = "Log in to see your profile"
-    redirect '/'
+    redirect '/login?d=/profile'
   else
     @review_list = []
 
@@ -426,7 +457,7 @@ post '/reset' do
     redirect '/logout'
   rescue
     flash[:issue] = "No user with that email"
-    redirect '/reset'
+    redirect back
   end
 end
 
@@ -486,7 +517,7 @@ post '/review' do
   rev.save
 
   flash[:issue] = "Thanks for your review!"
-  redirect '/review'
+  redirect back
 end
 
 def reviews
@@ -623,7 +654,7 @@ get '/testing/:which' do
   # right now, which can be anything. Nbd?
   if not logged_in?
     flash[:issue] = "Must log in to test"
-    redirect '/'
+    redirect "/login?d=/testing/#{params[:which]}"
   end
 
   if !["head", "snitch", "ass"].include? params[:which]
