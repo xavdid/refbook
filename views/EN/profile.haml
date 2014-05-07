@@ -1,3 +1,9 @@
+
+%p
+  %a{href: "/profile/#{session[:user]['objectId']}"}<
+    This
+  is your public profile.
+
 %p
   You've got #{@total} review#{@total == 1 ? '' : 's'}. 
   - if @total > 0

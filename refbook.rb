@@ -525,12 +525,15 @@ end
 get '/reviews/:review_id' do
   @title = "Edit a Review"
   if not logged_in? or not session[:user]['admin']
+    # still using old bounce because there's no way someone is linking
+    # right to this page. hopefully.
     flash[:issue] = "Admins only, kid"
     redirect '/'
   else
     @r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
     q = Parse::Query.new("_User").eq("objectId",@r['referee'].parse_object_id).get.first
     @name = name_maker(q)
+    @r['reviewName'] = 'REDACTED' if q['objectId'] == session[:user]['objectId']
     @review = @r.to_json
     display :edit_review
   end
