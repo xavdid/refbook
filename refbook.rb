@@ -127,18 +127,20 @@ end
 before do 
   if settings.development?
     # this is the local switch
-    @killed = false
+    @killed = true
   else
     # this is the production (live) switch
     @killed = true
   end
+
   if not session[:user].nil?
     @lang = session[:user]['lang']
   else
     @lang = "EN"
   end
-  if @killed and !['/off','/styles.css'].include? request.path_info
-    redirect '/off'
+
+  if @killed and !['/release','/styles.css'].include? request.path_info
+    redirect '/release'
   end
 end
 
