@@ -61,6 +61,11 @@ html, body {
     .issue {
         color: $red;
     }
+
+    span.ex {
+        color: red; 
+        font-weight: bold;
+    }
 }
 
 .content {
@@ -238,12 +243,27 @@ html, body {
             width: 100%;
             clear: both;
             margin-bottom: 20px;
+            border-radius: 0px;
+            &:focus {
+                border: 2px solid #000;
+                box-shadow: none;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                outline: none;
+            }
         }
 
         select {
             width: 100%;
             clear: both;
             margin-bottom: 20px;
+            &:focus {
+                border: 2px solid #000;
+                box-shadow: none;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                outline: none;
+            }
         }
     }
 

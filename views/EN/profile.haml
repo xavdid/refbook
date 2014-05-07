@@ -1,3 +1,11 @@
+- if not session[:user]['profPic']
+  %p
+    %span.ex
+      !
+    It looks like you haven't uploaded a profile pic yet! Do so on your 
+    %a{href: "/settings"}<
+      settings
+    page.
 
 %p
   %a{href: "/profile/#{session[:user]['objectId']}"}<
@@ -9,15 +17,12 @@
   - if @total > 0
     #{@total == 1 ? "It's" : "They're"} listed below.
   - else
+    %span.ex
+      !
     Encourage people to review you!
 
-%img#prof_pic{src: "#{session[:user]['profPic']['url']}", height: 300}
--# DON'T LET THEM SUBMIT EMPTY IMAGES
-.form_box
-  %form{method: "post", enctype: "multipart/form-data", action: "upload"}
-    %input{type: "file", name: "myfile"}   
-    %br
-    %input{type:'submit', value:'Upload!'}
+%img#prof_pic{src: "#{@url}", width: 300}
+
 
 
 %table.skinny#theTable

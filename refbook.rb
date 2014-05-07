@@ -140,8 +140,11 @@ before do
     @lang = "EN"
   end
 
-  if @killed and !['/release','/styles.css'].include? request.path_info
-    redirect '/release'
+  # admins can use site even when it's locked
+  if not logged_in? or not session[:user]['admin']
+    if @killed and !['/layout','/login','/release','/styles.css'].include? request.path_info
+      redirect '/release'
+    end
   end
 end
 
@@ -431,6 +434,9 @@ get '/profile' do
       end
     end
 
+    @url = session[:user]['profPic'] ? 
+      session[:user]['profPic'] : '/images/person_blank.png'
+
     display
   end
 end
@@ -442,6 +448,8 @@ get '/profile/:ref_id' do
     redirect '/search/ALL'
   else
     @title = "#{@ref['firstName']} #{@ref['lastName']}"
+    @url = @ref['profPic'] ? @ref['profPic'] : '/images/person_blank.png'
+
     display :public_profile
   end
 end
@@ -662,6 +670,9 @@ get '/testing' do
 end
 
 get '/testing/:which' do
+  flash[:issue] = "Testing is disabled right now"
+  redirect '/'
+  
   @names = {ass: "Assistant", snitch: "Snitch", head: "Head"}
   @title = "#{@names[params[:which].to_sym]} Referee Test"
   @section = 'testing'
@@ -715,7 +726,7 @@ post '/upload' do
 
   h = photo.save
   puts h
-  session[:user]['profPic'] = photo
+  session[:user]['profPic'] = photo.url
   session[:user] = session[:user].save
   redirect '/profile'
 end

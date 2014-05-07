@@ -19,8 +19,25 @@
       %option{value: "FR"}
         Français
 
-
     %input.button{type: "submit", value: "Update User"}
+
+%p
+  Below you can upload a profile picture. Aim for something mostly square and larger than 300px wide. You can use 
+  %a{href: "http://www.picresize.com", target: "_blank"}<
+    this
+  site to easily crop and edit your photo. This will replace your current picture (which you can see on your
+  %a{href: "/profile"}<
+    profile
+  page). 
+
+.form_box
+  %form{method: "post", enctype: "multipart/form-data", action: "upload"}
+    %label{for: "myfile"}
+      Image (max file size 5MB)
+    %input{type: "file", name: "myfile"}   
+    %br
+    %input{type:'submit', value:'Upload!'}
+
 
 %p
   %a{href: '/reset'}<
