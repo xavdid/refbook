@@ -520,6 +520,14 @@ post '/review' do
   redirect back
 end
 
+def release
+end
+get '/release' do 
+  # this isn't display because all the languages are already there
+  # it could be updated if we add a language we didn't press release in
+  haml :'EN/release', layout: false
+end
+
 def reviews
 end
 get '/reviews/:review_id' do

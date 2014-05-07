@@ -49,6 +49,9 @@ html, body {
             text-align: center; 
             padding-top: 60px;
         }
+        .left {
+            float: left;
+        }
         .right {
             float: right;
             padding-right: 20px;
@@ -216,6 +219,10 @@ html, body {
         li {
             width: 60%;
         }
+    }
+
+    .right {
+        float: right;
     }
 
     .form_box {
