@@ -2,7 +2,7 @@
   %form{name: "login", action: "login", method: "post"}
     %label{for: "Email"}
       Email
-    %input{type: "email", name: "username", placeholder:"email"}
+    %input{type: "email", name: "username", placeholder:"email", id:"start"}
 
     %label{for: "Password:"}
       Password
@@ -18,3 +18,6 @@
   %a{href: '/reset'}<
     reset
   it?
+
+:javascript
+  $('#start').focus();

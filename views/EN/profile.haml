@@ -11,7 +11,14 @@
   - else
     Encourage people to review you!
 
-%img#prof_pic{src: '/images/person_blank.png', height: 300}
+%img#prof_pic{src: "#{session[:user]['profPic']['url']}", height: 300}
+-# DON'T LET THEM SUBMIT EMPTY IMAGES
+.form_box
+  %form{method: "post", enctype: "multipart/form-data", action: "upload"}
+    %input{type: "file", name: "myfile"}   
+    %br
+    %input{type:'submit', value:'Upload!'}
+
 
 %table.skinny#theTable
   %thead

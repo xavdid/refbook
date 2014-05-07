@@ -9,6 +9,7 @@ require 'pp'
 require 'time'
 require 'mail'
 require 'rack-google-analytics'
+require 'uri'
 
 include Mongo
 
@@ -127,7 +128,7 @@ end
 before do 
   if settings.development?
     # this is the local switch
-    @killed = true
+    @killed = false
   else
     # this is the production (live) switch
     @killed = true
@@ -703,7 +704,24 @@ get '/testing/:which' do
   display :test_links
 end
 
+def upload
+end
+post '/upload' do
+  photo = Parse::File.new({
+    body: IO.read(params[:myfile][:tempfile]),
+    local_filename: URI.encode(params[:myfile][:filename]),
+    content_type: params[:myfile][:type]
+  })
+
+  h = photo.save
+  puts h
+  session[:user]['profPic'] = photo
+  session[:user] = session[:user].save
+  redirect '/profile'
+end
+
 # renders css
 get '/styles.css' do
   scss :refbook
 end
+
