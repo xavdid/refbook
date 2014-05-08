@@ -142,7 +142,7 @@ before do
 
   # admins can use site even when it's locked
   if not logged_in? or not session[:user]['admin']
-    if @killed and !['/layout','/login','/release','/styles.css'].include? request.path_info
+    if @killed and !['/layout','/login','/logout','/release','/styles.css'].include? request.path_info
       redirect '/release'
     end
   end
@@ -672,7 +672,7 @@ end
 get '/testing/:which' do
   flash[:issue] = "Testing is disabled right now"
   redirect '/'
-  
+
   @names = {ass: "Assistant", snitch: "Snitch", head: "Head"}
   @title = "#{@names[params[:which].to_sym]} Referee Test"
   @section = 'testing'
