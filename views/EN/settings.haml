@@ -25,16 +25,13 @@
   Below you can upload a profile picture. Aim for something mostly square and larger than 300px wide. You can use 
   %a{href: "http://www.picresize.com", target: "_blank"}<
     this
-  site to easily crop and edit your photo. This will replace your current picture (which you can see on your
-  %a{href: "/profile"}<
-    profile
-  page). 
+  site to easily crop and edit your photo. Make sure it's a solo picture of your where your face is clear and un-obstructed, preferably just of the shoulders and up.
 
 .form_box
-  %form{method: "post", enctype: "multipart/form-data", action: "upload"}
+  %form{id: "profPic", method: "post", enctype: "multipart/form-data", action: "upload", onsubmit: "return validate();"}
     %label{for: "myfile"}
       Image (max file size 5MB)
-    %input{type: "file", name: "myfile"}   
+    %input{type: "file", name: "myfile", id: "fileBox"}   
     %br
     %input{type:'submit', value:'Upload!'}
 
@@ -50,4 +47,21 @@
 
   $('#email').val("#{session[:user]['username']}");
   $('#lang').val("#{session[:user]['lang']}");
+
+  function validate(){
+    var f = $("#fileBox")[0].files[0];
+    if (f) {
+      return true;
+    }
+    else {
+      $(".issue").text("Must select a file");
+      return false;
+    }
+    // var filled = true;
+
+    // var e = f["username"].value;
+    // var p = f["password"].value;
+    // var p2 = f["pw2"].value;
+    // return true;
+  };
 

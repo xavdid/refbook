@@ -23,6 +23,7 @@ configure do
   set :region_codes, ["USWE", "USMW", "USSW", "USSO", "USNE", "USMA", "CANA", "OCEA", "ITAL"]
   set :waiting, 300
   set :names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
+  set :updated_at, Time.now.strftime('%b %e, %l:%M %p')
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
@@ -81,11 +82,11 @@ end
 # views are in the following setup:
 # /views
 # |-- /EN
-#   |--a.haml
-#   |--b.haml
+#  `--a.haml
+#  `--b.haml
 # |-- /FR
-#   |--a.haml
-#   |--b.haml
+#  `--a.haml
+#  `--b.haml
 # 
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
@@ -148,14 +149,12 @@ before do
   end
 end
 
-
 # routes
 def index 
 end
 get '/' do
   @title = "Home"
   @section = "index"
-  # haml "#{@lang}/index".to_sym, layout: "#{@lang}/layout".to_sym
   display :index
 end
 
@@ -171,8 +170,6 @@ def admin
 end
 get '/admin' do
   @title = "Admin"
-  # this'll list links to important stuff
-  # also, unique team names to catch typos/etc
   if not logged_in?
     redirect '/login?d=/admin'
   elsif not session[:user]['admin']
@@ -207,7 +204,6 @@ get '/admin' do
       @review_list << a
     end
 
-    # haml "#{@lang}/admin".to_sym, layout: "#{@lang}/layout".to_sym
     display
   end
 end
@@ -215,8 +211,6 @@ end
 def cm
 end
 get '/cm' do 
-  # TODO: make sure user is logged in (so you can update cookie). 
-
   # cases:
   #   A: no attempts at all
   #   B: no attempts for this test
@@ -294,13 +288,10 @@ get '/create' do
   end
   @team_list = @team_list.to_set.to_a
   @region_keys = settings.region_names
-  # puts @team_list
   display
 end
 
 post '/create' do
-    # could have lastAss, lastHead, lastSnitch to enforce retake time
-    # also, i'll check CM, but we may want to store all of the attempts for our records
   user = Parse::User.new({
     # username is actually email, secretly
     :username => params[:username],
@@ -320,7 +311,6 @@ post '/create' do
     # because of dropdown, there shouldn't ever be no region, but this is 
     # just in case. Region errors really break stuff.
     :region => settings.region_hash[params[:region]] || "NONE"
-    # :last_ass => T
   })
 
   begin
@@ -403,7 +393,6 @@ get '/off' do
     # flash[:issue] = "Maintenance is done, carry on!"
     redirect '/'
   else
-    # haml "#{@lang}/off".to_sym, layout: false
     display(:off, false)
   end
 end
@@ -426,8 +415,6 @@ get '/profile' do
     @total = 0
     reviews.each do |r|
       if r['show']
-      # q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
-
         a = [r['rating'], r['comments']]
         @review_list << a
         @total += 1
@@ -495,10 +482,6 @@ get '/review' do
       @refs[reg_reverse(person['region'])] << p
     end
   end
-
-  # @refs.each do |i|
-    # @refs[i] = i.sort_by{|j| j[1]}
-  # end
 
   @refs = @refs.to_json
   display
@@ -618,8 +601,6 @@ get '/search/:region' do
       @refs << entry
     end
   end
-  # @refs << @refs
-  # @refs = @refs.sort_by{|i| i[1]}
 
   display :search
 end
