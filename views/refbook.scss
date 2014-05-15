@@ -3,7 +3,6 @@
 $footer-height: 36px;
 $slide-left: 30px;
 @import url("http://fonts.googleapis.com/css?family=Exo+2:400,700&subset=latin,latin-ext");
-@import url("http://fonts.googleapis.com/css?family=Fanwood+Text");
 
 // colors
 $orange: #ff6600; //orange
@@ -16,7 +15,7 @@ $gray: #767676; //gray
 $links: #000;
 
 * {
-    font-family: 'Exo 2', 'sans-serif';
+    font-family: 'Exo 2', Verdana;
 }
 
 html, body {

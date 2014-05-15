@@ -19,11 +19,11 @@ configure do
 
   set :session_secret, 'this_is_secret'
   set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
-  set :region_names, ["US West", "US Midwest", "US Southwest", "US South", "US Northeast", "US Mid-Atlantic", "Canada", "Oceania", "Italy"]
-  set :region_codes, ["USWE", "USMW", "USSW", "USSO", "USNE", "USMA", "CANA", "OCEA", "ITAL"]
+  set :region_names, settings.region_hash.keys[0..-3]
+  set :region_codes, settings.region_hash.values[0..-3]
   set :waiting, 300
-  set :names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
-  set :updated_at, Time.now.strftime('%b %e, %l:%M %p')
+  set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
+  set :updated_at, Time.now.strftime('%b %e, %l:%M%P')
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
@@ -31,8 +31,8 @@ configure do
   if settings.development?
     # this is so we can test on multiple local computers
     set :bind, '0.0.0.0'
-  else
-    require 'newrelic_rpm'
+  # else
+    # require 'newrelic_rpm'
   end
 
   Mail.defaults do
@@ -47,7 +47,7 @@ configure do
     }
   end
 
-  use Rack::GoogleAnalytics, :tracker => 'UA-42341849-2'
+  # use Rack::GoogleAnalytics, :tracker => 'UA-42341849-2'
 end
 
 # helpers
@@ -82,11 +82,11 @@ end
 # views are in the following setup:
 # /views
 # |-- /EN
-#  `--a.haml
-#  `--b.haml
+#   |--a.haml
+#   |--b.haml
 # |-- /FR
-#  `--a.haml
-#  `--b.haml
+#   |--a.haml
+#   |--b.haml
 # 
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
@@ -113,6 +113,22 @@ def email_results(email, pass, score, unlock)
       end
     end
   end
+end
+
+def email_link(a={})
+  if a.include? :subject
+    @subject = URI.encode("?subject=#{a[:subject]}")
+  else
+    @subject = ''
+  end
+
+  if a.include? :text
+    @text = a[:text]
+  else
+    @text = 'refdevelopmentprogram@gmail.com'
+  end
+
+  haml :email_link
 end
 
 not_found do
@@ -166,6 +182,8 @@ get '/about' do
   display
 end
 
+
+# it would be nice to be able to download all of this info as a CSV
 def admin
 end
 get '/admin' do
@@ -253,17 +271,18 @@ get '/cm' do
   puts 'to', @email, @score
   if params[:cm_tp].to_i >= 80
     pass = true
-    flash[:issue] = "You passed the #{settings.names[params[:cm_return_test_type].to_sym]} ref test, go you!"
+    flash[:issue] = "You passed the #{settings.test_names[params[:cm_return_test_type].to_sym]} ref test, go you!"
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     session[:user] = user_to_update.save
     @unlock = ''
   else
     pass = false
     @unlock = (Time.parse(att['time']) + settings.waiting).strftime('%b %e,%l:%M %p')
-    flash[:issue] = "You failed, try again in a week!"
+    flash[:issue] = "You were unsuccessful in your attempt. Try again soon!"
   end
   email_results(@email, pass, @score, @unlock)
-  redirect '/'
+  redirect '/' if pass
+  redirect "/testing/#{params[:cm_return_test_type]}"
 end
 
 def contact

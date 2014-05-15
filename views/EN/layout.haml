@@ -8,7 +8,7 @@
 
 / js
 %script{src: "http://code.jquery.com/jquery-1.10.2.min.js", type:"text/javascript"}
--# %script{src: "jquery-1.10.2.min.js", type:"text/javascript"}
+-# %script{src: "js/jquery-1.10.2.min.js", type:"text/javascript"}
 %script{src: "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js", type:"text/javascript"}
 %script{src: "/js/tablesorter.min.js", type:"text/javascript"}
 %script{src: "/js/tablesorter.widgets.min.js", type:"text/javascript"}
@@ -32,9 +32,9 @@
             %li
               %a{href: '/about'}
                 About
-            %li
-              %a{href: '/leagues'}
-                Affiliate Leagues
+            -# %li
+            -#   %a{href: '/leagues'}
+            -#     Affiliate Leagues
             %li
               %a{href: '/faq'}
                 FAQ
@@ -106,7 +106,14 @@
 
   .mid
     /[if lt IE 9]
-      <p style="color: red;">We detect you're using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> as the one you are using isn't supported (and causes errors) on our site. C'mon.</p>
+      %p
+        We detect you're using an 
+        %strong
+          outdated
+        browser. Please
+        %a{href:"http://browsehappy.com/"}
+          upgrade your browser
+        as the one you are using isn't supported (and causes errors) on our site.
     
     %h1#the_title
       #{@title || 'Missing Title'}
