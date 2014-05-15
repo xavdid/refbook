@@ -59,6 +59,9 @@
             Testing Center
           %ul.sub-menu
             %li
+              %a{href: '/testing'}
+                Training Materials
+            %li
               %a{href: "/testing/ass"}
                 Assistant Ref Test
             %li
@@ -122,15 +125,7 @@
       %h3
         =flash[:issue]
 
-    
-
     #{yield}
-
-
-  -# Maybe I want this to have space below content. We'll see. 
-
-    -# .issue
-    -#   =flash[:space]
 
   .bot
     %p
