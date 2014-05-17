@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'json'
-require 'mongo'
 require 'sass'
 require 'parse-ruby-client'
 require 'haml'
@@ -10,8 +9,6 @@ require 'time'
 require 'mail'
 require 'rack-google-analytics'
 require 'uri'
-
-include Mongo
 
 configure do
   enable :sessions

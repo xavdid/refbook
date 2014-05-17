@@ -16,9 +16,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    bson (1.9.2)
-    bson_ext (1.9.2)
-      bson (~> 1.9.2)
     builder (3.2.2)
     erubis (2.7.0)
     haml (4.0.5)
@@ -34,8 +31,6 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (5.3.3)
-    mongo (1.9.2)
-      bson (~> 1.9.2)
     net-http-persistent (2.9.4)
     netrc (0.7.7)
     newrelic_rpm (3.8.0.218)
@@ -76,11 +71,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext
   haml
   json
   mail
-  mongo
   newrelic_rpm
   parse-ruby-client
   rack-google-analytics

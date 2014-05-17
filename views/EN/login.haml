@@ -14,10 +14,16 @@
     %input.button{type: "submit", value: "Login"}
 
 %p
-  Forgot your password? Do you need to 
+  Don't have an account? You can 
+  %a{href: '/create'}<
+    create
+  one!
+
+%p
+  Forgot your password? 
   %a{href: '/reset'}<
-    reset
-  it?
+    Reset
+  it.
 
 :javascript
   $('#start').focus();
