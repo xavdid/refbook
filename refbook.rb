@@ -512,7 +512,8 @@ post '/review' do
 
   p = Parse::Pointer.new({})
   p.class_name = "_User"
-  p.parse_object_id = params[:referee]
+  # the correct user_id or hardcoded Unnamed Ref
+  p.parse_object_id = params[:referee] || "Sb33WyBziN"
 
   rev['referee'] = p
 
