@@ -15,7 +15,7 @@ configure do
   
 
   set :session_secret, 'this_is_secret'
-  set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Oceania" => "OCEA", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
   set :region_names, settings.region_hash.keys[0..-3]
   set :region_codes, settings.region_hash.values[0..-3]
   set :waiting, 300

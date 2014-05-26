@@ -287,6 +287,12 @@ html, body {
         }
     }
 
+    .mode {
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
     .active {
         color: #000;
         text-decoration: none;
@@ -316,10 +322,10 @@ html, body {
             tr {
                 background: #cdcdcd;
             }
-            .name {
+            .ref-name {
                 // go $links, baby
-                color: #000;
-                text-decoration: none;
+                background-color: #676767;
+                color: #fff;
             }
             .mine {
                 background-color: #00274c;

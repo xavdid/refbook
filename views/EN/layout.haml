@@ -1,20 +1,22 @@
 !!!
+%head
+  /css
+  %title
+    #{@title}
+  %link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
+  %link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css'}
+  %link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'}
+  %link{:rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/theme.default.css'}
 
-/css
-%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
-%link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css'}
-%link{:rel => 'stylesheet', :type => 'text/css', :href => 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'}
-%link{:rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/theme.default.css'}
+  / js
+  %script{src: "http://code.jquery.com/jquery-1.10.2.min.js", type:"text/javascript"}
+  -# %script{src: "js/jquery-1.10.2.min.js", type:"text/javascript"}
+  %script{src: "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js", type:"text/javascript"}
+  %script{src: "/js/tablesorter.min.js", type:"text/javascript"}
+  %script{src: "/js/tablesorter.widgets.min.js", type:"text/javascript"}
 
-/ js
-%script{src: "http://code.jquery.com/jquery-1.10.2.min.js", type:"text/javascript"}
--# %script{src: "js/jquery-1.10.2.min.js", type:"text/javascript"}
-%script{src: "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js", type:"text/javascript"}
-%script{src: "/js/tablesorter.min.js", type:"text/javascript"}
-%script{src: "/js/tablesorter.widgets.min.js", type:"text/javascript"}
-
-/ favicon
-%link{:rel => 'shortcut icon', :type => 'image/png', :href => '/images/favicon.png'}
+  / favicon
+  %link{:rel => 'shortcut icon', :type => 'image/png', :href => '/images/favicon.png'}
 
 .content
   .top
@@ -108,7 +110,7 @@
         
 
   .mid
-    /[if lt IE 9]
+    /[if lt IE 10]
       %p
         We detect you're using an 
         %strong
@@ -116,7 +118,10 @@
         browser. Please
         %a{href:"http://browsehappy.com/"}
           upgrade your browser
-        as the one you are using isn't supported (and causes errors) on our site.
+        as the one you are using isn't supported (and causes errors) on our site. If you're curious, we follow Google's
+        %a{href: "https://support.google.com/a/answer/33864?hl=en", target: "_blank"}<
+          browser support
+        timeline.
     
     %h1#the_title
       #{@title || 'Missing Title'}
