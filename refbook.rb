@@ -156,7 +156,7 @@ before do
 
   # admins can use site even when it's locked
   if not logged_in? or not session[:user]['admin']
-    if @killed and !['/layout','/login','/logout','/release','/styles.css', '/create'].include? request.path_info
+    if @killed and !['/layout','/login','/logout','/release','/styles.css'].include? request.path_info
       redirect '/release'
     end
   end
@@ -318,8 +318,7 @@ post '/create' do
     :headRef => false,
     :attemptsRemaining => 0,
     :passedFieldTest => false,
-    # FIX THIS BEFORE LIVE
-    :admin => true,
+    :admin => false,
     :lang => params[:lang] || 'EN',
     :firstName => params[:fn].capitalize,
     :lastName => params[:ln].capitalize,
