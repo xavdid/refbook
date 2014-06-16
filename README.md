@@ -11,7 +11,7 @@ Our tests are proctored through [Classmarker](http://classmarker.com), which all
 
 In the past, users signed up for the AR and SR tests through a google doc which had a link to the CM page. Upon completion, CM would tell them what they got wrong and it would periodically update our database (which was a gsheet). The HR test required payment, so upon submitting money through paypal, hopefuls had to wait for one of us to send them an email with their unique test link. We were usually pretty fast about it, but vacations and emergencies happen, so there tended to be delays of up to 48 hours. 
 
-Given these shortcomings, I wanted to accomplish a few specific goals with the new system: 
+Given these shortcomings, the IRDP wanted to accomplish a few specific goals with the new system: 
 
 * Never force an applicant wait to take their test
 * Make certification status information easy for both us and the general public to access
@@ -21,7 +21,7 @@ Given these shortcomings, I wanted to accomplish a few specific goals with the n
 The best way to store and reference this information is through an authenticated database. Because an account is required to attempt a test, we're able to easily track (and enforce) not only who they are and their team affiliation, but which tests they're qualified for and the time between attempts. Additionally, we can programmatically send confirmation emails and keep in touch with applicants.
 
 ### [Referee Directory](http://refdevelopment.com/search/ALL)
-One of the challenges when planning a tournament is ref coordination. Part of the issue is knowing which of the 150 people showing up to your tournament are ref certified (and in what capacity) and in what capacity. In the past, TD's have posted referee signup forms on their event page in the hopes that refs reveal themselves for easy contact. 
+One of the challenges when planning a tournament is ref coordination. Part of the issue is knowing which of the 150 people showing up to your tournament are ref certified and in what capacity. In the past, TD's have posted referee signup forms on their event page in the hopes that refs reveal themselves for easy contact. 
 
 Instead, what if the TD could easy glance at their region and see a full, sortable list of certified refs in their region (and their contact info). That's exactly what we've done with our ref directory. Because certification happens within our system, it's easy to show a sanitized view of our database for public consumption. 
 
