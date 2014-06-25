@@ -116,6 +116,11 @@ def email_results(email, pass, score, unlock)
   end
 end
 
+def paypal_button
+  @id = session[:user]['objectId']
+  display(:paypal, false)
+end
+
 def email_link(a={})
   if a.include? :subject
     @subject = URI.encode("?subject=#{a[:subject]}")
@@ -160,7 +165,7 @@ before do
 
   # admins can use site even when it's locked
   if not logged_in? or not session[:user]['admin']
-    if @killed and !['/layout','/login','/logout','/release','/styles.css'].include? request.path_info
+    if @killed and !['/layout','/login','/logout','/release','/paid','/styles.css'].include? request.path_info
       redirect '/release'
     end
   end
@@ -320,7 +325,7 @@ post '/create' do
     :assRef => false,
     :snitchRef => false,
     :headRef => false,
-    :attemptsRemaining => 0,
+    :hrWrittenAttemptsRemaining => 0,
     :passedFieldTest => false,
     :admin => false,
     :lang => params[:lang] || 'EN',
@@ -415,6 +420,20 @@ get '/off' do
   else
     display(:off, false)
   end
+end
+
+def paid
+end
+# get ca$h get m0ney
+post '/paid' do
+  id = params[:custom].split('=')[1]
+  # puts 'params
+  user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
+  puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid at #{Time.now}"
+  # FIX change this to however many attempts they get
+  user_to_update['hrWrittenAttemptsRemaining'] = 4
+  user_to_update.save
+  return {status: 200, message: "ok"}.to_json
 end
 
 def profile
@@ -672,10 +691,12 @@ get '/testing' do
 end
 
 get '/testing/:which' do
-  flash[:issue] = "Testing is disabled right now"
-  redirect '/'
+  if not settings.development?
+    flash[:issue] = "Testing is disabled right now"
+    redirect '/'
+  end
 
-  @names = {ass: "Assistant", snitch: "Snitch", head: "Head"}
+  @names = {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
   @title = "#{@names[params[:which].to_sym]} Referee Test"
   @section = 'testing'
   # right now, which can be anything. Nbd?
@@ -684,13 +705,24 @@ get '/testing/:which' do
     redirect "/login?d=/testing/#{params[:which]}"
   end
 
-  if !["head", "snitch", "ass"].include? params[:which]
+  if !["head", "snitch", "ass", "sample"].include? params[:which]
     halt 404
   end
 
+  # why do computation if they've alreayd passed?
+  display :test_links if session[:user][params[:which]+"Ref"]
+
   @good = true
+  @attempts_remaining = true
   @tests = {ass: "afd51c7d951f264b", snitch: "ykg51c7e006504d2", head: "x", sample: "xnj533d065451038"}
   
+  if params[:which] == 'head'
+    session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+    puts 'refreshed user object'
+    if session[:user]['hrWrittenAttemptsRemaining'] <= 0
+      @attempts_remaining = false
+    end
+  end
 
   attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
   if not attempt_list.empty?
@@ -698,7 +730,6 @@ get '/testing/:which' do
     att = attempt_list.select do |a|
       # hardcoded - will do actual test discrim later
       a['type'] == params[:which]
-      # a["type"] == params[:which]
     end
     if not att.empty?
       # they've taken this test sometime

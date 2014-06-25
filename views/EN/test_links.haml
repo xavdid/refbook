@@ -6,11 +6,13 @@
     You've already passed the #{@names[params[:which].to_sym]} ref test. Congrats!
   - else
     - if params[:which] == "head"
-      The HR test isn't available yet as we're not certifying new HR's until the new rulebook comes out. We'll post notices here and on the homepage (amoung other places) when it's ready!
+      - if @attempts_remaining
+        LINK
+      - else
+        You haven't purchased any HR attempts (or are out). Buy some!
+        #{paypal_button}
     - elsif @good
       Here's the link to the 
-      -# %a{href: "http://www.classmarker.com/online-test/start/?quiz=afd51c7d951f264b&cm_return_test_type=ass&cm_user_id=#{session[:user]['objectId']}"}<
-      -#   Assistant
       %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
         #{@names[params[:which].to_sym]}
       test!
@@ -18,7 +20,8 @@
       Looks like it hasn't been long enough since your last try! 
       %br
       %br
-      Give it another go at 
+      Give it another go at #{@try_unlocked.strftime("%b %e,%l:%M %p")} UTC
       %a{href: "http://www.timeanddate.com/worldclock/fixedtime.html?msg=#{@names[params[:which].to_sym]}+Ref+Test+Available&iso=#{@try_unlocked.strftime('%Y%m%dT%H%M')}&p1=784", target: "_blank"}<
-        #{@try_unlocked.strftime("%b %e,%l:%M %p")}
-      US Eastern Time.
+        (view in local time zone)
+        
+      
