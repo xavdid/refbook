@@ -88,10 +88,14 @@ end
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
 def display(path = request.path_info[1..-1], layout = true)
-  if layout
-    haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-  else
-    haml "#{@lang}/#{path}".to_sym, layout: false
+  begin
+    if layout
+      haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
+    else
+      haml "#{@lang}/#{path}".to_sym, layout: false
+    end
+  rescue
+    redirect '/logout'
   end
 end
 
