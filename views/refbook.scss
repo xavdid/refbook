@@ -288,8 +288,9 @@ html, body {
         text-decoration: underline;
     }
 
-    #regions {
+    .regions {
         padding-left: 0;
+        padding-bottom: 15px;
         color: darkgray;
         // a:hover {
             // text-decoration: none;
@@ -309,6 +310,7 @@ html, body {
     .active {
         color: #000;
         text-decoration: none;
+        font-weight: bold;
     }
 
     .table_box {

@@ -15,8 +15,8 @@ configure do
   
   set :session_secret, 'this_is_secret'
   set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
-  set :region_names, settings.region_hash.keys[0..-3]
-  set :region_codes, settings.region_hash.values[0..-3]
+  set :region_names, settings.region_hash.keys[0..-3].sort
+  set :region_codes, settings.region_hash.values[0..-3].sort
   set :waiting, 3000
   set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
   set :updated_at, Time.now.utc
@@ -344,6 +344,7 @@ post '/create' do
     :hrWrittenAttemptsRemaining => 0,
     :passedFieldTest => false,
     :admin => false,
+    :paid => false,
     :lang => params[:lang] || 'EN',
     :firstName => params[:fn].capitalize,
     :lastName => params[:ln].capitalize,

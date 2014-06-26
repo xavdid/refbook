@@ -1,26 +1,31 @@
 %p
-  This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified). Otherwise, it'll tell you when this test will be available. 
+  This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. 
 %hr
-%p
-  - if session[:user][params[:which]+"Ref"]
-    You've already passed the #{@names[params[:which].to_sym]} referee test. Congrats!
-  - else
-    - if params[:which] == "head"
-      - if @attempts_remaining
-        LINK
-      - else
-        You haven't purchased any HR attempts (or are out). Buy some!
-        #{paypal_button}
-    - elsif @good
-      Here's the link to the 
-      %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
-        #{@names[params[:which].to_sym]}
-      test!
+- if paid?
+  %p
+    - if session[:user][params[:which]+"Ref"]
+      You've already passed the #{@names[params[:which].to_sym]} referee test. Congrats!
     - else
-      Looks like it hasn't been long enough since your last try! You last attempted the #{@names[params[:which].to_sym]} referee test at #{@t2.strftime(settings.time_string)}
-      %br
-      %br
-      Give it another go at #{@try_unlocked.strftime(settings.time_string)}
-      #{local_time(@try_unlocked,'Refdevelopment.com+Updated')}
+      - if params[:which] == "head"
+        - if @attempts_remaining
+          LINK
+        - else
+          You haven't purchased any HR attempts (or are out). Buy some!
+          #{paypal_button}
+      - elsif @good
+        Here's the link to the 
+        %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
+          #{@names[params[:which].to_sym]}
+        test!
+      - else
+        Looks like it hasn't been long enough since your last try! You last attempted the #{@names[params[:which].to_sym]} referee test at #{@t2.strftime(settings.time_string)}
+        %br
+        %br
+        Give it another go at #{@try_unlocked.strftime(settings.time_string)}
+        #{local_time(@try_unlocked,'Refdevelopment.com+Updated')}
+- else
+  Sorry, you've got to either be part of an affiliate league or have paid our $5 fee to take these tests! 
+
+  LINK TO PAYMENT PAGE
         
       
