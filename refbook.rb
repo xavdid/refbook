@@ -13,14 +13,15 @@ require 'uri'
 configure do
   enable :sessions
   
-
   set :session_secret, 'this_is_secret'
   set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
   set :region_names, settings.region_hash.keys[0..-3]
   set :region_codes, settings.region_hash.values[0..-3]
-  set :waiting, 300
+  set :waiting, 3000
   set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
-  set :updated_at, Time.now.strftime('%b %e, %l:%M%P')
+  set :updated_at, Time.now.utc
+  set :time_string, '%b %e, %l:%M%P'
+  set :wc_string, '%Y%m%dT%H%M'
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
@@ -51,7 +52,15 @@ end
 
 # returns true if and only if the user is logged in
 def logged_in?
-    session[:user] != nil
+  session[:user] != nil
+end
+
+def admin?
+  logged_in? and session[:user]['admin']
+end
+
+def paid?
+  logged_in? and session[:user]['paid']
 end
 
 # gets the nice name from the key
@@ -88,15 +97,15 @@ end
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
 def display(path = request.path_info[1..-1], layout = true)
-  begin
+  # begin
     if layout
       haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
     else
       haml "#{@lang}/#{path}".to_sym, layout: false
     end
-  rescue
-    redirect '/logout'
-  end
+  # rescue
+    # redirect '/logout'
+  # end
 end
 
 # For whatever reason, we need the mail gem in it's own little function
@@ -116,11 +125,7 @@ def email_results(email, pass, score, unlock)
   end
 end
 
-def paypal_button
-  @id = session[:user]['objectId']
-  display(:paypal, false)
-end
-
+# Rendering helpers
 def email_link(a={})
   if a.include? :subject
     @subject = URI.encode("?subject=#{a[:subject]}")
@@ -133,8 +138,19 @@ def email_link(a={})
   else
     @text = 'refdevelopmentprogram@gmail.com'
   end
-
   haml :email_link
+end
+
+def local_time(time, message='', text=nil)
+  @time = time
+  @message = message
+  @text = text || 'UTC'
+  haml :local_time
+end
+
+def paypal_button
+  @id = session[:user]['objectId']
+  display(:paypal, false)
 end
 
 not_found do
@@ -268,7 +284,7 @@ get '/cm' do
   att["percentage"] = params[:cm_tp].to_i
   att["duration"] = params[:cm_td]
   att["type"] = params[:cm_return_test_type]
-  att["time"] = Time.now.to_s
+  att["time"] = Time.now.utc.to_s
   att.save
 
   user_to_update = Parse::Query.new("_User").eq("objectId", params[:cm_user_id]).get.first
@@ -286,7 +302,7 @@ get '/cm' do
     @unlock = (Time.parse(att['time']) + settings.waiting).strftime('%b %e,%l:%M %p')
     flash[:issue] = "You were unsuccessful in your attempt. Try again soon!"
   end
-  email_results(@email, pass, @score, @unlock)
+  email_results(@email, pass, @score, @unlock) if not settings.development?
   redirect '/' if pass
   redirect "/testing/#{params[:cm_return_test_type]}"
 end
@@ -547,7 +563,7 @@ post '/review' do
   rev['comments'] = params[:comments]
   # show should be false by default, true for testing
   rev['show'] = true
-  rev['now'] = Time.now.strftime('%b %e,%l:%M %p')
+  rev['now'] = Time.now.utc.strftime('%b %e,%l:%M %p')
   rev.save
 
   flash[:issue] = "Thanks for your review!"
@@ -736,10 +752,10 @@ get '/testing/:which' do
       att = att.first
       # TIME BETWEEN ATTEMPTS
       # 604800 sec = 1 week
-      if Time.now - Time.parse(att['time']) < settings.waiting
+      if Time.now.utc - Time.parse(att['time']) < settings.waiting
         @good = false
         @try_unlocked = Time.parse(att['time']) + settings.waiting
-        @t1 = Time.now
+        @t1 = Time.now.utc
         @t2 = Time.parse(att['time'])
       end
     end

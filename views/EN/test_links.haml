@@ -1,9 +1,9 @@
 %p
   This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified). Otherwise, it'll tell you when this test will be available. 
-
+%hr
 %p
   - if session[:user][params[:which]+"Ref"]
-    You've already passed the #{@names[params[:which].to_sym]} ref test. Congrats!
+    You've already passed the #{@names[params[:which].to_sym]} referee test. Congrats!
   - else
     - if params[:which] == "head"
       - if @attempts_remaining
@@ -17,11 +17,10 @@
         #{@names[params[:which].to_sym]}
       test!
     - else
-      Looks like it hasn't been long enough since your last try! 
+      Looks like it hasn't been long enough since your last try! You last attempted the #{@names[params[:which].to_sym]} referee test at #{@t2.strftime(settings.time_string)}
       %br
       %br
-      Give it another go at #{@try_unlocked.strftime("%b %e,%l:%M %p")} UTC
-      %a{href: "http://www.timeanddate.com/worldclock/fixedtime.html?msg=#{@names[params[:which].to_sym]}+Ref+Test+Available&iso=#{@try_unlocked.strftime('%Y%m%dT%H%M')}&p1=784", target: "_blank"}<
-        (view in local time zone)
+      Give it another go at #{@try_unlocked.strftime(settings.time_string)}
+      #{local_time(@try_unlocked,'Refdevelopment.com+Updated')}
         
       

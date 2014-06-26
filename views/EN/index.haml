@@ -3,11 +3,15 @@
 
 %p
   On this site, you'll find resources to prepare for the referee tests, the tests themselves, the Referee Directory, and any other information relating to refs that you may want or need. 
+%p
+  Whenever you see a time, click
+  %a{href: "#"}<
+    UTC
+  to see that time in your local time zone.
 
 %h2
-  Latest Updates (as of #{settings.updated_at} 
-  %a{href: "http://www.timeanddate.com/worldclock/usa/new-york", target: "_blank"}<
-    ET
+  Latest Updates (as of #{settings.updated_at.strftime(settings.time_string)} 
+  #{local_time(settings.updated_at,'Refdevelopment.com+Updated')}
   )
 %p
   Our blog posts describing the development of the IRDP will be released soon!

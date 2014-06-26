@@ -80,9 +80,16 @@
   %br
   %b
     A:
-  As of as of #{settings.updated_at} 
-  %a{href: "http://www.timeanddate.com/worldclock/usa/new-york", target: "_blank"}<
-    ET
+  As of as of #{settings.updated_at.strftime(settings.time_string)} 
+  #{local_time(settings.updated_at,'IRDP+Contracts+Updated')}
+  the IRDP has contracts with
+  %ul.bullets
+    %li
+      Australia
+    %li
+      United Kingdom
+%p
+  Members of these leagues gain access to all IRDP training materials for free!
   
 
 
