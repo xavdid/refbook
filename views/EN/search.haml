@@ -79,7 +79,7 @@
       };
 
       if (refs[i][9] == "N") {
-        if (#{not session[:user].nil? and session[:user]['admin']}) {
+        if (#{not admin?}) {
           r += [
                 "<td>",
                 "<div class=\"field_test\"><a href=\"/field/"+refs[i][8]+"?reg=#{@reg}\">",

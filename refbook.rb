@@ -180,7 +180,7 @@ before do
   end
 
   # admins can use site even when it's locked
-  if not logged_in? or not session[:user]['admin']
+  if not admin?
     if @killed and !['/layout','/login','/logout','/release','/paid','/styles.css'].include? request.path_info
       redirect '/release'
     end
@@ -212,7 +212,7 @@ get '/admin' do
   @title = "Admin"
   if not logged_in?
     redirect '/login?d=/admin'
-  elsif not session[:user]['admin']
+  elsif not admin?
     flash[:issue] = "Admins only"
     redirect '/'
   else
@@ -582,7 +582,7 @@ def reviews
 end
 get '/reviews/:review_id' do
   @title = "Edit a Review"
-  if not logged_in? or not session[:user]['admin']
+  if not admin?
     # still using old bounce because there's no way someone is linking
     # right to this page. hopefully.
     flash[:issue] = "Admins only, kid"
