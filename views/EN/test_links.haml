@@ -10,8 +10,16 @@
         - if @attempts_remaining
           LINK
         - else
-          You haven't purchased any HR attempts (or are out). Buy some!
-          #{paypal_button}
+          You have 0 HR Written Attempts Remaining. 
+          %br
+          %br
+          This purchase entitles you to be field tested WHERE APPLICABLE. Because this requires travel by our hardworking RDT members, field testing is not always an option based on your location (or may take a long time). If you're not sure that you live in a place where a field test is possible, don't hesitate to 
+          #{email_link({text: 'contact us!'})}
+          %br
+          %br
+          You're welcome to take the HR written tests even if there's no hope for a field test this year, just note that you won't be a fully certified IRDP Head Referee until you pass a field test given by an authorized proctor.
+          .paypal
+            #{paypal_button}
       - elsif @good
         Here's the link to the 
         %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
@@ -24,8 +32,6 @@
         Give it another go at #{@try_unlocked.strftime(settings.time_string)}
         #{local_time(@try_unlocked,'Refdevelopment.com+Updated')}
 - else
-  Sorry, you've got to either be part of an affiliate league or have paid our $5 fee to take these tests! 
-
-  LINK TO PAYMENT PAGE
+  #{display(:help,false)}
         
       

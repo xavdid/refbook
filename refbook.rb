@@ -97,15 +97,23 @@ end
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
 def display(path = request.path_info[1..-1], layout = true)
-  # begin
+  if settings.development?
     if layout
       haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
     else
       haml "#{@lang}/#{path}".to_sym, layout: false
     end
-  # rescue
-    # redirect '/logout'
-  # end
+  else
+    begin
+      if layout
+        haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
+      else
+        haml "#{@lang}/#{path}".to_sym, layout: false
+      end
+    rescue
+      redirect '/logout'
+    end
+  end
 end
 
 # For whatever reason, we need the mail gem in it's own little function
@@ -136,7 +144,7 @@ def email_link(a={})
   if a.include? :text
     @text = a[:text]
   else
-    @text = 'refdevelopmentprogram@gmail.com'
+    @text = 'irdp.rdt@gmail.com'
   end
   haml :email_link
 end
@@ -150,7 +158,7 @@ end
 
 def paypal_button
   @id = session[:user]['objectId']
-  display(:paypal, false)
+  display(session[:user]['region'][0..1]+'_paypal', false)
 end
 
 not_found do
@@ -439,17 +447,30 @@ get '/off' do
   end
 end
 
+def pay
+end
+get '/pay' do
+  @title = 'Support the IRDP!'
+  display
+end
+
 def paid
 end
 # get ca$h get m0ney
 post '/paid' do
-  id = params[:custom].split('=')[1]
-  # puts 'params
+  id = params[:custom].split('&')[0].split('=')[1]
+  type = id = params[:custom].split('&')[1].split('=')[1]
   user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
-  puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid at #{Time.now}"
-  # FIX change this to however many attempts they get
-  user_to_update['hrWrittenAttemptsRemaining'] = 4
-  user_to_update.save
+  # puts params
+  if type == 'hr'
+    user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
+    puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid at #{Time.now}"
+    # FIX change this to however many attempts they get
+    user_to_update['hrWrittenAttemptsRemaining'] = 4
+    user_to_update.save
+  elsif type == 'ac'
+    user_to_update['paid'] = true
+  end
   return {status: 200, message: "ok"}.to_json
 end
 
