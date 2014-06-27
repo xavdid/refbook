@@ -754,9 +754,9 @@ get '/testing/:which' do
   @attempts_remaining = true
   @tests = {ass: "afd51c7d951f264b", snitch: "ykg51c7e006504d2", head: "x", sample: "xnj533d065451038"}
   
+  # refresh user object
   if params[:which] == 'head'
     session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
-    puts 'refreshed user object'
     if session[:user]['hrWrittenAttemptsRemaining'] <= 0
       @attempts_remaining = false
     end
