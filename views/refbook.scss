@@ -246,6 +246,8 @@ html, body {
         float: right;
     }
 
+
+
     .form_box {
         padding-left: 30px;
         padding-right: 30px;
@@ -281,6 +283,10 @@ html, body {
                 outline: none;
             }
         }
+    }
+
+    .big {
+        width: 650px;
     }
 
     .paypal {
@@ -321,6 +327,14 @@ html, body {
         color: #000;
         text-decoration: none;
         font-weight: bold;
+    }
+
+    .table-background {
+        background-color: darkgray;
+        td {
+            padding: 8px;
+            background-color: white;
+        }
     }
 
     .table_box {
