@@ -104,15 +104,15 @@ def display(path = request.path_info[1..-1], layout = true)
       haml "#{@lang}/#{path}".to_sym, layout: false
     end
   else
-    begin
+    # begin
       if layout
         haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
       else
         haml "#{@lang}/#{path}".to_sym, layout: false
       end
-    rescue
-      redirect '/logout'
-    end
+    # rescue
+      # redirect '/logout'
+    # end
   end
 end
 
