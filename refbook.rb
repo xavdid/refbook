@@ -15,7 +15,7 @@ configure do
   enable :sessions
   
   set :session_secret, 'this_is_secret'
-  set :region_hash, {"Quiddtich UK" => "QUKX","US Pacific Northwest" => "USPN","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {"QuiddtichUK" => "QUKX","US Pacific Northwest" => "USPN","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
   set :region_names, settings.region_hash.keys[0..-3].sort
   set :region_codes, settings.region_hash.values[0..-3].sort
   # TIME BETWEEN ATTEMPTS
@@ -155,6 +155,17 @@ def email_results(email, pass, test)
     subject 'Referee Test Results'
     html_part do
       body "Hey there!<br><br>The IRDP has received and recorded your results. You can see your #{pass ? 'other testing opporunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
+    end
+  end
+end
+
+def register_purchase(text)
+  mail = Mail.deliver do 
+    to "trigger@ifttt.com"
+    from 'beamneocube@gmail.com'
+    subject text
+    html_part do 
+      body "asdf"
     end
   end
 end
@@ -516,6 +527,7 @@ post '/paid' do
   else
     halt 500
   end
+  register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type}")
   return {status: 200, message: "ok"}.to_json
 end
 
