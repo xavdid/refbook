@@ -450,7 +450,12 @@ end
 def pay
 end
 get '/pay' do
+  if not logged_in?
+    flash[:issue] = "Purchasing access requires an account"
+    redirect '/login?d=/pay'
+  end
   @title = 'Support the IRDP!'
+  @id = session[:user]['objectId']
   display
 end
 
@@ -518,6 +523,15 @@ get '/profile/:ref_id' do
 
     display :public_profile
   end
+end
+
+def refresh
+end
+
+get '/refresh' do 
+  session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+  flash[:issue] = 'Payment confirmed. Thank you!'
+  redirect '/'
 end
 
 def reset
