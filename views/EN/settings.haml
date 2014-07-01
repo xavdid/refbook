@@ -7,6 +7,33 @@
         Registration Code
       %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
       %input.button{type: "submit", value: "Register!"}
+- if session[:user]['region'] == 'AUST'
+  %p
+    Australians! Because you're in the middle of your season, you've got the special (temporary) opportunity to mark yourself as having passed your tests. 
+    %b
+      NOTE
+    only check these boxes if you've actually passed the corresponding test. Falsifying information will result in penalties and a possible ban from IRDP certificaiton.
+  .form_box
+    %form{name: 'tests', action: 'settings', method: 'post'}
+      %label{for: "ar"}
+        Certified Assistant Referee
+      %input{type: "checkbox", name: "ar", id: "ar"}
+
+      %label{for: "sr"}
+        Certified Snitch Referee
+      %input{type: "checkbox", name: "sr", id: "sr"}
+
+      %label{for: "hr"}
+        Passed Head Referee Written Teset
+      %input{type: "checkbox", name: "hr", id: "hr"}
+
+      %label{for: "ft"}
+        Passed Head Referee Field Test
+      %input{type: "checkbox", name: "ft", id: "ft"}
+      %input{type: "hidden", name:"tests", value: "yep"}
+      
+      %input.button{type: "submit", value: "Save Tests"}
+
 
 %p
   You can update your email (at which teams/TD's will contact you) here. If you need to change your region/team affiliation, contact
@@ -20,14 +47,14 @@
       Email
     %input{type: "email", name: "username", placeholder:"email", id: "email"}
 
-    %label{for: "lang"}
-      Language
-    %select{name: "lang", id: "lang"}
-      / these langauges are hardcoded, so update when you add a new lang
-      %option{value: "EN"}
-        English
-      %option{value: "FR"}
-        Français
+    -# %label{for: "lang"}
+      -# Language
+    -# %select{name: "lang", id: "lang"}
+    -#   / these langauges are hardcoded, so update when you add a new lang
+    -#   %option{value: "EN"}
+    -#     English
+    -#   %option{value: "FR"}
+    -#     Français
 
     %input.button{type: "submit", value: "Update User"}
 
@@ -55,6 +82,11 @@
 
   $('#email').val("#{session[:user]['username']}");
   $('#lang').val("#{session[:user]['lang']}");
+
+  $('#ar').prop('checked',#{session[:user]['assRef'] ? 'true' : 'false' });
+  $('#sr').prop('checked',#{session[:user]['snitchRef'] ? 'true' : 'false' });
+  $('#hr').prop('checked',#{session[:user]['headRef'] ? 'true' : 'false' });
+  $('#ft').prop('checked',#{session[:user]['passedFieldTest'] ? 'true' : 'false' });
 
   function validate(){
     var f = $("#fileBox")[0].files[0];

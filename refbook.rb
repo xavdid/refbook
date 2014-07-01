@@ -184,7 +184,7 @@ end
 
 def paypal_button
   @id = session[:user]['objectId']
-  if ['region'][0..1] == 'AU'
+  if session[:user]['region'] == 'AUST'
     display('AU_paypal', false)
   else
     display('US_paypal', false)
@@ -741,20 +741,44 @@ def settings
 end
 get '/settings' do 
   @title = "Settings"
+  @reg = session[:user]['region']
   display
 end
 
 post '/settings' do  
   begin
-    session[:user]['email'] = params[:username]
-    session[:user]['username'] = params[:username]
-    session[:user]['lang'] = params[:lang]
+    if params.include? 'tests'
+      if params.include? 'ar'
+        session[:user]['assRef'] = true 
+      else
+        session[:user]['assRef'] = false
+      end
+      if params.include? 'sr'
+        session[:user]['snitchRef'] = true 
+      else
+        session[:user]['snitchRef'] = false
+      end
+      if params.include? 'hr'
+        session[:user]['headRef'] = true 
+      else
+        session[:user]['headRef'] = false
+      end
+      if params.include? 'ft'
+        session[:user]['passedFieldTest'] = true 
+      else
+        session[:user]['passedFieldTest'] = false
+      end
+    else
+      session[:user]['email'] = params[:username]
+      session[:user]['username'] = params[:username]
+      # session[:user]['lang'] = params[:lang]
+    end
     session[:user] = session[:user].save
     flash[:issue] = "Settings sucessfully updated!"
     redirect '/'
   rescue
     session[:user] = Parse::Query.new("_User").eq("objectId",session[:user]['objectId']).get.first
-    flash[:issue] = "There was an error (possibly because that email is improperly formatted or already in use by another user). Try again, then contact the administrator."
+    flash[:issue] = "There was an error (possibly because that email is improperly formatted or already in use by another user). Try again, then contact the administrator if the problem persists."
     redirect '/settings'
   end
 end
