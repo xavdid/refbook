@@ -162,6 +162,7 @@ def paypal_button
     display('AU_paypal', false)
   else
     display('US_paypal', false)
+  end
 end
 
 not_found do
