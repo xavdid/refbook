@@ -463,18 +463,23 @@ def paid
 end
 # get ca$h get m0ney
 post '/paid' do
-  id = params[:custom].split('&')[0].split('=')[1]
-  type = id = params[:custom].split('&')[1].split('=')[1]
+  puts 'params!',params,params['custom']
+
+  id = params["custom"].split('|')[0].split('=')[1]
+  type = params["custom"].split('|')[1].split('=')[1]
+  puts 'id',id,'type',type
   user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
   # puts params
   if type == 'hr'
     user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
-    puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid at #{Time.now}"
+    puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
     # FIX change this to however many attempts they get
     user_to_update['hrWrittenAttemptsRemaining'] = 4
     user_to_update.save
   elsif type == 'ac'
+    puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
     user_to_update['paid'] = true
+    user_to_update.save
   else
     halt 500
   end
