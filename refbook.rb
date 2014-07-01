@@ -158,7 +158,10 @@ end
 
 def paypal_button
   @id = session[:user]['objectId']
-  display(session[:user]['region'][0..1]+'_paypal', false)
+  if ['region'][0..1] == 'AU'
+    display('AU_paypal', false)
+  else
+    display('US_paypal', false)
 end
 
 not_found do
