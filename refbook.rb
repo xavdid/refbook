@@ -521,13 +521,13 @@ post '/paid' do
     user_to_update['hrWrittenAttemptsRemaining'] = 4
     user_to_update.save
   elsif type == 'ac'
-    puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
+    # puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
     user_to_update['paid'] = true
     user_to_update.save
   else
     halt 500
   end
-  register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type}")
+  register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']}")
   return {status: 200, message: "ok"}.to_json
 end
 
