@@ -1,5 +1,5 @@
 %p
-  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. All information is required.
+  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. All information besides registration code is required.
 
 .form_box
   %form{name: "create", action: "create", method: "post", onsubmit: "return validate();"}
@@ -30,6 +30,10 @@
     %label{for: "region"}
       Region
     %select{name: "region", id: "region"}
+
+    %label{for: "code"}
+      Registration Code (optional)
+    %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
 
     %label{for: "agreement"}
       I agree that I've read the 

@@ -9,19 +9,25 @@ require 'time'
 require 'mail'
 require 'rack-google-analytics'
 require 'uri'
+require 'mongo'
 
 configure do
   enable :sessions
   
   set :session_secret, 'this_is_secret'
-  set :region_hash, {"US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {"UK Quiddtich" => "QUKX","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
   set :region_names, settings.region_hash.keys[0..-3].sort
   set :region_codes, settings.region_hash.values[0..-3].sort
-  set :waiting, 3000
+  # TIME BETWEEN ATTEMPTS
+  # 604800 sec = 1 week
+  set :waiting, 604800
   set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
   set :updated_at, Time.now.utc
   set :time_string, '%b %e, %l:%M%P'
   set :wc_string, '%Y%m%dT%H%M'
+
+  set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
+  set :coll, settings.conn.db('kinect')['refbook_keys']
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
@@ -83,6 +89,30 @@ def to_bool(str)
   str.downcase == 'true' || str == '1'
 end
 
+def validate(key, region)
+  begin
+    puts 'validating'
+    keys = settings.coll.find_one
+
+    #re-format just in case
+    key.gsub!('-','')
+    key.insert(9,'-')
+    key.insert(6,'-')
+    key.insert(4,'-')
+
+
+    if keys[region].include? key
+      keys[region].delete key
+      settings.coll.save(keys)
+      return true
+    else
+      return false
+    end
+  rescue
+    return false
+  end
+end
+
 # IMPORTANT
 # renders the view and layout in the correct language
 # views are in the following setup:
@@ -118,17 +148,13 @@ end
 
 # For whatever reason, we need the mail gem in it's own little function
 # this is just for test results, could add other message stuff
-def email_results(email, pass, score, unlock)
+def email_results(email, pass, test)
   mail = Mail.deliver do
     to email
-    from 'IRDP <beamneocube@gmail.com>'
+    from 'IRDP <irdp.rdt@gmail.com>'
     subject 'Referee Test Results'
-    text_part do
-      if pass
-        body "You passed with a score of #{score}! Why don't you give the snitch test a go?\n\nHope to hear from you soon!"
-      else
-        body "Unfortunately, you didn't pass the test (you got a score of #{score}). Take a week to think about the test and give it another go at #{unlock} (US Eastern Time)."
-      end
+    html_part do
+      body "Hey there!<br><br>The IRDP has received and recorded your results. You can see your #{pass ? 'other testing opporunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
     end
   end
 end
@@ -314,7 +340,7 @@ get '/cm' do
     @unlock = (Time.parse(att['time']) + settings.waiting).strftime('%b %e,%l:%M %p')
     flash[:issue] = "You were unsuccessful in your attempt. Try again soon!"
   end
-  email_results(@email, pass, @score, @unlock) if not settings.development?
+  email_results(@email, pass, params[:cm_return_test_type]) #if not settings.development?
   redirect '/' if pass
   redirect "/testing/#{params[:cm_return_test_type]}"
 end
@@ -331,7 +357,7 @@ end
 def create
 end
 get '/create' do
-  @title = "Create an account!"
+  @title = "Create an Account!"
   @team_list = []
   teams = Parse::Query.new("_User").tap do |team|
     team.exists("team")
@@ -356,20 +382,20 @@ post '/create' do
     :hrWrittenAttemptsRemaining => 0,
     :passedFieldTest => false,
     :admin => false,
-    :paid => false,
+    :paid => validate(params[:code],settings.region_hash[params[:region]]),
     :lang => params[:lang] || 'EN',
     :firstName => params[:fn].capitalize,
     :lastName => params[:ln].capitalize,
-    # the regex titlecases
-    :team => params[:team].split(/(\W)/).map(&:capitalize).join,
+    :team => params[:team],
     # because of dropdown, there shouldn't ever be no region, but this is 
     # just in case. Region errors really break stuff.
     :region => settings.region_hash[params[:region]] || "NONE"
   })
 
+
   begin
     session[:user] = user.save
-    flash[:issue] = "Account creation successful"
+    flash[:issue] = "Account creation successful - #{session[:user]['paid'] ? '' : 'non'}paid version"
     redirect '/'
   rescue
     # usually only fails for invalid email, but it could be other stuff
@@ -457,8 +483,11 @@ get '/pay' do
   if not logged_in?
     flash[:issue] = "Purchasing access requires an account"
     redirect '/login?d=/pay'
+  elsif paid?
+    flash[:issue] = 'You\'ve already paid, don\'t worry about paying again!'
+    redirect back
   end
-  @title = 'Support the IRDP!'
+  @title = 'Purchase an IRDP Membership!'
   @id = session[:user]['objectId']
   display
 end
@@ -768,13 +797,20 @@ get '/testing/:which' do
 
   @good = true
   @attempts_remaining = true
-  @tests = {ass: "afd51c7d951f264b", snitch: "ykg51c7e006504d2", head: "x", sample: "xnj533d065451038"}
+  @prereqs_passed = true
+
+  @tests = {ass: 'ap953ab5d46d258b', snitch: "yqc53ab5e83e8128", head: "6b953ab5f5bbd1c4", sample: "xnj533d065451038"}
   
   # refresh user object
   if params[:which] == 'head'
     session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+
     if session[:user]['hrWrittenAttemptsRemaining'] <= 0
       @attempts_remaining = false
+    end
+
+    if not session[:user]['assRef'] or not session[:user]['snitchRef']
+      @prereqs_passed = false
     end
   end
 
@@ -788,8 +824,7 @@ get '/testing/:which' do
     if not att.empty?
       # they've taken this test sometime
       att = att.first
-      # TIME BETWEEN ATTEMPTS
-      # 604800 sec = 1 week
+      
       if Time.now.utc - Time.parse(att['time']) < settings.waiting
         @good = false
         @try_unlocked = Time.parse(att['time']) + settings.waiting
@@ -816,6 +851,21 @@ post '/upload' do
   session[:user]['profPic'] = photo.url
   session[:user] = session[:user].save
   redirect '/profile'
+end
+
+def valid
+end
+get '/validate' do 
+  if validate(params[:code],session[:user]['region'])
+    user_to_update = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+    user_to_update['paid'] = true
+    session[:user] = user_to_update.save
+    flash[:issue] = 'Registration Successful'
+    redirect '/'
+  else
+    flash[:issue] = 'Invalid or already used code'
+    redirect '/settings'
+  end
 end
 
 # renders css

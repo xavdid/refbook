@@ -1,3 +1,13 @@
+- if not paid?
+  %p
+    You're an unpaid member! Do you have a registration code that you got from your regional director or officials manager? If so, enter it here to upgrade.
+  .form_box
+    %form{name: "validate", action: "validate", method: "get"}
+      %label{for: "code"}
+        Registration Code
+      %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
+      %input.button{type: "submit", value: "Register!"}
+
 %p
   You can update your email (at which teams/TD's will contact you) here. If you need to change your region/team affiliation, contact
   %a{href: "mailto: david@relateiq.com"}<

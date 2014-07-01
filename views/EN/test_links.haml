@@ -25,7 +25,9 @@
     - if session[:user][params[:which]+"Ref"]
       You've already passed the #{@names[params[:which].to_sym]} referee test. Congrats!
     - else
-      - if not @attempts_remaining
+      - if not @prereqs_passed
+        It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.
+      - elsif not @attempts_remaining
         You have 0 HR Written Attempts Remaining. 
         %br
         %br
