@@ -30,6 +30,9 @@ For referees to improve, it's important that they're given feedback on how they 
 
 Our new review system is simple (10 questions including name and stuff!) and easy to access (top level link: refdevelopment.com/review). Furthermore, we as administrators are able to directly send the productive reviews to the ref's account on our site. This way, we will hopefully be able to track a marked improvement in skill development over time.
 
+### Central Payments & Registration
+Instead of having to pay through another site or worry about waiting for a human to process your testing payment, all payments are done in local currency through paypal. Paypal takes care of the database, so changes are always reflected immediately and without hassle. 
+
 ### Internationality
 Because the IRDP is a global organization, being able to easily display translated versions of all our pages was an important goal. 
 
