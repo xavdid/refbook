@@ -1,37 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Refbook : the IRDP central site" />
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <title>Refbook</title>
+  <meta name="description" content="the IRDP central site">
 
-    <title>Refbook</title>
-  </head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <body>
+</head>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Xavdidtheshadow/refbook">View on GitHub</a>
+<body>
 
-          <h1 id="project_title">Refbook</h1>
-          <h2 id="project_tagline">the IRDP central site</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Xavdidtheshadow/refbook/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Xavdidtheshadow/refbook/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Refbook</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">the IRDP central site</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/Xavdidtheshadow/refbook/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/Xavdidtheshadow/refbook/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/Xavdidtheshadow/refbook" class="code">View Refbook on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
 <a name="refbook" class="anchor" href="#refbook"><span class="octicon octicon-link"></span></a>Refbook</h1>
 
 <p>This is the informational and functional hub of the <a href="http://refdevelopment.com">International Referee Development Program</a>, an independant quidditch referee certification and standards body. </p>
@@ -52,7 +57,7 @@
 
 <p>In the past, users signed up for the AR and SR tests through a google doc which had a link to the CM page. Upon completion, CM would tell them what they got wrong and it would periodically update our database (which was a gsheet). The HR test required payment, so upon submitting money through paypal, hopefuls had to wait for one of us to send them an email with their unique test link. We were usually pretty fast about it, but vacations and emergencies happen, so there tended to be delays of up to 48 hours. </p>
 
-<p>Given these shortcomings, I wanted to accomplish a few specific goals with the new system: </p>
+<p>Given these shortcomings, the IRDP wanted to accomplish a few specific goals with the new system: </p>
 
 <ul>
 <li>Never force an applicant wait to take their test</li>
@@ -65,7 +70,7 @@
 <a name="referee-directory" class="anchor" href="#referee-directory"><span class="octicon octicon-link"></span></a><a href="http://refdevelopment.com/search/ALL">Referee Directory</a>
 </h3>
 
-<p>One of the challenges when planning a tournament is ref coordination. Part of the issue is knowing which of the 150 people showing up to your tournament are ref certified (and in what capacity) and in what capacity. In the past, TD's have posted referee signup forms on their event page in the hopes that refs reveal themselves for easy contact. </p>
+<p>One of the challenges when planning a tournament is ref coordination. Part of the issue is knowing which of the 150 people showing up to your tournament are ref certified and in what capacity. In the past, TD's have posted referee signup forms on their event page in the hopes that refs reveal themselves for easy contact. </p>
 
 <p>Instead, what if the TD could easy glance at their region and see a full, sortable list of certified refs in their region (and their contact info). That's exactly what we've done with our ref directory. Because certification happens within our system, it's easy to show a sanitized view of our database for public consumption. </p>
 
@@ -76,6 +81,11 @@
 <p>For referees to improve, it's important that they're given feedback on how they did during a game. While the IQA has had a reviews system, it was always hard to find (despite now many bit.ly's we had) and required a lot of typing. RDT also wasn't great at passing on review information to the refs, so the overall experience really never helped referees improve. </p>
 
 <p>Our new review system is simple (10 questions including name and stuff!) and easy to access (top level link: refdevelopment.com/review). Furthermore, we as administrators are able to directly send the productive reviews to the ref's account on our site. This way, we will hopefully be able to track a marked improvement in skill development over time.</p>
+
+<h3>
+<a name="central-payments--registration" class="anchor" href="#central-payments--registration"><span class="octicon octicon-link"></span></a>Central Payments &amp; Registration</h3>
+
+<p>Instead of having to pay through another site or worry about waiting for a human to process your testing payment, all payments are done in local currency through paypal. Paypal takes care of the database, so changes are always reflected immediately and without hassle. </p>
 
 <h3>
 <a name="internationality" class="anchor" href="#internationality"><span class="octicon octicon-link"></span></a>Internationality</h3>
@@ -113,18 +123,36 @@ haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
 <li>
 <strong>IQA</strong>: International Quidditch Association, the worldwide quidditch governing body. <strong>Note:</strong> the organization known as the IQA until July 2014 rebranded into <strong>USQ</strong> to continue their work as a US centric organization. At that time, a new IQA was formed. </li>
 </ul>
-      </section>
+        </article>
+      </div>
     </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/Xavdidtheshadow" class="avatar"><img src="https://avatars0.githubusercontent.com/u/1231935?s=60" width="48" height="48"/></a> <a href="https://github.com/Xavdidtheshadow">Xavdidtheshadow</a> maintains <a href="https://github.com/Xavdidtheshadow/refbook">Refbook</a></p>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Refbook maintained by <a href="https://github.com/Xavdidtheshadow">Xavdidtheshadow</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
 
-    
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/Xavdidtheshadow/refbook/tarball/master" class="tar">tar</a><a href="https://github.com/Xavdidtheshadow/refbook/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
 
-  </body>
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-42341849-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+</body>
 </html>
