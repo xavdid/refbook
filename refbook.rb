@@ -470,6 +470,8 @@ post '/paid' do
     user_to_update.save
   elsif type == 'ac'
     user_to_update['paid'] = true
+  else
+    halt, 500
   end
   return {status: 200, message: "ok"}.to_json
 end
@@ -710,15 +712,6 @@ end
 get '/testing' do
   @title = "Testing Information Center"
   @section = 'testing'
-  # right now, which can be anything. Nbd?
-  # tests table (probably needed) will have the following rows:
-  #   taker: (objectId of test taker)
-  #   type: ass|head|snitch
-  #   score: int
-  #   percentage: int
-  #   duration?: h-m-s (can probably convert to second/Time value
-  #   ^ mostly for interesting stat purposes
-  #   time: Time.now.to_s
 
   #   find all test attempts from that user id, find the (single) type attempt, 
   #   then, update it with most recent attempt (and Time.now) for comparison.
