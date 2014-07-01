@@ -471,7 +471,7 @@ post '/paid' do
   elsif type == 'ac'
     user_to_update['paid'] = true
   else
-    halt, 500
+    halt 500
   end
   return {status: 200, message: "ok"}.to_json
 end
@@ -722,10 +722,10 @@ get '/testing' do
 end
 
 get '/testing/:which' do
-  if not settings.development?
-    flash[:issue] = "Testing is disabled right now"
-    redirect '/'
-  end
+  # if not settings.development?
+  #   flash[:issue] = "Testing is disabled right now"
+  #   redirect '/'
+  # end
 
   @names = {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
   @title = "#{@names[params[:which].to_sym]} Referee Test"
