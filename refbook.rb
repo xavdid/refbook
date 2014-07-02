@@ -515,18 +515,16 @@ post '/paid' do
   user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
   # puts params
   if type == 'hr'
-    user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
-    puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
+    # puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
     # FIX change this to however many attempts they get
     user_to_update['hrWrittenAttemptsRemaining'] = 4
-    user_to_update.save
   elsif type == 'ac'
     # puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
     user_to_update['paid'] = true
-    user_to_update.save
   else
     halt 500
   end
+  user_to_update.save
   register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']}")
   return {status: 200, message: "ok"}.to_json
 end
@@ -577,10 +575,11 @@ end
 
 def refresh
 end
-
-get '/refresh' do 
+get '/refresh' do
+  # just to make sure we beat the paypal note
+  sleep(1.5) 
   session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
-  flash[:issue] = 'Payment confirmed. Thank you!'
+  flash[:issue] = 'Payment confirmed. Thank you! You may need to logout and back in to register the upgrade.'
   redirect '/'
 end
 
@@ -800,30 +799,30 @@ end
 get '/testing' do
   @title = "Testing Information Center"
   @section = 'testing'
-
-  #   find all test attempts from that user id, find the (single) type attempt, 
-  #   then, update it with most recent attempt (and Time.now) for comparison.
-  #   If they pass, display the link for the relevant test(s). When they finish, 
-  #   update the relevent test entry wtih the most recent test
-
   display
 end
 
 get '/testing/:which' do
-  # if not settings.development?
-  #   flash[:issue] = "Testing is disabled right now"
-  #   redirect '/'
-  # end
+   #   find all test attempts from that user id, find the (single) type attempt, 
+  #   then, update it with most recent attempt (and Time.now) for comparison.
+  #   If they pass, display the link for the relevant test(s). When they finish, 
+  #   update the relevent test entry wtih the most recent test
 
-  @names = {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
-  @title = "#{@names[params[:which].to_sym]} Referee Test"
-  @section = 'testing'
-  # right now, which can be anything. Nbd?
   if not logged_in?
     flash[:issue] = "Must log in to test"
     redirect "/login?d=/testing/#{params[:which]}"
   end
 
+  if not session[:user]['region'] == "AUST"
+    flash[:issue] = "Testing is disabled before Rulebook 8 comes out."
+    redirect '/'
+  end
+
+  @names = {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
+  @title = "#{@names[params[:which].to_sym]} Referee Test"
+  @section = 'testing'
+  # right now, which can be anything. Nbd?
+  
   if !["head", "snitch", "ass", "sample"].include? params[:which]
     halt 404
   end
