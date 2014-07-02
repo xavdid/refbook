@@ -146,6 +146,8 @@ def display(path = request.path_info[1..-1], layout = true)
   end
 end
 
+# EMAIL FUNCTIONS #
+
 # For whatever reason, we need the mail gem in it's own little function
 # this is just for test results, could add other message stuff
 def email_results(email, pass, test)
@@ -166,6 +168,17 @@ def register_purchase(text)
     subject text
     html_part do 
       body "asdf"
+    end
+  end
+end
+
+def notify_of_review(reviewee)
+  mail = Mail.deliver do 
+    to reviewee
+    from 'IRDP <irdp.rdt@gmail.com>'
+    subject "You've been reviewed!"
+    html_part do 
+      body "Hey there!<br><br>Someone has written a review about you and it's been approved (or recently edited) by an IRDP RDT member. Head over to your <a href=\"http://refdevelopment.com/profile\">profile</a> to read it!<br><br>~the IRDP<br><br>"
     end
   end
 end
@@ -649,8 +662,8 @@ post '/review' do
   rev['rating'] = params[:rating]
   rev['comments'] = params[:comments]
   # show should be false by default, true for testing
-  rev['show'] = true
-  rev['now'] = Time.now.utc.strftime('%b %e,%l:%M %p')
+  rev['show'] = false
+  rev['now'] = Time.now.utc.strftime(settings.time_string)
   rev.save
 
   flash[:issue] = "Thanks for your review!"
@@ -686,11 +699,16 @@ end
 
 post '/reviews/:review_id' do
   r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
-
+  reviewee = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first['email']
   r['show'] = to_bool(params[:show])
   r['comments'] = params[:comments]
+
+  notify_of_review(reviewee) if r['show']
+  
   r.save
 
+  
+  
   flash[:issue] = "Review saved, it will #{r['show'] ? "" : "not"} be shown"
   redirect '/admin'
 end
