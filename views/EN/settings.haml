@@ -2,7 +2,7 @@
   %p
     You're an unpaid member! Do you have a registration code that you got from your regional director or officials manager? If so, enter it here to upgrade.
   .form_box
-    %form{name: "validate", action: "validate", method: "get"}
+    %form{name: "validate", action: "/validate", method: "get"}
       %label{for: "code"}
         Registration Code
       %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
@@ -42,7 +42,7 @@
   with all necessary information.
 
 .form_box
-  %form{name: "settings", action: "settings", method: "post"}
+  %form{name: "settings", action: "/settings", method: "post"}
     %label{for: "email"}
       Email
     %input{type: "email", name: "username", placeholder:"email", id: "email"}
@@ -65,7 +65,7 @@
   site to easily crop and edit your photo. Make sure it's a solo picture of you where your face is clear, un-obstructed, and facing forward. Preferably it's just of the shoulders and up.
 
 .form_box
-  %form{id: "profPic", method: "post", enctype: "multipart/form-data", action: "upload", onsubmit: "return validate();"}
+  %form{id: "profPic", method: "post", enctype: "multipart/form-data", action: "/upload", onsubmit: "return validate();"}
     %label{for: "myfile"}
       Image (max file size 5MB)
     %input{type: "file", name: "myfile", id: "fileBox"}   

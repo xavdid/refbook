@@ -5,4 +5,8 @@
 
 %p
   %a{href: "mailto: #{@ref['username']}"}
-    Email #{@ref['firstName']}
+    Send an email to #{@ref['firstName']}
+
+%p
+  %a{href: "/review/#{@ref['objectId']}"}
+    Write a review for #{@ref['firstName']}

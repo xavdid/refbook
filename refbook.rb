@@ -643,6 +643,19 @@ get '/review' do
   display
 end
 
+get '/review/:id' do 
+  @ref = Parse::Query.new("_User").eq("objectId", params[:id]).get.first
+  halt 404 if @ref.nil?
+
+  @url = @ref['profPic'] ? 
+      @ref['profPic'] : '/images/person_blank.png'
+
+  @title = "Review #{@ref['firstName']} #{@ref['lastName']}"
+  @region_keys = settings.region_names
+  @refs = {}
+  display :review
+end
+
 post '/review' do 
   rev = Parse::Object.new('review')
   rev['reviewerName'] = params[:name]
