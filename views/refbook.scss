@@ -74,9 +74,25 @@ html, body {
         color: $red;
     }
 
-    span.ex {
-        color: red; 
-        font-weight: bold;
+    // span.ex {
+        // color: red; 
+        // font-weight: bold;
+    // }
+
+    .danger {
+        color: red;
+    }
+
+    .warning {
+        color: yellow;
+    }
+
+    .ok {
+        color: blue;
+    }
+
+    .go {
+        color: green;
     }
 
     .hang {

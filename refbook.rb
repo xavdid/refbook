@@ -23,7 +23,7 @@ configure do
   set :waiting, 604800
   set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
   set :updated_at, Time.now.utc
-  set :time_string, '%b %e, %l:%M%P'
+  set :time_string, '%e %B, %l:%M%P'
   set :wc_string, '%Y%m%dT%H%M'
 
   set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
@@ -630,6 +630,7 @@ get '/review' do
 
 
   q.each do |person|
+    # you can only review if they've got some sort of cert
     if person["assRef"] or person["snitchRef"]
       # [id, fN + lN]
       p = [person['objectId'], name_maker(person)]

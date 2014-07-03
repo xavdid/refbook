@@ -1,7 +1,6 @@
 - if not session[:user]['profPic']
   %p
-    %span.ex
-      !
+    %i.fa.fa-exclamation-circle.danger
     It looks like you haven't uploaded a profile pic yet! Do so on your 
     %a{href: "/settings"}<
       settings
@@ -19,8 +18,7 @@
   - else
     %br
     %br
-    %span.ex
-      !
+    %i.fa.fa-exclamation-circle.danger
     Encourage people to review you!
 
 %img#prof_pic{src: "#{@url}", width: 300}
