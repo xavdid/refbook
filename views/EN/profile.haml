@@ -1,3 +1,5 @@
+%img#prof_pic{src: "#{@url}", width: 300}
+
 - if not session[:user]['profPic']
   %p
     %i.fa.fa-exclamation-circle.danger
@@ -9,10 +11,26 @@
 %p
   %a{href: "/profile/#{session[:user]['objectId']}"}<
     This
-  is your public profile.
+  is your public 
+  %strong
+    profile.
 
 %p
-  You've got #{@total} review#{@total == 1 ? '' : 's'}. 
+  %a{href: "/qr", target: "_blank"}<
+    This
+  is your 
+  %strong
+    QR code 
+  that directs people to your personal review page. Feel free to save it to your phone for easy access. You can also bookmark 
+  %a{href: "/review/#{session[:user]['objectId']}"}<
+    that page 
+  if you want to share it digitally.
+
+%p
+  You've got 
+  %strong
+    #{@total} 
+  review#{@total == 1 ? '' : 's'}. 
   - if @total > 0
     #{@total == 1 ? "It's" : "They're"} listed below.
   - else
@@ -20,9 +38,6 @@
     %br
     %i.fa.fa-exclamation-circle.danger
     Encourage people to review you!
-
-%img#prof_pic{src: "#{@url}", width: 300}
-
 
 - if @total > 0
   %table.skinny#theTable

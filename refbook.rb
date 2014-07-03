@@ -10,6 +10,7 @@ require 'mail'
 require 'rack-google-analytics'
 require 'uri'
 require 'mongo'
+require 'open-uri'
 
 configure do
   enable :sessions
@@ -568,7 +569,6 @@ get '/profile' do
 
     @url = session[:user]['profPic'] ? 
       session[:user]['profPic'] : '/images/person_blank.png'
-
     display
   end
 end
@@ -584,6 +584,14 @@ get '/profile/:ref_id' do
 
     display :public_profile
   end
+end
+
+def qr
+end
+get '/qr' do
+  u = "http://refdevelopment.com/review/#{session[:user]['objectId']}"
+  @review_qr = "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=#{URI::encode(u)}"
+  display(:qr, false)
 end
 
 def refresh
