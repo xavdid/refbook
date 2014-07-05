@@ -6,6 +6,9 @@
 %hr
 
 %ul.regions#regions
+- if @us
+  %ul.regions#sub-regions
+
 - if @refs.length > 0
   %ul.regions
     %li
@@ -16,8 +19,10 @@
     %li
       %a.head{href: '#'}<
         Show Only IRDP Certified Head Refs
+
   %i.fa.fa-exclamation-circle.go
   Tip - Hold the SHIFT key to sort by multiple columns!
+
   .table_box
     %table#theTable
       %thead
@@ -45,10 +50,13 @@
     Womp womp, this region has no certified refs yet!
 
 :javascript
+  // I apologize for the following code
   var refs = #{@refs};
   var region_keys = #{@region_keys};
   var region_values = #{@region_values};
-  var odd = false;
+  var us_region_keys = #{@us_region_keys};
+  var us_region_values = #{@us_region_values}
+
   $("#theTable tbody").empty();
 
   // fill region list
@@ -65,7 +73,22 @@
   };
   $('#regions').append("<li> | </li><li><a id=\"USQ\" href=\"/search/USQ\">USQ</a></li>");
 
+  if(#{@us}) {
+    $('#sub-regions').append("<li><a id=\"aUSQ\" href=\"/search/USQ\">All</a></li>");
+    for (var i = 0; i < us_region_keys.length; i++) {
+      var s = "<li> | </li>";
+      $("#sub-regions").append(s);
+      s = [
+        "<li><a id=\""+us_region_values[i]+"\" href=\"/search/"+us_region_values[i],"\">",
+        us_region_keys[i]+"</a></li>"
+      ].join(' ');
+      $("#sub-regions").append(s);
+    };
+  }
+
+  // probably something about always active USQ on subregion
   $("##{@reg}").addClass("active");
+  if ("#{@reg}" == "USQ") {$("#aUSQ").addClass("active");}
 
   // fill ref table
   for (var i = 0; i < refs.length; i++) {
@@ -104,7 +127,7 @@
       };
 
       r += "</tr>";
-    odd = !odd;  
+    
     $("#theTable tbody").append(r);
   };
   

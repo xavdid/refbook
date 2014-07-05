@@ -755,11 +755,19 @@ get '/search/:region' do
   @section = 'search'
 
   @reg = params[:region].upcase
+  @us = @reg[0..1] == 'US'
   @region_title = reg_reverse(@reg)
   
   @region_values = settings.region_codes.reject{|p| p[0..1] == "US"}
   @region_keys = []
   @region_values.each{|r| @region_keys << reg_reverse(r)}
+
+  @us_region_values = settings.region_codes.select{|p| p[0..1] == "US"}
+  @us_region_keys = []
+  @us_region_values.each do |r| 
+    r = reg_reverse(r)
+    @us_region_keys << r[2..r.size] 
+  end
 
   pp @region_values
   pp @region_keys
