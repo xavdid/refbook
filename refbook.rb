@@ -539,19 +539,14 @@ def paid
 end
 # get ca$h get m0ney
 post '/paid' do
-  puts 'params!',params,params['custom']
-
   id = params["custom"].split('|')[0].split('=')[1]
   type = params["custom"].split('|')[1].split('=')[1]
-  puts 'id',id,'type',type
+  
   user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
   # puts params
   if type == 'hr'
-    # puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
-    # FIX change this to however many attempts they get
     user_to_update['hrWrittenAttemptsRemaining'] = 4
   elsif type == 'ac'
-    # puts "#{user_to_update['firstName']} #{user_to_update['lastName']} paid for #{type} at #{Time.now}"
     user_to_update['paid'] = true
   else
     halt 500
@@ -567,28 +562,27 @@ get '/profile' do
   @title = "Profile"
   if not logged_in?
     redirect '/login?d=/profile'
-  else
-    @review_list = []
-
-    reviews = Parse::Query.new("review").tap do |q|
-      q.eq("referee", Parse::Pointer.new({
-        "className" => "_User",
-        "objectId"  => session[:user]['objectId']
-      }))
-    end.get
-    @total = 0
-    reviews.each do |r|
-      if r['show']
-        a = [r['rating'], r['comments']]
-        @review_list << a
-        @total += 1
-      end
-    end
-
-    @url = session[:user]['profPic'] ? 
-      session[:user]['profPic'] : '/images/person_blank.png'
-    display
   end
+  @review_list = []
+
+  reviews = Parse::Query.new("review").tap do |q|
+    q.eq("referee", Parse::Pointer.new({
+      "className" => "_User",
+      "objectId"  => session[:user]['objectId']
+    }))
+  end.get
+  @total = 0
+  reviews.each do |r|
+    if r['show']
+      a = [r['rating'], r['comments']]
+      @review_list << a
+      @total += 1
+    end
+  end
+
+  @url = session[:user]['profPic'] ? 
+    session[:user]['profPic'] : '/images/person_blank.png'
+  display
 end
 
 get '/profile/:ref_id' do
@@ -607,6 +601,10 @@ end
 def qr
 end
 get '/qr' do
+  @title = "QR"
+  if not logged_in?
+    redirect '/login?d=/qr'
+  end
   u = "http://refdevelopment.com/review/#{session[:user]['objectId']}"
   @review_qr = "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=#{URI::encode(u)}"
   display(:qr, false)
@@ -615,7 +613,7 @@ end
 def refresh
 end
 get '/refresh' do
-  # just to make sure we beat the paypal note
+  # just to make sure we beat the paypal ping
   sleep(1.5) 
   session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
   flash[:issue] = 'Payment confirmed. Thank you! You may need to logout and back in to register the upgrade.'
@@ -824,6 +822,9 @@ end
 def settings
 end
 get '/settings' do 
+  if not logged_in?
+    redirect '/login?d=/profile'
+  end
   @title = "Settings"
   display
 end

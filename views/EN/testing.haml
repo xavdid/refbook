@@ -86,19 +86,20 @@
 - if paid?
   %p
     %span.fa-stack
-      %i.fa.fa-circle.fa-stack-2x.ok
+      %i.fa.fa-circle.fa-stack-2x.go
       %i.fa.fa-exclamation-triangle.fa-stack-1x.warning
     These files are for paying members only, so we would really appreciate you not spreading them around. Thanks!
   %ul.bullets
     %li
-      %a{href: '/files/IRDPRefereePositioningGuide.pdf', target: '_blank'}<
+      -# %a{href: "https://docs.google.com/feeds/download/documents/export/Export?id=1vBA8wiA_BfsEnasHLf5PRUZTtVDJD8MmuNprCzyZ3YY&exportFormat=pdf", target: '_blank'}<
+      %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
         Positioning Guide
     %li
-      %a{href: "/files/IRDPConfidenceGuide.pdf", target: '_blank'}<
+      %a{href: "https://docs.google.com/feeds/download/documents/export/Export?id=1XWmROvS--BAnck4L7YI9w4reKtxKTMleyfddktfmMCk&exportFormat=pdf", target: '_blank'}<
         Confidence Guide
     %li
-      -# %a{href: "", target: '_blank'}<
-      Communication Guide - Coming soon!
+      %a{href: "https://docs.google.com/feeds/download/documents/export/Export?id=1jAUAZVh4oy3Dr3ZdtVwajAFKBHzXMZAQE41dUHpYo8s&exportFormat=pdf", target: '_blank'}<
+        Communication Guide
     %li
       -# %a{href: "", target: '_blank'}<
       Professionalism Guide - Coming soon!
@@ -108,7 +109,8 @@
 - else
   %ul.bullets
     %li
-      %a{href: '/files/IRDPRefereePositioningGuide.pdf', target: '_blank'}<
+      -# %a{href: "https://docs.google.com/feeds/download/documents/export/Export?id=1vBA8wiA_BfsEnasHLf5PRUZTtVDJD8MmuNprCzyZ3YY&exportFormat=pdf", target: '_blank'}<
+      %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
         Positioning Guide
   #{display(:help,false)}
 
