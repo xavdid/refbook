@@ -26,7 +26,7 @@
             First Name
           %td
             Last Name
-          %td
+          %td{title: "This could be their current team or the last team they were with. Either way, they won't be reffing this team's games!"}
             Team
           %td{title: "Assistant Ref Certified"}
             AR
@@ -34,11 +34,11 @@
             SR
           %td{title: "Head Ref Certified"}
             HR
-          - if @reg == 'ALL'
-            %td
-              Region
           %td{title: "Passed Field Test"}
             FT
+          - if ['ALL', 'USQ'].include? @reg
+            %td
+              Region
       %tbody
 - else
   %p
@@ -52,6 +52,7 @@
   $("#theTable tbody").empty();
 
   // fill region list
+  // All regions is special and goes first
   $('#regions').append("<li><a id=\"ALL\" href=\"/search/ALL\">All Regions</a></li>");
   for (var i = 0; i < region_keys.length; i++) {
     var s = "<li> | </li>";
@@ -62,6 +63,7 @@
     ].join(' ');
     $("#regions").append(s);
   };
+  $('#regions').append("<li> | </li><li><a id=\"USQ\" href=\"/search/USQ\">USQ</a></li>");
 
   $("##{@reg}").addClass("active");
 
@@ -76,10 +78,8 @@
       "<td>",refs[i][5],"</td>", //sr
       "<td>",refs[i][6],"</td>", //hr
       ].join(' ');
-      if (#{@reg == 'ALL'}) {
-        r += ["<td>",refs[i][7],"</td>"].join(' ');
-      };
 
+      // field test
       if (refs[i][9] == "N") {
         if (#{admin?}) {
           r += [
@@ -96,6 +96,11 @@
       }
       else {
         r += ["<td>",refs[i][9],"</td>"].join(' ');
+      };
+
+      //region
+      if (#{['ALL', 'USQ'].include? @reg}) {
+        r += ["<td>",refs[i][7],"</td>"].join(' ');
       };
 
       r += "</tr>";

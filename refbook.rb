@@ -17,7 +17,7 @@ configure do
   enable :sessions
   
   set :session_secret, 'this_is_secret'
-  set :region_hash, {"QuidditchUK" => "QUKX","US Pacific Northwest" => "USPN","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {"QuidditchUK" => "QUK","US Pacific Northwest" => "USPN","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
   set :region_names, settings.region_hash.keys[0..-3].sort
   set :region_codes, settings.region_hash.values[0..-3].sort
   # TIME BETWEEN ATTEMPTS
@@ -756,35 +756,42 @@ get '/search/:region' do
 
   @reg = params[:region].upcase
   @region_title = reg_reverse(@reg)
+  
+  @region_values = settings.region_codes.reject{|p| p[0..1] == "US"}
+  @region_keys = []
+  @region_values.each{|r| @region_keys << reg_reverse(r)}
 
-  @region_keys = settings.region_names
-  @region_values = settings.region_codes
+  pp @region_values
+  pp @region_keys
+  
 
-  if @region_title.nil?
-    flash[:issue] = "Invalid region code: #{@reg}"
-    redirect '/search'
-  end
+  # if @region_title.nil?
+    # halt 404
+  # end
 
   if @reg == 'ALL'
     q = Parse::Query.new("_User").get
+  elsif @reg == "USQ"
+    q = Parse::Query.new("_User").get.select{|p| p['region'][0..1] == "US"}
   else
     q = Parse::Query.new("_User").eq("region",@reg).get
   end
 
   @refs = []
+  # build each row of the table
   q.each do |person|
-    if person["assRef"] or person["snitchRef"]
+    if person["assRef"] or person["snitchRef"] # or person['betaTester']
       entry = [
-        person["firstName"], 
-        person["lastName"], 
-        person["team"], 
-        person["username"]
+        person["firstName"], # 0
+        person["lastName"], # 1
+        person["team"], # 2
+        person["username"] # 3
       ]
       
       # assignment because reuby returns are weird
-      entry << j = person['assRef'] ? 'Y' : 'N'
-      entry << j = person['snitchRef'] ? 'Y' : 'N'
-      entry << j = person['headRef'] ? 'Y' : 'N'
+      entry << j = person['assRef'] ? 'Y' : 'N' # 4
+      entry << j = person['snitchRef'] ? 'Y' : 'N' # 5
+      entry << j = person['headRef'] ? 'Y' : 'N' # 6
 
       
       entry << reg_reverse(person['region']) # 7
