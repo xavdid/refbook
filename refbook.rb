@@ -252,7 +252,7 @@ before do
   end
 
   # subdomain redirection
-  if not request.url['localhost']
+  if not settings.development?
     url = Domainatrix.parse(request.url)
     if url.subdomain.size > 0
       redirect 'http://refdevelopment.com'+url.path
