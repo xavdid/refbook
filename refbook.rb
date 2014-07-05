@@ -11,6 +11,7 @@ require 'rack-google-analytics'
 require 'uri'
 require 'mongo'
 require 'open-uri'
+require 'domainatrix'
 
 configure do
   enable :sessions
@@ -28,7 +29,7 @@ configure do
   set :wc_string, '%Y%m%dT%H%M'
 
   set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
-  set :coll, settings.conn.db('kinect')['refbook_keys']
+  set :keys, settings.conn.db('kinect')['refbook_keys']
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
@@ -93,7 +94,7 @@ end
 def validate(key, region)
   begin
     puts 'validating'
-    keys = settings.coll.find_one
+    keys = settings.keys.find_one
 
     #re-format just in case
     key.gsub!('-','')
@@ -104,7 +105,7 @@ def validate(key, region)
 
     if keys[region].include? key
       keys[region].delete key
-      settings.coll.save(keys)
+      settings.keys.save(keys)
       return true
     else
       return false
@@ -236,6 +237,7 @@ before do
     @killed = false
   end
 
+  # so we never have a null language
   if not session[:user].nil?
     @lang = session[:user]['lang']
   else
@@ -248,6 +250,17 @@ before do
       redirect '/release'
     end
   end
+
+  # subdomain redirection
+  if not request.url['localhost']
+    url = Domainatrix.parse(request.url)
+    if url.subdomain.size > 0
+      redirect 'http://refdevelopment.com'+url.path
+    end
+  end
+
+  # pp request
+
 end
 
 # routes
