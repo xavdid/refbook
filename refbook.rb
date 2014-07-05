@@ -85,6 +85,10 @@ def name_maker(person)
   "#{person['firstName']} #{person['lastName']}"
 end
 
+def pull_user
+  Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+end
+
 # originally created to ease the transition between js bools and 
 # ruby bools, I'm not sure if I need it anymore
 def to_bool(str)
@@ -363,7 +367,8 @@ get '/cm' do
   att["time"] = Time.now.utc.to_s
   att.save
 
-  user_to_update = Parse::Query.new("_User").eq("objectId", params[:cm_user_id]).get.first
+  user_to_update = pull_user
+
   @email = session[:user]['email']
   @score = params[:cm_tp]
   puts 'to', @email, @score
@@ -788,7 +793,7 @@ get '/search/:region' do
   @refs = []
   # build each row of the table
   q.each do |person|
-    if person["assRef"] or person["snitchRef"] # or person['betaTester']
+    if person["assRef"] or person["snitchRef"]
       entry = [
         person["firstName"], # 0
         person["lastName"], # 1
@@ -820,7 +825,6 @@ def settings
 end
 get '/settings' do 
   @title = "Settings"
-  @reg = session[:user]['region']
   display
 end
 
@@ -882,7 +886,7 @@ get '/testing/:which' do
   end
 
   if not session[:user]['region'] == "AUST"
-    flash[:issue] = "Testing is disabled before Rulebook 8 comes out."
+    flash[:issue] = "Testing is disabled before our Rulebook 8 tests are ready."
     redirect '/'
   end
 
@@ -916,7 +920,6 @@ get '/testing/:which' do
       @prereqs_passed = false
     end
   end
-
   attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
   if not attempt_list.empty?
     # at least 1 attempt
@@ -960,7 +963,7 @@ def valid
 end
 get '/validate' do 
   if validate(params[:code],session[:user]['region'])
-    user_to_update = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+    user_to_update = pull_user
     user_to_update['paid'] = true
     session[:user] = user_to_update.save
     flash[:issue] = 'Registration Successful'

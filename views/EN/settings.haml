@@ -14,7 +14,7 @@
       NOTE
     only check these boxes if you've actually passed the corresponding test. Falsifying information will result in penalties and a possible ban from IRDP certification.
   .form_box
-    %form{name: 'tests', action: 'settings', method: 'post'}
+    %form{name: 'tests', action: '/settings', method: 'post'}
       %label{for: "ar"}
         Certified Assistant Referee
       %input{type: "checkbox", name: "ar", id: "ar"}
@@ -79,15 +79,17 @@
   your password.
 
 :javascript
-
+  // fill fields
   $('#email').val("#{session[:user]['username']}");
   $('#lang').val("#{session[:user]['lang']}");
 
+  // check test buttons for aussies
   $('#ar').prop('checked',#{session[:user]['assRef'] ? 'true' : 'false' });
   $('#sr').prop('checked',#{session[:user]['snitchRef'] ? 'true' : 'false' });
   $('#hr').prop('checked',#{session[:user]['headRef'] ? 'true' : 'false' });
   $('#ft').prop('checked',#{session[:user]['passedFieldTest'] ? 'true' : 'false' });
 
+  //make sure they uploaded _something_ 
   function validate(){
     var f = $("#fileBox")[0].files[0];
     if (f) {
@@ -97,11 +99,5 @@
       $(".issue").text("Must select a file");
       return false;
     }
-    // var filled = true;
-
-    // var e = f["username"].value;
-    // var p = f["password"].value;
-    // var p2 = f["pw2"].value;
-    // return true;
   };
 
