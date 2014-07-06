@@ -36,7 +36,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    minitest (5.3.4)
+    minitest (5.3.5)
     mongo (1.10.1)
       bson (~> 1.10.1)
     net-http-persistent (2.9.4)
@@ -83,9 +83,11 @@ DEPENDENCIES
   haml
   json
   mail
+  minitest
   mongo
   parse-ruby-client
   rack-google-analytics
+  rack-test
   sass
   sinatra
   sinatra-flash

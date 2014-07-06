@@ -771,11 +771,7 @@ get '/search/:region' do
     r = reg_reverse(r)
     @us_region_keys << r[2..r.size] 
   end
-
-  pp @region_values
-  pp @region_keys
   
-
   # if @region_title.nil?
     # halt 404
   # end
