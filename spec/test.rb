@@ -10,6 +10,7 @@ class RefbookTest < MiniTest::Test
     Sinatra::Application
   end
 
+  # need to call functions test_XXXX
   def test_up
     get '/'
     assert last_response.ok?
@@ -24,4 +25,5 @@ class RefbookTest < MiniTest::Test
     get '/search/ALL'
     assert last_response.ok?
   end
+  
 end
