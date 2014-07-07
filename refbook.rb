@@ -189,6 +189,17 @@ def notify_of_review(reviewee)
   end
 end
 
+def report_bad(user_id)
+  mail = Mail.deliver do
+    to 'beamneocube@gmail.com'
+    from 'IRDP <irdp.rdt@gmail.com>'
+    subject 'Someone submitted a test early!'
+    html_part do
+      body "User #{user_id} just tried to finish a test before the alotted amount of time. Check it out!"
+    end
+  end
+end
+
 # Rendering helpers
 def email_link(a={})
   if a.include? :subject
@@ -350,14 +361,19 @@ get '/cm' do
     # C
     att = attempt_list.select do |a|
       a["type"] == params[:cm_return_test_type]
-    end
-    if att.empty?
+    end.first
+    if not att
       # B
       att = Parse::Object.new("testAttempt")
-      att["taker"] = params[:cm_user_id]
+      att["taker"] = params[:cm_user_id]  
     else
-      att = att.first
+      if Time.now.utc - Time.parse(att['time']) < settings.waiting - 500
+        flash[:issue] = "I'm not sure how you took the test again so quicky, but this one didn't count because you didn't wait a week. Email david@relateiq.com and tell him what's up."
+        report_bad(att['taker'])
+        redirect '/'
+      end
     end
+
   end
 
   att["score"] = params[:cm_ts].to_i
@@ -377,13 +393,11 @@ get '/cm' do
     flash[:issue] = "You passed the #{settings.test_names[params[:cm_return_test_type].to_sym]} ref test, go you!"
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     session[:user] = user_to_update.save
-    @unlock = ''
   else
     pass = false
-    @unlock = (Time.parse(att['time']) + settings.waiting).strftime('%b %e,%l:%M %p')
-    flash[:issue] = "You were unsuccessful in your attempt. Try again soon!"
+    flash[:issue] = "You were unsuccessful in your attempt. Try again in a week!"
   end
-  email_results(@email, pass, params[:cm_return_test_type]) #if not settings.development?
+  email_results(@email, pass, params[:cm_return_test_type]) if not settings.development?
   redirect '/' if pass
   redirect "/testing/#{params[:cm_return_test_type]}"
 end
@@ -882,7 +896,7 @@ get '/testing/:which' do
     redirect "/login?d=/testing/#{params[:which]}"
   end
 
-  if not session[:user]['region'] == "AUST"
+  if not session[:user]['region'] == "AUST" and not settings.development?
     flash[:issue] = "Testing is disabled before our Rulebook 8 tests are ready."
     redirect '/'
   end
