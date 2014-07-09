@@ -13,7 +13,7 @@ In the past, users signed up for the AR and SR tests through a google doc which 
 
 Given these shortcomings, the IRDP wanted to accomplish a few specific goals with the new system: 
 
-* Never force an applicant wait to take their test
+* Never force an applicant to wait to take their test
 * Make certification status information easy for both us and the general public to access
 * Centralize the requirements for the tests (waiting period, cost, qualification) so we (by hand) didn't have to check 3 google docs to validate whether a candidate should have taken a test.
 * Make it super straightforward to test, regardless of what language(s) the user spoke.
