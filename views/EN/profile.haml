@@ -44,6 +44,8 @@
     %thead
       %tr
         %td
+          Position
+        %td
           Rating
         %td
           Comments
@@ -56,23 +58,18 @@
   var odd = false;
   for (var i = 0; i < reviews.length; i++) {
     var r = [
-      "<tr class=\"",(odd) ? "odd" : "even","\">",
-      "<td>",reviews[i][0],"</td>", //rating
-      "<td>",reviews[i][1],"</td>", //comments
+      "<tr>",
+        "<td>",reviews[i][2],"</td>", //type
+        "<td>",reviews[i][0],"</td>", //rating
+        "<td>",reviews[i][1],"</td>", //comments
+      "</tr>"
     ].join(' ');
-      
-      r += "</tr>";
-    odd = !odd;  
+    
     $("#theTable tbody").append(r);
   };
 
-  $('.small').hide();
-
-  $('.more').click(function(){
-    $('.small').show();
+  $('#theTable').tablesorter({
+    ignoreCase: true,
+    widthFixed: false,
+    widgets: ['stickyHeaders'],
   });
-
-  $('.less').click(function(){
-    $('.small').hide();
-  });
-

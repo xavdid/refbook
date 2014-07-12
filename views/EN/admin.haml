@@ -22,9 +22,11 @@
         %td.small
           Team Captain?
         %td
-          Referee Region
+          Ref Region
         %td.light
-          Referee Name
+          Ref Name
+        %td
+          Ref Position
         %td.small
           Team
         %td.small
@@ -56,6 +58,7 @@
       "<td>",reviews[i][3],"</td>", //region
       "<td class=\"name ", (reviews[i][11] == "#{session[:user]['objectId']}") ? "mine" : "ref-name",
       "\">",reviews[i][4],"</td>", //referee
+      "<td>",reviews[i][13],"</td>", //type
       "<td class=\"small\">",reviews[i][5],"</td>", //team
       "<td class=\"small\">",reviews[i][6],"</td>", //opponent
       "<td>",reviews[i][7],"</td>", //rating

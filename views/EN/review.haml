@@ -45,6 +45,8 @@
       %span.danger
         *
     %select{name: "type", id: "type"}
+      %option{value: ""}
+      
       %option{value: "head"}
         Head Referee
       %option{value: "snitch"}
@@ -133,8 +135,9 @@
     var e = f["email"].value;
     var r = f["region"].value;
     var ra = f["rating"].value;
+    var ty = f["type"].value;
 
-    var fields = [n, e, r, ra];
+    var fields = [n, e, r, ra, ty];
 
     fields.forEach(function(field){
       if (field == null || field == "") {

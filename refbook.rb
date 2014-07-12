@@ -325,7 +325,8 @@ get '/admin' do
         r['show'], #9
         r['objectId'], #10
         q['objectId'], #11
-        r['now'] #12
+        r['now'], #12
+        r['type'] #13
       ]
       # hide the name of reviews made about you
       if r['referee'].parse_object_id == session[:user]['objectId']
@@ -588,7 +589,7 @@ get '/profile' do
   @total = 0
   reviews.each do |r|
     if r['show']
-      a = [r['rating'], r['comments']]
+      a = [r['rating'], r['comments'], r['type']]
       @review_list << a
       @total += 1
     end
