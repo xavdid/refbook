@@ -707,6 +707,7 @@ post '/review' do
   p.parse_object_id = params[:referee] || "Sb33WyBziN"
 
   rev['referee'] = p
+  rev['type'] = params[:type]
 
   rev['date'] = params[:date]
   rev['team'] = params[:team]
@@ -732,6 +733,29 @@ end
 
 def reviews
 end
+
+get '/reviews' do 
+  @title = 'Reviews'
+  @num = Parse::Query.new("review").get.size
+  case @num
+  when 0..10
+    @text = "Well, everyone has to start somewhere!"
+  when 11..30
+    @text = "We're off to a great start, let's keep this going strong!"
+  when 31..49
+    @text = "We're charging up the hill to halfway. Let's get there!"
+  when 50..65
+    @text = "Halfway! That was easy mode, let's knock the rest of these out"
+  when 66..90
+    @text = "We're on the home stretch. Can we do it!?"
+  when 91..99
+    @text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
+  when 100..300
+    @text = "We did it! West Fantasy, you're a class act. How's that for a new quidditch record?"
+  end
+  display
+end
+
 get '/reviews/:review_id' do
   @title = "Edit a Review"
   if not admin?
