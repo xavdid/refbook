@@ -368,7 +368,7 @@ get '/cm' do
       att["taker"] = params[:cm_user_id]  
     else
       if Time.now.utc - Time.parse(att['time']) < settings.waiting - 500
-        flash[:issue] = "I'm not sure how you took the test again so quicky, but this one didn't count because you didn't wait a week. Email david@relateiq.com and tell him what's up."
+        flash[:issue] = "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email david@relateiq.com for more info."
         report_bad(att['taker'])
         redirect '/'
       end
