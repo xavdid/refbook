@@ -23,7 +23,7 @@ configure do
   # TIME BETWEEN ATTEMPTS
   # 604800 sec = 1 week
   set :waiting, 604800
-  set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head"}
+  set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
   set :updated_at, Time.now.utc
   set :time_string, '%e %B, %l:%M%P'
   set :wc_string, '%Y%m%dT%H%M'
@@ -589,7 +589,7 @@ get '/profile' do
   @total = 0
   reviews.each do |r|
     if r['show']
-      a = [r['rating'], r['comments'], r['type']]
+      a = [r['rating'].capitalize, r['comments'], settings.test_names[r['type'].to_sym]]
       @review_list << a
       @total += 1
     end
@@ -923,13 +923,13 @@ get '/testing/:which' do
     redirect "/login?d=/testing/#{params[:which]}"
   end
 
+  # this will go away soon
   if not session[:user]['region'] == "AUST" and not settings.development?
     flash[:issue] = "Testing is disabled before our Rulebook 8 tests are ready."
     redirect '/'
   end
 
-  @names = {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
-  @title = "#{@names[params[:which].to_sym]} Referee Test"
+  @title = "#{settings.test_names[params[:which].to_sym]} Referee Test"
   @section = 'testing'
   # right now, which can be anything. Nbd?
   

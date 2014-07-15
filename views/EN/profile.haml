@@ -16,15 +16,15 @@
     profile.
 
 %p
-  %a{href: "/qr", target: "_blank"}<
+  %a{href: "/review/#{session[:user]['objectId']}"}<
     This
   is your 
   %strong
-    QR code 
-  that directs people to your personal review page. Feel free to save it to your phone for easy access. You can also bookmark 
-  %a{href: "/review/#{session[:user]['objectId']}"}<
-    that page 
-  if you want to share it digitally.
+    personal review page.
+  Feel free to bookmark it to your phone for easy access. You can also distrbute this
+  %a{href: "/qr", target: "_blank"}<
+    QR
+  code that lets the scanner review you on their own device.
 
 %p
   You've got 
@@ -59,7 +59,7 @@
   for (var i = 0; i < reviews.length; i++) {
     var r = [
       "<tr>",
-        "<td>",reviews[i][2],"</td>", //type
+        "<td>",reviews[i][2],"Referee</td>", //type
         "<td>",reviews[i][0],"</td>", //rating
         "<td>",reviews[i][1],"</td>", //comments
       "</tr>"

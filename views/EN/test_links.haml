@@ -23,7 +23,7 @@
 - if paid?
   %p
     - if session[:user][params[:which]+"Ref"]
-      You've already passed the #{@names[params[:which].to_sym]} referee test. Congrats!
+      You've already passed the #{settings.test_names[params[:which].to_sym]} Referee test. Congrats!
     - else
       - if not @prereqs_passed
         It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.
@@ -45,18 +45,18 @@
           %br
         Here's the link to the 
         %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
-          #{@names[params[:which].to_sym]}
+          #{settings.test_names[params[:which].to_sym]}
         test!
       - else
         Looks like it hasn't been long enough since your last try! 
         %br
         %br
-        You last attempted the #{@names[params[:which].to_sym]} referee test at #{@t2.strftime(settings.time_string)}
-        #{local_time(@try_unlocked,"Last+#{@names[params[:which]]}+Referee+Test+Attempt")}
+        You last attempted the #{settings.test_names[params[:which].to_sym]} referee test at #{@t2.strftime(settings.time_string)}
+        #{local_time(@try_unlocked,"Last+#{settings.test_names[params[:which]]}+Referee+Test+Attempt")}
         %br
         %br
         Give it another go at #{@try_unlocked.strftime(settings.time_string)}
-        #{local_time(@try_unlocked,"#{@names[params[:which]]}+Referee+Test+Unlocks")}
+        #{local_time(@try_unlocked,"#{settings.test_names[params[:which]]}+Referee+Test+Unlocks")}
 - else
   #{display(:help,false)}
         
