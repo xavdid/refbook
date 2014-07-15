@@ -587,8 +587,11 @@ get '/profile' do
     }))
   end.get
   @total = 0
+  @counts = {'excellent'=> 0, 'good' => 0, 'average' => 0, 'poor' => 0}
   reviews.each do |r|
-    if r['show']
+    if r['comments'].size == 0
+      @counts[r['rating']] += 1
+    elsif r['show']
       a = [r['rating'].capitalize, r['comments'], settings.test_names[r['type'].to_sym]]
       @review_list << a
       @total += 1
@@ -660,10 +663,11 @@ get '/review' do
   @section = 'review'
 
   @region_keys = settings.region_names
+  @region_codes = settings.region_codes
   q = Parse::Query.new("_User").get
   @refs = {}
 
-  @region_keys.each do |r|
+  @region_codes.each do |r|
     @refs[r] = []
   end
 
@@ -674,7 +678,7 @@ get '/review' do
       # [id, fN + lN]
       p = [person['objectId'], name_maker(person)]
 
-      @refs[reg_reverse(person['region'])] << p
+      @refs[person['region']] << p
     end
   end
 
