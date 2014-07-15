@@ -40,13 +40,14 @@
       %input{type: "hidden", name: "region", value: "#{@ref['region']}"}
       %input{type: "hidden", name: "referee", value: "#{@ref['objectId']}"}
 
+
     %label{for: "type"}
       Referee's Position
       %span.danger
         *
     %select{name: "type", id: "type"}
       %option{value: ""}
-      
+
       %option{value: "head"}
         Head Referee
       %option{value: "snitch"}
@@ -57,7 +58,7 @@
 
     %label{for: "date"}
       Date of Game
-    %input{type: "text", name: "date", placeholder: "6 Dec, 2014"}
+    %input{type: "text", name: "date", value: "#{Time.now.strftime('%e %b, %Y')}"}
 
     %label{for: "team"}
       Your Team's Name
@@ -102,7 +103,7 @@
   for (var i = 0; i < region_keys.length; i++) {
     var el = document.createElement("option");
     el.textContent = region_keys[i];
-    el.value = region_keys[i];
+    el.value = region_codes[i];
     $("#region").append(el);
   };
 

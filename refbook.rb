@@ -691,6 +691,7 @@ get '/review/:id' do
 
   @title = "Review #{@ref['firstName']} #{@ref['lastName']}"
   @region_keys = settings.region_names
+  # this is included so there's no error because of a missinv variable
   @refs = {}
   display :review
 end
@@ -700,7 +701,7 @@ post '/review' do
   rev['reviewerName'] = params[:name]
   rev['reviewerEmail'] = params[:email]
   rev['isCaptain'] = params[:captain] ? true : false
-  rev['region'] = settings.region_hash[params[:region]] || "None"
+  rev['region'] = params[:region] || "None"
 
   p = Parse::Pointer.new({})
   p.class_name = "_User"
