@@ -752,7 +752,7 @@ get '/reviews' do
   when 91..99
     @text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
   when 100..300
-    @text = "We did it! West Fantasy, you're a class act. How's that for a new quidditch record?"
+    @text = "We did it! We've crossed into 100 reviews!"
   end
   display
 end
@@ -768,7 +768,9 @@ get '/reviews/:review_id' do
     @r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
     q = Parse::Query.new("_User").eq("objectId",@r['referee'].parse_object_id).get.first
     @name = name_maker(q)
-    @r['reviewName'] = 'REDACTED' if q['objectId'] == session[:user]['objectId']
+    pp @r
+    pp session[:user]['objectId']
+    @r['reviewerName'] = 'REDACTED' if @r['referee'].parse_object_id == session[:user]['objectId']
     @review = @r.to_json
     display :edit_review
   end
