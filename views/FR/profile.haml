@@ -1,74 +1,85 @@
+%img#prof_pic{src: "#{@url}", width: 300}
+
+- if not session[:user]['profPic']
+  %p
+    %i.fa.fa-exclamation-circle.danger
+    It looks like you haven't uploaded a profile pic yet! Do so on your 
+    %a{href: "/settings"}<
+      settings
+    page.
+
 %p
-  You've got #{@total} review#{@total == 1 ? '' : 's'}. 
+  %a{href: "/profile/#{session[:user]['objectId']}"}<
+    This
+  is your public 
+  %strong
+    profile.
+
+%p
+  %a{href: "/review/#{session[:user]['objectId']}"}<
+    This
+  is your 
+  %strong
+    personal review page.
+  Feel free to bookmark it to your phone for easy access. You can also distrbute this
+  %a{href: "/qr", target: "_blank"}<
+    QR
+  code that lets the scanner review you on their own device.
+%p
+  You've got the following quantities of reviews that left no comments:
+  %br
+  %table.mini.table-background
+    - @counts.each do |gr, num|
+      %tr
+        %td
+          = gr
+        %td
+          %strong
+            = num
+%p
+  You've got 
+  %strong
+    #{@total} 
+  review#{@total == 1 ? '' : 's'} with comments. 
   - if @total > 0
     #{@total == 1 ? "It's" : "They're"} listed below.
   - else
+    %br
+    %br
+    %i.fa.fa-exclamation-circle.danger
     Encourage people to review you!
 
--# %p
--#   %a.more{href: "#"}
--#     Show extra info
-
--# %p
--#   %a.less{href: "#"}
--#     Show less info
-
-%table#theTable
-  %thead
-    %tr
-      -# %td
-      -#   Reviewer Name
-      -# %td
-      -#   Reviewer Email
-      -# %td.small
-      -#   Captain?
-      -# %td.small
-      -#   Referee Region
-      -# %td.light
-      -#   Referee Name
-      -# %td.small
-      -#   Team
-      -# %td.small
-      -#   Opponent
-      %td
-        Rating
-      %td
-        Comments
-      
-  %tbody
+- if @total > 0
+  %table.skinny#theTable
+    %thead
+      %tr
+        %td
+          Position
+        %td
+          Rating
+        %td
+          Comments
+        
+    %tbody
 
 
 :javascript
-  // $('#the_title').text("French Index haw haw haw");
   var reviews = #{@review_list};
   var odd = false;
-  // $("#theTable tbody").empty();
   for (var i = 0; i < reviews.length; i++) {
     var r = [
-      "<tr class=\"",(odd) ? "odd" : "even","\">",
-      // "<td>",reviews[i][0],"</td>",
-      // "<td><a href=\"mailto:",reviews[i][1],"\">",reviews[i][1],"</a></td>",
-      // "<td class=\"small\">",reviews[i][2],"</td>", //captain?
-      // "<td class=\"small\">",reviews[i][3],"</td>", //region
-      // "<td>",reviews[i][4],"</td>", //name
-      // "<td class=\"small\">",reviews[i][5],"</td>", //team
-      // "<td class=\"small\">",reviews[i][6],"</td>", //opponent
-      "<td>",reviews[i][0],"</td>", //rating
-      "<td>",reviews[i][1],"</td>", //comments
+      "<tr>",
+        "<td>",reviews[i][2],"Referee</td>", //type
+        "<td>",reviews[i][0],"</td>", //rating
+        "<td>",reviews[i][1],"</td>", //comments
+      "</tr>"
     ].join(' ');
-      
-      r += "</tr>";
-    odd = !odd;  
+    
     $("#theTable tbody").append(r);
   };
 
-  $('.small').hide();
-
-  $('.more').click(function(){
-    $('.small').show();
+  $('#theTable').tablesorter({
+    ignoreCase: true,
+    widthFixed: false,
+    widgets: ['stickyHeaders'],
   });
-
-  $('.less').click(function(){
-    $('.small').hide();
-  });
-

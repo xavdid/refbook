@@ -1,5 +1,7 @@
 %p
-  Edit the comment and mark whether or not it should be displayed.
+  Edit the comment and mark whether or not it should be displayed. 
+%P
+  IF THE RADIO BUTTON SAYS "YES" AND YOU HIT SUBMIT, IT WILL EMAIL THEM. Just navigate away if you don't want to change anything.
 
 %p
   Review for 
@@ -10,10 +12,10 @@
     #{@r['rating']}
 
 -# This isn't in a formbox beause of the weird radio buttons
-%form{name: "review", action: "//reviews/#{params[:review_id]}", method: "post", id: "editor"}
+%form{name: "review", action: "/reviews/#{params[:review_id]}", method: "post", id: "editor"}
   
   %label{for: "show"}
-    Show?
+    Display to referee?
   %br
   %input{type: "radio", name: "show", value: "true", id: "Y"}
   Yes
@@ -25,13 +27,12 @@
   %label{for: "comments"}
     Text of the review
   %br
-  %textarea{form: "editor", cols: 32, rows: 7, name: "comments", id: "comments"}
+  %textarea{form: "editor", cols: 50, rows: 7, name: "comments", id: "comments"}
   %br
   %br
   %input.button{type: "submit", value: "Submit", title: "Will submit current state of review, regardless of what it was before"}
 
 :javascript
-  // $('#the_title').text("French Index haw haw haw");
   var r = #{@review};
 
   $((r['show']) ? "#Y" : "#N").prop("checked", true);

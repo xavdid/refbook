@@ -1,5 +1,5 @@
 %p
-  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. 
+  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. All information besides registration code is required.
 
 .form_box
   %form{name: "create", action: "/create", method: "post", onsubmit: "return validate();"}
@@ -23,17 +23,21 @@
       Last Name
     %input{type: "text", name: "ln", placeholder: "Last Name", id: "ln"}
 
-    %label{for: "team"}
-      Associated Team (or none)
+    %label{for: "team", style: "font-size: 12px;"}
+      Associated Team/Alma Mater (or none). The team to whom we shouldn't assign you games to referee.
     %input{type: "text", name: "team", placeholder: "team", id: "team"}
 
     %label{for: "region"}
       Region
     %select{name: "region", id: "region"}
 
+    %label{for: "code"}
+      Registration Code (optional; you can also do it later)
+    %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
+
     %label{for: "agreement"}
       I agree that I've read the 
-      %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank", onclick: "return false;"}<
+      %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank"}<
         Referee's Code
       and agree to all statements therein.
 
@@ -42,12 +46,10 @@
     %input.button{type: "submit", value: "Create User"}
 
 :javascript
-  // $('#the_title').text("French Index haw haw haw");
   // team should be dropdown too, get team list/region from Pyne
   var region_keys = #{@region_keys};
   var teams = #{@team_list};
 
-  teams.push("None");
   $('#team').autocomplete({source: teams});
 
   // pop pop!
@@ -99,8 +101,6 @@
       $(".issue").text("Must agree to ref agreement");
       return false;
     }
-
-    
 
     else {
       return true;

@@ -1,65 +1,155 @@
-%h2
-  #{@region_title}
-
 %p
-  %a.all{href: '#'}<
-    Show All Certified Refs
-%p
-  %a.head{href: '#'}<
-    Show Only Certified Head Refs
+  This table acts as a directory of IRDP referees who have been certified at any level. If you haven't yet passed any tests, you won't show up, so go
+  %a{href: '/testing'}<
+    get certified!
 
-%table#theTable
-  %thead
-    %tr
-      %td
-        First Name
-      %td
-        Last Name
-      %td
-        Team
-      %td
-        Email
-      %td
-        AR
-      %td
-        SR
-      %td
-        HR
-      - if params[:region] == 'ALL'
-        %td
-          Region
-  %tbody
+%hr
+
+%ul.regions#regions
+- if @us
+  %ul.regions#sub-regions
+
+- if @refs.length > 0
+  %ul.regions
+    %li
+      %a.all.active{href: '#'}<
+        Show All IRDP Certified Refs
+    %li
+      |
+    %li
+      %a.head{href: '#'}<
+        Show Only IRDP Certified Head Refs
+
+  %i.fa.fa-exclamation-circle.go
+  Tip - Hold the SHIFT key to sort by multiple columns!
+
+  .table_box
+    %table#theTable
+      %thead
+        %tr
+          %td{title: "Profile Link"}
+            First Name
+          %td
+            Last Name
+          %td{title: "This could be their current team or the last team they were with. Either way, they won't be reffing this team's games!"}
+            Team
+          %td{title: "Assistant Ref Certified"}
+            AR
+          %td{title: "Snitch Ref Certified"}
+            SR
+          %td{title: "Head Ref Certified"}
+            HR
+          %td{title: "Passed Field Test"}
+            FT
+          - if ['ALL', 'USQ'].include? @reg
+            %td
+              Region
+      %tbody
+- else
+  %p
+    Womp womp, this region has no certified refs yet!
 
 :javascript
-  // $('#the_title').text("French Index haw haw haw");
+  // I apologize for the following code
   var refs = #{@refs};
-  var odd = false;
+  var region_keys = #{@region_keys};
+  var region_values = #{@region_values};
+  var us_region_keys = #{@us_region_keys};
+  var us_region_values = #{@us_region_values}
+
   $("#theTable tbody").empty();
+
+  // fill region list
+  // All regions is special and goes first
+  $('#regions').append("<li><a id=\"ALL\" href=\"/search/ALL\">All Regions</a></li>");
+  for (var i = 0; i < region_keys.length; i++) {
+    var s = "<li> | </li>";
+    $("#regions").append(s);
+    s = [
+      "<li><a id=\""+region_values[i]+"\" href=\"/search/"+region_values[i],"\">",
+      region_keys[i]+"</a></li>"
+    ].join(' ');
+    $("#regions").append(s);
+  };
+  $('#regions').append("<li> | </li><li><a id=\"USQ\" href=\"/search/USQ\">USQ</a></li>");
+
+  if(#{@us}) {
+    $('#sub-regions').append("<li><a id=\"aUSQ\" href=\"/search/USQ\">All</a></li>");
+    for (var i = 0; i < us_region_keys.length; i++) {
+      var s = "<li> | </li>";
+      $("#sub-regions").append(s);
+      s = [
+        "<li><a id=\""+us_region_values[i]+"\" href=\"/search/"+us_region_values[i],"\">",
+        us_region_keys[i]+"</a></li>"
+      ].join(' ');
+      $("#sub-regions").append(s);
+    };
+  }
+
+  // probably something about always active USQ on subregion
+  $("##{@reg}").addClass("active");
+  if ("#{@reg}" == "USQ") {$("#aUSQ").addClass("active");}
+
+  // fill ref table
   for (var i = 0; i < refs.length; i++) {
     var r = [
-      "<tr class=\"",(odd) ? "odd" : "even",refs[i][6],"\">",
-      "<td>",refs[i][0],"</td>",
+      "<tr class=\"",refs[i][6],"\">",
+      "<td><a href=\"/profile/"+refs[i][8]+"\">",refs[i][0],"</a></td>",
       "<td>",refs[i][1],"</td>",
       "<td>",refs[i][2],"</td>",
-      "<td><a href=\"mailto:",refs[i][3],"\">",refs[i][3],"</a></td>",
       "<td>",refs[i][4],"</td>", //ar
       "<td>",refs[i][5],"</td>", //sr
       "<td>",refs[i][6],"</td>", //hr
       ].join(' ');
-      if (#{params[:region] == 'ALL'}) {
+
+      // field test
+      if (refs[i][9] == "N") {
+        if (#{admin?}) {
+          r += [
+                "<td>",
+                "<div class=\"field_test\">",
+                "<a href=\"/field/"+refs[i][8]+"?reg=#{@reg}\" onclick=\"return confirm('"+refs[i][0]+" "+refs[i][1]+" passed their field test?')\">",
+                "Passed Field Test",
+                "</a></div></td>"
+              ].join(' ');
+        }
+        else {
+          r += ["<td>",refs[i][9],"</td>"].join(' ');
+        }
+      }
+      else {
+        r += ["<td>",refs[i][9],"</td>"].join(' ');
+      };
+
+      //region
+      if (#{['ALL', 'USQ'].include? @reg}) {
         r += ["<td>",refs[i][7],"</td>"].join(' ');
       };
+
       r += "</tr>";
-    odd = !odd;  
+    
     $("#theTable tbody").append(r);
   };
-
+  
+  // click handlers
   $('.all').click(function(){
+    togthat();
     $('.N').show();
   });
   $('.head').click(function(){
+    togthat();
     $('.N').hide();
-
-
   // could do something to update colored rows every time (update())
   });
+  function togthat(){
+    $('.all').toggleClass('active');
+    $('.head').toggleClass('active');
+  }
+
+  $('#theTable').tablesorter({
+    ignoreCase: true,
+    widthFixed: false,
+    widgets: ['stickyHeaders'],
+    sortList: [[1,0]]
+  });
+

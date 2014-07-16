@@ -3,62 +3,67 @@
 
 %p
   %a.more{href: "#"}
-    Show extra info
+    Extra info
 
 %p
-  %a.less{href: "#"}
-    Show less info
+  %a.less.mode{href: "#"}
+    Less info
 
-%table#theTable
-  %thead
-    %tr
-      %td
-        Reviewer Name
-      %td
-        Reviewer Email
-      %td.small{title: "Team Captain?"}
-        C?
-      %td.small
-        Referee Region
-      %td.light
-        Referee Name
-      %td.small
-        Team
-      %td.small
-        Opponent
-      %td
-        Rating
-      %td
-        Comments
-      %td{title: "Display to that referee?"}
-        D?
-      %td
-        Link
-      
-  %tbody
+.table_box
+  %table#theTable
+    %thead
+      %tr
+        %td
+          Submit Date
+        %td
+          Reviewer Name
+        %td.small
+          Reviewer Email
+        %td.small
+          Team Captain?
+        %td
+          Ref Region
+        %td.light
+          Ref Name
+        %td
+          Ref Position
+        %td.small
+          Team
+        %td.small
+          Opponent
+        %td
+          Rating
+        %td
+          Comments
+        %td{title: "Display to that referee?"}
+          Display?
+        %td
+          Link
+        
+    %tbody
 
-%p
-  there could be more info here
   
 :javascript
-  // $('#the_title').text("French Index haw haw haw");
   var reviews = #{@review_list};
   var odd = false;
   // $("#theTable tbody").empty();
   for (var i = 0; i < reviews.length; i++) {
     var r = [
-      "<tr class=\"",(odd) ? "odd" : "even","\">",
+      // "<tr class=\"",(odd) ? "odd" : "even","\">",
+      "<tr>",
+      "<td>",reviews[i][12],"</td>",
       "<td>",reviews[i][0],"</td>", //reviewer
-      "<td><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
-      "<td class=\"small",(reviews[i][2]) ? "y" : "n","\">",(reviews[i][2]) ? "T" : "F","</td>", //captain?
-      "<td class=\"small\">",reviews[i][3],"</td>", //region
-      "<td class=\"name ", (reviews[i][11] == "#{session[:user]['objectId']}") ? "mine" : "",
+      "<td class=\"small\"><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
+      "<td class=\"small",(reviews[i][2]) ? "y" : "n","\">",(reviews[i][2]) ? "Y" : "N","</td>", //captain?
+      "<td>",reviews[i][3],"</td>", //region
+      "<td class=\"name ", (reviews[i][11] == "#{session[:user]['objectId']}") ? "mine" : "ref-name",
       "\">",reviews[i][4],"</td>", //referee
+      "<td>",reviews[i][13],"</td>", //type
       "<td class=\"small\">",reviews[i][5],"</td>", //team
       "<td class=\"small\">",reviews[i][6],"</td>", //opponent
       "<td>",reviews[i][7],"</td>", //rating
       "<td>",reviews[i][8],"</td>", //comments
-      "<td class=\"",(reviews[i][9]) ? "y" : "n","\">",(reviews[i][9]) ? "T" : "F","</td>", //show?
+      "<td class=\"",(reviews[i][9]) ? "y" : "n","\">",(reviews[i][9]) ? "Y" : "N","</td>", //show?
       "<td><a href=\"/reviews/"+reviews[i][10],"\">Edit</a></td>", //link
 
 
@@ -73,10 +78,20 @@
   $('.small').hide();
 
   $('.more').click(function(){
+    $('.less').removeClass('mode');
+    $(this).addClass('mode');
     $('.small').show();
   });
 
   $('.less').click(function(){
+    $('.more').removeClass('mode');
+    $(this).addClass('mode');
     $('.small').hide();
   });
 
+  $('#theTable').tablesorter({
+    ignoreCase: true,
+    widthFixed: false,
+    widgets: ['stickyHeaders'],
+    sortList: [[0,1]],
+  });
