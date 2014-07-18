@@ -87,6 +87,9 @@
           or
           %a{href: '/create'}
             Create Account
+      - if @killed
+        %p
+          %i.fa.fa-warning.fa-2x.danger
         
   .mid
     /[if lt IE 10]

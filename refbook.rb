@@ -27,6 +27,7 @@ configure do
   set :updated_at, Time.now.utc
   set :time_string, '%e %B, %l:%M%P'
   set :wc_string, '%Y%m%dT%H%M'
+  set :killed, false
 
   set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
   set :keys, settings.conn.db('kinect')['refbook_keys']
@@ -246,14 +247,14 @@ end
 before do 
   if settings.development?
     # this is the local switch
-    @killed = false
+    @killed = settings.killed
   else
     # this is the production (live) switch
-    @killed = false
+    @killed = settings.killed
   end
 
   # so we never have a null language
-  if not session[:user].nil?
+  if logged_in?
     @lang = session[:user]['lang']
   else
     @lang = "EN"
@@ -261,8 +262,8 @@ before do
 
   # admins can use site even when it's locked
   if not admin?
-    if @killed and !['/layout','/login','/logout','/release','/paid','/styles.css'].include? request.path_info
-      redirect '/release'
+    if @killed and !['/layout','/login','/logout','/release','/paid','/styles.css', '/off'].include? request.path_info
+      redirect '/off'
     end
   end
 
@@ -490,12 +491,24 @@ get '/info' do
   display
 end
 
-def leagues
+# def leagues
+# end
+# get '/leagues' do
+#   @title = 'Affiliate Leagues'
+#   @section = 'info'
+#   display
+# end
+
+def lock
 end
-get '/leagues' do
-  @title = 'Affiliate Leagues'
-  @section = 'info'
-  display
+get '/lock' do
+  if params[:code] != ENV['REFBOOK_LOCK_CODE']
+    flash[:issue] = 'Invalid Code'
+    redirect '/'
+  else
+    settings.killed = true
+  end
+  "Successful locked at #{Time.now} - #{settings.killed}"
 end
 
 def login
@@ -930,8 +943,10 @@ get '/testing/:which' do
 
   # this will go away soon
   if not session[:user]['region'] == "AUST" and not settings.development?
-    flash[:issue] = "Testing is disabled before our Rulebook 8 tests are ready."
-    redirect '/'
+    if Time.now.utc.to_i < 1405814400
+      flash[:issue] = "Testing is disabled before our Rulebook 8 tests are ready."
+      redirect '/'
+    end
   end
 
   @title = "#{settings.test_names[params[:which].to_sym]} Referee Test"
@@ -949,7 +964,15 @@ get '/testing/:which' do
   @attempts_remaining = true
   @prereqs_passed = true
 
-  @tests = {ass: 'ap953ab5d46d258b', snitch: "yqc53ab5e83e8128", head: "6b953ab5f5bbd1c4", sample: "xnj533d065451038"}
+  if session[:user]['region'] == "AUST"
+    # rulebook 7!
+    @tests = {ass: 'ap953ab5d46d258b', snitch: "yqc53ab5e83e8128", head: "6b953ab5f5bbd1c4", sample: "xnj533d065451038"}
+    @rb = 7
+  else
+    # rulebook 8!
+    @tests = {ass: 'mk53c853467f7c6', snitch: "6kr53c853f4914d8", head: "qjp53c854a5530ff", sample: "xnj533d065451038"}
+    @rb = 8
+  end
   
   # refresh user object
   if params[:which] == 'head'

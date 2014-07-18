@@ -43,9 +43,14 @@
           You've got #{session[:user]['hrWrittenAttemptsRemaining']} HR attempts left.
           %br
           %br
+        This test is for Rulebook 
+        %strong
+          #{@rb}
+        %br
+        %br
         Here's the link to the 
         %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
-          #{settings.test_names[params[:which].to_sym]}
+          #{settings.test_names[params[:which].to_sym]} Referee
         test!
       - else
         Looks like it hasn't been long enough since your last try! 
