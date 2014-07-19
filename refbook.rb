@@ -962,7 +962,7 @@ get '/testing/:which' do
     @rb = 7
   else
     # rulebook 8!
-    @tests = {ass: 'mk53c853467f7c6', snitch: "6kr53c853f4914d8", head: "qjp53c854a5530ff", sample: "xnj533d065451038"}
+    @tests = {ass: 'jmk53c853467f7c6', snitch: "6kr53c853f4914d8", head: "qjp53c854a5530ff", sample: "xnj533d065451038"}
     @rb = 8
   end
   
