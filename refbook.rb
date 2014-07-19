@@ -941,14 +941,6 @@ get '/testing/:which' do
     redirect "/login?d=/testing/#{params[:which]}"
   end
 
-  # this will go away soon
-  if not session[:user]['region'] == "AUST" and not settings.development?
-    if Time.now.utc.to_i < 1405814400
-      flash[:issue] = "Testing is disabled before our Rulebook 8 tests are ready."
-      redirect '/'
-    end
-  end
-
   @title = "#{settings.test_names[params[:which].to_sym]} Referee Test"
   @section = 'testing'
   # right now, which can be anything. Nbd?
