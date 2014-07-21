@@ -881,7 +881,7 @@ def settings
 end
 get '/settings' do 
   if not logged_in?
-    redirect '/login?d=/profile'
+    redirect '/login?d=/settings'
   end
   @title = "Settings"
   display
