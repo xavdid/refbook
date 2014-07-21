@@ -10,24 +10,25 @@
 
 %p
   %a{href: "/profile/#{session[:user]['objectId']}"}<
-    This
-  is your public 
+    Ceci
+  est votre
   %strong
-    profile.
+    profil public.
 
 %p
   %a{href: "/review/#{session[:user]['objectId']}"}<
-    This
-  is your 
+    Ceci
+  est votre
   %strong
-    personal review page.
-  Feel free to bookmark it to your phone for easy access. You can also distrbute this
+    page de critiques individuelle.
+  Pour un accès facile, n'hésitez pas à distribuer ce code
   %a{href: "/qr", target: "_blank"}<
     QR
-  code that lets the scanner review you on their own device.
+  qui permet quelqu'un de vous donner leur avis de leur propre appareil.
 %p
-  You've got the following quantities of reviews that left no comments:
+  Vous avez les critiques suivants sans commentaires:
   %br
+  / NEED TO TRANSLATE THESE
   %table.mini.table-background
     - @counts.each do |gr, num|
       %tr
@@ -37,17 +38,17 @@
           %strong
             = num
 %p
-  You've got 
+  Vous avez
   %strong
     #{@total} 
-  review#{@total == 1 ? '' : 's'} with comments. 
+  critiques#{@total == 1 ? '' : 's'} avec les commentaires.
   - if @total > 0
     #{@total == 1 ? "It's" : "They're"} listed below.
   - else
     %br
     %br
     %i.fa.fa-exclamation-circle.danger
-    Encourage people to review you!
+    Encouragez les autres à vous critiquer !
 
 - if @total > 0
   %table.skinny#theTable

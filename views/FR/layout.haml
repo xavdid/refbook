@@ -6,7 +6,7 @@
       %ul#menu
         %li.no-kids#index
           %a{href: '/'}
-            IRDP 
+            PIDA 
         %li
           |
 
@@ -16,10 +16,10 @@
           %ul.sub-menu
             %li
               %a{href: '/about'}
-                About
+                Infos
             %li
               %a{href: '/faq'}
-                FAQ
+                Q&R
             %li
               %a{href: '/contact'}
                 Contact
@@ -44,19 +44,19 @@
           %ul.sub-menu
             %li
               %a{href: '/testing'}
-                Training Materials
+                Documents de Formation
             %li
               %a{href: "/testing/ass"}
-                Assistant Ref Test
+                Test d'arbitre
             %li
               %a{href: "/testing/snitch"}
-                Snitch Ref Test
+                Test d'arbitre de vif
             %li
               %a{href: "/testing/head"}
-                Head Ref Test
+                Test d'arbitre en chef
         
         %li.right
-          | #{logged_in? ? name_maker(session[:user]) : 'Not Signed In'}
+          | #{logged_in? ? name_maker(session[:user]) : 'Pas connecté'}
           -# show email
           -# #{logged_in? ? "(#{session[:user]['username']})" : ''}
         

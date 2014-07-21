@@ -283,7 +283,7 @@ end
 def index 
 end
 get '/' do
-  @title = "Home"
+  @title = {"EN" => "Home", "FR" => "Page d'Accueil"}[@lang]
   @section = "index"
   display :index
 end
@@ -291,7 +291,7 @@ end
 def about
 end
 get '/about' do
-  @title = "About the IRDP"
+  @title = {"EN" => "About the IRDP", "FR" => "Infos"}[@lang]
   @section = "info"
   display
 end
@@ -587,7 +587,8 @@ end
 def profile
 end
 get '/profile' do
-  @title = "Profile"
+  @title = {"EN" => "Profile", "FR" => "Profil"}[@lang]
+
   if not logged_in?
     redirect '/login?d=/profile'
   end
@@ -599,6 +600,8 @@ get '/profile' do
       "objectId"  => session[:user]['objectId']
     }))
   end.get
+
+  # count reviews
   @total = 0
   @counts = {'excellent'=> 0, 'good' => 0, 'average' => 0, 'poor' => 0}
   reviews.each do |r|
