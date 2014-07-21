@@ -1,45 +1,45 @@
 %p
-  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. All information besides registration code is required.
+  Vérifiez que toutes les informations sont correctes, ils seront utilisés pour notre BD d'arbitres.  Toutes les choses seront accessibles au public aux fins de communiquer avec vous.  Toutes les informations sauf le code d'enregistrement est obligatoire.
 
 .form_box
   %form{name: "create", action: "/create", method: "post", onsubmit: "return validate();"}
     %label{for: "email"}
-      Email
+      Adresse email
     %input{type: "email", name: "username", placeholder:"email"}
 
     %label{for: "password"}
-      Password
+      Mot de passe
     %input{type: "password", name: "password", placeholder: "password"}
 
     %label{for: "pw2"}
-      Confirm
+      Mot de passe (bis)
     %input{type: "password", name: "pw2", placeholder: "confirmed password"}
 
     %label{for: "fn"}
-      First Name
+      Prénom
     %input{type: "text", name: "fn", placeholder: "First Name", id: "fn"}
 
     %label{for: "ln"}
-      Last Name
+      Nom
     %input{type: "text", name: "ln", placeholder: "Last Name", id: "ln"}
 
     %label{for: "team", style: "font-size: 12px;"}
-      Associated Team/Alma Mater (or none). The team to whom we shouldn't assign you games to referee.
+      Equipe associée (ou aucune)
     %input{type: "text", name: "team", placeholder: "team", id: "team"}
 
     %label{for: "region"}
-      Region
+      Pays
     %select{name: "region", id: "region"}
 
     %label{for: "code"}
-      Registration Code (optional; you can also do it later)
+      Code d'enregistrement (vous pouvez également le faire plus tard)
     %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
 
     %label{for: "agreement"}
-      I agree that I've read the 
+      J'ai lu le 
       %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank"}<
-        Referee's Code
-      and agree to all statements therein.
+        Code d'Arbitrage
+      et j'accepte (je suis d'accord) toutes les déclarations qui y sont.
 
     %input{type: "checkbox", name: "agreement", id: "agreement"}
 

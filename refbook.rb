@@ -486,7 +486,7 @@ end
 def info
 end
 get '/info' do 
-  @title = "Information"
+  @title = {"EN" => "Information", "FR" => "Infos"}[@lang]
   @section = 'info'
   display
 end
@@ -910,7 +910,7 @@ post '/settings' do
     else
       session[:user]['email'] = params[:username]
       session[:user]['username'] = params[:username]
-      # session[:user]['lang'] = params[:lang]
+      session[:user]['lang'] = params[:lang]
     end
     session[:user] = session[:user].save
     flash[:issue] = "Settings sucessfully updated!"
