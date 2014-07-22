@@ -1,0 +1,14 @@
+# Logfile created on 2014-07-22 14:43:17 -0700 by logger.rb/44203
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Starting the New Relic agent in "development" environment.
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : To prevent agent startup add a NEWRELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Reading configuration from config/newrelic.yml
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Environment: development
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : No known dispatcher detected.
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Application: My Application (Development)
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Installing Mongo instrumentation
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Installing Net instrumentation
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Installing Sinatra instrumentation
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Installing deferred Rack instrumentation
+[07/22/14 14:43:17 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Finished instrumentation
+[07/22/14 14:43:18 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Reporting to: https://rpm.newrelic.com/accounts/669139/applications/3983180
+[07/22/14 14:43:26 -0700 David-Brownmans-MacBook-Pro.local (21382)] INFO : Doing deferred dependency-detection before Rack startup

@@ -12,6 +12,7 @@ require 'uri'
 require 'mongo'
 require 'open-uri'
 require 'domainatrix'
+require 'newrelic_rpm'
 
 configure do
   enable :sessions

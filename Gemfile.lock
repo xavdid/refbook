@@ -40,6 +40,7 @@ GEM
       bson (= 1.10.2)
     net-http-persistent (2.9.4)
     netrc (0.7.7)
+    newrelic_rpm (3.8.1.221)
     parse-ruby-client (0.2.0)
       iron_mq
       patron
@@ -80,6 +81,7 @@ DEPENDENCIES
   mail
   minitest
   mongo
+  newrelic_rpm
   parse-ruby-client
   rack-google-analytics
   rack-test
