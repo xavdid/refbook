@@ -638,10 +638,11 @@ end
 get '/pull' do 
   if not logged_in? 
     flash[:issue] = "Must be logged in to refresh"
+  else
+    session[:user] = pull_user
+    flash[:issue] = "User object sucessfully updated"
+    redirect '/'
   end
-  session[:user] = pull_user
-  flash[:issue] = "User object sucessfully updated"
-  redirect '/'
 end
 
 def qr
