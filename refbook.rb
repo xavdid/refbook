@@ -99,7 +99,7 @@ end
 
 def validate(key, region)
   begin
-    puts 'validating'
+    # pull from mongo
     keys = settings.keys.find_one
 
     #re-format just in case
@@ -631,6 +631,17 @@ get '/profile/:ref_id' do
 
     display :public_profile
   end
+end
+
+def pull
+end
+get '/pull' do 
+  if not logged_in? 
+    flash[:issue] = "Must be logged in to refresh"
+  end
+  session[:user] = pull_user
+  flash[:issue] = "User object sucessfully updated"
+  redirect '/'
 end
 
 def qr
