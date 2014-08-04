@@ -555,9 +555,6 @@ get '/pay' do
   if not logged_in?
     flash[:issue] = "Purchasing access requires an account"
     redirect '/login?d=/pay'
-  elsif paid?
-    flash[:issue] = 'You\'ve already paid, don\'t worry about paying again!'
-    redirect back
   end
   @title = 'Purchase an IRDP Membership!'
   @id = session[:user]['objectId']
