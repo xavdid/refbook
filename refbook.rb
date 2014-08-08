@@ -73,6 +73,9 @@ def paid?
   logged_in? and session[:user]['paid']
 end
 
+def affiliate?
+  logged_in? and ["QUK", "AUS"].include? session[:user]['region']
+end
 # gets the nice name from the key
 # passing "USMW" returns "US Midwest"
 # I don't love this system and may redo it

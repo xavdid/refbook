@@ -90,6 +90,15 @@
       - if @killed
         %p
           %i.fa.fa-warning.fa-2x.danger
+      - if affiliate? and not paid?
+        %p
+          %i.fa.fa-warning.fa-2x.go
+          %br
+          It looks like you belong to an affiliate league but you haven't entered your registration code. There's a lot more content available if you get that free code from your region's referee administrator and submit it on the
+          %a{href: '/settings'}
+            settings
+          page.
+
         
   .mid
     /[if lt IE 10]
@@ -98,7 +107,7 @@
         %strong
           outdated
         browser. Please
-        %a{href:"http://browsehappy.com/"}
+        %a{href:"http://browsehappy.com/?locale=en"}
           upgrade your browser
         as the one you are using isn't supported (and causes errors) on our site. If you're curious, we follow Google's
         %a{href: "https://support.google.com/a/answer/33864?hl=en", target: "_blank"}<
@@ -123,7 +132,7 @@
       /%a{href: "https://github.com/Xavdidtheshadow/refbook", target: "_blank"}<
       /  here
       /if you're into that sort of thing.
-      Read more about the features in
+      Read more about the features
       %a{href: "http://davidbrownman.com/refbook", target: "_blank"}<
         here
       in this handy readme!
