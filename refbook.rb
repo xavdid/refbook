@@ -19,6 +19,7 @@ configure do
   
   set :session_secret, 'this_is_secret'
   set :region_hash, {"QuidditchUK" => "QUK","US Northwest" => "USNW","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "All Regions" => "ALL","None" => "NONE"}
+  # this is actually a little dumb because it's just lucky that both lists are the first letters and sort the same way. 
   set :region_names, settings.region_hash.keys[0..-3].sort
   set :region_codes, settings.region_hash.values[0..-3].sort
   # TIME BETWEEN ATTEMPTS
@@ -27,9 +28,12 @@ configure do
   set :test_names, {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
   set :updated_at, Time.now.utc
   set :time_string, '%e %B, %l:%M%P'
+  # world clock string format
   set :wc_string, '%Y%m%dT%H%M'
+
   set :killed, false
 
+  # mongo is just for registration codes
   set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
   set :keys, settings.conn.db('kinect')['refbook_keys']
 
@@ -202,6 +206,60 @@ def report_bad(user_id)
     html_part do
       body "User #{user_id} just tried to finish a test before the alotted amount of time. Check it out!"
     end
+  end
+end
+
+def weekly_testing_update()
+  # some nice email styling
+  td_start = '<td style="background-color: white; padding: 3px;">'
+  table_start = '<table style="width: 800px; background-color: darkgray;">'
+  body_text = "These are all of the people who have attempted an IRDP test in the past week. An 80% is required to pass.
+    <br><br>
+    #{table_start}
+      <tr>
+      #{td_start}Name</td>
+      #{td_start}Type</td>
+      #{td_start}Percentage</td>
+      #{td_start}Time (UTC)</td>
+      </tr>"
+  begin
+    user_dump = Parse::Query.new("_User").eq('region','QUK').get
+    users = {}
+    user_dump.each do |u|
+      users[u['objectId']] = name_maker(u)
+    end
+
+    test_dump = Parse::Query.new("testAttempt").tap do |q|
+      q.greater_than("createdAt", Parse::Date.new((Time.now - 604800).to_datetime))
+    end.get
+    tests = []
+
+    test_dump.each do |t|
+      if users.include? t['taker']
+        body_text += "<tr>#{td_start}#{users[t['taker']]}</td>
+          #{td_start}#{settings.test_names[t['type'].to_sym]}</td>
+          #{td_start}#{t['percentage']}%</td>
+          #{td_start}#{Time.parse(t['updatedAt']).strftime(settings.time_string)}</td>
+          </tr>"
+      end
+    end
+
+    body_text += "</table><br><br>If you've got any questions, reach out to David at david@relateiq.com.<br><br> ~IRDP"
+
+    mail = Mail.deliver do
+      # to 'gameplay@quidditchuk.org'
+      to 'beamneocube@gmail.com'
+      from 'IRDP <irdp.rdt@gmail.com>'
+      subject 'Weekly Test Result Update'
+      html_part do 
+        content_type 'text/html; charset=UTF-8'
+        body body_text
+      end
+    end
+
+    return 1
+  rescue
+    return nil
   end
 end
 
@@ -681,6 +739,27 @@ post '/reset' do
   end
 end
 
+def release
+end
+get '/release' do 
+  # this isn't display because all the languages are already there
+  # it could be updated if we add a language we didn't press release in
+  haml :'EN/release', layout: false
+end
+
+def report
+end
+# this is a post so it'll play nice with IFTTT
+# could eventually take in a region code so that this will work for anyone
+post '/report' do 
+  good = weekly_testing_update
+  if good
+    {status: 200}.to_json
+  else
+    {status: 500}.to_json
+  end
+end
+
 def review
 end
 get '/review' do 
@@ -754,17 +833,8 @@ post '/review' do
   redirect back
 end
 
-def release
-end
-get '/release' do 
-  # this isn't display because all the languages are already there
-  # it could be updated if we add a language we didn't press release in
-  haml :'EN/release', layout: false
-end
-
 def reviews
 end
-
 get '/reviews' do 
   @title = 'Reviews'
   @num = Parse::Query.new("review").get.size
