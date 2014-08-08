@@ -8,8 +8,12 @@
     instead and complete your purchase there. 
 - else
   - if logged_in?
-    .paypal
-      #{display(:access,false)}
+    - if affiliate?
+      %p
+        You don't have to buy this, you're part of an affiliate league! Instead, see your regional IRDP member or gameplay person!
+    - else
+      .paypal
+        #{display(:access,false)}
   - else
     %p
       %a{href: '/create'}<
@@ -57,8 +61,12 @@
       IRDP.
 
   - if logged_in?
-    .paypal
-      #{display(:access,false)}
+    - if affiliate?
+      %p
+        You don't have to buy this, you're part of an affiliate league! Instead, see your regional IRDP member or gameplay person!
+    - else
+      .paypal
+        #{display(:access,false)}
   - else
     %p
       %a{href: '/create'}<

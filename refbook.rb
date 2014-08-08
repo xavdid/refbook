@@ -614,6 +614,9 @@ def pay
 end
 get '/pay' do
   @title = 'Purchase an IRDP Membership!'
+  if logged_in?
+    @id = session[:user]['objectId']
+  end
   display
 end
 
@@ -691,6 +694,7 @@ end
 get '/pull' do 
   if not logged_in? 
     flash[:issue] = "Must be logged in to refresh"
+    redirect '/login?d=/pull'
   else
     session[:user] = pull_user
     flash[:issue] = "User object sucessfully updated"
