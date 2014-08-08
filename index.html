@@ -1,42 +1,34 @@
 <!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Refbook by Xavdidtheshadow</title>
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Refbook</h1>
+        <p>the IRDP central site</p>
 
-  <title>Refbook</title>
-  <meta name="description" content="the IRDP central site">
+        <p class="view"><a href="https://github.com/Xavdidtheshadow/refbook">View the Project on GitHub <small>Xavdidtheshadow/refbook</small></a></p>
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-</head>
-
-<body>
-
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Refbook</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">the IRDP central site</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/Xavdidtheshadow/refbook/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/Xavdidtheshadow/refbook/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/Xavdidtheshadow/refbook" class="code">View Refbook on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h1>
+        <ul>
+          <li><a href="https://github.com/Xavdidtheshadow/refbook/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Xavdidtheshadow/refbook/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Xavdidtheshadow/refbook">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
 <a name="refbook" class="anchor" href="#refbook"><span class="octicon octicon-link"></span></a>Refbook</h1>
 
 <p>This is the informational and functional hub of the <a href="http://refdevelopment.com">International Referee Development Program</a>, an independant quidditch referee certification and standards body. </p>
@@ -60,7 +52,7 @@
 <p>Given these shortcomings, the IRDP wanted to accomplish a few specific goals with the new system: </p>
 
 <ul>
-<li>Never force an applicant wait to take their test</li>
+<li>Never force an applicant to wait to take their test</li>
 <li>Make certification status information easy for both us and the general public to access</li>
 <li>Centralize the requirements for the tests (waiting period, cost, qualification) so we (by hand) didn't have to check 3 google docs to validate whether a candidate should have taken a test.</li>
 <li>Make it super straightforward to test, regardless of what language(s) the user spoke.</li>
@@ -123,27 +115,14 @@ haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
 <li>
 <strong>IQA</strong>: International Quidditch Association, the worldwide quidditch governing body. <strong>Note:</strong> the organization known as the IQA until July 2014 rebranded into <strong>USQ</strong> to continue their work as a US centric organization. At that time, a new IQA was formed. </li>
 </ul>
-        </article>
-      </div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Xavdidtheshadow">Xavdidtheshadow</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/Xavdidtheshadow" class="avatar"><img src="https://avatars0.githubusercontent.com/u/1231935?s=60" width="48" height="48"/></a> <a href="https://github.com/Xavdidtheshadow">Xavdidtheshadow</a> maintains <a href="https://github.com/Xavdidtheshadow/refbook">Refbook</a></p>
-
-
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/Xavdidtheshadow/refbook/tarball/master" class="tar">tar</a><a href="https://github.com/Xavdidtheshadow/refbook/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
-
-            <script type="text/javascript">
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -154,5 +133,5 @@ haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
             } catch(err) {}
           </script>
 
-</body>
+  </body>
 </html>
