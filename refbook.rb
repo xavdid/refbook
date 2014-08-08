@@ -93,8 +93,9 @@ def name_maker(person)
   "#{person['firstName']} #{person['lastName']}"
 end
 
-def pull_user
-  Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+def pull_user(id=nil)
+  uid = id || session[:user]['objectId']
+  Parse::Query.new("_User").eq("objectId", uid).get.first
 end
 
 # originally created to ease the transition between js bools and 
@@ -449,9 +450,9 @@ get '/cm' do
   att["time"] = Time.now.utc.to_s
   att.save
 
-  user_to_update = pull_user
+  user_to_update = pull_user(params[:cm_user_id])
 
-  @email = session[:user]['email']
+  @email = user_to_update['email']
   @score = params[:cm_tp]
   puts 'to', @email, @score
   if params[:cm_tp].to_i >= 80
@@ -628,7 +629,10 @@ end
 post '/paid' do
   id = params["custom"].split('|')[0].split('=')[1]
   type = params["custom"].split('|')[1].split('=')[1]
-  
+  # unnamed ref payments don't count
+  if id == 'Sb33WyBziN'
+    return {status: 200, message: "ok"}.to_json
+  end
   user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
   # puts params
   if type == 'hr'
@@ -720,7 +724,7 @@ def refresh
 end
 get '/refresh' do
   # just to make sure we beat the paypal ping
-  sleep(1.5) 
+  sleep(2.5) 
   session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
   flash[:issue] = 'Payment confirmed. Thank you! You may need to logout and back in to register the upgrade.'
   redirect '/'
