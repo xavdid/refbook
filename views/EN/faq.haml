@@ -85,10 +85,17 @@
     A:
   As of #{settings.updated_at.strftime(settings.time_string)} 
   #{local_time(settings.updated_at,'IRDP+Contracts+Updated')}
-  the IRDP is in final contract agreements with the Australian Quidditch Association. That agreement can be 
-  %a{href: 'https://docs.google.com/document/d/1jHE29t7dzAUuJvKAH4win9cuDAIgHg8uk6kwWyNHcO4/edit', target: '_blank'}<
-    viewed
-  publicly.
+  the IRDP has contracts with: 
+  %ul.bullets
+    %li
+      the 
+      %a{href: "http://www.quidditch.org.au/", target: "_blank"}<
+        Australian Quidditch Association
+      (<a href="https://docs.google.com/document/d/1jHE29t7dzAUuJvKAH4win9cuDAIgHg8uk6kwWyNHcO4/edit" target="_blank">contract</a>)
+    %li
+      %a{href: "https://quidditchuk.org/", target: "_blank"}<
+        Quidditch UK
+      (<a href="https://docs.google.com/document/d/1O_iugOK8w0Vui3Cf9XLnqXiTbCtWXIDRLmySZCY3RsI/edit" target="_blank">contract</a>)
   %br
   %br
   Stay tuned for the results of our talks with at multiple other leagues!
