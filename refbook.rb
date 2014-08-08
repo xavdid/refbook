@@ -552,12 +552,7 @@ end
 def pay
 end
 get '/pay' do
-  if not logged_in?
-    flash[:issue] = "Purchasing access requires an account"
-    redirect '/login?d=/pay'
-  end
   @title = 'Purchase an IRDP Membership!'
-  @id = session[:user]['objectId']
   display
 end
 

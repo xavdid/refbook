@@ -7,8 +7,14 @@
       HR test page
     instead and complete your purchase there. 
 - else
-  .paypal
-    #{display(:access,false)}
+  - if logged_in?
+    .paypal
+      #{display(:access,false)}
+  - else
+    %p
+      %a{href: '/create'}<
+        Create
+      an account to make a purchase!
 
   %p
     Thank you for thinking about financially supporting the IRDP! Now that we're our own organization, we've got bills to pay and as of now, our only support comes from you, our lovely paid members. 
@@ -50,5 +56,12 @@
     %b
       IRDP.
 
-  .paypal
-    #{display(:access,false)}
+  - if logged_in?
+    .paypal
+      #{display(:access,false)}
+  - else
+    %p
+      %a{href: '/create'}<
+        Create
+      an account to make a purchase!
+      
