@@ -639,7 +639,7 @@ post '/paid' do
     halt 500
   end
   user_to_update.save
-  register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']}")
+  register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']} ||| #{user_to_update['region']}")
   return {status: 200, message: "ok"}.to_json
 end
 
