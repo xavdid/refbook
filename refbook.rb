@@ -123,7 +123,11 @@ def validate(key, region)
     else
       return false
     end
-  rescue
+  rescue Exception => e
+    puts 'VALIDATION ERROR'
+    puts key
+    puts region
+    puts e
     return false
   end
 end
@@ -213,14 +217,15 @@ def weekly_testing_update()
   # some nice email styling
   td_start = '<td style="background-color: white; padding: 3px;">'
   table_start = '<table style="width: 800px; background-color: darkgray;">'
+
   body_text = "These are all of the people who have attempted an IRDP test in the past week. An 80% is required to pass.
     <br><br>
     #{table_start}
       <tr>
-      #{td_start}Name</td>
-      #{td_start}Type</td>
-      #{td_start}Percentage</td>
-      #{td_start}Time (UTC)</td>
+      #{td_start}<strong>Name</strong></td>
+      #{td_start}<strong>Type</strong></td>
+      #{td_start}<strong>Percentage</strong></td>
+      #{td_start}<strong>Time (UTC)</strong></td>
       </tr>"
   begin
     user_dump = Parse::Query.new("_User").eq('region','QUK').get
@@ -247,8 +252,8 @@ def weekly_testing_update()
     body_text += "</table><br><br>If you've got any questions, reach out to David at david@relateiq.com.<br><br> ~IRDP"
 
     mail = Mail.deliver do
-      # to 'gameplay@quidditchuk.org'
-      to 'beamneocube@gmail.com'
+      # to 'beamneocube@gmail.com'
+      to 'gameplay@quidditchuk.org'
       from 'IRDP <irdp.rdt@gmail.com>'
       subject 'Weekly Test Result Update'
       html_part do 
@@ -760,7 +765,7 @@ def report
 end
 # this is a post so it'll play nice with IFTTT
 # could eventually take in a region code so that this will work for anyone
-post '/report' do 
+get '/report' do 
   good = weekly_testing_update
   if good
     {status: 200}.to_json
