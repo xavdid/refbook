@@ -1,0 +1,28 @@
+{
+    "404" : {
+        "EN" : {
+            "header": "You've found something that doesn't exist!",
+            "hunter": "You're the greatest treasure hunter there ever was... or the worst.",
+            "cookie": "If you're the first to find this broken link, you've won a cookie!",
+            "contact": "Contact the admin",
+            "prize": "to claim your prize",
+            "after": "Afterwards, head",
+            "home": "home",
+            "continue": "to continue with your business."
+        },
+        "FR" : {
+            "header": "Vous avez trouvé quelque chose qui n'existe pas!",
+            "hunter": "Vous êtes le meilleur détective de l'histoire mondiale...ou peut-être le plus mauvais.",
+            "cookie": "Si vous êtes le premier de trouver cet hyperlien cassé, vous avez gagné un biscuit!",
+            "contact": "Envoyez un email au webmaster",
+            "prize": "pour recevoir votre prix. ",
+            "after": "Après ça, retournez",
+            "home": "à la page d'acceuil",
+            "continue": "pour continuer avec vos affaires."
+        }
+    },
+    "create": {
+        "EN": {"name": "name"},
+        "FR": {"name": "nom"}
+    }
+}

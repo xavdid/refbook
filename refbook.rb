@@ -30,6 +30,8 @@ configure do
   # world clock string format
   set :wc_string, '%Y%m%dT%H%M'
 
+  set.text_hash, JSON.parse(File.read('text.json'))
+
   set :killed, false
 
   # mongo is just for registration codes
