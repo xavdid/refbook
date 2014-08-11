@@ -147,25 +147,47 @@ end
 # 
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
-def display(path = request.path_info[1..-1], layout = true)
-  if settings.development?
-    if layout
-      haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-    else
-      haml "#{@lang}/#{path}".to_sym, layout: false
-    end
-  else
-    # begin
-      if layout
-        haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-      else
-        haml "#{@lang}/#{path}".to_sym, layout: false
-      end
-    # rescue
-      # redirect '/logout'
-    # end
-  end
+
+def to_bool(b)
+  b == :t
 end
+
+def display(args = {})
+  pp args
+  path = args[:path] || request.path_info[1..-1]
+  args[:layout] ||= :t
+  args[:old] ||= :t
+
+  if not to_bool(args[:old])
+    @lay = settings.text_hash[path][@lang]
+    @text = settings.text_hash[path][@lang]
+  end
+
+  pp args
+  pp @text
+
+  haml path.to_sym, layout: to_bool(args[:layout])
+end
+
+# def display(path = request.path_info[1..-1], layout = true)
+#   if settings.development?
+#     if layout
+#       haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
+#     else
+#       haml "#{@lang}/#{path}".to_sym, layout: false
+#     end
+#   else
+#     # begin
+#       if layout
+#         haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
+#       else
+#         haml "#{@lang}/#{path}".to_sym, layout: false
+#       end
+#     # rescue
+#       # redirect '/logout'
+#     # end
+#   end
+# end
 
 # EMAIL FUNCTIONS #
 
@@ -305,13 +327,11 @@ def paypal_button
 end
 
 not_found do
-  @text = settings.text_hash['404'][@lang]
-  haml :'404', layout: false
-  # display(404, false)
+  display({path: "404", layout: :f, old: :f})
 end
 
 error 500 do
-  display(500,false)
+  display({path: "500", layout: :f, old: :f})
 end
 
 # kill switch
@@ -364,11 +384,13 @@ end
 def about
 end
 get '/about' do
-  @title = {"EN" => "About the IRDP", "FR" => "Infos"}[@lang]
   @section = "info"
   display
 end
 
+get '/break' do 
+  halt 500
+end
 
 # it would be nice to be able to download all of this info as a CSV
 def admin
@@ -541,9 +563,8 @@ end
 def faq
 end
 get '/faq' do
-  @title = "FAQ"
   @section = "info"
-  display
+  display({old: :f})
 end
 
 def field

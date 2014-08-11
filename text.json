@@ -41,6 +41,7 @@
     }, 
     "about" : {
         "EN": {
+            "about": "About the IRDP",
             "intro": "The new International Referee Development Program was created for the purpose of constant improvement in the quality of quidditch refereeing. Through the usage of online and in-person tests, and constant evaluation and re-evaluation, the IRDP’s focus is to provide all leagues across the world with the highest quality of referees available. This program recognizes the importance of great referees in a growing sport, and aspires to continue the growth of referees at all levels. This new organization utilizes the same five tenants that are currently employed in our field tests for head referees as a structure for our business model:",
             "confidence": "Confidence",
             "confidence_paragraph": "By displaying trust and faith in the referees that we hire and the methods utilized, the IRDP builds a strong support system for any who have become certified under the IRDP. Confidence is essential for all successful referees, and our faith in those that are certified builds the faith they have in themselves.",
@@ -55,6 +56,7 @@
         },
 
         "FR": {
+            "about": "Infos",
             "intro": "La nouvelle organisation Programme Internationale pour Developper des Arbitres (PIDA, ou en anglais, International Referee Development Program, ou IRDP) était créée pour améliorer constamment la qualité de l'arbitrage de quidditch.  Grâce à des tests en ligne et en personne, et l'évaluation et réévaluation constante, PIDA est capable de fournir des meilleurs arbitres disponibles pour toutes les ligues du monde.  Ce programme reconnaît l'importance d'arbitrage pour le développement du sport et souhait à continuer la croissance d'arbitrage à tous les niveaux.  Cette nouvelle organisation utilise les mêmes cinq idéaux actuellement employés pendant nos tests pour notre modèle d'affaires:",
             "confidence": "Confiance",
             "confidence_paragraph": "Affichant la fiducie et la foi aux arbitres que nous embauchons et aux méthods utilisées, le PIDA construit un réseau de soutien solide pour tous ceux qui vont obtenir la certification.  La confiance est essentielle pour tous les arbitres réussis, et notre foi en ceux qui sont certifiés par nous bâtit la foi qu'ils ont en eux-mêmes.",
@@ -66,14 +68,6 @@
             "Professionalism_paragraph": "Traitant tout le monde avec la même manière respectable, indépendamment de l'expérience ou de la situation, le PIDA mis la barre pour les interactions interpersonnelles.  Ceci assure que ceux qui sont impliqués dans le PIDA vont agir d'une manière digne d'un représentant de l'organisation.",
             "positioning": "Positionnement",
             "positioning_paragraph": "Etablissement rapidement et efficacement les membres dans les régions où la infrastructure a besoin d'être construit ou renforcé, le PIDA bâtit une présence géographique très répandue, ce qui s'assure que la qualité d'arbitrage est d'un niveau similaire dans le monde entier.  Avec les membres déjà établies sur trois continents et les parties intéressées dans les autres pays, nous sommes dans une position idéale. "
-        }
-    },
-    "access" : {
-        "EN": {
-
-        },
-        "FR": {
-
         }
     },
     "contact" : {
@@ -94,10 +88,112 @@
     },
     "faq" : {
         "EN": {
+            "title": "FAQ",
+            "q": "Q",
+            "a": "A",
+            "q1": "Why the change from the old RDT setup?",
+            "a1": "With the separation of the IQA into new national leagues, the RDT would have remained a part of a national body, specifically, the USQ. This would mean that the new leagues would not have access to the collective experience, which the IRDP felt would hinder the continued growth of the sport. For that reason, we believe that it is better for the game, and community as a whole, to work specifically as an independent organization whose sole aim is to better the quality of referees worldwide.",
 
+            "q2": "What does this change for me?",
+            "a2": "For leagues that contract the IRDP, the changes will be marginal. This site is an example of the changes you can expect: a more streamlined, efficient, and simple approach to delivering information to those who are interested in our services. Anyone that is involved in a league that uses the IRDP and our resources should expect the same services that were present under the IQA RDT.",
+            
+            "q3": "My league hasn't hired you; can I still become an IRDP certified referee?",
+            "a3": "Yes, and you are encouraged to do so. Please note, however, that if your league does not contract us, your certification as an IRDP referee will hold no bearing on the membership requirements for your league. If you want to become a certified IRDP Head Referee, there will be a fee associated with that process.",
+            
+            "q4": "Are you hiring?",
+            "a4": "Yes! The IRDP are always looking to hire new members who want to better the quality of officiating. We are currently looking to hire new Referee Development Team members and Referee Training Coordinators in all of our leagues. Below is a description of the two major components of the IRDP:",
+            "rdt": "Referee Development Team",
+            "rdt_blurb": "This team creates testing and training materials to uphold the standards of each league with which the IRDP has contracted.",
+            "rtc": "Referee Training Coordinators",
+            "rtc_blurb": "These members have been noted to have a high level of refereeing and offer constructive criticism for other referees. Their focus is to certify and train new referees to become stronger representatives of the IRDP.",
+            "a4p2": "If you feel like you would be a great fit for any of the positions listed above, send a resume and brief cover letter to us at ",
+            "a4p3": "and we'll get back to you as soon as we can.",
+
+            "q5": "I’m interested in contracting the IRDP for my league; how do I do that?",
+            "a5": "Contact us ",
+            "here": "here!",
+            "a5p2": "The IRDP offers field tests and will run workshops in your leagues to get you up and running, as well as continue to offer additional support after our initial workshops.",
+
+            "q6": "How exactly is my head ref fee used?",
+            "a6": "Even though a lot of candidates look great on paper, a large part of head reffing is control of the pitch. In order to ensure refs are talented on the field, we cover the cost of transport for our field testers around the world to affirm that only the most talented HR candidates are certified. Additionally, your fee powers our website and online testing resources (classmarker). The IRDP makes no profit and all of your money is used to better your reffing experience. You can read more about it on our ",
+            "pay": "payment",
+            "a6p2": "page",
+            
+            "q7": "What leagues has the IRDP contracted with?",
+            "a7": "As of",
+            "updated": "IRDP+Contracts+Updated",
+            "a7p2": "the IRDP has contracts with: ",
+            "aqa": "Australian Quidditch Association",
+            "quk": "Quidditch UK",
+            "contract": "contract",
+            "a7p3" :"Stay tuned for the results of our talks with at multiple other leagues. Members of these leagues gain access to all IRDP training materials for free!",
+
+            "q8": "Help! I paid but I don't have access to the site!",
+            "a8": "Never fear! Sometimes a packet gets dropped. If your paypal purchase went through (you saw the \"Payment Completed\" page and/or got the confirmation email), then you'll definitely get site access, don't you worry. First try",
+            "logout": "logging out",
+            "a8p2": "and back in to see if that fixes it. If that doesn't work, email the ",
+            "webmaster": "webmaster",
+            "a8p3": "and he'll get you sorted within 12 hours.",
+            
+            "q9": "What content is offered on this website for free?",
+            "a9": "For any referee within a league the IRDP has a contract with, all content is free and the Head Referee test is offered for a small fee. For any referee within a league the IRDP has not contracted with, the Scorekeeper content and Goal referee content is offered for free along with a sneak peek at our five pillar guides. These referees may purchase access to Assistant, Snitch, and Head referee training resources for $5USD, and the Head referee written test will be available for $20USD.",
+            
+            "q10": "How is testing different from the last season with the IQA?",
+            "a10": "The IRDP has completely revamped the internal structure of the written tests. The new system more effectively tests candidates on their knowledge of specific rules, and follows a question format that will allow for easier understanding. In addition, the field test has been streamlined, as well as a sixth section that has been added to test a candidate's ability to make the correct calls in a game. Additionally, it's all offered through one convenient, automated site (this one)."
         },
         "FR": {
+            "title": "FAQ",
+            "q": "Q",
+            "a": "A",
+            "q1": "Why the change from the old RDT setup?",
+            "a1": "With the separation of the IQA into new national leagues, the RDT would have remained a part of a national body, specifically, the USQ. This would mean that the new leagues would not have access to the collective experience, which the IRDP felt would hinder the continued growth of the sport. For that reason, we believe that it is better for the game, and community as a whole, to work specifically as an independent organization whose sole aim is to better the quality of referees worldwide.",
 
+            "q2": "What does this change for me?",
+            "a2": "For leagues that contract the IRDP, the changes will be marginal. This site is an example of the changes you can expect: a more streamlined, efficient, and simple approach to delivering information to those who are interested in our services. Anyone that is involved in a league that uses the IRDP and our resources should expect the same services that were present under the IQA RDT.",
+            
+            "q3": "My league hasn't hired you; can I still become an IRDP certified referee?",
+            "a3": "Yes, and you are encouraged to do so. Please note, however, that if your league does not contract us, your certification as an IRDP referee will hold no bearing on the membership requirements for your league. If you want to become a certified IRDP Head Referee, there will be a fee associated with that process.",
+            
+            "q4": "Are you hiring?",
+            "a4": "Yes! The IRDP are always looking to hire new members who want to better the quality of officiating. We are currently looking to hire new Referee Development Team members and Referee Training Coordinators in all of our leagues. Below is a description of the two major components of the IRDP:",
+            "rdt": "Referee Development Team",
+            "rdt_blurb": "This team creates testing and training materials to uphold the standards of each league with which the IRDP has contracted.",
+            "rtc": "Referee Training Coordinators",
+            "rtc_blurb": "These members have been noted to have a high level of refereeing and offer constructive criticism for other referees. Their focus is to certify and train new referees to become stronger representatives of the IRDP.",
+            "a4p2": "If you feel like you would be a great fit for any of the positions listed above, send a resume and brief cover letter to us at ",
+            "a4p3": "and we'll get back to you as soon as we can.",
+
+            "q5": "I’m interested in contracting the IRDP for my league; how do I do that?",
+            "a5": "Contact us ",
+            "here": "here!",
+            "a5p2": "The IRDP offers field tests and will run workshops in your leagues to get you up and running, as well as continue to offer additional support after our initial workshops.",
+
+            "q6": "How exactly is my head ref fee used?",
+            "a6": "Even though a lot of candidates look great on paper, a large part of head reffing is control of the pitch. In order to ensure refs are talented on the field, we cover the cost of transport for our field testers around the world to affirm that only the most talented HR candidates are certified. Additionally, your fee powers our website and online testing resources (classmarker). The IRDP makes no profit and all of your money is used to better your reffing experience. You can read more about it on our ",
+            "pay": "payment",
+            "a6p2": "page",
+            
+            "q7": "What leagues has the IRDP contracted with?",
+            "a7": "As of",
+            "updated": "IRDP+Contracts+Updated",
+            "a7p2": "the IRDP has contracts with: ",
+            "aqa": "Australian Quidditch Association",
+            "quk": "Quidditch UK",
+            "contract": "contract",
+            "a7p3" :"Stay tuned for the results of our talks with at multiple other leagues. Members of these leagues gain access to all IRDP training materials for free!",
+
+            "q8": "Help! I paid but I don't have access to the site!",
+            "a8": "Never fear! Sometimes a packet gets dropped. If your paypal purchase went through (you saw the \"Payment Completed\" page and/or got the confirmation email), then you'll definitely get site access, don't you worry. First try",
+            "logout": "logging out",
+            "a8p2": "and back in to see if that fixes it. If that doesn't work, email the ",
+            "webmaster": "webmaster",
+            "a8p3": "and he'll get you sorted within 12 hours.",
+            
+            "q9": "What content is offered on this website for free?",
+            "a9": "For any referee within a league the IRDP has a contract with, all content is free and the Head Referee test is offered for a small fee. For any referee within a league the IRDP has not contracted with, the Scorekeeper content and Goal referee content is offered for free along with a sneak peek at our five pillar guides. These referees may purchase access to Assistant, Snitch, and Head referee training resources for $5USD, and the Head referee written test will be available for $20USD.",
+            
+            "q10": "How is testing different from the last season with the IQA?",
+            "a10": "The IRDP has completely revamped the internal structure of the written tests. The new system more effectively tests candidates on their knowledge of specific rules, and follows a question format that will allow for easier understanding. In addition, the field test has been streamlined, as well as a sixth section that has been added to test a candidate's ability to make the correct calls in a game. Additionally, it's all offered through one convenient, automated site (this one)."
         }
     },
     "index" : {
