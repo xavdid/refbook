@@ -3,16 +3,16 @@
 .error
 
   %h1
-    Something went wrong! 
+    #{@text['header']}
     %br
     {HTTP 500}
   %h2
     %a{href: '/logout'}<
-      Logging out
-    may solve the issue. 
+      #{@text['logout']}
+    #{@text['solve']}
     %br
     %br
-    If not, 
+    #{@text['not']}
     %a{href: "mailto: david@relateiq.com"}<
-      email the administrator
-    and he'll sort it out. 
+      #{@text['email']}
+    #{@text['sort']}

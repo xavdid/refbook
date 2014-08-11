@@ -30,7 +30,7 @@ configure do
   # world clock string format
   set :wc_string, '%Y%m%dT%H%M'
 
-  set.text_hash, JSON.parse(File.read('text.json'))
+  set :text_hash, JSON.parse(File.read('text.json'))
 
   set :killed, false
 
@@ -305,7 +305,9 @@ def paypal_button
 end
 
 not_found do
-  display(404, false)
+  @text = settings.text_hash['404'][@lang]
+  haml :'404', layout: false
+  # display(404, false)
 end
 
 error 500 do
@@ -562,14 +564,6 @@ get '/info' do
   @section = 'info'
   display
 end
-
-# def leagues
-# end
-# get '/leagues' do
-#   @title = 'Affiliate Leagues'
-#   @section = 'info'
-#   display
-# end
 
 def lock
 end

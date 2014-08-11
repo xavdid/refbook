@@ -1,0 +1,22 @@
+%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
+
+.error
+
+  %h1
+    #{@text['header']}
+    %br
+    {HTTP 404}
+  %h2
+    #{@text['hunter']}
+    %br
+    %br
+    #{@text['cookie']}
+    %a{href: 'mailto: david@relateiq.com'}<
+      #{@text['contact']}
+    #{@text['prize']}
+    %br
+    %br
+    #{@text['after']}
+    %a{href: '/'}<
+      #{@text['home']}
+    #{@text['continue']}

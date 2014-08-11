@@ -21,8 +21,198 @@
             "continue": "pour continuer avec vos affaires."
         }
     },
-    "create": {
-        "EN": {"name": "name"},
-        "FR": {"name": "nom"}
+    "500" : {
+        "EN": {
+            "header": "Something went wrong!",
+            "logout": "Logging out",
+            "solve": "may solve the issue.",
+            "not": "If not, ",
+            "email": "email the administrator",
+            "sort": "and he'll sort it out. "
+        },
+        "FR": {
+            "header": "",
+            "logout": "",
+            "solve": "",
+            "not": "",
+            "email": "",
+            "sort": ""
+        }
+    }, 
+    "about" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "access" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "contact" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "create" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "faq" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "index" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "help" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "index" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "info" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "layout" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "login" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "off" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "pay" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "profile" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "public_profile" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "reset" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "review" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "reviews" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "search" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "settings" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "test_links" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
+    },
+    "testing" : {
+        "EN": {
+
+        },
+        "FR": {
+
+        }
     }
 }
