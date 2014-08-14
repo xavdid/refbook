@@ -31,6 +31,7 @@ configure do
   set :wc_string, '%Y%m%dT%H%M'
 
   set :text_hash, JSON.parse(File.read('text.json'))
+  set :layout_hash, JSON.parse(File.read('layout.json'))
 
   set :killed, false
 
@@ -164,8 +165,11 @@ def display(args = {})
   args[:old] ||= :t
 
   if not to_bool(args[:old])
-    @lay = settings.text_hash[path][@lang]
+    @layout = settings.layout_hash[@lang]
     @text = settings.text_hash[path][@lang]
+  else
+    @text = {}
+    @layout = {}
   end
 
   pp args
@@ -381,7 +385,6 @@ end
 def index 
 end
 get '/' do
-  @title = {"EN" => "Home", "FR" => "Page d'Accueil"}[@lang]
   @section = "index"
   display({path: :index})
 end
@@ -390,7 +393,7 @@ def about
 end
 get '/about' do
   @section = "info"
-  display
+  display({old: :f})
 end
 
 get '/break' do 

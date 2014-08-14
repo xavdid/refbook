@@ -6,59 +6,58 @@
       %ul#menu
         %li.no-kids#index
           %a{href: '/'}
-            IRDP 
+            #{@layout['irdp']} 
         %li
           |
 
         %li.kids#info
           %a{href: '/info'}<
-            Information
+            #{@layout['information']}
           %ul.sub-menu
             %li
               %a{href: '/about'}
-                About
+                #{@layout['about']} 
             %li
               %a{href: '/faq'}
-                FAQ
+                #{@layout['faq']} 
             %li
               %a{href: '/contact'}
-                Contact
+                #{@layout['contact']} 
         %li
           |
 
         %li.no-kids#search
           %a{href: '/search/ALL'}
-            Referee Directory
+            #{@layout['directory']} 
         %li
           |
 
         %li.no-kids#review
           %a{href: '/review'}
-            Review a Referee
+            #{@layout['review']} 
         %li
           |
 
         %li.kids#testing
           %a{href: '/testing'}
-            Testing Center
+            #{@layout['testing']} 
           %ul.sub-menu
             %li
               %a{href: '/testing'}
-                Training Materials
+                #{@layout['testing']} 
             %li
               %a{href: "/testing/ass"}
-                Assistant Ref Test
+                #{@layout['ass']} 
             %li
               %a{href: "/testing/snitch"}
-                Snitch Ref Test
+                #{@layout['snitch']} 
             %li
               %a{href: "/testing/head"}
-                Head Ref Test
+                #{@layout['head']} 
         
         %li.right
-          | #{logged_in? ? name_maker(session[:user]) : 'Not Signed In'}
-          -# show email
-          -# #{logged_in? ? "(#{session[:user]['username']})" : ''}
+          | 
+          #{logged_in? ? name_maker(session[:user]) : @layout['nsi']}
         
         - if logged_in?
           - if admin?
@@ -78,15 +77,15 @@
       %p
         - if logged_in?
           %a{href: '/logout'}
-            Logout
+            #{@layout['logout']} 
             %i.fa.fa-sign-out.fa-lg
             
         - else
           %a{href: '/login'}<
-            Login
+            #{@layout['logout']} 
           or
           %a{href: '/create'}
-            Create Account
+            #{@layout['create']} 
       - if @killed
         %p
           %i.fa.fa-warning.fa-2x.danger
@@ -94,10 +93,10 @@
         %p
           %i.fa.fa-warning.fa-2x.go
           %br
-          It looks like you belong to an affiliate league but you haven't entered your registration code. There's a lot more content available if you get that free code from your region's referee administrator and submit it on the
+          #{@layout['affiliate']} 
           %a{href: '/settings'}<
-            settings
-          page.
+            #{@layout['settings']} 
+          #{@layout['page']}. 
 
         
   .mid
@@ -115,11 +114,11 @@
         timeline.
     
     %h1#the_title
-      #{@title || 'Missing Title'}
+      #{@text['title'] || 'Missing Title'}
 
     .issue
       %h3
-        =flash[:issue]
+        = flash[:issue]
 
     #{yield}
 
@@ -127,18 +126,15 @@
     %p
       %a{href: "http://davidbrownman.com", target: "_blank"}<
         David Brownman
-      made this site. 
-      /The code is available
-      /%a{href: "https://github.com/Xavdidtheshadow/refbook", target: "_blank"}<
-      /  here
-      /if you're into that sort of thing.
-      Read more about the features
+      #{@layout['made']}.
       %a{href: "http://davidbrownman.com/refbook", target: "_blank"}<
-        here
-      in this handy readme!
-      &copy; 2014 IRDP, all rights reserved.
+        #{@layout['here']}
+      #{@layout['readme']}
+      &copy; 2014 
+      #{@layout['irdp']}, 
+      #{@layout['reserved']} 
       %a{href: "/contact"}<
-        Contact
+        #{@layout['contact']}
       us!
 
 
