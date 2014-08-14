@@ -152,6 +152,11 @@ def to_bool(b)
   b == :t
 end
 
+# what the heck did I write?
+# you can pass in a hash with any of 3 options
+# path: to mancually specify the route name
+# layout: whether or not to render with a layout
+# old: whether or not it uses the old haml format. Will depreciate later.
 def display(args = {})
   pp args
   path = args[:path] || request.path_info[1..-1]
@@ -301,9 +306,9 @@ def email_link(a={})
   end
 
   if a.include? :text
-    @text = a[:text]
+    @display_text = a[:text]
   else
-    @text = 'irdp.rdt@gmail.com'
+    @display_text = 'irdp.rdt@gmail.com'
   end
   haml :email_link
 end
@@ -311,7 +316,7 @@ end
 def local_time(time, message='', text=nil)
   @time = time
   @message = message
-  @text = text || 'UTC'
+  @display_text = text || 'UTC'
   haml :local_time
 end
 
@@ -378,7 +383,7 @@ end
 get '/' do
   @title = {"EN" => "Home", "FR" => "Page d'Accueil"}[@lang]
   @section = "index"
-  display :index
+  display({path: :index})
 end
 
 def about
@@ -871,19 +876,19 @@ get '/reviews' do
   @num = Parse::Query.new("review").get.size
   case @num
   when 0..10
-    @text = "Well, everyone has to start somewhere!"
+    @display_text = "Well, everyone has to start somewhere!"
   when 11..30
-    @text = "We're off to a great start, let's keep this going strong!"
+    @display_text = "We're off to a great start, let's keep this going strong!"
   when 31..49
-    @text = "We're charging up the hill to halfway. Let's get there!"
+    @display_text = "We're charging up the hill to halfway. Let's get there!"
   when 50..65
-    @text = "Halfway! That was easy mode, let's knock the rest of these out"
+    @display_text = "Halfway! That was easy mode, let's knock the rest of these out"
   when 66..90
-    @text = "We're on the home stretch. Can we do it!?"
+    @display_text = "We're on the home stretch. Can we do it!?"
   when 91..99
-    @text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
+    @display_text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
   when 100..300
-    @text = "We did it! We've crossed into 100 reviews!"
+    @display_text = "We did it! We've crossed into 100 reviews!"
   end
   display
 end
