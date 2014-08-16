@@ -263,7 +263,31 @@
             "press": "Press Release",
             "public": "was made public on May 5th",
 
-            "upcoming": "Upcoming Releases and Events"
+            "upcoming": "Upcoming Releases and Events",
+            "release": "Release of the IRDP",
+            "confidence": "Confidence Guide",
+            "communication": "Communication Guide",
+            "professionalism": "Professionalism Guide",
+            "consistency": "Consistency Guide",
+            "health": "Health and Well-Being Guide",
+            "responsibilities": "Referee Match Responsibilities Guide",
+            "tests": "All tests updated for USQ Rulebook 8",
+            "beta": "Beta Release of the ",
+            "french": "the French",
+            "italian": "the Italian",
+            "not_tests": "website (but not tests)!",
+            "rtc": "Referee Training Coordinator training materials",
+            "extra": "Assistant and Snitch Refere Rating goes live",
+
+            "july": "July,",
+            "august": "August,",
+            "september": "September,",
+            "suffix": "th",
+            "suffix_2": "rd",
+
+            "outages": "Upcoming Site Outages",
+            "none": "None planned!"
+
         },
         "FR": {
             "title": "Home",
@@ -279,7 +303,31 @@
             "press": "communiqué de presse",
             "public": "a été publié le 5 mai 2014.",
 
-            "upcoming": "Evénements à venir"
+            "upcoming": "Evénements à venir",
+            "release": "publication du",
+            "confidence": "Guide de Confiance",
+            "communication": "Guide de Communication",
+            "professionalism": "Guide de Professionalisme",
+            "consistency": "Guide de Consistence",
+            "health": "SGuide de anté et bien-être",
+            "responsibilities": "Guide de Responsibilités d'Arbitre du Match",
+            "tests": "Tous les tests pour Règles Version 8 disponibles",
+            "beta": "Version beta ",
+            "french": "du français",
+            "italian": "d'italien",
+            "not_tests": "(lauf les tests) !",
+            "rtc": "Publication des documents de formation de coordinateur d'arbitre formation",
+            "extra": "Évaluation d'arbitre de vif",
+
+            "july": "juillet",
+            "august": "août",
+            "september": "septembre",
+            "suffix": "",
+            "suffix_2": "",
+
+            "outages": "Interruptions du site prévus",
+            "none": "Aucune !"
+
         }
     },
     "info" : {
