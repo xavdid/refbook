@@ -234,28 +234,52 @@
             "a10": "le PIDA a complètement revu la structure interne des examens écrits. Le nouveau système teste les candidats de manière plus efficace sur leur connaissance de règles spécifiques, selon un format de question plus facile à comprendre. De plus, l’examen pratique a été épuré et voit l’ajout d’une sixième section destinée à évaluer la capacité du candidat à prendre la bonne décision en cours de jeu. Le tout est offert via un site internet pratique et automatisé (que vous consultez actuellement)."
         }
     },
-    "index" : {
-        "EN": {
-
-        },
-        "FR": {
-
-        }
-    },
     "help" : {
         "EN": {
-
+            "paid": "This is paid content",
+            "funds": "The funds for the IRDP come exclusively from leagues we contract with and member dues. So, be a champion and give us a $5USD payment in order to gain access to these awesome resources. Read all about why we charge and where your money goes on our",
+            "purchase": "purchase",
+            "page": "page"
         },
         "FR": {
-
+            "paid": "This is paid content",
+            "funds": "The funds for the IRDP come exclusively from leagues we contract with and member dues. So, be a champion and give us a $5USD payment in order to gain access to these awesome resources. Read all about why we charge and where your money goes on our",
+            "purchase": "purchase",
+            "page": "page"
         }
     },
     "index" : {
         "EN": {
+            "title": "Home",
+            "purpose": "The International Referee Development Program is an organization formed for the express purpose of the certification of consistent and competent referees around the world.",
+            "resources": "On this site, you'll find resources to prepare for the referee tests, the tests themselves, the Referee Directory, and any other information relating to refs that you may want or need.", 
+            "whenever": "Whenever you see a time, click", 
+            "click": "to see that time in your local time zone.",
 
+            "latest": "Latest Updates ",
+            "asof": "as of ",
+
+            "our": "Our",
+            "press": "Press Release",
+            "public": "was made public on May 5th",
+
+            "upcoming": "Upcoming Releases and Events"
         },
         "FR": {
+            "title": "Home",
+            "purpose": "Le Programme International pour Developper des Arbitres est une organisation formée pour le but de la certification des arbitres cohérents et compétants à travers le monde.",
+            "resources": "Ici, vous pouvez y trouver des ressources pour préparer vous-même aux tests d'arbitrage, les tests eux-mêmes, l'annuaire d'arbitre, critiques, et autre information.", 
+            "whenever": "Chaque fois vous voyez une heure, cliquez sur", 
+            "click": "pour voir dans votre heure locale.",
 
+            "latest": "Dernières mises à jour ",
+            "asof": "à partir de ",
+
+            "our": "Notre",
+            "press": "communiqué de presse",
+            "public": "a été publié le 5 mai 2014.",
+
+            "upcoming": "Evénements à venir"
         }
     },
     "info" : {

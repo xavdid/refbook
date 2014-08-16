@@ -159,13 +159,13 @@ end
 # layout: whether or not to render with a layout
 # old: whether or not it uses the old haml format. Will depreciate later.
 def display(args = {})
-  pp args
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
   args[:old] ||= :t
 
   if not to_bool(args[:old])
-    @text = settings.text_hash[path][@lang]
+    pp 'asdf',settings.text_hash
+    @text = settings.text_hash[path.to_s][@lang]
   else
     @text = {}
   end
@@ -173,7 +173,7 @@ def display(args = {})
   @layout = settings.layout_hash[@lang]
 
   pp args
-  pp @text
+  # pp @text
 
   haml path.to_sym, layout: to_bool(args[:layout])
 end
@@ -386,7 +386,7 @@ def index
 end
 get '/' do
   @section = "index"
-  display({path: :index})
+  display({path: :index, old: :f})
 end
 
 def about
