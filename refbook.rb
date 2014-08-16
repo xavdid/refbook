@@ -165,12 +165,12 @@ def display(args = {})
   args[:old] ||= :t
 
   if not to_bool(args[:old])
-    @layout = settings.layout_hash[@lang]
     @text = settings.text_hash[path][@lang]
   else
     @text = {}
-    @layout = {}
   end
+
+  @layout = settings.layout_hash[@lang]
 
   pp args
   pp @text
@@ -511,16 +511,14 @@ end
 def contact
 end
 get '/contact' do
-  @title = "Contact the IRDP"
   @section = "info"
 
-  display
+  display({old: :f})
 end
 
 def create
 end
 get '/create' do
-  @title = "Create an Account!"
   @team_list = []
   teams = Parse::Query.new("_User").tap do |team|
     team.exists("team")
@@ -530,7 +528,7 @@ get '/create' do
   end
   @team_list = @team_list.to_set.to_a
   @region_keys = settings.region_names
-  display
+  display(old: :f)
 end
 
 post '/create' do

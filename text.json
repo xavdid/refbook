@@ -72,18 +72,56 @@
     },
     "contact" : {
         "EN": {
-
+            "title": "Contact the IRDP",
+            "reach": "The best way to contact us is via our shared email address,",
+            "board": "You can also contact individual board members, such as",
+            "director": "Director",
+            "adirector": "Assistant Director",
+            "treasurer": "Treasurer",
+            "secretary": "Secretary",
+            "tech": "Technical Director"
         },
         "FR": {
-
+            "title": "Contact the IRDP",
+            "reach": "The best way to contact us is via our shared email address,",
+            "board": "You can also contact individual board members, such as",
+            "director": "Director",
+            "adirector": "Assistant Director",
+            "treasurer": "Treasurer",
+            "secretary": "Secretary",
+            "tech": "Technical Director"
         }
     },
     "create" : {
         "EN": {
-
+            "title": "Create an Account",
+            "verify": "Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. All information besides registration code is required.",
+            "email": "Email",
+            "password": "Password (no spaces allowed!)",
+            "confirm": "Confirm",
+            "firstname": "First Name",
+            "lastname": "Last Name",
+            "team": "Associated Team/Alma Mater (or none). The team to whom we shouldn't assign you games to referee.",
+            "region": "Region",
+            "registration": "Registration Code (optional; you can also do it later)",
+            "agree": "I agree that I've read the",
+            "code": "Referee's Code",
+            "agree2": "and agree to all statements therein."
         },
         "FR": {
-
+            "title": "Create an Account",
+            "verify": "Vérifiez que toutes les informations sont correctes, ils seront utilisés pour notre BD d'arbitres.  Toutes les choses seront accessibles au public aux fins de communiquer avec vous.  Toutes les informations sauf le code d'enregistrement est obligatoire.",
+            "email": "Adresse email",
+            "password": "Mot de passe",
+            "confirm": "Mot de passe (bis)",
+            "firstname": "Prénom",
+            "lastname": "Nom",
+            "team": "Equipe associée (ou aucune)",
+            "region": "Pays",
+            "registration": "Code d'enregistrement (vous pouvez également le faire plus tard)",
+            "agree": "J'ai lu le ",
+            "code": "Code d'Arbitrage",
+            "agree2": "et j'accepte (je suis d'accord) toutes les déclarations qui y sont."
         }
     },
     "faq" : {

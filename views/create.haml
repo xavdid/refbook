@@ -1,45 +1,45 @@
 %p
-  Verify that all of this information is correct- it'll be used in our master ref database. All information will be publicly available for purposes of contacting you. All information besides registration code is required.
+  #{@text['verify']}
 
 .form_box
   %form{name: "create", action: "/create", method: "post", onsubmit: "return validate();"}
     %label{for: "email"}
-      Email
+      #{@text['email']}
     %input{type: "email", name: "username", placeholder:"email"}
 
     %label{for: "password"}
-      Password (no spaces allowed!)
+      #{@text['password']}
     %input{type: "password", name: "password", placeholder: "password"}
 
     %label{for: "pw2"}
-      Confirm
+      #{@text['confirm']}
     %input{type: "password", name: "pw2", placeholder: "confirmed password"}
 
     %label{for: "fn"}
-      First Name
+      #{@text['firstname']}
     %input{type: "text", name: "fn", placeholder: "First Name", id: "fn"}
 
     %label{for: "ln"}
-      Last Name
+      #{@text['lastname']}
     %input{type: "text", name: "ln", placeholder: "Last Name", id: "ln"}
 
     %label{for: "team", style: "font-size: 12px;"}
-      Associated Team/Alma Mater (or none). The team to whom we shouldn't assign you games to referee.
+      #{@text['team']}
     %input{type: "text", name: "team", placeholder: "team", id: "team"}
 
     %label{for: "region"}
-      Region
+      #{@text['region']}
     %select{name: "region", id: "region"}
 
     %label{for: "code"}
-      Registration Code (optional; you can also do it later)
+      #{@text['code']}
     %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
 
     %label{for: "agreement"}
-      I agree that I've read the 
+      #{@text['agree']}
       %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank"}<
-        Referee's Code
-      and agree to all statements therein.
+        #{@text['code']}
+      #{@text['agree2']}
 
     %input{type: "checkbox", name: "agreement", id: "agreement"}
 
