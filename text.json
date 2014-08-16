@@ -287,7 +287,6 @@
 
             "outages": "Upcoming Site Outages",
             "none": "None planned!"
-
         },
         "FR": {
             "title": "Home",
@@ -327,15 +326,32 @@
 
             "outages": "Interruptions du site prévus",
             "none": "Aucune !"
-
         }
     },
     "info" : {
         "EN": {
+            "title": "Information",
+            "check": "Check out our",
+            "pr": "Press Release",
+            "more": "for more info on the formation of the IRDP.",
 
+            "got": "We've got a",
+            "annoucements": "where we post important announcements. It's an easy way to stay in touch!",
+
+            "check": "Check out our",
+            "page": "page for interesting referee content and some good discussion."
         },
         "FR": {
+            "title": "Information",
+            "check": "Check out our",
+            "pr": "Press Release",
+            "more": "for more info on the formation of the IRDP.",
 
+            "got": "We've got a",
+            "annoucements": "where we post important announcements. It's an easy way to stay in touch!",
+            
+            "check": "Check out our",
+            "page": "page for interesting referee content and some good discussion."
         }
     },
     "layout" : {

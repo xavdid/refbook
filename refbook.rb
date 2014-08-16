@@ -589,7 +589,7 @@ end
 get '/info' do 
   @title = {"EN" => "Information", "FR" => "Infos"}[@lang]
   @section = 'info'
-  display
+  display({old: :f})
 end
 
 def lock
