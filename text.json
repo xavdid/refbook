@@ -354,20 +354,24 @@
             "page": "page for interesting referee content and some good discussion."
         }
     },
-    "layout" : {
-        "EN": {
-
-        },
-        "FR": {
-
-        }
-    },
     "login" : {
         "EN": {
-
+            "title": "Login",
+            "dont": "Don't have an account? You can",
+            "create": "create",
+            "one": "one",
+            "forgot": "Forgot your password? You can ",
+            "reset": "Reset",
+            "it": "it"
         },
         "FR": {
-
+            "title": "Login",
+            "dont": "Don't have an account? You can",
+            "create": "create",
+            "one": "one",
+            "forgot": "Forgot your password? You can ",
+            "reset": "Reset",
+            "it": "it"
         }
     },
     "off" : {

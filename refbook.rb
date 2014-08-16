@@ -608,7 +608,7 @@ def login
 end
 get '/login' do
   @title = "Login"
-  display
+  display({old: :f})
 end
 
 post '/login' do
