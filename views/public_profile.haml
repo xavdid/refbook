@@ -1,12 +1,12 @@
 %img#prof_pic{src: "#{@url}", width: 300}
 
 %h2
-  Region: #{reg_reverse(@ref['region'])}
+  #{@text['region']} #{reg_reverse(@ref['region'])}
 
 %p
   %a{href: "mailto: #{@ref['username']}"}
-    Send an email to #{@ref['firstName']}
+    #{@text['email']} #{@ref['firstName']}
 
 %p
   %a{href: "/review/#{@ref['objectId']}"}
-    Write a review for #{@ref['firstName']}
+    #{@text['review']} #{@ref['firstName']}

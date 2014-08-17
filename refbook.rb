@@ -678,8 +678,6 @@ end
 def profile
 end
 get '/profile' do
-  @title = {"EN" => "Profile", "FR" => "Profil"}[@lang]
-
   if not logged_in?
     redirect '/login?d=/profile'
   end
@@ -719,7 +717,7 @@ get '/profile/:ref_id' do
     @title = "#{@ref['firstName']} #{@ref['lastName']}"
     @url = @ref['profPic'] ? @ref['profPic'] : '/images/person_blank.png'
 
-    display :public_profile
+    display({path: :public_profile, old: :f})
   end
 end
 

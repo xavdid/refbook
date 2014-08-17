@@ -458,6 +458,7 @@
     },
     "profile" : {
         "EN": {
+            "title": "Profile",
             "upload": "It looks like you haven't uploaded a profile pic yet! Do so on your",
             "settings": "settings",
             "page": "page",
@@ -486,6 +487,7 @@
             "comments": "comments"
         },
         "FR": {
+            "title": "Profil",
             "upload": "It looks like you haven't uploaded a profile pic yet! Do so on your",
             "settings": "settings",
             "page": "page",
@@ -516,10 +518,14 @@
     },
     "public_profile" : {
         "EN": {
-
+            "region": "Region:",
+            "email": "Send an email to",
+            "review": "Write a review for"
         },
         "FR": {
-
+            "region": "Region:",
+            "email": "Send an email to",
+            "review": "Write a review for"
         }
     },
     "reset" : {
