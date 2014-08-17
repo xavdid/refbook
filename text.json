@@ -530,18 +530,78 @@
     },
     "reset" : {
         "EN": {
-
+            "title": "Reset Your Password"
         },
         "FR": {
-
+            "title": "Reset Your Password"
         }
     },
     "review" : {
         "EN": {
+            "title": "Review a Referee",
+            "intro": "Here you can provide feedback for any referee that has been IRDP certified at any level. Please keep reviews as specific and calm as possible. All data is anonymous to the reviewee.",
+            "required": "Required",
 
+            "yn": "Your Name",
+            "ye": "Your Email",
+            "captain": "I am my team's captain/coach",
+
+            "region": "Referee's Region",
+            "rn": "Referee's Name",
+            "rp": "Referee's Position",
+            "hr": "Head Referee",
+            "sr": "Snitch Referee",
+            "ar": "Assistant Referee",
+
+            "date": "Date of Game",
+            "ytn": "Your Team's Name",
+            "otn": "Opponent's Team Name",
+
+            "how": "How did ",
+            "ref": "the referee",
+            "do": "do",
+
+            "excellent": "Excellent",
+            "good": "Good",
+            "average": "Average",
+            "poor": "Poor",
+
+            "comments": "Have any specific comments about the referee? Especially pertaining to positioning, professionalism, confidence, consistency, and communication.",
+
+            "missing": "Required field is missing"
         },
         "FR": {
+            "title": "Critiquez un Arbitre","title": "Review a Referee",
+            "intro": "Here you can provide feedback for any referee that has been IRDP certified at any level. Please keep reviews as specific and calm as possible. All data is anonymous to the reviewee.",
+            "required": "Required",
 
+            "yn": "Your Name",
+            "ye": "Your Email",
+            "captain": "I am my team's captain/coach",
+
+            "region": "Referee's Region",
+            "rn": "Referee's Name",
+            "rp": "Referee's Position",
+            "hr": "Head Referee",
+            "sr": "Snitch Referee",
+            "ar": "Assistant Referee",
+
+            "date": "Date of Game",
+            "ytn": "Your Team's Name",
+            "otn": "Opponent's Team Name",
+
+            "how": "How did ",
+            "ref": "the referee",
+            "do": "do",
+
+            "excellent": "Excellent",
+            "good": "Good",
+            "average": "Average",
+            "poor": "Poor",
+
+            "comments": "Have any specific comments about the referee? Especially pertaining to positioning, professionalism, confidence, consistency, and communication.",
+
+            "missing": "Required field is missing"
         }
     },
     "reviews" : {

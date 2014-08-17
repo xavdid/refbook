@@ -2,39 +2,39 @@
   -# %img#prof_pic{src: "#{@url}", width: 300}
 
 %p
-  Here you can provide feedback for any referee that has been IRDP certified at any level. Please keep reviews as specific and calm as possible. All data is anonymous to the reviewee.
+  #{@text['intro']}
 
 %p
   %span.danger
-    * Required
+    * #{@text['required']}
 
 .form_box
   %form{name: "review", action: "/review", method: "post", onsubmit: "return validate();", id: "rater"}
     %label{for: "name"}
-      Your Name
+      #{@text['yn']}
       %span.danger
         *
 
     %input{type: "text", name: "name", placeholder:"first and last"}
 
     %label{for: "email"}
-      Your Email
+      #{@text['ye']}
       %span.danger
         *
     %input{type: "email", name: "email", placeholder:"name@example.com"}
 
     %label{for: "captain"}
-      I am my team's captain
+      #{@text['captain']}
     %input{type: "checkbox", name: "captain", id: "captain", form: "rater"}
     - if @ref.nil?
       %label{for: "region"}
-        Referees's Region
+        #{@text['region']}
         %span.danger
           *
       %select{name: "region", id: "region"}
 
       %label{for: "referee"}
-        Referees's Name
+        #{@text['rn']}
       %select{name: "referee", id: "referee"}
     - else
       %input{type: "hidden", name: "region", value: "#{@ref['region']}"}
@@ -42,50 +42,52 @@
 
 
     %label{for: "type"}
-      Referee's Position
+      #{@text['rp']}
       %span.danger
         *
     %select{name: "type", id: "type"}
       %option{value: ""}
 
       %option{value: "head"}
-        Head Referee
+        #{@text['hr']}
       %option{value: "snitch"}
-        Snitch Referee
+        #{@text['sr']}
       %option{value: "ass"}
-        Assistant Referee
+        #{@text['ar']}
 
 
     %label{for: "date"}
-      Date of Game
+      #{@text['date']}
     %input{type: "text", name: "date", value: "#{Time.now.strftime('%e %b, %Y')}"}
 
     %label{for: "team"}
-      Your Team's Name
+      #{@text['ytn']}
     %input{type: "text", name: "team"}
 
     %label{for: "opponent"}
-      Opponent Team's Name
+      #{@text['otn']}
     %input{type: "text", name: "opponent"}
 
     %label{for: "rating"}
-      How did #{@ref.nil? ? 'the referee' : "#{@ref['firstName']}"} do?
+      How did 
+      #{@ref.nil? ? @text['ref'] : "#{@ref['firstName']}"} 
+      #{@text['do']}?
       %span.danger
         *
     %select{name: "rating", id: "rating"}
       %option{value: ""}
 
       %option{value: "excellent"}
-        Excellent!
+        #{@text['excellend']}
       %option{value: "good"}
-        Good
+        #{@text['good']}
       %option{value: "average"}
-        Average
+        #{@text['average']}
       %option{value: "poor"}
-        Poor
+        #{@text['poor']}
 
     %label{for: "comments", style: "font-size: 12px;"}
-      Have any specific comments about the referee? Especially pertaining to positioning, professionalism, confidence, consistency, and communication.
+      #{@text['comments']}
     %textarea{form: "rater", cols: 37, rows: 9, name: "comments"}
 
     %input.button{type: "submit", value: "Submit Review"}
@@ -147,10 +149,10 @@
       }
     });
 
-    // checking forms are full, passwords match, and checkbox is checked
+    // checking forms are full
 
     if (!filled) {
-      $(".issue").text("Required field is missing");
+      $(".issue").text("#{@text['missing']}");
       return false;
     }
 

@@ -822,7 +822,7 @@ get '/review' do
   end
 
   @refs = @refs.to_json
-  display
+  display({old: :f})
 end
 
 get '/review/:id' do 
