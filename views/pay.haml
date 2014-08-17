@@ -1,74 +1,76 @@
 - if paid?
   %p
-    It looks like you've already paid for your IRDP membership! 
+    #{@text['already']}
   %p
-    If you're looking to buy a HR test, head over to the 
+    #{@text['hr']}
     %a{href: "/testing/head"}<
-      HR test page
-    instead and complete your purchase there. 
+      #{@text['hr_link']}
+    #{@text['complete']}
 - else
+  -# not paid
   - if logged_in?
     - if affiliate?
       %p
-        You don't have to buy this, you're part of an affiliate league! Instead, see your regional IRDP member or gameplay person!
+        #{@text['affiliate']}
     - else
       .paypal
-        #{display(:access,false)}
+        #{display({path: :access, layout: :f, old: :f})}
   - else
     %p
       %a{href: '/create'}<
-        Create
-      an account to make a purchase!
+        #{@text['create']}
+      #{@text['account']}
+      %a{href: '/login'}<
+        #{@text['login']}
+      #{@text['purchase']}
 
   %p
-    Thank you for thinking about financially supporting the IRDP! Now that we're our own organization, we've got bills to pay and as of now, our only support comes from you, our lovely paid members. 
+    #{@text['thanks']}
     %u<
-      NOTE
-    Sometimes paypal doesn't register your purchase fast enough, so you may need to sign out and back in for your payment to register. We'll get this fixed soon!
-    %br
-    %br
-    %u<
-      NOTE
-    if you belong to an affiliate league's team, DO NOT BUY this; you get free access. See administrators for registration codes.
+      #{@text['note']}
+    #{@text['paypal']}
 
   %p
     %strong
-      What is my money used for? Will it be spent on patches or id cards I don't want?
+      #{@text['used']}
     %br
-    Good question! We have a few upkeep costs that drain the majority of our financial resources. 
+    #{@text['upkeep']}
   %ul.bullets
     %li
       %p
-        The biggest cost is classmarker, the wonderful site that supports our online written testing. Because we're using their premium features to integrate with our databases, we use a 
-        %a{href: 'http://d.pr/i/t9Pb', target: '_blank'}<
-          paid 
-        plan. Furthermore, we pay per test taken, so at minimum, every certified Head Referee consumes 3 tests (ideally). That adds up quickly.
+        #{@text['ub1']}
+        %a{href: 'http://i.imgur.com/w5lz48W.png', target: '_blank'}<
+          #{@text['paid']}
+        #{@text['ub12']}
     %li
       %p
-        Travel for field tests. Some referees look great on paper but don't have the chops once they're out on the field. In order to maintain the highest quality reffing standards, we make sure every Head Referee candidate is vetted by one of our highly qualified RDT or RTC members. This sends them all over the world, which gets expensive quickly.
+        #{@text['ub2']}
     %li
       %p
-        Other electronic resources. In order to provide the best possible online experience, we've got the latest web technologies powering an awesome stack. We decided not to sacrifice quality in any way (we know how frustrating that can be!), so we pay a bit for our tech (this is our smallest monthly expense).
+        #{@text['ub3']}
 
   %p
-    We also want to stress that every IRDP employee is a volunteer and none of us are compensated for our time. We do what we do because we love quidditch and believe the system we are building will produce the best referees possible. 
+    #{@text['stress']}
 
   %p
-    So, help us help you. Skip that latte tomorrow and be part of something awesome. 
+    #{@text['help']}
   %p
-    Be part of the 
+    #{@text['be']}
     %b
-      IRDP.
+      #{@layout['irdp']}.
 
   - if logged_in?
     - if affiliate?
       %p
-        You don't have to buy this, you're part of an affiliate league! Instead, see your regional IRDP member or gameplay person!
+        #{@text['affiliate']}
     - else
       .paypal
-        #{display(:access,false)}
+        #{display({path: :access, layout: :f, old: :f})}
   - else
     %p
       %a{href: '/create'}<
-        Create
-      an account to make a purchase!
+        #{@text['create']}
+      #{@text['account']}
+      %a{href: '/login'}<
+        #{@text['login']}
+      #{@text['purchase']}

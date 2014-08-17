@@ -388,10 +388,72 @@
     },
     "pay" : {
         "EN": {
+            "title": "Purchase an IRDP Membership!",
+            "already": "It looks like you've already paid for your IRDP membership (or are part of an affiliate league)!",
+            "hr": "If you're looking to buy a HR test, head over to the",
+            "hr_link": "HR test page",
+            "complete": "and complete your purchase there",
 
+            "affiliate": "You don't have to buy this, you're part of an affiliate league! Instead, see your regional IRDP member or gameplay person!",
+
+            "create": "Create",
+            "account": "an account or",
+            "login": "log in",
+            "purchase": "to make a purchase",
+
+            "thanks": "Thank you for thinking about financially supporting the IRDP! Now that we're our own organization, we've got bills to pay and as of now, our only support comes from you, our lovely paid members.",
+            "note": "NOTE",
+            "paypal": "Sometimes paypal doesn't register your purchase fast enough, so you may need to sign out and back in for your payment to register. We'll get this fixed soon!",
+
+            "used": "What is my money used for? Will it be spent on patches or ID cards I don't want?",
+            "upkeep": "Good question! We have a few upkeep costs that drain the majority of our financial resources.",
+
+            "ub1": "The biggest cost is classmarker, the wonderful site that supports our online written testing. Because we're using their premium features to integrate with our databases, we use a",
+            "paid": "paid",
+            "ub12": "plan. Furthermore, we pay per test taken, so at minimum, every certified Head Referee consumes 3 tests (ideally). That adds up quickly.",
+
+            "ub2": "Travel for field tests. Some referees look great on paper but don't have the chops once they're out on the field. In order to maintain the highest quality reffing standards, we make sure every Head Referee candidate is vetted by one of our highly qualified RDT or RTC members. This sends them all over the world, which gets expensive quickly.",
+
+            "ub3": "Other electronic resources. In order to provide the best possible online experience, we've got the latest web technologies powering an awesome stack. We decided not to sacrifice quality in any way (we know how frustrating that can be!), so we pay a bit for our tech (this is our smallest monthly expense).",
+
+            "stress": "We also want to stress that every IRDP employee is a volunteer and none of us are compensated for our time. We do what we do because we love quidditch and believe the system we are building will produce the best referees possible.",
+
+            "help": "So, help us help you. Skip that latte tomorrow and be part of something awesome.",
+            "be": "Be part of the"
         },
         "FR": {
+            "title": "Purchase an IRDP Membership!",
+            "already": "It looks like you've already paid for your IRDP membership (or are part of an affiliate league)!",
+            "hr": "If you're looking to buy a HR test, head over to the",
+            "hr_link": "HR test page",
+            "complete": "and complete your purchase there",
 
+            "affiliate": "You don't have to buy this, you're part of an affiliate league! Instead, see your regional IRDP member or gameplay person!",
+
+            "create": "Create",
+            "account": "an account or",
+            "login": "log in",
+            "purchase": "to make a purchase",
+
+            "thanks": "Thank you for thinking about financially supporting the IRDP! Now that we're our own organization, we've got bills to pay and as of now, our only support comes from you, our lovely paid members.",
+            "note": "NOTE",
+            "paypal": "Sometimes paypal doesn't register your purchase fast enough, so you may need to sign out and back in for your payment to register. We'll get this fixed soon!",
+
+            "used": "What is my money used for? Will it be spent on patches or ID cards I don't want?",
+            "upkeep": "Good question! We have a few upkeep costs that drain the majority of our financial resources.",
+
+            "ub1": "The biggest cost is classmarker, the wonderful site that supports our online written testing. Because we're using their premium features to integrate with our databases, we use a",
+            "paid": "paid",
+            "ub12": "plan. Furthermore, we pay per test taken, so at minimum, every certified Head Referee consumes 3 tests (ideally). That adds up quickly.",
+
+            "ub2": "Travel for field tests. Some referees look great on paper but don't have the chops once they're out on the field. In order to maintain the highest quality reffing standards, we make sure every Head Referee candidate is vetted by one of our highly qualified RDT or RTC members. This sends them all over the world, which gets expensive quickly.",
+
+            "ub3": "Other electronic resources. In order to provide the best possible online experience, we've got the latest web technologies powering an awesome stack. We decided not to sacrifice quality in any way (we know how frustrating that can be!), so we pay a bit for our tech (this is our smallest monthly expense).",
+
+            "stress": "We also want to stress that every IRDP employee is a volunteer and none of us are compensated for our time. We do what we do because we love quidditch and believe the system we are building will produce the best referees possible.",
+
+            "help": "So, help us help you. Skip that latte tomorrow and be part of something awesome.",
+            "be": "Be part of the"
         }
     },
     "profile" : {

@@ -648,7 +648,7 @@ get '/pay' do
   if logged_in?
     @id = session[:user]['objectId']
   end
-  display
+  display({old: :f})
 end
 
 def paid
