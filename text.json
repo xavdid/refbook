@@ -458,10 +458,60 @@
     },
     "profile" : {
         "EN": {
+            "upload": "It looks like you haven't uploaded a profile pic yet! Do so on your",
+            "settings": "settings",
+            "page": "page",
 
+            "this": "This",
+            "is_your": "is your",
+            "profile_page": "public profile",
+
+            "review_page": "public review page",
+            "bookmark": "Feel free to bookmark it to your phone for easy access. You can also distrbute this",
+            "code": "code that lets the scanner review you on their own device.",
+
+
+            "empty": "You've gotten these reviews without comments:",
+            "excellent": "excellent",
+            "good": "good",
+            "average": "average",
+            "poor": "poor",
+
+            "you": "You've got",
+            "review": "review(s) with comments.",
+            "encourage": "Encourage people to review you!",
+
+            "position": "Position",
+            "rating": "Rating",
+            "comments": "comments"
         },
         "FR": {
+            "upload": "It looks like you haven't uploaded a profile pic yet! Do so on your",
+            "settings": "settings",
+            "page": "page",
 
+            "this": "Ceci",
+            "is_your": "est votre",
+            "profile_page": "profil public",
+
+            "review_page": "page de critiques individuelle",
+            "bookmark": "Pour un accès facile, n'hésitez pas à distribuer ce code",
+            "code": "qui permet quelqu'un de vous donner leur avis de leur propre appareil.",
+
+
+            "empty": "Vous avez les critiques suivants sans commentaires:",
+            "excellent": "excellent",
+            "good": "good",
+            "average": "average",
+            "poor": "poor",
+
+            "you": "Vous avez",
+            "review": "critique(s) avec les commentaires.",
+            "encourage": "Encouragez les autres à vous critiquer !",
+
+            "position": "Position",
+            "rating": "Rating",
+            "comments": "comments"
         }
     },
     "public_profile" : {

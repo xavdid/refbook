@@ -707,7 +707,7 @@ get '/profile' do
 
   @url = session[:user]['profPic'] ? 
     session[:user]['profPic'] : '/images/person_blank.png'
-  display
+  display({old: :f})
 end
 
 get '/profile/:ref_id' do
