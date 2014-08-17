@@ -349,7 +349,7 @@ end
 before do 
   if settings.development?
     # this is the local switch
-    @killed = settings.killed
+    @killed = false
   else
     # this is the production (live) switch
     @killed = settings.killed
@@ -637,7 +637,7 @@ get '/off' do
     # flash[:issue] = "Maintenance is done, carry on!"
     redirect '/'
   else
-    display(:off, false)
+    display({path: :off, layout: :f, old: :f})
   end
 end
 

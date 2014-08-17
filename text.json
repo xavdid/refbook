@@ -376,10 +376,14 @@
     },
     "off" : {
         "EN": {
-
+            "under": "Undergoing Maintenance",
+            "check": "Check our",
+            "info": "for more information"
         },
         "FR": {
-
+            "under": "Undergoing Maintenance",
+            "check": "Check our",
+            "info": "for more information"
         }
     },
     "pay" : {
