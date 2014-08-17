@@ -868,29 +868,29 @@ post '/review' do
   redirect back
 end
 
-def reviews
-end
-get '/reviews' do 
-  @title = 'Reviews'
-  @num = Parse::Query.new("review").get.size
-  case @num
-  when 0..10
-    @display_text = "Well, everyone has to start somewhere!"
-  when 11..30
-    @display_text = "We're off to a great start, let's keep this going strong!"
-  when 31..49
-    @display_text = "We're charging up the hill to halfway. Let's get there!"
-  when 50..65
-    @display_text = "Halfway! That was easy mode, let's knock the rest of these out"
-  when 66..90
-    @display_text = "We're on the home stretch. Can we do it!?"
-  when 91..99
-    @display_text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
-  when 100..300
-    @display_text = "We did it! We've crossed into 100 reviews!"
-  end
-  display
-end
+# def reviews
+# end
+# get '/reviews' do 
+#   @title = 'Reviews'
+#   @num = Parse::Query.new("review").get.size
+#   case @num
+#   when 0..10
+#     @display_text = "Well, everyone has to start somewhere!"
+#   when 11..30
+#     @display_text = "We're off to a great start, let's keep this going strong!"
+#   when 31..49
+#     @display_text = "We're charging up the hill to halfway. Let's get there!"
+#   when 50..65
+#     @display_text = "Halfway! That was easy mode, let's knock the rest of these out"
+#   when 66..90
+#     @display_text = "We're on the home stretch. Can we do it!?"
+#   when 91..99
+#     @display_text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
+#   when 100..300
+#     @display_text = "We did it! We've crossed into 100 reviews!"
+#   end
+#   display
+# end
 
 get '/reviews/:review_id' do
   @title = "Edit a Review"
@@ -952,11 +952,14 @@ get '/search/:region' do
     # halt 404
   # end
 
-  if @reg == 'ALL'
-    q = Parse::Query.new("_User").get
-  elsif @reg == "USQ"
+  
+  q = Parse::Query.new("_User").get
+
+  @total = q.size
+  
+  if @reg == "USQ"
     q = Parse::Query.new("_User").get.select{|p| p['region'][0..1] == "US"}
-  else
+  elsif @reg != "ALL"
     q = Parse::Query.new("_User").eq("region",@reg).get
   end
 
@@ -988,7 +991,7 @@ get '/search/:region' do
     end
   end
 
-  display :search
+  display({path: :search, old: :f})
 end
 
 def settings

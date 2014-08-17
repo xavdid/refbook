@@ -604,20 +604,54 @@
             "missing": "Required field is missing"
         }
     },
-    "reviews" : {
-        "EN": {
-
-        },
-        "FR": {
-
-        }
-    },
     "search" : {
         "EN": {
+            "title": "Directory by Region",
+            "intro": "This table acts as a directory of IRDP referees who have been certified at any level. If you haven't yet passed any tests, you won't show up, so go",
+            "cert": "get certified!",
 
+            "current": "There are currently",
+            "world": "referees around the world with some amount of IRDP certification.",
+
+            "all_refs": "Show all IRDP certified refs",
+            "head_refs": "Show only IRDP certified head refs",
+            "tip": "Tip - Hold the SHIFT key to sort by multiple columns!",
+
+            "fn": "First Name",
+            "ln": "Last Name",
+            "team": "Team",
+            "team_ex": "This could be their current team or the last team they were with. Either way, they won't be reffing this team's games!",
+            "ar": "AR",
+            "sr": "SR",
+            "hr": "HR",
+            "ft": "FT",
+            "region": "Region",
+
+            "empty": "Womp womp, this region has no certified refs yet!"
         },
         "FR": {
+            "title": "Directory by Region",
+            "intro": "This table acts as a directory of IRDP referees who have been certified at any level. If you haven't yet passed any tests, you won't show up, so go",
+            "cert": "get certified!",
 
+            "current": "There are currently",
+            "world": "referees around the world with some amount of IRDP certification.",
+
+            "all_refs": "Show all IRDP certified refs",
+            "head_refs": "Show only IRDP certified head refs",
+            "tip": "Tip - Hold the SHIFT key to sort by multiple columns!",
+
+            "fn": "First Name",
+            "ln": "Last Name",
+            "team": "Team",
+            "team_ex": "This could be their current team or the last team they were with. Either way, they won't be reffing this team's games!",
+            "ar": "AR",
+            "sr": "SR",
+            "hr": "HR",
+            "ft": "FT",
+            "region": "Region",
+
+            "empty": "Womp womp, this region has no certified refs yet!"
         }
     },
     "settings" : {

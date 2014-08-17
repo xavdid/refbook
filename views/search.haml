@@ -1,9 +1,16 @@
 %p
-  This table acts as a directory of IRDP referees who have been certified at any level. If you haven't yet passed any tests, you won't show up, so go
+  #{@text['intro']}
   %a{href: '/testing'}<
-    get certified!
+    #{@text['cert']}
+%p
+  #{@text['current']}
+  %strong
+    #{@total} 
+  #{@text['world']}
 
 %hr
+
+
 
 %ul.regions#regions
 - if @us
@@ -13,41 +20,41 @@
   %ul.regions
     %li
       %a.all.active{href: '#'}<
-        Show All IRDP Certified Refs
+        #{@text['all_refs']}
     %li
       |
     %li
       %a.head{href: '#'}<
-        Show Only IRDP Certified Head Refs
+        #{@text['head_refs']}
 
   %i.fa.fa-exclamation-circle.go
-  Tip - Hold the SHIFT key to sort by multiple columns!
+  #{@text['tip']}
 
   .table_box
     %table#theTable
       %thead
         %tr
           %td{title: "Profile Link"}
-            First Name
+            #{@text['fn']}
           %td
-            Last Name
-          %td{title: "This could be their current team or the last team they were with. Either way, they won't be reffing this team's games!"}
-            Team
+            #{@text['ln']}
+          %td{title: @text['team_ex']}
+            #{@text['team']}
           %td{title: "Assistant Ref Certified"}
-            AR
+            #{@text['ar']}
           %td{title: "Snitch Ref Certified"}
-            SR
+            #{@text['sr']}
           %td{title: "Head Ref Certified"}
-            HR
+            #{@text['hr']}
           %td{title: "Passed Field Test"}
-            FT
+            #{@text['ft']}
           - if ['ALL', 'USQ'].include? @reg
             %td
-              Region
+              #{@text['region']}
       %tbody
 - else
   %p
-    Womp womp, this region has no certified refs yet!
+    #{@text['empty']}
 
 :javascript
   // I apologize for the following code
