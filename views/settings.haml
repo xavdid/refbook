@@ -1,10 +1,10 @@
-- if not paid?
+- if not paid? and affiliate?
   %p
-    You're an unpaid member! Do you have a registration code that you got from your regional director or officials manager? If so, enter it here to upgrade.
+    #{@text['unpaid']}
   .form_box
     %form{name: "validate", action: "/validate", method: "get"}
       %label{for: "code"}
-        Registration Code
+        #{@text['code']}
       %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
       %input.button{type: "submit", value: "Register!"}
       
@@ -37,10 +37,10 @@
 
 
 %p
-  You can update your email (at which teams/TD's will contact you) here. If you need to change your region/team affiliation, contact
+  #{@text['update']}
   %a{href: "mailto: david@relateiq.com"}<
     David Brownman
-  with all necessary information.
+  #{@text['necessary']}
 
 .form_box
   %form{name: "settings", action: "/settings", method: "post"}
@@ -49,7 +49,7 @@
     %input{type: "email", name: "username", placeholder:"email", id: "email"}
 
     %label{for: "lang"}
-      Language
+      #{@text['lang']}
     %select{name: "lang", id: "lang"}
       / these langauges are hardcoded, so update when you add a new lang
       %option{value: "EN"}
@@ -60,15 +60,15 @@
     %input.button{type: "submit", value: "Update User"}
 
 %p
-  Below you can upload a profile picture. Aim for something mostly square and larger than 300px wide. You can use 
+  #{@text['upload']}
   %a{href: "http://www.picresize.com", target: "_blank"}<
-    this
-  site to easily crop and edit your photo. Make sure it's a solo picture of you where your face is clear, un-obstructed, and facing forward. Preferably it's just of the shoulders and up.
+    #{@text['this']}
+  #{@text['crop']}
 
 .form_box
   %form{id: "profPic", method: "post", enctype: "multipart/form-data", action: "/upload", onsubmit: "return validate();"}
     %label{for: "myfile"}
-      Image (max file size 5MB)
+      #{@text['image']}
     %input{type: "file", name: "myfile", id: "fileBox"}   
     %br
     %input{type:'submit', value:'Upload!'}
@@ -76,8 +76,8 @@
 
 %p
   %a{href: '/reset'}<
-    Reset
-  your password.
+    #{@text['reset']}
+  #{@text['password']}
 
 :javascript
   // fill fields

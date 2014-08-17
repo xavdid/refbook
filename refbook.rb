@@ -1001,7 +1001,7 @@ get '/settings' do
     redirect '/login?d=/settings'
   end
   @title = "Settings"
-  display
+  display({old: :f})
 end
 
 post '/settings' do  

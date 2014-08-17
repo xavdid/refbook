@@ -656,10 +656,42 @@
     },
     "settings" : {
         "EN": {
+            "title": "Settings",
+            "unpaid": "You're an unpaid member! Enter the registration code that you got from your regional director or officials manager for a free upgrade.",
+            "code": "Registration Code",
 
+            "update": "You can update your email (at which teams/TD's will contact you) here. If you need to change your region/team affiliation, contact",
+            "necessary": "with all necessary information",
+
+            "lang": "Language",
+
+            "upload": "Below you can upload a profile picture. Aim for something mostly square and larger than 300px wide. You can use",
+            "this": "this",
+            "crop": "site to easily crop and edit your photo. Make sure it's a solo picture of you where your face is clear, un-obstructed, and facing forward. Preferably it's just of the shoulders and up.",
+
+            "image": "Image (max file size 5MB)",
+
+            "reset": "Reset",
+            "password": "your password"
         },
         "FR": {
+            "title": "Settings",
+            "unpaid": "You're an unpaid member! Enter the registration code that you got from your regional director or officials manager for a free upgrade.",
+            "code": "Registration Code",
 
+            "update": "You can update your email (at which teams/TD's will contact you) here. If you need to change your region/team affiliation, contact",
+            "necessary": "with all necessary information",
+
+            "lang": "Language",
+
+            "upload": "Below you can upload a profile picture. Aim for something mostly square and larger than 300px wide. You can use",
+            "this": "this",
+            "crop": "site to easily crop and edit your photo. Make sure it's a solo picture of you where your face is clear, un-obstructed, and facing forward. Preferably it's just of the shoulders and up.",
+
+            "image": "Image (max file size 5MB)",
+
+            "reset": "Reset",
+            "password": "your password"
         }
     },
     "test_links" : {
