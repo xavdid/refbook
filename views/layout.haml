@@ -47,13 +47,31 @@
                 #{@layout['testing']} 
             %li
               %a{href: "/testing/ass"}
-                #{@layout['ass']} 
+                - if @lang == 'EN'
+                  #{@layout['ass']} 
+                  #{@layout['ref_test']}
+                - else
+                  #{@layout['ref_test']}
+                  #{@layout['ass']} 
+                
             %li
               %a{href: "/testing/snitch"}
-                #{@layout['snitch']} 
+                - if @lang == 'EN'
+                  #{@layout['snitch']} 
+                  #{@layout['ref_test']}
+                - else
+                  #{@layout['ref_test']}
+                  #{@layout['snitch']} 
+                
             %li
               %a{href: "/testing/head"}
-                #{@layout['head']} 
+                - if @lang == 'EN'
+                  #{@layout['head']} 
+                  #{@layout['ref_test']}
+                - else
+                  #{@layout['ref_test']}
+                  #{@layout['head']} 
+                
         
         %li.right
           | 
@@ -114,6 +132,7 @@
         timeline.
     
     %h1#the_title
+      -# this could prioritize @title or @text, idk which i prefer
       #{@text['title'] || @title || 'Missing Title'}
 
     .issue
