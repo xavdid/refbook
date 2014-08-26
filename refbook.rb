@@ -159,6 +159,7 @@ end
 # layout: whether or not to render with a layout
 # old: whether or not it uses the old haml format. Will depreciate later.
 def display(args = {})
+  pp args
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
   args[:old] ||= :t
@@ -172,7 +173,7 @@ def display(args = {})
 
   @layout = settings.layout_hash[@lang]
 
-  pp args
+  
   # pp @text
 
   haml path.to_sym, layout: to_bool(args[:layout])
@@ -587,7 +588,7 @@ end
 def info
 end
 get '/info' do 
-  @title = {"EN" => "Information", "FR" => "Infos"}[@lang]
+  # @title = {"EN" => "Information", "FR" => "Infos"}[@lang]
   @section = 'info'
   display({old: :f})
 end
@@ -1051,7 +1052,7 @@ get '/testing' do
 end
 
 get '/testing/:which' do
-   #   find all test attempts from that user id, find the (single) type attempt, 
+  #   find all test attempts from that user id, find the (single) type attempt, 
   #   then, update it with most recent attempt (and Time.now) for comparison.
   #   If they pass, display the link for the relevant test(s). When they finish, 
   #   update the relevent test entry wtih the most recent test
@@ -1070,7 +1071,7 @@ get '/testing/:which' do
   end
 
   # why do computation if they've alreayd passed?
-  display :test_links if session[:user][params[:which]+"Ref"]
+  display({path: :test_links, old: :f}) if session[:user][params[:which]+"Ref"]
 
   @good = true
   @attempts_remaining = true
@@ -1118,7 +1119,7 @@ get '/testing/:which' do
     end
   end
 
-  display :test_links
+  display({path: :test_links, old: :f})
 end
 
 def upload

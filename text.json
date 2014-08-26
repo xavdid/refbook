@@ -1023,13 +1023,118 @@
     },
     "test_links" : {
         "EN": {
+            "intro": "This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. ",
+            "remember": "Remember that upon creation of an account, you agreed to the",
+            "code": "Ref's Code", 
+            "therein": "and all articles therein. ",
 
+            "hint": "Hint, hint",
+            "comfortable":"be comfortable and familiar with our awesome",
+            "training": "training",
+            "before": "materials before attempting any written tests. We certify only the best, so these tests aren't easy.",
+
+            "also": "It's also",
+            "important": "incredibly important",
+            "click": "that you click the orange",
+            "return": "\"return to refdevelopment.com\"",
+            "confirm": "at the end of the test and see confirmation back on this site or else your results will not be recorded in our system. ",
+            "if": "If you click the button multiple times (don't do that!) you may get a message about \"turning in your test too quicky\". If you're sure you only hit the button once, get in touch with",
+            "me": "me",
+            "confirmation": "You should also get an immediate confirmation email from us. Good luck!",
+
+            "already": "You've already passed the",
+            "congrats": "Congrats",
+            "either": "It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.",
+
+            "none_left": "You have 0 HR Written Attempts Remaining.",
+            "applicable": "This purchase entitles you to be field tested WHERE APPLICABLE. Because this requires travel by our hardworking RDT members, field testing is not always an option based on your location (or may take a long time). If you're not sure that you live in a place where a field test is possible, don't hesitate to ",
+            "contact": "contact us!",
+            "hope": "You're welcome to take the HR written tests even if there's no hope for a field test this year, just note that you won't be a fully certified IRDP Head Referee until you pass a field test given by an authorized proctor.",
+
+            "rulebook": "This test is for Rulebook ",
+
+            "here": "Here's the link to the ",
+
+            "long": "Looks like it hasn't been long enough since your last try!",
+            "attempted": "You last attempted the ",
+            "at": "at",
+            "give": "Give it another go at "
         },
         "FR": {
+            "intro": "This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. ",
+            "remember": "Remember that upon creation of an account, you agreed to the",
+            "code": "Ref's Code", 
+            "therein": "and all articles therein. ",
 
+            "hint": "Hint, hint",
+            "comfortable":"be comfortable and familiar with our awesome",
+            "training": "training",
+            "before": "materials before attempting any written tests. We certify only the best, so these tests aren't easy.",
+
+            "also": "It's also",
+            "important": "incredibly important",
+            "click": "that you click the orange",
+            "return": "\"return to refdevelopment.com\"",
+            "confirm": "at the end of the test and see confirmation back on this site or else your results will not be recorded in our system. ",
+            "if": "If you click the button multiple times (don't do that!) you may get a message about \"turning in your test too quicky\". If you're sure you only hit the button once, get in touch with",
+            "me": "me",
+            "confirmation": "You should also get an immediate confirmation email from us. Good luck!",
+
+            "already": "You've already passed the",
+            "congrats": "Congrats",
+            "either": "It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.",
+
+            "none_left": "You have 0 HR Written Attempts Remaining.",
+            "applicable": "This purchase entitles you to be field tested WHERE APPLICABLE. Because this requires travel by our hardworking RDT members, field testing is not always an option based on your location (or may take a long time). If you're not sure that you live in a place where a field test is possible, don't hesitate to ",
+            "contact": "contact us!",
+            "hope": "You're welcome to take the HR written tests even if there's no hope for a field test this year, just note that you won't be a fully certified IRDP Head Referee until you pass a field test given by an authorized proctor.",
+
+            "rulebook": "This test is for Rulebook ",
+
+            "here": "Here's the link to the ",
+
+            "long": "Looks like it hasn't been long enough since your last try!",
+            "attempted": "You last attempted the ",
+            "at": "at",
+            "give": "Give it another go at "
         },
         "IT": {
-            
+            "intro": "This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. ",
+            "remember": "Remember that upon creation of an account, you agreed to the",
+            "code": "Ref's Code", 
+            "therein": "and all articles therein. ",
+
+            "hint": "Hint, hint",
+            "comfortable":"be comfortable and familiar with our awesome",
+            "training": "training",
+            "before": "materials before attempting any written tests. We certify only the best, so these tests aren't easy.",
+
+            "also": "It's also",
+            "important": "incredibly important",
+            "click": "that you click the orange",
+            "return": "\"return to refdevelopment.com\"",
+            "confirm": "at the end of the test and see confirmation back on this site or else your results will not be recorded in our system. ",
+            "if": "If you click the button multiple times (don't do that!) you may get a message about \"turning in your test too quicky\". If you're sure you only hit the button once, get in touch with",
+            "me": "me",
+            "confirmation": "You should also get an immediate confirmation email from us. Good luck!",
+
+            "already": "You've already passed the",
+            "congrats": "Congrats",
+            "either": "It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.",
+
+            "none_left": "You have 0 HR Written Attempts Remaining.",
+            "applicable": "This purchase entitles you to be field tested WHERE APPLICABLE. Because this requires travel by our hardworking RDT members, field testing is not always an option based on your location (or may take a long time). If you're not sure that you live in a place where a field test is possible, don't hesitate to ",
+            "contact": "contact us!",
+            "hope": "You're welcome to take the HR written tests even if there's no hope for a field test this year, just note that you won't be a fully certified IRDP Head Referee until you pass a field test given by an authorized proctor.",
+
+            "rulebook": "This test is for Rulebook ",
+
+            "here": "Here's the link to the ",
+
+            "long": "Looks like it hasn't been long enough since your last try!",
+            "attempted": "You last attempted the ",
+            "at": "at",
+            "give": "Give it another go at "
         }
     },
     "testing" : {

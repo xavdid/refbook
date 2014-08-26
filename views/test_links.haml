@@ -1,68 +1,92 @@
 %p
-  This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. 
+  #{@text['intro']}
 %p
-  Remember that upon creation of an account, you agreed to the
+  #{@text['remember']}
   %a{href: "https://docs.google.com/document/d/1ybhTrPbk_H4QqekrrWHgiDBRIlqzLlx2P5Ir43Nt774", target: "_blank"}<
-    Ref's Code
-  and all articles therein. 
+    #{@text['code']}
+  #{@text['therein']}
   %i
-    Hint, hint:
-  be comfortable and familiar with our awesome
+    #{@text['hint']}
+  #{@text['comfortable']}
   %a{href: '/testing'}<
-    training
-  materials before attempting any written tests. We certify only the best, so these tests aren't easy.
+    #{@text['training']}
+  #{@text['before']}
 %p
-  It's also
+  #{@text['also']}
   %span{style: "color: red; font-weight: bold;"}
-    incredibly important
-  that you click the orange
+    #{@text['important']}
+  #{@text['click']}
   %span{style: "text-decoration: underline; background-color: orange;"}<
-    "return to refdevelopment.com"
-  at the end of the test and see confirmation back on this site or else your results will not be recorded in our system. 
+    #{@text['return']}
+  #{@text['confirm']}
 %p
-  If you click the button multiple times (don't do that!) you may get a message about "turning in your test too quicky". If you're sure you only hit the button once, get in touch with <a href="mailto:david@relateiq.com">me</a>. You should also get an immediate confirmation email from us. Good luck!
+  #{@text['if']}
+  <a href="mailto:david@relateiq.com">#{@text['me']}</a>. 
+  #{@text['confirmation']}
 %hr
 - if paid?
   %p
     - if session[:user][params[:which]+"Ref"]
-      You've already passed the #{settings.test_names[params[:which].to_sym]} Referee test. Congrats!
+      #{@text['already']}
+      - if @lang == "EN"
+        #{@layout[params[:which]]}
+        #{@layout['ref_test']}
+      - else
+        #{@layout['ref_test']}
+        #{@layout[params[:which]]}
+      #{@layout['congrats']}!
     - else
       - if not @prereqs_passed
-        It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.
+        #{@text['either']}
       - elsif not @attempts_remaining
-        You have 0 HR Written Attempts Remaining. 
+        #{@text['none_left']}
         %br
         %br
-        This purchase entitles you to be field tested WHERE APPLICABLE. Because this requires travel by our hardworking RDT members, field testing is not always an option based on your location (or may take a long time). If you're not sure that you live in a place where a field test is possible, don't hesitate to 
-        #{email_link({text: 'contact us!'})}
+        #{@text['applicable']}
+        #{email_link({text: @text['contact']})}
         %br
         %br
-        You're welcome to take the HR written tests even if there's no hope for a field test this year, just note that you won't be a fully certified IRDP Head Referee until you pass a field test given by an authorized proctor.
+        #{@text['hope']}
         .paypal
           #{paypal_button}        
       - elsif @good and @attempts_remaining
         - if params[:which] == 'head'
-          You've got #{session[:user]['hrWrittenAttemptsRemaining']} HR attempts left.
+          You've got 
+          #{session[:user]['hrWrittenAttemptsRemaining']} 
+          HR attempts left.
           %br
           %br
-        This test is for Rulebook 
+        #{@text['rulebook']}
         %strong
           #{@rb.to_s}
         %br
         %br
-        Here's the link to the 
+        #{@text['here']}
         %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
-          #{settings.test_names[params[:which].to_sym]} Referee
-        test!
+          - if @lang == "EN"
+            #{@layout[params[:which]]}
+            #{@layout['ref_test']}
+          - else
+            #{@layout['ref_test']}
+            #{@layout[params[:which]]}
       - else
-        Looks like it hasn't been long enough since your last try! 
+        #{@text['long']}
         %br
         %br
-        You last attempted the #{settings.test_names[params[:which].to_sym]} referee test at #{@t2.strftime(settings.time_string)}
+        #{@text['attempted']}
+        - if @lang == "EN"
+          #{@layout[params[:which]]}
+          #{@layout['ref_test']}
+        - else
+          #{@layout['ref_test']}
+          #{@layout[params[:which]]}
+        #{@text['at']}
+        #{@t2.strftime(settings.time_string)}
         #{local_time(@try_unlocked,"Last+#{settings.test_names[params[:which]]}+Referee+Test+Attempt")}
         %br
         %br
-        Give it another go at #{@try_unlocked.strftime(settings.time_string)}
+        #{@text['give']}
+        #{@try_unlocked.strftime(settings.time_string)}
         #{local_time(@try_unlocked,"#{settings.test_names[params[:which]]}+Referee+Test+Unlocks")}
 - else
   #{display({path: :help, layout: :false, old: :false})}
