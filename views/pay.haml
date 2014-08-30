@@ -1,0 +1,76 @@
+- if paid?
+  %p
+    #{@text['already']}
+  %p
+    #{@text['hr']}
+    %a{href: "/testing/head"}<
+      #{@text['hr_link']}
+    #{@text['complete']}
+- else
+  -# not paid
+  - if logged_in?
+    - if affiliate?
+      %p
+        #{@text['affiliate']}
+    - else
+      .paypal
+        #{display({path: :access, layout: :f, old: :f})}
+  - else
+    %p
+      %a{href: '/create'}<
+        #{@text['create']}
+      #{@text['account']}
+      %a{href: '/login'}<
+        #{@text['login']}
+      #{@text['purchase']}
+
+  %p
+    #{@text['thanks']}
+    %u<
+      #{@text['note']}
+    #{@text['paypal']}
+
+  %p
+    %strong
+      #{@text['used']}
+    %br
+    #{@text['upkeep']}
+  %ul.bullets
+    %li
+      %p
+        #{@text['ub1']}
+        %a{href: 'http://i.imgur.com/w5lz48W.png', target: '_blank'}<
+          #{@text['paid']}
+        #{@text['ub12']}
+    %li
+      %p
+        #{@text['ub2']}
+    %li
+      %p
+        #{@text['ub3']}
+
+  %p
+    #{@text['stress']}
+
+  %p
+    #{@text['help']}
+  %p
+    #{@text['be']}
+    %b
+      #{@layout['irdp']}.
+
+  - if logged_in?
+    - if affiliate?
+      %p
+        #{@text['affiliate']}
+    - else
+      .paypal
+        #{display({path: :access, layout: :f, old: :f})}
+  - else
+    %p
+      %a{href: '/create'}<
+        #{@text['create']}
+      #{@text['account']}
+      %a{href: '/login'}<
+        #{@text['login']}
+      #{@text['purchase']}

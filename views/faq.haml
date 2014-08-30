@@ -1,0 +1,141 @@
+/1
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q1']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a1']}
+/2
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q2']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a2']}
+/3
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q3']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a3']}
+/4
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q4']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a4']}
+  %ul.bullets
+    %li
+      %p
+        %strong
+          #{@text['rdt']}
+        #{@text['rdt_blurb']}
+    %li
+      %p
+        %strong
+          #{@text['rtc']}
+        #{@text['rtc_blurb']}
+  %p
+    #{@text['a4p2']} 
+    #{email_link({subject:'Job Application'})} 
+    #{@text['a4p3']}
+/5
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q5']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a5']}
+  #{email_link({subject: "New IRDP Contract", text: @text['here']})} 
+  #{@text['a5p2']}
+/6
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q6']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a6']}
+  %a{href: '/pay'}<
+    #{@text['pay']}
+  #{@text['a6p2']}
+/7
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q7']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a7']}
+  #{settings.updated_at.strftime(settings.time_string)} 
+  #{local_time(settings.updated_at,@text['updated'])}
+  #{@text['a7p2']} 
+  %ul.bullets
+    %li
+      %a{href: "http://www.quidditch.org.au/", target: "_blank"}<
+        #{@text['aqa']}
+      (<a href="https://docs.google.com/document/d/1jHE29t7dzAUuJvKAH4win9cuDAIgHg8uk6kwWyNHcO4/edit" target="_blank">#{@text['contract']}</a>)
+    %li
+      %a{href: "https://quidditchuk.org/", target: "_blank"}<
+        #{@text['quk']}
+      (<a href="https://docs.google.com/document/d/1O_iugOK8w0Vui3Cf9XLnqXiTbCtWXIDRLmySZCY3RsI/edit" target="_blank">#{@text['contract']}</a>)
+  %p
+    #{@text['a7p3']}
+/8
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q8']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a8']} 
+  %a{href: '/logout'}<
+    #{@text['logout']}
+  #{@text['a8p2']}
+  %a{href: 'mailto:david@relateiq.com'}<
+    #{@text['webmaster']}
+  #{@text['a8p3']}
+/9
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q9']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a9']}  
+
+/10
+%p
+  %strong
+    #{@text['q']}:
+  %i
+    #{@text['q10']}
+  %br
+  %strong
+    #{@text['a']}:
+  #{@text['a10']}

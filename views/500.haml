@@ -1,0 +1,18 @@
+%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles.css'}
+
+.error
+
+  %h1
+    #{@text['header']}
+    %br
+    {HTTP 500}
+  %h2
+    %a{href: '/logout'}<
+      #{@text['logout']}
+    #{@text['solve']}
+    %br
+    %br
+    #{@text['not']}
+    %a{href: "mailto: david@relateiq.com"}<
+      #{@text['email']}
+    #{@text['sort']}

@@ -30,6 +30,9 @@ configure do
   # world clock string format
   set :wc_string, '%Y%m%dT%H%M'
 
+  set :text_hash, JSON.parse(File.read('text.json'))
+  set :layout_hash, JSON.parse(File.read('layout.json'))
+
   set :killed, false
 
   # mongo is just for registration codes
@@ -145,25 +148,56 @@ end
 # 
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
-def display(path = request.path_info[1..-1], layout = true)
-  if settings.development?
-    if layout
-      haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-    else
-      haml "#{@lang}/#{path}".to_sym, layout: false
-    end
-  else
-    # begin
-      if layout
-        haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-      else
-        haml "#{@lang}/#{path}".to_sym, layout: false
-      end
-    # rescue
-      # redirect '/logout'
-    # end
-  end
+
+def to_bool(b)
+  b == :t
 end
+
+# what the heck did I write?
+# you can pass in a hash with any of 3 options
+# path: to mancually specify the route name
+# layout: whether or not to render with a layout
+# old: whether or not it uses the old haml format. Will depreciate later.
+def display(args = {})
+  pp args
+  path = args[:path] || request.path_info[1..-1]
+  args[:layout] ||= :t
+  args[:old] ||= :t
+
+  if not to_bool(args[:old])
+    # pp 'asdf',settings.text_hash
+    @text = settings.text_hash[path.to_s][@lang]
+  else
+    @text = {}
+  end
+
+  @layout = settings.layout_hash[@lang]
+
+  
+  # pp @text
+
+  haml path.to_sym, layout: to_bool(args[:layout])
+end
+
+# def display(path = request.path_info[1..-1], layout = true)
+#   if settings.development?
+#     if layout
+#       haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
+#     else
+#       haml "#{@lang}/#{path}".to_sym, layout: false
+#     end
+#   else
+#     # begin
+#       if layout
+#         haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
+#       else
+#         haml "#{@lang}/#{path}".to_sym, layout: false
+#       end
+#     # rescue
+#       # redirect '/logout'
+#     # end
+#   end
+# end
 
 # EMAIL FUNCTIONS #
 
@@ -277,9 +311,9 @@ def email_link(a={})
   end
 
   if a.include? :text
-    @text = a[:text]
+    @display_text = a[:text]
   else
-    @text = 'irdp.rdt@gmail.com'
+    @display_text = 'irdp.rdt@gmail.com'
   end
   haml :email_link
 end
@@ -287,7 +321,7 @@ end
 def local_time(time, message='', text=nil)
   @time = time
   @message = message
-  @text = text || 'UTC'
+  @display_text = text || 'UTC'
   haml :local_time
 end
 
@@ -303,11 +337,11 @@ def paypal_button
 end
 
 not_found do
-  display(404, false)
+  display({path: "404", layout: :f, old: :f})
 end
 
 error 500 do
-  display(500,false)
+  display({path: "500", layout: :f, old: :f})
 end
 
 # kill switch
@@ -316,7 +350,7 @@ end
 before do 
   if settings.development?
     # this is the local switch
-    @killed = settings.killed
+    @killed = false
   else
     # this is the production (live) switch
     @killed = settings.killed
@@ -352,19 +386,20 @@ end
 def index 
 end
 get '/' do
-  @title = {"EN" => "Home", "FR" => "Page d'Accueil"}[@lang]
   @section = "index"
-  display :index
+  display({path: :index, old: :f})
 end
 
 def about
 end
 get '/about' do
-  @title = {"EN" => "About the IRDP", "FR" => "Infos"}[@lang]
   @section = "info"
-  display
+  display({old: :f})
 end
 
+get '/break' do 
+  halt 500
+end
 
 # it would be nice to be able to download all of this info as a CSV
 def admin
@@ -477,16 +512,14 @@ end
 def contact
 end
 get '/contact' do
-  @title = "Contact the IRDP"
   @section = "info"
 
-  display
+  display({old: :f})
 end
 
 def create
 end
 get '/create' do
-  @title = "Create an Account!"
   @team_list = []
   teams = Parse::Query.new("_User").tap do |team|
     team.exists("team")
@@ -496,7 +529,7 @@ get '/create' do
   end
   @team_list = @team_list.to_set.to_a
   @region_keys = settings.region_names
-  display
+  display(old: :f)
 end
 
 post '/create' do
@@ -537,9 +570,8 @@ end
 def faq
 end
 get '/faq' do
-  @title = "FAQ"
   @section = "info"
-  display
+  display({old: :f})
 end
 
 def field
@@ -556,18 +588,10 @@ end
 def info
 end
 get '/info' do 
-  @title = {"EN" => "Information", "FR" => "Infos"}[@lang]
+  # @title = {"EN" => "Information", "FR" => "Infos"}[@lang]
   @section = 'info'
-  display
+  display({old: :f})
 end
-
-# def leagues
-# end
-# get '/leagues' do
-#   @title = 'Affiliate Leagues'
-#   @section = 'info'
-#   display
-# end
 
 def lock
 end
@@ -585,7 +609,7 @@ def login
 end
 get '/login' do
   @title = "Login"
-  display
+  display({old: :f})
 end
 
 post '/login' do
@@ -614,7 +638,7 @@ get '/off' do
     # flash[:issue] = "Maintenance is done, carry on!"
     redirect '/'
   else
-    display(:off, false)
+    display({path: :off, layout: :f, old: :f})
   end
 end
 
@@ -625,7 +649,7 @@ get '/pay' do
   if logged_in?
     @id = session[:user]['objectId']
   end
-  display
+  display({old: :f})
 end
 
 def paid
@@ -655,8 +679,6 @@ end
 def profile
 end
 get '/profile' do
-  @title = {"EN" => "Profile", "FR" => "Profil"}[@lang]
-
   if not logged_in?
     redirect '/login?d=/profile'
   end
@@ -684,7 +706,7 @@ get '/profile' do
 
   @url = session[:user]['profPic'] ? 
     session[:user]['profPic'] : '/images/person_blank.png'
-  display
+  display({old: :f})
 end
 
 get '/profile/:ref_id' do
@@ -696,7 +718,7 @@ get '/profile/:ref_id' do
     @title = "#{@ref['firstName']} #{@ref['lastName']}"
     @url = @ref['profPic'] ? @ref['profPic'] : '/images/person_blank.png'
 
-    display :public_profile
+    display({path: :public_profile, old: :f})
   end
 end
 
@@ -801,7 +823,7 @@ get '/review' do
   end
 
   @refs = @refs.to_json
-  display
+  display({old: :f})
 end
 
 get '/review/:id' do 
@@ -847,29 +869,29 @@ post '/review' do
   redirect back
 end
 
-def reviews
-end
-get '/reviews' do 
-  @title = 'Reviews'
-  @num = Parse::Query.new("review").get.size
-  case @num
-  when 0..10
-    @text = "Well, everyone has to start somewhere!"
-  when 11..30
-    @text = "We're off to a great start, let's keep this going strong!"
-  when 31..49
-    @text = "We're charging up the hill to halfway. Let's get there!"
-  when 50..65
-    @text = "Halfway! That was easy mode, let's knock the rest of these out"
-  when 66..90
-    @text = "We're on the home stretch. Can we do it!?"
-  when 91..99
-    @text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
-  when 100..300
-    @text = "We did it! We've crossed into 100 reviews!"
-  end
-  display
-end
+# def reviews
+# end
+# get '/reviews' do 
+#   @title = 'Reviews'
+#   @num = Parse::Query.new("review").get.size
+#   case @num
+#   when 0..10
+#     @display_text = "Well, everyone has to start somewhere!"
+#   when 11..30
+#     @display_text = "We're off to a great start, let's keep this going strong!"
+#   when 31..49
+#     @display_text = "We're charging up the hill to halfway. Let's get there!"
+#   when 50..65
+#     @display_text = "Halfway! That was easy mode, let's knock the rest of these out"
+#   when 66..90
+#     @display_text = "We're on the home stretch. Can we do it!?"
+#   when 91..99
+#     @display_text = "Knock knock knockin' on 100's door. Who's going to be lucky #100?"
+#   when 100..300
+#     @display_text = "We did it! We've crossed into 100 reviews!"
+#   end
+#   display
+# end
 
 get '/reviews/:review_id' do
   @title = "Edit a Review"
@@ -931,11 +953,14 @@ get '/search/:region' do
     # halt 404
   # end
 
-  if @reg == 'ALL'
-    q = Parse::Query.new("_User").get
-  elsif @reg == "USQ"
+  
+  q = Parse::Query.new("_User").get
+
+  @total = q.size
+  
+  if @reg == "USQ"
     q = Parse::Query.new("_User").get.select{|p| p['region'][0..1] == "US"}
-  else
+  elsif @reg != "ALL"
     q = Parse::Query.new("_User").eq("region",@reg).get
   end
 
@@ -967,7 +992,7 @@ get '/search/:region' do
     end
   end
 
-  display :search
+  display({path: :search, old: :f})
 end
 
 def settings
@@ -977,7 +1002,7 @@ get '/settings' do
     redirect '/login?d=/settings'
   end
   @title = "Settings"
-  display
+  display({old: :f})
 end
 
 post '/settings' do  
@@ -1027,7 +1052,7 @@ get '/testing' do
 end
 
 get '/testing/:which' do
-   #   find all test attempts from that user id, find the (single) type attempt, 
+  #   find all test attempts from that user id, find the (single) type attempt, 
   #   then, update it with most recent attempt (and Time.now) for comparison.
   #   If they pass, display the link for the relevant test(s). When they finish, 
   #   update the relevent test entry wtih the most recent test
@@ -1046,7 +1071,7 @@ get '/testing/:which' do
   end
 
   # why do computation if they've alreayd passed?
-  display :test_links if session[:user][params[:which]+"Ref"]
+  display({path: :test_links, old: :f}) if session[:user][params[:which]+"Ref"]
 
   @good = true
   @attempts_remaining = true
@@ -1094,7 +1119,7 @@ get '/testing/:which' do
     end
   end
 
-  display :test_links
+  display({path: :test_links, old: :f})
 end
 
 def upload

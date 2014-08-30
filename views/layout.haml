@@ -1,0 +1,161 @@
+=haml :headers
+
+.content
+  .top
+    .topbar
+      %ul#menu
+        %li.no-kids#index
+          %a{href: '/'}
+            #{@layout['irdp']} 
+        %li
+          |
+
+        %li.kids#info
+          %a{href: '/info'}<
+            #{@layout['information']}
+          %ul.sub-menu
+            %li
+              %a{href: '/about'}
+                #{@layout['about']} 
+            %li
+              %a{href: '/faq'}
+                #{@layout['faq']} 
+            %li
+              %a{href: '/contact'}
+                #{@layout['contact']} 
+        %li
+          |
+
+        %li.no-kids#search
+          %a{href: '/search/ALL'}
+            #{@layout['directory']} 
+        %li
+          |
+
+        %li.no-kids#review
+          %a{href: '/review'}
+            #{@layout['review']} 
+        %li
+          |
+
+        %li.kids#testing
+          %a{href: '/testing'}
+            #{@layout['testing']} 
+          %ul.sub-menu
+            %li
+              %a{href: '/testing'}
+                #{@layout['testing']} 
+            %li
+              %a{href: "/testing/ass"}
+                - if @lang == 'EN'
+                  #{@layout['ass']} 
+                  #{@layout['ref_test']}
+                - else
+                  #{@layout['ref_test']}
+                  #{@layout['ass']} 
+                
+            %li
+              %a{href: "/testing/snitch"}
+                - if @lang == 'EN'
+                  #{@layout['snitch']} 
+                  #{@layout['ref_test']}
+                - else
+                  #{@layout['ref_test']}
+                  #{@layout['snitch']} 
+                
+            %li
+              %a{href: "/testing/head"}
+                - if @lang == 'EN'
+                  #{@layout['head']} 
+                  #{@layout['ref_test']}
+                - else
+                  #{@layout['ref_test']}
+                  #{@layout['head']} 
+                
+        
+        %li.right
+          | 
+          #{logged_in? ? name_maker(session[:user]) : @layout['nsi']}
+        
+        - if logged_in?
+          - if admin?
+            %li.right.icon
+              %a{href: '/admin'}<
+                %i.fa.fa-gavel.fa-lg{title: "Admin Console"}
+
+          %li.right.icon
+            %a{href: '/settings'}<
+              %i.fa.fa-cog.fa-lg#settings{title: "Settings Console"}
+
+          %li.right.icon
+            %a{href: '/profile'}<
+              %i.fa.fa-user.fa-lg{title: "Profile Console"}
+
+    .header
+      %p
+        - if logged_in?
+          %a{href: '/logout'}
+            #{@layout['logout']} 
+            %i.fa.fa-sign-out.fa-lg
+            
+        - else
+          %a{href: '/login'}<
+            #{@layout['login']} 
+          or
+          %a{href: '/create'}
+            #{@layout['create']} 
+      - if @killed
+        %p
+          %i.fa.fa-warning.fa-2x.danger
+      - if affiliate? and not paid?
+        %p
+          %i.fa.fa-warning.fa-2x.go
+          %br
+          #{@layout['affiliate']} 
+          %a{href: '/settings'}<
+            #{@layout['settings']} 
+          #{@layout['page']}. 
+
+        
+  .mid
+    /[if lt IE 10]
+      %p
+        We detect you're using an 
+        %strong
+          outdated
+        browser. Please
+        %a{href:"http://browsehappy.com/?locale=en"}
+          upgrade your browser
+        as the one you are using isn't supported (and causes errors) on our site. If you're curious, we follow Google's
+        %a{href: "https://support.google.com/a/answer/33864?hl=en", target: "_blank"}<
+          browser support
+        timeline.
+    
+    %h1#the_title
+      -# this could prioritize @title or @text, idk which i prefer
+      #{@text['title'] || @title || 'Missing Title'}
+
+    .issue
+      %h3
+        = flash[:issue]
+
+    #{yield}
+
+  .bot
+    %p
+      %a{href: "http://davidbrownman.com", target: "_blank"}<
+        David Brownman
+      #{@layout['made']}
+      %a{href: "http://davidbrownman.com/refbook", target: "_blank"}<
+        #{@layout['here']}
+      #{@layout['readme']}
+      &copy; 2014 
+      #{@layout['irdp']}, 
+      #{@layout['reserved']}.
+      %a{href: "/contact"}<
+        #{@layout['contact']}
+      us!
+
+
+:javascript
+  $('##{@section}').addClass('active');

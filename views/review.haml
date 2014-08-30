@@ -1,0 +1,164 @@
+-# - if not @ref.nil?
+  -# %img#prof_pic{src: "#{@url}", width: 300}
+
+%p
+  #{@text['intro']}
+
+%p
+  %span.danger
+    * #{@text['required']}
+
+.form_box
+  %form{name: "review", action: "/review", method: "post", onsubmit: "return validate();", id: "rater"}
+    %label{for: "name"}
+      #{@text['yn']}
+      %span.danger
+        *
+
+    %input{type: "text", name: "name", placeholder:"first and last"}
+
+    %label{for: "email"}
+      #{@text['ye']}
+      %span.danger
+        *
+    %input{type: "email", name: "email", placeholder:"name@example.com"}
+
+    %label{for: "captain"}
+      #{@text['captain']}
+    %input{type: "checkbox", name: "captain", id: "captain", form: "rater"}
+    - if @ref.nil?
+      %label{for: "region"}
+        #{@text['region']}
+        %span.danger
+          *
+      %select{name: "region", id: "region"}
+
+      %label{for: "referee"}
+        #{@text['rn']}
+      %select{name: "referee", id: "referee"}
+    - else
+      %input{type: "hidden", name: "region", value: "#{@ref['region']}"}
+      %input{type: "hidden", name: "referee", value: "#{@ref['objectId']}"}
+
+
+    %label{for: "type"}
+      #{@text['rp']}
+      %span.danger
+        *
+    %select{name: "type", id: "type"}
+      %option{value: ""}
+
+      %option{value: "head"}
+        #{@text['hr']}
+      %option{value: "snitch"}
+        #{@text['sr']}
+      %option{value: "ass"}
+        #{@text['ar']}
+
+
+    %label{for: "date"}
+      #{@text['date']}
+    %input{type: "text", name: "date", value: "#{Time.now.strftime('%e %b, %Y')}"}
+
+    %label{for: "team"}
+      #{@text['ytn']}
+    %input{type: "text", name: "team"}
+
+    %label{for: "opponent"}
+      #{@text['otn']}
+    %input{type: "text", name: "opponent"}
+
+    %label{for: "rating"}
+      How did 
+      #{@ref.nil? ? @text['ref'] : "#{@ref['firstName']}"} 
+      #{@text['do']}?
+      %span.danger
+        *
+    %select{name: "rating", id: "rating"}
+      %option{value: ""}
+
+      %option{value: "excellent"}
+        #{@text['excellend']}
+      %option{value: "good"}
+        #{@text['good']}
+      %option{value: "average"}
+        #{@text['average']}
+      %option{value: "poor"}
+        #{@text['poor']}
+
+    %label{for: "comments", style: "font-size: 12px;"}
+      #{@text['comments']}
+    %textarea{form: "rater", cols: 37, rows: 9, name: "comments"}
+
+    %input.button{type: "submit", value: "Submit Review"}
+
+.issue
+  %h3
+    =flash[:issue]
+
+
+:javascript
+  var region_keys = #{@region_keys};
+  var region_codes = #{@region_codes}
+  var refs = #{@refs};
+
+  $("#region").append(generateBlank());
+  for (var i = 0; i < region_keys.length; i++) {
+    var el = document.createElement("option");
+    el.textContent = region_keys[i];
+    el.value = region_codes[i];
+    $("#region").append(el);
+  };
+
+  // fills the dropdown with refs from that region
+  $("#region").change(function(){
+    $("#referee").empty();
+    $("#referee").append(generateBlank());
+    $("#referee").append("<option value=\"Sb33WyBziN\">Unnamed Ref</option>")
+    for (var i = 0; i < refs[$("#region").val()].length; i++) {
+      var el = document.createElement("option");
+      el.textContent = refs[$("#region").val()][i][1];
+      el.value = refs[$("#region").val()][i][0];
+      $("#referee").append(el);
+    };
+  });
+
+  function generateBlank(){
+    var el = document.createElement("option");
+    el.textContent = "";
+    el.value = "";
+    return el;
+  };
+
+  function validate() {
+    // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
+    var f = $("form")[0];
+    var filled = true;
+
+    var n = f["name"].value;
+    var e = f["email"].value;
+    var r = f["region"].value;
+    var ra = f["rating"].value;
+    var ty = f["type"].value;
+
+    var fields = [n, e, r, ra, ty];
+
+    fields.forEach(function(field){
+      if (field == null || field == "") {
+        filled = false;
+      }
+    });
+
+    // checking forms are full
+
+    if (!filled) {
+      $(".issue").text("#{@text['missing']}");
+      return false;
+    }
+
+    else {
+      return true;
+    }    
+
+  }
+

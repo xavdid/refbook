@@ -1,0 +1,106 @@
+- if not paid? and affiliate?
+  %p
+    #{@text['unpaid']}
+  .form_box
+    %form{name: "validate", action: "/validate", method: "get"}
+      %label{for: "code"}
+        #{@text['code']}
+      %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
+      %input.button{type: "submit", value: "Register!"}
+      
+-# - if session[:user]['region'] == 'AUST'
+-#   %p
+-#     Australians! Because you're in the middle of your season, you've got the special (temporary) opportunity to mark yourself as having passed your tests. 
+-#     %b
+-#       NOTE
+-#     only check these boxes if you've actually passed the corresponding test. Falsifying information will result in penalties and a possible ban from IRDP certification.
+-#   .form_box
+-#     %form{name: 'tests', action: '/settings', method: 'post'}
+-#       %label{for: "ar"}
+-#         Certified Assistant Referee
+-#       %input{type: "checkbox", name: "ar", id: "ar"}
+
+-#       %label{for: "sr"} 
+-#         Certified Snitch Referee
+-#       %input{type: "checkbox", name: "sr", id: "sr"}
+
+-#       %label{for: "hr"}
+-#         Passed Head Referee Written Teset
+-#       %input{type: "checkbox", name: "hr", id: "hr"}
+
+-#       %label{for: "ft"}
+-#         Passed Head Referee Field Test
+-#       %input{type: "checkbox", name: "ft", id: "ft"}
+-#       %input{type: "hidden", name:"tests", value: "yep"}
+      
+-#       %input.button{type: "submit", value: "Save Tests"}
+
+
+%p
+  #{@text['update']}
+  %a{href: "mailto: david@relateiq.com"}<
+    David Brownman
+  #{@text['necessary']}
+
+.form_box
+  %form{name: "settings", action: "/settings", method: "post"}
+    %label{for: "email"}
+      Email
+    %input{type: "email", name: "username", placeholder:"email", id: "email"}
+
+    %label{for: "lang"}
+      #{@text['lang']}
+    %select{name: "lang", id: "lang"}
+      / these langauges are hardcoded, so update when you add a new lang
+      %option{value: "EN"}
+        English
+      %option{value: "FR"}
+        Français
+      %option{value: "IT"}
+        Italiano
+
+    %input.button{type: "submit", value: "Update User"}
+
+%p
+  #{@text['upload']}
+  %a{href: "http://www.picresize.com", target: "_blank"}<
+    #{@text['this']}
+  #{@text['crop']}
+
+.form_box
+  %form{id: "profPic", method: "post", enctype: "multipart/form-data", action: "/upload", onsubmit: "return validate();"}
+    %label{for: "myfile"}
+      #{@text['image']}
+    %input{type: "file", name: "myfile", id: "fileBox"}   
+    %br
+    %input{type:'submit', value:'Upload!'}
+
+
+%p
+  %a{href: '/reset'}<
+    #{@text['reset']}
+  #{@text['password']}
+
+:javascript
+  // fill fields
+  $('#email').val("#{session[:user]['username']}");
+  $('#lang').val("#{session[:user]['lang']}");
+
+  // check test buttons for aussies
+  $('#ar').prop('checked',#{session[:user]['assRef'] ? 'true' : 'false' });
+  $('#sr').prop('checked',#{session[:user]['snitchRef'] ? 'true' : 'false' });
+  $('#hr').prop('checked',#{session[:user]['headRef'] ? 'true' : 'false' });
+  $('#ft').prop('checked',#{session[:user]['passedFieldTest'] ? 'true' : 'false' });
+
+  //make sure they uploaded _something_ 
+  function validate(){
+    var f = $("#fileBox")[0].files[0];
+    if (f) {
+      return true;
+    }
+    else {
+      $(".issue").text("Must select a file");
+      return false;
+    }
+  };
+

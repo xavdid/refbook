@@ -1,0 +1,83 @@
+%img#prof_pic{src: "#{@url}", width: 300}
+
+- if not session[:user]['profPic']
+  %p
+    %i.fa.fa-exclamation-circle.danger
+    #{@text['upload']}
+    %a{href: "/settings"}<
+      #{@text['settings']}
+    #{@text['page']}.
+
+%p
+  %a{href: "/profile/#{session[:user]['objectId']}"}<
+    #{@text['this']}
+  #{@text['is_your']}
+  %strong
+    #{@text['profile_page']}.
+
+%p
+  %a{href: "/review/#{session[:user]['objectId']}"}<
+    #{@text['this']}
+  #{@text['is_your']}
+  %strong
+    #{@text['review_page']}.
+  #{@text['bookmark']}
+  %a{href: "/qr", target: "_blank"}<
+    QR
+  #{@text['code']}
+%p
+  #{@text['empty']}
+  %br
+  %table.mini.table-background
+    - @counts.each do |grade, num|
+      %tr
+        %td
+          = @text[grade]
+        %td
+          %strong
+            = num
+%p
+  #{@text['you']}
+  %strong
+    #{@total} 
+  #{@text['review']}
+  - if @total == 0
+    %br
+    %br
+    %i.fa.fa-exclamation-circle.danger
+    #{@text['encourage']}
+
+- if @total > 0
+  %table.skinny#theTable
+    %thead
+      %tr
+        %td
+          #{@text['position']}
+        %td
+          #{@text['rating']}
+        %td
+          #{@text['comments']}
+        
+    %tbody
+
+
+:javascript
+  var reviews = #{@review_list};
+  var odd = false;
+  for (var i = 0; i < reviews.length; i++) {
+    var r = [
+      "<tr>",
+        "<td>",reviews[i][2],"Referee</td>", //type
+        "<td>",reviews[i][0],"</td>", //rating
+        "<td>",reviews[i][1],"</td>", //comments
+      "</tr>"
+    ].join(' ');
+    
+    $("#theTable tbody").append(r);
+  };
+
+  $('#theTable').tablesorter({
+    ignoreCase: true,
+    widthFixed: false,
+    widgets: ['stickyHeaders'],
+  });

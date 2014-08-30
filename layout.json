@@ -1,0 +1,93 @@
+{
+    
+    "EN": {
+        "irdp": "IRDP",
+
+        "information": "Information",
+        "about": "About",
+        "faq": "FAQ",
+        "contact": "Contact",
+
+        "directory": "Referee Directory",
+        "review": "Review a Referee",
+
+        "testing": "Testing Center",
+        "training": "Training Materials",
+        "ass": "Assistant",
+        "snitch": "Snitch",
+        "head": "Head",
+        "ref_test": "Ref Test",
+
+        "nsi": "Not Signed In",
+        "logout": "Logout",
+        "login": "Login",
+        "create": "Create Account",
+        "affiliate": "It looks like you belong to an affiliate league but you haven't entered your registration code. There's a lot more content available if you get that free code from your region's referee administrator and submit it on the",
+        "page": "page",
+
+        "made": "made this site. Read more about the features",
+        "readme": "in this handy README!",
+        "here": "here",
+        "reserved": "all rights reserved"
+    },
+    "FR": {
+        "irdp": "PIDA",
+
+        "information": "Information",
+        "about": "Infos",
+        "faq": "Q&R",
+        "contact": "Contact",
+
+        "directory": "Listes d'Arbitres",
+        "review": "Critiquez un Arbitre",
+
+        "testing": "Évaluation",
+        "training": "Documents de Formation",
+        "ass": "arbitre",
+        "snitch": "arbitre de vif",
+        "head": "arbitre en chef",
+        "ref_test": "Test d'",
+
+        "nsi": "Pas connecté",
+        "logout": "Logout",
+        "login": "Login",
+        "create": "Create Account",
+        "affiliate": "It looks like you belong to an affiliate league but you haven't entered your registration code. There's a lot more content available if you get that free code from your region's referee administrator and submit it on the",
+        "page": "page",
+
+        "made": "made this site. Read more about the features",
+        "readme": "in this handy README!",
+        "here": "ici",
+        "reserved": "all rights reserved"
+    },
+    "IT": {
+        "irdp": "IRDP",
+
+        "information": "Informazioni",
+        "about": "A proposito di",
+        "faq": "FAQ",
+        "contact": "Contatta",
+
+        "directory": "Elenco arbitri",
+        "review": "Valuta un arbitro",
+
+        "testing": "Centro test",
+        "training": "Materiale formativo",
+        "ass": "assistente arbitrale",
+        "snitch": "arbitro del boccino",
+        "head": "arbitro principale",
+        "ref_test": "Test per",
+
+        "nsi": "Login non effettuato",
+        "logout": "Logout",
+        "login": "Login",
+        "create": "Crea un Account",
+        "affiliate": "Sembra che tu appartenga ad un'organizzazione affiliata, ma non hai inserito il tuo codice di registrazione. Ci sono molti più contenuti disponibili richiedendo gratuitamente quel codice al responsabile arbitrale della tua regione o Paese",
+        "page": "pagina",
+
+        "made": "ha creato questo sito. Leggi di più sulle feature",
+        "readme": "in questo comodo README!",
+        "here": "qui",
+        "reserved": "tutti i diritti riservati"
+    }
+}

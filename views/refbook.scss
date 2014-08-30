@@ -402,6 +402,7 @@ html, body {
 
     .mini {
         width: 15%;
+        margin-left: 60px;
     }
 
     #prof_pic {
@@ -426,10 +427,9 @@ html, body {
     color: white;
 
     p {
-        // padding-left: $slide-left;
-        padding-left: 10px;
-        // margin-left: -2em;
+        padding-left: 10px; 
         font-size: 12px;
+        margin-top: 10px;
     }
 
     a {
