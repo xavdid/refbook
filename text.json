@@ -59,7 +59,7 @@
     }, 
     "about" : {
         "EN": {
-            "about": "About the IRDP",
+            "title": "About the IRDP",
             "intro": "The new International Referee Development Program was created for the purpose of constant improvement in the quality of quidditch refereeing. Through the usage of online and in-person tests, and constant evaluation and re-evaluation, the IRDP’s focus is to provide all leagues across the world with the highest quality of referees available. This program recognizes the importance of great referees in a growing sport, and aspires to continue the growth of referees at all levels. This new organization utilizes the same five tenants that are currently employed in our field tests for head referees as a structure for our business model:",
             "confidence": "Confidence",
             "confidence_paragraph": "By displaying trust and faith in the referees that we hire and the methods utilized, the IRDP builds a strong support system for any who have become certified under the IRDP. Confidence is essential for all successful referees, and our faith in those that are certified builds the faith they have in themselves.",
@@ -74,7 +74,7 @@
         },
 
         "FR": {
-            "about": "Infos",
+            "title": "Infos",
             "intro": "La nouvelle organisation Programme Internationale pour Developper des Arbitres (PIDA, ou en anglais, International Referee Development Program, ou IRDP) était créée pour améliorer constamment la qualité de l'arbitrage de quidditch.  Grâce à des tests en ligne et en personne, et l'évaluation et réévaluation constante, PIDA est capable de fournir des meilleurs arbitres disponibles pour toutes les ligues du monde.  Ce programme reconnaît l'importance d'arbitrage pour le développement du sport et souhait à continuer la croissance d'arbitrage à tous les niveaux.  Cette nouvelle organisation utilise les mêmes cinq idéaux actuellement employés pendant nos tests pour notre modèle d'affaires:",
             "confidence": "Confiance",
             "confidence_paragraph": "Affichant la fiducie et la foi aux arbitres que nous embauchons et aux méthods utilisées, le PIDA construit un réseau de soutien solide pour tous ceux qui vont obtenir la certification.  La confiance est essentielle pour tous les arbitres réussis, et notre foi en ceux qui sont certifiés par nous bâtit la foi qu'ils ont en eux-mêmes.",
@@ -88,7 +88,7 @@
             "positioning_paragraph": "Etablissement rapidement et efficacement les membres dans les régions où la infrastructure a besoin d'être construit ou renforcé, le PIDA bâtit une présence géographique très répandue, ce qui s'assure que la qualité d'arbitrage est d'un niveau similaire dans le monde entier.  Avec les membres déjà établies sur trois continents et les parties intéressées dans les autres pays, nous sommes dans une position idéale. "
         },
         "IT": {
-            "about": "A proposito dell'IRDP",
+            "title": "A proposito dell'IRDP",
             "intro": "Il nuovo Programma internazionale per lo sviluppo dell'arbitraggio è stato creato al fine di perseguire un miglioramento costante nella qualità dell'arbitraggio nel quidditch. Attraverso l'uso di test online e di persona, e una costante valutazione e ri-valutazione, l'obbiettivo principale dell'IRDP è di fornire a tutte le organizzazioni esistenti la più alta qualità possibile di arbitri. Questo programma riconosce l'importanza di eccellenti arbitri in uno sport in crescita, e aspira a continuare la crescita degli arbitri su ogni livello. Questa nuova organizzazione utilizza gli stessi cinque punti cardine attualmente adottati nei nostri test pratici per arbitro principale, quale struttura per il nostro business model:",
             "confidence": "Fiducia",
             "confidence_paragraph": "Dimostrando fiducia negli arbitri con cui collaboriamo e nei metodi utilizzati, l'IRDP costruisce un forte sistema di supporto per tutti coloro che sono stati certificati come ufficiali di gara IRDP. La fiducia è essenziale per qualsiasi arbitro di successo, e la nostra fiducia in coloro che vengono certificati è la base della fiducia che essi hanno in sé stessi.",

@@ -165,7 +165,7 @@ def display(args = {})
   args[:old] ||= :t
 
   if not to_bool(args[:old])
-    pp 'asdf',settings.text_hash
+    # pp 'asdf',settings.text_hash
     @text = settings.text_hash[path.to_s][@lang]
   else
     @text = {}
