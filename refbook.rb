@@ -327,11 +327,11 @@ end
 def paypal_button
   @id = session[:user]['objectId']
   if session[:user]['region'] == 'AUST'
-    display('AU_paypal', false)
+    display({path: :AU_paypal})
   elsif session[:user]['region'] == 'QUK'
-    display('QU_paypal', false)
+    display({path: :QU_paypal})
   else
-    display('US_paypal', false)
+    display({path: :US_paypal})
   end
 end
 
