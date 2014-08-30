@@ -163,7 +163,6 @@ def display(args = {})
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
   args[:old] ||= :t
-
   if not to_bool(args[:old])
     # pp 'asdf',settings.text_hash
     @text = settings.text_hash[path.to_s][@lang]
