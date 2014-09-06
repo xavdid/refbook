@@ -14,7 +14,7 @@
         #{@text['affiliate']}
     - else
       .paypal
-        #{display({path: :access, layout: :f, old: :f})}
+        =haml :access
   - else
     %p
       %a{href: '/create'}<
@@ -65,7 +65,7 @@
         #{@text['affiliate']}
     - else
       .paypal
-        #{display({path: :access, layout: :f, old: :f})}
+        =haml :access
   - else
     %p
       %a{href: '/create'}<
