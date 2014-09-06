@@ -534,9 +534,9 @@ end
 post '/create' do
   user = Parse::User.new({
     # username is actually email, secretly
-    :username => params[:username],
-    :password => params[:password],
-    :email => params[:username],
+    :username => params[:username].downcase,
+    :password => params[:password].rstrip,
+    :email => params[:username].downcase,
     :assRef => false,
     :snitchRef => false,
     :headRef => false,
@@ -613,7 +613,7 @@ end
 
 post '/login' do
   begin
-    session[:user] = Parse::User.authenticate(params[:username], params[:password])
+    session[:user] = Parse::User.authenticate(params[:username].downcase, params[:password].rstrip)
     session.options[:expire_after] = 2592000 # 30 days
     redirect params[:d]
   rescue
