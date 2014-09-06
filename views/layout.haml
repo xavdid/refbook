@@ -133,7 +133,7 @@
     
     %h1#the_title
       -# this could prioritize @title or @text, idk which i prefer
-      #{@text['title'] || @title || 'Missing Title'}
+      #{@title || @text['title'] || 'Missing Title'}
 
     .issue
       %h3

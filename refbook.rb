@@ -836,7 +836,7 @@ get '/review/:id' do
   @region_keys = settings.region_names
   # this is included so there's no error because of a missinv variable
   @refs = {}
-  display :review
+  display({path: :review ,old: :f})
 end
 
 post '/review' do 
