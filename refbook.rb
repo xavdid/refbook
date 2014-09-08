@@ -421,9 +421,15 @@ get '/admin' do
     @review_list = []
     reviews = Parse::Query.new("review").get
 
+    refs = {}
+
     reviews.each do |r|
       # THIS WAS POORLY THOUGHT OUT 
-      q = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
+      if not refs.include? r['referee'].parse_object_id
+        refs[r['referee'].parse_object_id] = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
+      end
+      
+      q = refs[r['referee'].parse_object_id]
       a = [
         r['reviewerName'], #0
         r['reviewerEmail'], #1
