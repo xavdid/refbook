@@ -36,8 +36,15 @@ configure do
   set :killed, false
 
   # mongo is just for registration codes
-  set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
-  set :keys, settings.conn.db('kinect')['refbook_keys']
+  begin
+    set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
+    set :keys, settings.conn.db('kinect')['refbook_keys']
+  rescue
+    set :conn, nil
+    set :keys, nil
+    puts 'Mongo offline!'
+  end
+  
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY']
