@@ -1054,7 +1054,7 @@ end
 get '/testing' do
   @title = "Testing Information Center"
   @section = 'testing'
-  display
+  display({old: :f})
 end
 
 get '/testing/:which' do
