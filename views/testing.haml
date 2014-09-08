@@ -27,7 +27,7 @@
 %p
   #{@text['rb8']}
   
-
+-# trianing materials
 %h2
   #{@text['training']}
 
@@ -36,7 +36,7 @@
 %p
   #{@text['goal']}
 %p
-  #{@text['goal']}
+  #{@text['encouraged']}
 %ul.bullets
   -# %li
     -# %a{href: "https://www.google.com/url?q=https%3A%2F%2Fdocs.google.com%2Fa%2Finternationalquidditch.org%2Fdocument%2Fd%2F1UDbK4w9UswZcnAUZQJRaK--EwzA6GA64qO7PXv1V0rg%2Fedit", target: "_blank"}<
@@ -70,7 +70,7 @@
   #{@text['refresher']}
 
 %p
-  #{@text['fell']}
+  #{@text['feel']}
 %ul.bullets
   %li
     %a{href: 'http://www.classmarker.com/online-test/start/?quiz=93j53abaa3d0488d', target: '_blank'}<
@@ -82,7 +82,7 @@
 %h3
   #{@text['pillars']}
 %p
-  #{@text['got']}
+  #{@text['formed']}
 - if paid?
   %p
     %span.fa-stack
@@ -92,24 +92,19 @@
   %ul.bullets
     %li
       %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
-        #{@text['positioning']}
-        #{@text['guide']}
+        #{@text['positioning']} #{@text['guide']}
     %li
       %a{href: "/files/IRDPConfidenceGuide.pdf", target: '_blank'}<
-        #{@text['confidence']}
-        #{@text['guide']}
+        #{@text['confidence']} #{@text['guide']}
     %li
       %a{href: "/files/IRDPCommunicationGuide.pdf", target: '_blank'}<
-        #{@text['communication']}
-        #{@text['guide']}
+        #{@text['communication']} #{@text['guide']}
     %li
       %a{href: "/files/IRDPProfessionalismGuide.pdf", target: '_blank'}<
-        #{@text['professionalism']}
-        #{@text['guide']}
+        #{@text['professionalism']} #{@text['guide']}
     %li
       %a{href: "/files/IRDPConsistencyGuide.pdf", target: '_blank'}<
-        #{@text['consistency']}
-        #{@text['guide']}
+        #{@text['consistency']} #{@text['guide']}
 - else
   %ul.bullets
     %li
@@ -126,7 +121,7 @@
 %ul.bullets
   %li
     %a{href: '/files/IRDPHealthandWellnessGuide.pdf', target: '_blank'}<
-      #{@text['members']}
+      #{@text['health']} #{@text['guide']}
   %li
     %a{href: 'https://docs.google.com/file/d/0Bzr87uCsNgTzRmY4WGMwOUt2S2s/edit', target: '_blank'}<
       #{@text['pitch']}
@@ -135,7 +130,7 @@
   -if paid?
     %li
       %a{href: '/files/IRDPRefereeGameResponsibilitiesGuide.pdf', target: '_blank'}<
-        #{@text['match']}
+        #{@text['match']} #{@text['guide']}
     %li
       %a{href: '/files/IRDPFieldTestRubric.pdf', target: '_blank'}<
         #{@text['rubric']}
