@@ -424,12 +424,13 @@ get '/admin' do
     refs = {}
 
     reviews.each do |r|
-      # THIS WAS POORLY THOUGHT OUT 
-      if not refs.include? r['referee'].parse_object_id
-        refs[r['referee'].parse_object_id] = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first
+      rid = refs[r['referee'].parse_object_id]
+
+      if not refs.include? rid
+        refs[rid] = Parse::Query.new("_User").eq("objectId",rid).get.first
       end
+      q = refs[rid]
       
-      q = refs[r['referee'].parse_object_id]
       a = [
         r['reviewerName'], #0
         r['reviewerEmail'], #1
