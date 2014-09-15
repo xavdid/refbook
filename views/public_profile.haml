@@ -1,7 +1,9 @@
 %img#prof_pic{src: "#{@url}", width: 300}
 
-%h2
-  #{@text['region']} #{reg_reverse(@ref['region'])}
+%p
+  #{@text['region']}:
+  %strong
+    #{reg_reverse(@ref['region'])}
 
 %p
   %a{href: "mailto: #{@ref['username']}"}
@@ -10,3 +12,42 @@
 %p
   %a{href: "/review/#{@ref['objectId']}"}
     #{@text['review']} #{@ref['firstName']}
+
+%h3
+  Qualifications
+
+.form_box.small
+  .table-background
+    %table
+      %tr
+        %td
+          Assistant Referee
+        %td
+          - if @ref['assRef']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Snitch Referee
+        %td
+          - if @ref['snitchRef']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Head Referee Written
+        %td
+          - if @ref['headRef']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Head Referee Field
+        %td
+          - if @ref['passedFieldTest']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o

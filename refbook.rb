@@ -87,7 +87,7 @@ def paid?
 end
 
 def affiliate?
-  logged_in? and ["QUK", "AUST"].include? session[:user]['region']
+  logged_in? and ["QUK", "AUST", "CANA"].include? session[:user]['region']
 end
 # gets the nice name from the key
 # passing "USMW" returns "US Midwest"
@@ -125,6 +125,7 @@ def validate(key, region)
     key.insert(6,'-')
     key.insert(4,'-')
 
+    key.strip!
 
     if keys[region].include? key
       keys[region].delete key
@@ -419,7 +420,9 @@ get '/admin' do
     redirect '/'
   else
     @review_list = []
-    reviews = Parse::Query.new("review").get
+    reviews = Parse::Query.new("review").tap do |r|
+      r.limit = 1000
+    end.get
 
     refs = {}
 
@@ -817,7 +820,9 @@ get '/review' do
 
   @region_keys = settings.region_names
   @region_codes = settings.region_codes
-  q = Parse::Query.new("_User").get
+  q = Parse::Query.new("_User").tap do |u|
+    u.limit = 1000
+  end.get
   @refs = {}
 
   @region_codes.each do |r|
@@ -962,25 +967,33 @@ get '/search/:region' do
     @us_region_keys << r[2..r.size] 
   end
   
-  # if @region_title.nil?
-    # halt 404
-  # end
+  if @region_title.nil? and @reg != "USQ"
+    halt 404
+  end
 
   
-  q = Parse::Query.new("_User").get
+  q = Parse::Query.new("_User").tap do |r|
+    r.limit = 1000
+  end.get
 
   @total = q.size
   
   if @reg == "USQ"
-    q = Parse::Query.new("_User").get.select{|p| p['region'][0..1] == "US"}
+    q = Parse::Query.new("_User").tap do |r|
+      r.limit = 1000
+    end.get.select{|p| p['region'][0..1] == "US"}
   elsif @reg != "ALL"
-    q = Parse::Query.new("_User").eq("region",@reg).get
+    q = Parse::Query.new("_User").tap do |r|
+      r.limit = 1000
+    end.eq("region",@reg).get
   end
 
   @refs = []
+  pp q
   # build each row of the table
   q.each do |person|
     if person["assRef"] or person["snitchRef"]
+      puts 'in'
       entry = [
         person["firstName"], # 0
         person["lastName"], # 1

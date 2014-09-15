@@ -769,17 +769,17 @@
     },
     "public_profile" : {
         "EN": {
-            "region": "Region:",
+            "region": "Region",
             "email": "Send an email to",
             "review": "Write a review for"
         },
         "FR": {
-            "region": "Region:",
+            "region": "Region",
             "email": "Send an email to",
             "review": "Write a review for"
         },
         "IT": {
-            "region": "Regione:",
+            "region": "Regione",
             "email": "Manda un'email a",
             "review": "Scrivi una valutazione per"
         }
