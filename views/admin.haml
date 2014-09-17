@@ -1,5 +1,9 @@
 %p
-  Here are all reviews (viewable only if you're an admin). There'll be other info.
+  Here are all reviews (viewable only if you're an admin). There'll be other info. Dates are 
+  %strong
+    mm/dd/yy.
+  Sorry non-Americans. 
+
 
 %p
   %a.more{href: "#"}
@@ -44,6 +48,7 @@
 
   
 :javascript
+  // this can all be redone in haml like a regular goddam person
   var reviews = #{@review_list};
   var odd = false;
   // $("#theTable tbody").empty();
@@ -65,8 +70,6 @@
       "<td>",reviews[i][8],"</td>", //comments
       "<td class=\"",(reviews[i][9]) ? "y" : "n","\">",(reviews[i][9]) ? "Y" : "N","</td>", //show?
       "<td><a href=\"/reviews/"+reviews[i][10],"\">Edit</a></td>", //link
-
-
     ].join(' ');
     
 
@@ -93,5 +96,5 @@
     ignoreCase: true,
     widthFixed: false,
     widgets: ['stickyHeaders'],
-    sortList: [[0,1]],
+    sortList: [[0,1]]
   });

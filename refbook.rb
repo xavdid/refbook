@@ -424,15 +424,20 @@ get '/admin' do
       r.limit = 1000
     end.get
 
+    ref_dump = Parse::Query.new("_User").tap do |r|
+      r.limit = 1000
+    end.get
+
     refs = {}
 
-    reviews.each do |r|
-      rid = refs[r['referee'].parse_object_id]
+    ref_dump.each do |r|
+      refs[r['objectId']] = r
+    end
 
-      if not refs.include? rid
-        refs[rid] = Parse::Query.new("_User").eq("objectId",rid).get.first
-      end
-      q = refs[rid]
+
+
+    reviews.each do |r|
+      q = refs[r['referee'].parse_object_id]
       
       a = [
         r['reviewerName'], #0
@@ -447,7 +452,7 @@ get '/admin' do
         r['show'], #9
         r['objectId'], #10
         q['objectId'], #11
-        r['now'], #12
+        Time.parse(r['now']).strftime("%m/%d/%y"), #12
         r['type'] #13
       ]
       # hide the name of reviews made about you
