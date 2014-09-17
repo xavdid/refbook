@@ -157,7 +157,7 @@ end
 # and so forth for all language codes available
 # (which will probably be [EN|FR|IT|ES])
 
-def to_bool(b)
+def sym_to_bool(b)
   b == :t
 end
 
@@ -171,7 +171,7 @@ def display(args = {})
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
   args[:old] ||= :t
-  if not to_bool(args[:old])
+  if not sym_to_bool(args[:old])
     # pp 'asdf',settings.text_hash
     @text = settings.text_hash[path.to_s][@lang]
   else
@@ -183,7 +183,7 @@ def display(args = {})
   
   # pp @text
 
-  haml path.to_sym, layout: to_bool(args[:layout])
+  haml path.to_sym, layout: sym_to_bool(args[:layout])
 end
 
 # def display(path = request.path_info[1..-1], layout = true)
@@ -936,16 +936,16 @@ get '/reviews/:review_id' do
 end
 
 post '/reviews/:review_id' do
+  pp "params!",params
   r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
   reviewee = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first['email']
   r['show'] = to_bool(params[:show])
+  puts "show: ",r['show']
   r['comments'] = params[:comments]
 
   notify_of_review(reviewee) if r['show']
   
   r.save
-
-  
   
   flash[:issue] = "Review saved, it will #{r['show'] ? "" : "not"} be shown"
   redirect '/admin'
