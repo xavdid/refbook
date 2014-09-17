@@ -931,7 +931,7 @@ get '/reviews/:review_id' do
     pp session[:user]['objectId']
     @r['reviewerName'] = 'REDACTED' if @r['referee'].parse_object_id == session[:user]['objectId']
     @review = @r.to_json
-    display :edit_review
+    display({path: :edit_review, old: :t})
   end
 end
 
