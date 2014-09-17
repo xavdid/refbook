@@ -28,7 +28,8 @@
         "made": "made this site. Read more about the features",
         "readme": "in this handy README!",
         "here": "here",
-        "reserved": "all rights reserved"
+        "reserved": "all rights reserved",
+        "flash": {}
     },
     "FR": {
         "irdp": "PIDA",
@@ -58,7 +59,8 @@
         "made": "made this site. Read more about the features",
         "readme": "in this handy README!",
         "here": "ici",
-        "reserved": "all rights reserved"
+        "reserved": "all rights reserved",
+        "flash": {}
     },
     "IT": {
         "irdp": "IRDP",
@@ -88,6 +90,7 @@
         "made": "ha creato questo sito. Leggi di più sulle feature",
         "readme": "in questo comodo README!",
         "here": "qui",
-        "reserved": "tutti i diritti riservati"
+        "reserved": "tutti i diritti riservati",
+        "flash": {}
     }
 }
