@@ -1115,6 +1115,9 @@ get '/testing/:which' do
   else
     # rulebook 8!
     @tests = {ass: 'jmk53c853467f7c6', snitch: "6kr53c853f4914d8", head: "qjp53c854a5530ff", sample: "xnj533d065451038"}
+    # if session[:user]['region'] == "CANA"
+    #   @tests[:snitch] = CANADIAN TEST # test w/ off pitch
+    # end
     @rb = 8.0
   end
   

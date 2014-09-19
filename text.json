@@ -411,7 +411,8 @@
             "suffix_2": "rd",
 
             "outages": "Upcoming Site Outages",
-            "none": "None planned!"
+            "none": "None planned!",
+            "the_outages": ""
         },
         "FR": {
             "title": "Home",
@@ -450,7 +451,8 @@
             "suffix_2": "",
 
             "outages": "Interruptions du site prévus",
-            "none": "Aucune !"
+            "none": "Aucune !",
+            "the_outages": ""
         },
         "IT": {
             "title": "Home",
@@ -489,7 +491,8 @@
             "suffix_2": "",
 
             "outages": "Periodi pianificati di non disponibilità del sito",
-            "none": "Nulla in programma!"
+            "none": "Nulla in programma!",
+            "the_outages": ""
         }
     },
     "info" : {
