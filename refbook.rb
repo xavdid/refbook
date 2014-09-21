@@ -1118,7 +1118,7 @@ get '/testing/:which' do
     # if session[:user]['region'] == "CANA"
     #   @tests[:snitch] = CANADIAN TEST # test w/ off pitch
     # end
-    @rb = 8.0
+    @rb = 8.1
   end
   
   # refresh user object
