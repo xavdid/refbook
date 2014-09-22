@@ -32,34 +32,33 @@
         "flash": {}
     },
     "FR": {
-        "irdp": "PIDA",
+        "irdp": "IRDP",
 
         "information": "Information",
-        "about": "Infos",
+        "about": "À propos",
         "faq": "Q&R",
         "contact": "Contact",
 
-        "directory": "Listes d'Arbitres",
-        "review": "Critiquez un Arbitre",
+        "directory": "Annuaire des Arbitres",
+        "review": "Évaluer un Arbitre",
 
-        "testing": "Évaluation",
+        "testing": "Certification",
         "training": "Documents de Formation",
-        "ass": "arbitre",
-        "snitch": "arbitre de vif",
-        "head": "arbitre en chef",
-        "ref_test": "Test d'",
+        "ass": "Test d'Arbitre Assistant",
+        "snitch": "Test d'Arbitre de Vif",
+        "head": "Test d'Arbitre Principal",
 
-        "nsi": "Pas connecté",
-        "logout": "Logout",
-        "login": "Login",
-        "create": "Create Account",
-        "affiliate": "It looks like you belong to an affiliate league but you haven't entered your registration code. There's a lot more content available if you get that free code from your region's referee administrator and submit it on the",
-        "page": "page",
+        "nsi": "Hors ligne",
+        "logout": "Déconnexion",
+        "login": "Se connecter",
+        "create": "Créer un compte",
+        "affiliate": "Il semblerait que vous soyez membre d'une ligue affiliée mais que vous n'avez pas validé votre Code d'Inscription. Il y a beaucoup plus de contenu disponible un fois ce code, obtenu gratuitement auprès de votre directeur régional, retranscrit sur la page",
+        "page": "",
 
-        "made": "made this site. Read more about the features",
-        "readme": "in this handy README!",
+        "made": "a créé ce site. Découvrez-en plus sur les spécificités",
+        "readme": "dans ce guide très pratique !",
         "here": "ici",
-        "reserved": "all rights reserved",
+        "reserved": "Tous droits réservés",
         "flash": {}
     },
     "IT": {
