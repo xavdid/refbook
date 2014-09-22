@@ -460,7 +460,9 @@ get '/admin' do
         a[0] = "REDACTED"
         a[1] = "REDACTED"
       end
-      @review_list << a
+      if r['comments'].size > 0
+        @review_list << a
+      end
     end
 
     display
