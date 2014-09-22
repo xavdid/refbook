@@ -41,12 +41,12 @@
             "sort": "and he'll sort it out. "
         },
         "FR": {
-            "header": "This is correctly French!",
-            "logout": "Logging out",
-            "solve": "may solve the issue.",
-            "not": "If not, ",
-            "email": "email the administrator",
-            "sort": "and he'll sort it out. "
+            "header": "Une erreur s'est produite !",
+            "logout": "Se déconnecter",
+            "solve": "pourrait résoudre le problème.",
+            "not": "Dans le cas contraire,",
+            "email": "envoyez un email au webmaster",
+            "sort": "et il s'en occupera. "
         },
         "IT": {
             "header": "Qualcosa è andato storto!",
@@ -68,24 +68,24 @@
             "communication": "Communication",
             "communication_paragraph": "By utilizing a system of constant evaluation from IRDP members and offering players and coaches the ability to review referees’ performances, the IRDP can provide constructive feedback to continually improve quality. This ensures that referees can improve their craft at every turn. ",
             "professionalism": "Professionalism",
-            "Professionalism_paragraph": "By treating everyone we interact with in a respectable manner, regardless of experience or situation, the members of the IRDP set the bar for interpersonal interactions. This ensures that those who are involved with IRDP will act in a manner befitting of a representative of the organization.",
+            "professionalism_paragraph": "By treating everyone we interact with in a respectable manner, regardless of experience or situation, the members of the IRDP set the bar for interpersonal interactions. This ensures that those who are involved with IRDP will act in a manner befitting of a representative of the organization.",
             "positioning": "Positioning",
             "positioning_paragraph": "By quickly and efficiently establishing members in areas where infrastructure needs to be built or bolstered, the IRDP has widespread geographic presence, which is extremely important in making sure that quality is of a similar level worldwide. With members already located on three continents and interested parties in other countries, we are in a perfect position to both monitor current referees and certify new ones in new areas."
         },
 
         "FR": {
-            "title": "Infos",
-            "intro": "La nouvelle organisation Programme Internationale pour Developper des Arbitres (PIDA, ou en anglais, International Referee Development Program, ou IRDP) était créée pour améliorer constamment la qualité de l'arbitrage de quidditch.  Grâce à des tests en ligne et en personne, et l'évaluation et réévaluation constante, PIDA est capable de fournir des meilleurs arbitres disponibles pour toutes les ligues du monde.  Ce programme reconnaît l'importance d'arbitrage pour le développement du sport et souhait à continuer la croissance d'arbitrage à tous les niveaux.  Cette nouvelle organisation utilise les mêmes cinq idéaux actuellement employés pendant nos tests pour notre modèle d'affaires:",
+            "title": "À propos de l'IRDP",
+            "intro": "L'International Referee Development Program (IRDP, ou Programme International pour Developper l'Arbitrage) a été créé afin d'améliorer en permanence la qualité de l'arbitrage au quidditch.  Grâce à des tests en ligne et en personne, ainsi qu'à des évaluations et réévaluations constantes, l'IRDP cherche à fournir les meilleurs arbitres disponibles pour toutes les ligues du monde.  Ce programme reconnaît l'importance de l'arbitrage pour un sport en pleine croissance et souhaite pousser au développement des arbitres à tous les niveaux.  L'IRDP se base sur cinq piliers qui servent également de critères lors de nos examens pratiques sur terrain et de structure à notre organisation:",
             "confidence": "Confiance",
-            "confidence_paragraph": "Affichant la fiducie et la foi aux arbitres que nous embauchons et aux méthods utilisées, le PIDA construit un réseau de soutien solide pour tous ceux qui vont obtenir la certification.  La confiance est essentielle pour tous les arbitres réussis, et notre foi en ceux qui sont certifiés par nous bâtit la foi qu'ils ont en eux-mêmes.",
-            "consistency": "Consistance",
-            "consistency_paragraph": "Suivant les tests et rubriques reproductibles, le PIDA s'efforce de définir clairement ce qui est attendu de ceux qui souhaitent devenir certifiés par les méthods du PIDA.  Fort de notre expérience collective, ceci nous permet d'offrir un produit conforme à ceux qui s'intéresse à nos services.",
+            "confidence_paragraph": "En faisant confiance aux arbitres que nous embauchons et ayant foi dans les méthodes que nous employons, l'IRDP établi un réseau de soutien solide pour tous ceux qui ont été certifiés par l'IRDP.  La confiance est essentielle pour tout arbitre établi, et notre foi en ceux qui sont certifiés par nous renforce la foi qu'ils ont en eux-mêmes.",
+            "consistency": "Cohérence",
+            "consistency_paragraph": "En proposant des tests et des critères reproductibles, l'IRDP s'efforce de définir clairement ce qui est attendu de ceux qui souhaitent être certifiés par l'IRDP.  Fort de notre expérience collective, nous pouvons faire une offre cohérente à ceux qui s'intéresse à nos services.",
             "communication": "Communication",
-            "communication_paragraph": "Utilisant un système d'évaluation constante et offrant aux joueurs et aux entraîneurs la possibilité d'examiner les performances d'arbitrage, le PIDA peut donner des commentaires constructifs aux arbitres pour améliorer continuellement la qualité.  Cela garantit que les arbitres peuvent améliorer leur art à chaque tour.",
+            "communication_paragraph": "En nous basant sur un système d'évaluation continuelle par les membres de l'IRDP et offrant aux joueurs/entraîneurs la possibilité d'évaluer eux-même les performances d'un arbitre, l'IRDP peut formuler des critiques constructives afin d'améliorer la qualité de l'arbitrage. Les arbitres peuvent donc progresser en permanence. ",
             "professionalism": "Professionnalisme",
-            "Professionalism_paragraph": "Traitant tout le monde avec la même manière respectable, indépendamment de l'expérience ou de la situation, le PIDA mis la barre pour les interactions interpersonnelles.  Ceci assure que ceux qui sont impliqués dans le PIDA vont agir d'une manière digne d'un représentant de l'organisation.",
+            "professionalism_paragraph": "En traitant tout le monde de manière respectable, indépendamment du niveau d'expérience ou de la situation, les membres de l'IRDP établissent les standards en matière d'interactions.  Ceci garantit que ceux impliqués dans l'IRDP agiront d'une manière digne d'un représentant de l'organisation.",
             "positioning": "Positionnement",
-            "positioning_paragraph": "Etablissement rapidement et efficacement les membres dans les régions où la infrastructure a besoin d'être construit ou renforcé, le PIDA bâtit une présence géographique très répandue, ce qui s'assure que la qualité d'arbitrage est d'un niveau similaire dans le monde entier.  Avec les membres déjà établies sur trois continents et les parties intéressées dans les autres pays, nous sommes dans une position idéale. "
+            "positioning_paragraph": "En établissement rapidement et efficacement des membres dans les régions où les infrastructures ont besoin d'être construites ou renforcées, l'IRDP a bâtit une présence géographique étendue, un point essentiel afin de s'assurer que la qualité de l'arbitrage est d'un niveau similaire dans le monde entier.  Avec des membres déjà établis sur trois continents et des parties intéressées dans plusieurs pays, nous sommes dans une position idéale pour certifier de nouveaux arbitres dans des régions qui en manqueraient ou pour être à l'écoute de nos arbitres actuels."
         },
         "IT": {
             "title": "A proposito dell'IRDP",
@@ -97,7 +97,7 @@
             "communication": "Comunicazione",
             "communication_paragraph": "Utilizzando un sistema di costante valutazione da parte dello staff IRDP e offrendo a giocatori e allenatori la possibilità di valutare le prestazioni degli arbitri, l'IRDP può fornire commenti costruttivi per migliorare continuamente la qualità. Questo assicura che di volta in volta gli arbitri migliorino le proprie capacità. ",
             "professionalism": "Professionalità",
-            "Professionalism_paragraph": "Trattando tutti coloro con cui interagiamo un maniera rispettosa, a prescindere dall'esperienza o dalla situazione, i membri dell'IRDP determinano uno standard per le relazioni interpersonali. Questo assicura che coloro che avranno a che fare con l'IRDP si comporteranno quali degni rappresentanti dell'organizzazione.",
+            "professionalism_paragraph": "Trattando tutti coloro con cui interagiamo un maniera rispettosa, a prescindere dall'esperienza o dalla situazione, i membri dell'IRDP determinano uno standard per le relazioni interpersonali. Questo assicura che coloro che avranno a che fare con l'IRDP si comporteranno quali degni rappresentanti dell'organizzazione.",
             "positioning": "Posizionamento",
             "positioning_paragraph": "Stabilendo velocemente e in modo efficiente membri dello staff in aree in cui l'infrastruttura necessita di essere costruita o rinforzata, l'IRDP ha una presenza geografica estesa, estremamente importante nell'assicurarsi che la qualità sia di simile livello in tutto il mondo. Con membri già presenti su tre continenti e nuovi interessati in altre nazioni, siamo nella perfetta posizione per monitorare gli arbitri attuali e certificarne di nuovi nelle aree di prossima espansione."
         }
@@ -114,14 +114,14 @@
             "tech": "Technical Director"
         },
         "FR": {
-            "title": "Contact the IRDP",
-            "reach": "The best way to contact us is via our shared email address,",
-            "board": "You can also contact individual board members, such as",
-            "director": "Director",
-            "adirector": "Assistant Director",
-            "treasurer": "Treasurer",
-            "secretary": "Secretary",
-            "tech": "Technical Director"
+            "title": "Contacter l’IRDP",
+            "reach": "Le meilleur moyen de nous contacter est d’utiliser notre adresse mail commune,",
+            "board": "Vous pouvez également contacter un membre du bureau en particulier :",
+            "director": "Directeur",
+            "adirector": "Directeur Assistant",
+            "treasurer": "Trésorier",
+            "secretary": "Secretaire",
+            "tech": "Directeur technique"
         },
         "IT": {
             "title": "Contatta l'IRDP",
@@ -151,19 +151,19 @@
             "agree2": "and agree to all statements therein."
         },
         "FR": {
-            "title": "Create an Account",
-            "verify": "Vérifiez que toutes les informations sont correctes, ils seront utilisés pour notre BD d'arbitres.  Toutes les choses seront accessibles au public aux fins de communiquer avec vous.  Toutes les informations sauf le code d'enregistrement est obligatoire.",
+            "title": "S’enregistrer",
+            "verify": "Vérifiez que toutes les informations fournies sont correctes ; elles seront utilisées pour notre banque de données d'arbitres.  Toutes les informations seront accessibles au public aux fins de communiquer avec vous.  Il est obligatoire de remplir tous les champs, sauf le code d'enregistrement, pour compléter l’enregistrement.",
             "email": "Adresse email",
             "password": "Mot de passe",
-            "confirm": "Mot de passe (bis)",
+            "confirm": "Confirmez le mot de passe",
             "firstname": "Prénom",
             "lastname": "Nom",
             "team": "Equipe associée (ou aucune)",
-            "region": "Pays",
-            "registration": "Code d'enregistrement (vous pouvez également le faire plus tard)",
+            "region": "Région/pays",
+            "registration": "Code d'enregistrement (vous pouvez compléter ce champ plus tard)",
             "agree": "J'ai lu le ",
             "code": "Code d'Arbitrage",
-            "agree2": "et j'accepte (je suis d'accord) toutes les déclarations qui y sont."
+            "agree2": "et je valide toutes les déclarations qu'il contient."
         },
         "IT": {
             "title": "Crea un Account",
@@ -242,42 +242,42 @@
             "q": "Q",
             "a": "R",
             "q1": "Pourquoi avoir abandonné l’ancien système de la RDT?",
-            "a1": "Avec la séparation de l’IQA en ligues nationales, la RDT serait resté attachée à une organisation nationale, nommément USQ. En conséquence de quoi, les nouvelles ligues n’auraient pas eu accès à l’expérience collective, ce qui, aux yeux de le PIDA, aurait ralentit l’expansion du sport. Pour cette raison, nous estimons que travailler en tant qu’organisation indépendante ayant pour seul but d’améliorer la qualité des arbitres au niveau mondial sera plus bénéfique au sport et à la communauté dans son entier.",
+            "a1": "Avec la séparation de l’IQA en ligues nationales, la RDT serait resté attachée à une organisation nationale, nommément USQ. En conséquence de quoi, les nouvelles ligues n’auraient pas eu accès à l’expérience collective, ce qui, aux yeux de l'IRDP, aurait ralentit l’expansion du sport. Pour cette raison, nous estimons que travailler en tant qu’organisation indépendante ayant pour seul but d’améliorer la qualité des arbitres au niveau mondial sera plus bénéfique au sport et à la communauté dans son entier.",
 
             "q2": "Qu’est-ce que cela change pour moi ? ",
-            "a2": "Pour les membres de ligues ayant établit un contrat avec le PIDA, le changement sera minimal. Ce site est un exemple des évolutions que vous pouvez attendre : une approche plus simple, efficace et épurée en matière de diffusion de l’information à destination de ceux qui s’intéressent à nos services. Toute personne impliquée dans une ligue travaillant avec le PIDA et nos ressources est en droit d’attendre le même service que celui offert par l’IQA RDT.",
+            "a2": "Pour les membres de ligues ayant établit un contrat avec l'IRDP, le changement sera minimal. Ce site est un exemple des évolutions que vous pouvez attendre : une approche plus simple, efficace et épurée en matière de diffusion de l’information à destination de ceux qui s’intéressent à nos services. Toute personne impliquée dans une ligue travaillant avec l'IRDP et nos ressources est en droit d’attendre le même service que celui offert par l’IQA RDT.",
             
-            "q3": "Ma ligue ne vous emploie pas; puis-je malgré tout devenir un arbitre certifié par le PIDA ?",
-            "a3": "Oui et nous vous encourageons à le faire. Sachez cependant que, si votre ligue ne nous emploie pas, votre certificat d’arbitrage délivré par le PIDA n’aura aucun impact sur les obligations envers celle-ci. Si vous souhaitez devenir un arbitre certifié par le PIDA, sachez qu’une participation financière fera partie du processus. ",
+            "q3": "Ma ligue ne vous emploie pas; puis-je malgré tout devenir un arbitre certifié par l'IRDP ?",
+            "a3": "Oui et nous vous encourageons à le faire. Sachez cependant que, si votre ligue ne nous emploie pas, votre certificat d’arbitrage délivré par l'IRDP n’aura aucun impact sur les obligations envers celle-ci. Si vous souhaitez devenir un arbitre certifié par le PIDA, sachez qu’une participation financière fera partie du processus. ",
             
             "q4": "Recrutez-vous ?",
-            "a4": "Oui ! le PIDA est en recherche permanente de nouveaux membres qui souhaitent améliorer la qualité de l’arbitrage. Actuellement, nous cherchons à recruter de nouveaux membres pour la Referee Development Team ainsi que des Referee Training Coordinators pour toutes les ligues avec lesquelles nous travaillons. Ci-dessous une description des deux composantes majeures de le PIDA: ",
+            "a4": "Oui ! L'IRDP recherche en permanence de nouveaux membres qui souhaitent améliorer la qualité de l’arbitrage. Actuellement, nous cherchons à recruter de nouveaux membres pour la Referee Development Team ainsi que des Referee Training Coordinators pour toutes les ligues avec lesquelles nous travaillons. Ci-dessous une description des deux composantes majeures de l'IRDP : ",
             "rdt": "Referee Development Team :",
-            "rdt_blurb": "Cette équipe crée les tests et le matériel d’entraînement destiné à maintenir les standards de chaque ligue ayant un contrat avec le PIDA.",
+            "rdt_blurb": "Cette équipe crée les tests et le matériel d’entraînement destiné à maintenir les standards de chaque ligue ayant un contrat avec l'IRDP.",
             "rtc": "Referee Training Coordinators :",
-            "rtc_blurb": "Ces membres ont été remarqués pour la haute qualité de leur arbitrage et pour les critiques constructives qu’ils offrent à leurs collègues. Leur tâche est d’entraîner et de certifier les nouveaux arbitres afin d’en faire de meilleur représentants de le PIDA.",
+            "rtc_blurb": "Ces membres ont été remarqués pour la haute qualité de leur arbitrage et pour les critiques constructives qu’ils offrent à leurs collègues. Leur tâche est d’entraîner et de certifier les nouveaux arbitres afin d’en faire de meilleur représentants de l'IRDP.",
             "a4p2": "Si vous pensez être un bon candidat pour l’une ou l’autre des positions décrites ci-dessus, envoyez un CV et une courte lettre de motivation à ",
             "a4p3": "et nous vous contacterons aussi vite que possible.",
 
-            "q5": "J’aimerais établir un contrat entre IRDP et la ligue dont je suis responsable, comment faire ?",
+            "q5": "J’aimerais établir un contrat entre l'IRDP et la ligue dont je suis responsable, comment faire ?",
             "a5": "Contactez-nous ",
             "here": "ici !",
-            "a5p2": "le PIDA propose des examens pratiques et organisera des ateliers avec votre ligue afin de lancer la machine, en plus d’offrir un soutien continu après les premières formations.",
+            "a5p2": "L'IRDP propose des examens pratiques et organisera des ateliers avec votre ligue afin de lancer la machine, en plus d’offrir un soutien continu après les premières formations.",
 
             "q6": "Comment seront utilisés mes frais d’inscription ? ",
-            "a6": "Bien qu’un grand nombre de candidats paraissent excellent à l’écrit, un aspect essentiel de l’arbitrage est la maîtrise sur le terrain. Afin de garantir la qualité des arbitres une fois mis en situation, nous couvrons les frais de déplacement de nos examinateurs de par le monde pour nous assurer que seuls les arbitres les plus talentueux soient certifiés. De plus, vos frais financent notre site et notre système d’examen en ligne (classmarker). le PIDA ne fait aucun profit et l’intégralité de votre argent est utilisé afin d’améliorer votre expérience d’arbitre. Plus d’informations à ce sujet sur notre",
+            "a6": "Bien qu’un grand nombre de candidats paraissent excellent à l’écrit, un aspect essentiel de l’arbitrage est la maîtrise sur le terrain. Afin de garantir la qualité des arbitres une fois mis en situation, nous couvrons les frais de déplacement de nos examinateurs de par le monde pour nous assurer que seuls les arbitres les plus talentueux soient certifiés. De plus, vos frais financent notre site et notre système d’examen en ligne (classmarker). L'IRDP ne fait aucun profit et l’intégralité de votre argent est utilisé afin d’améliorer votre expérience d’arbitre. Plus d’informations à ce sujet sur notre",
             "pay": "page de paiement.",
             "a6p2": "",
             
-            "q7": "Quelles ligues ont établit un contrat avec le PIDA ?",
+            "q7": "Quelles ligues ont établit un contrat avec l'IRDP ?",
             "a7": "À la date du",
             "updated": "IRDP+Contracts+Updated",
-            "a7p2": "le PIDA a un accord contractuel définitif avec: ",
+            "a7p2": "l'IRDP a un accord contractuel définitif avec: ",
             "aqa": "l’Australian Quidditch Association",
             "quk": "Quidditch UK",
             "canada": "Quidditch Canada",
             "contract": "accord",
-            "a7p3" :"Restez attentif aux futurs annonces quant aux résultats de nos négociations avec de nombreuses autres ligues. Les membres de ces ligues reçoivent un accès à tout le matériel de formation fournit par le PIDA gratuitement !",
+            "a7p3": "Restez attentifs aux futures annonces quant aux résultats de nos négociations avec de nombreuses autres ligues. Les membres de ces ligues reçoivent un accès à tout le matériel de formation fournit par l'IRDP gratuitement !",
 
             "q8": "À l’aide ! J’ai payé mais je ne parviens pas à accéder au site !",
             "a8": "N’ayez crainte ! Il arrive que des informations se perdent. Si votre transaction paypal a été confirmée (vous avez vu la page « paiement confirmé » et/ou reçu l’email de confirmation), vous recevrez l’accès au site, pas de panique. Tentez d’abord de vous ",
@@ -287,10 +287,10 @@
             "a8p3": "et il se penchera sur votre cas dans les douze heures.",
             
             "q9": "En quoi consiste le contenu offert gratuitement sur votre site ?",
-            "a9": "Pour tout arbitre attaché à une ligue ayant établit un contrat avec le PIDA, tout le contenu est gratuit et l’examen d’arbitre principal est offert pour un coût modeste. Pour tout arbitre attaché à une ligue n’ayant pas de contrat avec le PIDA,  les contenus concernant les arbitres de buts et l’arbitre de marquoir sont disponibles gratuitement, le tout accompagné d’un aperçu de nos cinq guides ‘piliers’. Ces arbitres peuvent se procurer un accès à notre matériel de formation pour les arbitres assistants, arbitres de vif et arbitres principaux au prix de 5$ ; l’examen d’arbitre principal leur sera proposé au prix de 20$.",
+            "a9": "Pour tout arbitre attaché à une ligue ayant établit un contrat avec l'IRDP, tout le contenu est gratuit et l’examen d’arbitre principal est offert pour un coût modeste. Pour tout arbitre attaché à une ligue n’ayant pas de contrat avec le PIDA,  les contenus concernant les arbitres de buts et l’arbitre de marquoir sont disponibles gratuitement, le tout accompagné d’un aperçu de nos cinq guides ‘piliers’. Ces arbitres peuvent se procurer un accès à notre matériel de formation pour les arbitres assistants, arbitres de vif et arbitres principaux au prix de 5$ ; l’examen d’arbitre principal leur sera proposé au prix de 20$.",
             
             "q10": "En quoi le système de testes diffère-t-il de celui des saisons précédentes avec l’IQA ? ",
-            "a10": "le PIDA a complètement revu la structure interne des examens écrits. Le nouveau système teste les candidats de manière plus efficace sur leur connaissance de règles spécifiques, selon un format de question plus facile à comprendre. De plus, l’examen pratique a été épuré et voit l’ajout d’une sixième section destinée à évaluer la capacité du candidat à prendre la bonne décision en cours de jeu. Le tout est offert via un site internet pratique et automatisé (que vous consultez actuellement)."
+            "a10": "L'IRDP a complètement revu la structure interne des examens écrits. Le nouveau système teste les candidats de manière plus efficace sur leur connaissance de règles spécifiques, selon un format de question plus facile à comprendre. De plus, l’examen pratique a été épuré et voit l’ajout d’une sixième section destinée à évaluer la capacité du candidat à prendre la bonne décision en cours de jeu. Le tout est offert via un site internet pratique et automatisé (que vous consultez actuellement)."
         },
         "IT": {
             "title": "FAQ",
@@ -356,10 +356,10 @@
             "page": "page"
         },
         "FR": {
-            "paid": "This is paid content",
-            "funds": "The funds for the IRDP come exclusively from leagues we contract with and member dues. So, be a champion and give us a $5USD payment in order to gain access to these awesome resources. Read all about why we charge and where your money goes on our",
-            "purchase": "purchase",
-            "page": "page"
+            "paid": "Ce contenu est payant",
+            "funds": "Les fonds de l’IRDP sont exclusivement fournis par les ligues avec lesquelles nous établissons un contrat et par les cotisations des membres. Soyez un héros et payez 5$ US pour obtenir l’accès à ces documents. Le détail de nos dépenses et du pourquoi ce service est payant se trouve sur notre page d’",
+            "purchase": "achat",
+            "page": ""
         },
         "IT": {
             "paid": "Questo è un contenuto a pagamento",
@@ -396,7 +396,7 @@
             "consistency": "Consistency Guide",
             "health": "Health and Well-Being Guide",
             "responsibilities": "Referee Match Responsibilities Guide",
-            "tests": "All tests updated for USQ Rulebook 8",
+            "tests": "All tests updated for USQ Rulebook 8.0",
             "beta": "Beta Release of the ",
             "french": "the French",
             "italian": "the Italian",
@@ -415,14 +415,14 @@
             "the_outages": ""
         },
         "FR": {
-            "title": "Home",
-            "purpose": "Le Programme International pour Developper des Arbitres est une organisation formée pour le but de la certification des arbitres cohérents et compétants à travers le monde.",
-            "resources": "Ici, vous pouvez y trouver des ressources pour préparer vous-même aux tests d'arbitrage, les tests eux-mêmes, l'annuaire d'arbitre, critiques, et autre information.", 
-            "whenever": "Chaque fois vous voyez une heure, cliquez sur", 
-            "click": "pour voir dans votre heure locale.",
+            "title": "Accueil",
+            "purpose": "L'International Referee Development Program (Programme International pour Developper l'Arbitrage) est une organisation formée dans le but de certifier des arbitres cohérents et compétents à travers le monde.",
+            "resources": "Vous trouverez ici des ressources pour vous préparer aux tests d'arbitrage, les tests eux-mêmes, l'annuaire des arbitres, un formulaire d'évaluation, et d'autres informations concernant les arbitres dont vous pourriez avoir besoin.", 
+            "whenever": "Lorsqu'une horloge s'affiche, cliquez sur", 
+            "click": "pour afficher votre heure locale.",
 
             "latest": "Dernières mises à jour ",
-            "asof": "à partir de ",
+            "asof": "en date du",
 
             "our": "Notre",
             "press": "communiqué de presse",
@@ -433,16 +433,16 @@
             "confidence": "Guide de Confiance",
             "communication": "Guide de Communication",
             "professionalism": "Guide de Professionalisme",
-            "consistency": "Guide de Consistence",
-            "health": "SGuide de anté et bien-être",
-            "responsibilities": "Guide de Responsibilités d'Arbitre du Match",
-            "tests": "Tous les tests pour Règles Version 8 disponibles",
+            "consistency": "Guide de Cohérence",
+            "health": "Guide de santé et bien-être",
+            "responsibilities": "Guide de Responsibilités en Match",
+            "tests": "Tous les tests sont à jour pour les Règles 8.0",
             "beta": "Version beta ",
-            "french": "du français",
-            "italian": "d'italien",
-            "not_tests": "(lauf les tests) !",
-            "rtc": "Publication des documents de formation de coordinateur d'arbitre formation",
-            "extra": "Évaluation d'arbitre de vif",
+            "french": "en français",
+            "italian": "en italien",
+            "not_tests": "(sauf les tests) !",
+            "rtc": "publication des Documents de formation pour les Referee Training Coordinators (Responsables de la formation des arbitres), ",
+            "extra": "Évaluations pour arbitres assistants et arbitres de vif",
 
             "july": "juillet",
             "august": "août",
@@ -450,7 +450,7 @@
             "suffix": "",
             "suffix_2": "",
 
-            "outages": "Interruptions du site prévus",
+            "outages": "Mise hors-ligne du site prévue(s)",
             "none": "Aucune !",
             "the_outages": ""
         },
@@ -476,7 +476,7 @@
             "consistency": "Guida alla coerenza",
             "health": "Guida per salute e benessere",
             "responsibilities": "Guida alle responsabilità arbitrali in partita",
-            "tests": "Tutti i test aggiornati per il Regolamento 8 USQ",
+            "tests": "Tutti i test aggiornati per il Regolamento 8.0 USQ",
             "beta": "Rilascio Beta di: ",
             "french": "Francese -",
             "italian": "Italiano",
@@ -509,14 +509,13 @@
         },
         "FR": {
             "title": "Information",
-            "check": "Check out our",
-            "pr": "Press Release",
-            "more": "for more info on the formation of the IRDP.",
+            "check": "Jetez un oeil à notre",
+            "pr": "communiqué de presse",
+            "more": "pour plus d'informations sur la création de l'IRDP.",
 
-            "got": "We've got a",
-            "annoucements": "where we post important announcements. It's an easy way to stay in touch!",
-            
-            "page": "page for interesting referee content and some good discussion."
+            "got": "Nous avons un compte",
+            "annoucements": "où nous postons les announces importantes. Cela permet de rester au courrant et de nous contacter facilement !",
+            "page": " avec des ressources et des discussions intéressantes pour les arbitres."
         },
         "IT": {
             "title": "Informazioni",
@@ -542,13 +541,13 @@
             "it": "it"
         },
         "FR": {
-            "title": "Login",
-            "dont": "Don't have an account? You can",
-            "create": "create",
-            "one": "one",
-            "forgot": "Forgot your password? You can ",
-            "reset": "Reset",
-            "it": "it"
+            "title": "Connexion",
+            "dont": "Vous n'avez pas de compte personnel ? Vous pouvez",
+            "create": "en créer",
+            "one": "un",
+            "forgot": "Vous avez oublié votre mot de passe ? Vous pouvez ",
+            "reset": "En créer un nouveau",
+            "it": ""
         },
         "IT": {
             "title": "Login",
@@ -567,9 +566,9 @@
             "info": "for more information"
         },
         "FR": {
-            "under": "Undergoing Maintenance",
-            "check": "Check our",
-            "info": "for more information"
+            "under": "Maintenance en cours",
+            "check": "Jetez un oeil à notre",
+            "info": "pour plus d'informations"
         },
         "IT": {
             "under": "Manutenzione in corso",
@@ -613,38 +612,38 @@
             "be": "Be part of the"
         },
         "FR": {
-            "title": "Purchase an IRDP Membership!",
-            "already": "It looks like you've already paid for your IRDP membership (or are part of an affiliate league)!",
-            "hr": "If you're looking to buy a HR test, head over to the",
-            "hr_link": "HR test page",
-            "complete": "and complete your purchase there",
+            "title": "Devenir membre payant de l'IRDP !",
+            "already": "Il smeblerait que vous avez déjà payé votre cotisation de membre à l'IRDP (ou que vous êtes affilié(e) à une ligue sous contrat) !",
+            "hr": "Si vous désirez accéder au test d'arbitre principal, dirigez vous vers",
+            "hr_link": "la page de test pour arbitres principaux",
+            "complete": "et exécutez votre achat depuis celle-ci",
 
-            "affiliate": "You don't have to buy this, you're part of an affiliate league! Instead, see your regional IRDP member or gameplay person!",
+            "affiliate": "Vous ne devez pas payer pour ce contenu, vous êtes affilié(e) à une ligue sous contrat ! Contactez plutôt votre membre IRDP régional ou la personne responsable de l'arbitrage dans votre ligue !",
 
-            "create": "Create",
-            "account": "an account or",
-            "login": "log in",
-            "purchase": "to make a purchase",
+            "create": "Créer",
+            "account": "un compte ou",
+            "login": "se connecter",
+            "purchase": "pour faire un achat",
 
-            "thanks": "Thank you for thinking about financially supporting the IRDP! Now that we're our own organization, we've got bills to pay and as of now, our only support comes from you, our lovely paid members.",
+            "thanks": "Merci de réfléchir à la possibilité de soutenir l'IRDP financièrement ! Maintenant que nous sommes une organisation indépendante, nous avons des factures à payer et, jusqu’à présent, notre seul soutien financier vient de vous, nos chers membres payants.",
             "note": "NOTE",
-            "paypal": "Sometimes paypal doesn't register your purchase fast enough, so you may need to sign out and back in for your payment to register. We'll get this fixed soon!",
+            "paypal": "Il arrive que paypal n’enregistre pas votre achat suffisamment rapidement ; il vous faudra vous déconnecter du site et vous reconnecter afin que votre payement soit enregistré. Nous travaillons à réparer ce problème le plus vite possible !",
 
-            "used": "What is my money used for? Will it be spent on patches or ID cards I don't want?",
-            "upkeep": "Good question! We have a few upkeep costs that drain the majority of our financial resources.",
+            "used": "À quoi sert l’argent ? Sera-t-il dépensé en badges et cartes d’identification qui ne m’intéressent pas ?",
+            "upkeep": "Bonne question ! Nous avons quelques coûts de maintenance qui absorbent la majorité de nos revenus.",
 
-            "ub1": "The biggest cost is classmarker, the wonderful site that supports our online written testing. Because we're using their premium features to integrate with our databases, we use a",
-            "paid": "paid",
-            "ub12": "plan. Furthermore, we pay per test taken, so at minimum, every certified Head Referee consumes 3 tests (ideally). That adds up quickly.",
+            "ub1": "Le plus gros coût est celui de classmarker, ce merveilleux site qui héberge nos tests écrits en ligne. Comme nous utilisons leur version premium pour pouvoir l'intégrer à notre base de données, nous avons besoin de la version",
+            "paid": "payante",
+            "ub12": ". De plus, ils contabilisent des frais par test consommé ; quand on sait que chaque Arbitre Principal certifié consomme au minimum 3 tests, le chiffre grimpe vite.",
 
-            "ub2": "Travel for field tests. Some referees look great on paper but don't have the chops once they're out on the field. In order to maintain the highest quality reffing standards, we make sure every Head Referee candidate is vetted by one of our highly qualified RDT or RTC members. This sends them all over the world, which gets expensive quickly.",
+            "ub2": "Les voyages pour examen sur terrain. Certains arbitres paraissent excellents sur papier, mais n’ont pas le talent une fois sur le terrain. Afin de maintenir les meilleurs standards en matière de qualité d’arbitrage, nous nous assurons que chaque candidat Arbitre Principal est validé par l’un de nos membres hautement qualifiés de la RDT ou RTC. Pour ce faire, nous les envoyons de par le monde, ce qui revient vite cher.",
 
-            "ub3": "Other electronic resources. In order to provide the best possible online experience, we've got the latest web technologies powering an awesome stack. We decided not to sacrifice quality in any way (we know how frustrating that can be!), so we pay a bit for our tech (this is our smallest monthly expense).",
+            "ub3": "Autres ressources informatiques. Afin de procurer la meilleure une expérience en ligne possible, nous utilisons des technologies de pointe. Nous avons décidé de ne pas regarder à la dépense en matière de qualité (nous savons que le contraire peut vite devenir frustrant), nous payons donc un peu pour notre support technique (la plus petite partie de notre budget mensuel).",
 
-            "stress": "We also want to stress that every IRDP employee is a volunteer and none of us are compensated for our time. We do what we do because we love quidditch and believe the system we are building will produce the best referees possible.",
+            "stress": "Nous souhaitons souligner que tout employé du PIDA est volontaire et nul ne reçoit de compensation financière pour le temps investi. Nous donnons de notre temps parce que nous aimons le quididtch et estimons que le système que nous mettons en place produira les meilleurs arbitres possible. ",
 
-            "help": "So, help us help you. Skip that latte tomorrow and be part of something awesome.",
-            "be": "Be part of the"
+            "help": "Donc, aidez-nous à vous aider. N’achetez pas votre latte demain et participez à un projet génial.",
+            "be": "Rejoignez l'"
         },
         "IT": {
             "title": "Acquista un'iscrizione all'IRDP!",
@@ -713,32 +712,31 @@
         },
         "FR": {
             "title": "Profil",
-            "upload": "It looks like you haven't uploaded a profile pic yet! Do so on your",
-            "settings": "settings",
-            "page": "page",
+            "upload": "Il semblerait que vous n'avez pas encore ajouté de photo de profil ! Rendez-vous sur votre",
+            "settings": "panneau de configuration",
+            "page": "pour ce faire",
 
             "this": "Ceci",
             "is_your": "est votre",
             "profile_page": "profil public",
 
-            "review_page": "page de critiques individuelle",
-            "bookmark": "Pour un accès facile, n'hésitez pas à distribuer ce code",
-            "code": "qui permet quelqu'un de vous donner leur avis de leur propre appareil.",
+            "review_page": "page d'évaluation personelle",
+            "bookmark": "Pour un accès facile, n'hésitez pas à sauvegarder ce lien ou distribuer ce code",
+            "code": "qui permettra à d'autres de vous évaluer depuis leur propre appareil.",
 
-
-            "empty": "Vous avez les critiques suivants sans commentaires:",
-            "excellent": "excellent",
-            "good": "good",
-            "average": "average",
-            "poor": "poor",
+            "empty": "Vous avez été évalué(e) de la manière suivante, sans commentaire :",
+            "excellent": "Excellent",
+            "good": "Bon",
+            "average": "Dans la moyenne",
+            "poor": "Mauvais",
 
             "you": "Vous avez",
-            "review": "critique(s) avec les commentaires.",
-            "encourage": "Encouragez les autres à vous critiquer !",
+            "review": "évaluations(s) avec commentaire(s).",
+            "encourage": "Encouragez les autres à vous évaluer !",
 
-            "position": "Position",
-            "rating": "Rating",
-            "comments": "comments"
+            "position": "Poste",
+            "rating": "Évaluation",
+            "comments": "Commentaire(s)"
         },
         "IT": {
             "title": "Profilo",
@@ -777,9 +775,9 @@
             "review": "Write a review for"
         },
         "FR": {
-            "region": "Region",
-            "email": "Send an email to",
-            "review": "Write a review for"
+            "region": "Région:",
+            "email": "Envoyer un email à",
+            "review": "Évaluer"
         },
         "IT": {
             "region": "Regione",
@@ -792,7 +790,7 @@
             "title": "Reset Your Password"
         },
         "FR": {
-            "title": "Reset Your Password"
+            "title": "Changer votre mot de passe"
         },
         "IT": {
             "title": "Fai il reset della tua password"
@@ -833,37 +831,37 @@
             "missing": "Required field is missing"
         },
         "FR": {
-            "title": "Critiquez un Arbitre","title": "Review a Referee",
-            "intro": "Here you can provide feedback for any referee that has been IRDP certified at any level. Please keep reviews as specific and calm as possible. All data is anonymous to the reviewee.",
-            "required": "Required",
+            "title": "Évaluer un Arbitre",
+            "intro": "Sur cette page, vous pouvez évaluer tout arbitre certifié par l'IRDP. Nous vous prions d’être spécifique et calme dans vos remarques. Toutes les données sont anonymement transmises à la personne que vous évaluerez.",
+            "required": "Nécessaire",
 
-            "yn": "Your Name",
-            "ye": "Your Email",
-            "captain": "I am my team's captain/coach",
+            "yn": "Votre nom",
+            "ye": "Votre adresse mail",
+            "captain": "Je suis capitaine/entraîneur de mon équipe",
 
-            "region": "Referee's Region",
-            "rn": "Referee's Name",
-            "rp": "Referee's Position",
-            "hr": "Head Referee",
-            "sr": "Snitch Referee",
-            "ar": "Assistant Referee",
+            "region": "Région de l’arbitre",
+            "rn": "Nom de l’arbitre",
+            "rp": "Poste de l’arbitre",
+            "hr": "Arbitre Principal",
+            "sr": "Arbitre de Vif",
+            "ar": "Arbitre Assistant",
 
-            "date": "Date of Game",
-            "ytn": "Your Team's Name",
-            "otn": "Opponent's Team Name",
+            "date": "Date du match",
+            "ytn": "Nom de votre équipe",
+            "otn": "Nom de l’équipe adverse",
 
-            "how": "How did ",
-            "ref": "the referee",
-            "do": "do",
+            "how": "Comment évalueriez-vous ",
+            "ref": "cet arbitre",
+            "do": "",
 
             "excellent": "Excellent",
-            "good": "Good",
-            "average": "Average",
-            "poor": "Poor",
+            "good": "Bon",
+            "average": "Dans la moyenne",
+            "poor": "Mauvais",
 
-            "comments": "Have any specific comments about the referee? Especially pertaining to positioning, professionalism, confidence, consistency, and communication.",
+            "comments": "Avez-vous des remarques ou commentaires spécifiques à transmettre au sujet de cet arbitre ? En particulier en matière de positionnement, professionnalisme, confiance, cohérence ou communication.",
 
-            "missing": "Required field is missing"
+            "missing": "Un champ obligatoire n'a pas été complété"
         },
         "IT": {
             "title": "Valuta un arbitro",
@@ -925,28 +923,28 @@
             "empty": "Womp womp, this region has no certified refs yet!"
         },
         "FR": {
-            "title": "Directory by Region",
-            "intro": "This table acts as a directory of IRDP referees who have been certified at any level. If you haven't yet passed any tests, you won't show up, so go",
-            "cert": "get certified!",
+            "title": "Annuaire par région",
+            "intro": "Ce tableau sert d'annuaire pour les arbitres certifiés à tout niveau par l'IRDP. Si vous n'avez pas passé le moindre test, vous n'apparaîtrez pas, alors foncez",
+            "cert": "vous faire certifier !",
 
-            "current": "There are currently",
-            "world": "referees around the world with some amount of IRDP certification.",
+            "current": "Il y a actuellement",
+            "world": "arbitres dans le monde ayant décroché un certificat IRDP de type indéfini.",
 
-            "all_refs": "Show all IRDP certified refs",
-            "head_refs": "Show only IRDP certified head refs",
-            "tip": "Tip - Hold the SHIFT key to sort by multiple columns!",
+            "all_refs": "Voir tous les arbitres certifiés par l'IRDP",
+            "head_refs": "Voir uniquement les Arbitres Principaux certifiés par l'IRDP",
+            "tip": "Astuce - maintenez la touche Maj enfoncée pour trier plusieurs colonnes à la fois !",
 
-            "fn": "First Name",
-            "ln": "Last Name",
-            "team": "Team",
-            "team_ex": "This could be their current team or the last team they were with. Either way, they won't be reffing this team's games!",
-            "ar": "AR",
-            "sr": "SR",
-            "hr": "HR",
-            "ft": "FT",
-            "region": "Region",
+            "fn": "Prénom",
+            "ln": "Nom",
+            "team": "Équipe",
+            "team_ex": "Il peut s'agir de leur équipe actuelle ou de la dernière équipe pour laquelle ils ont joué. Quoi qu'il en soit, il n'arbitreront pas un match de cette équipe !",
+            "ar": "AA",
+            "sr": "AdV",
+            "hr": "AP",
+            "ft": "EP",
+            "region": "Région",
 
-            "empty": "Womp womp, this region has no certified refs yet!"
+            "empty": "Déception, cette région n'a pas encore d'arbitre certifié !"
         },
         "IT": {
             "title": "Elenco per Regione/Paese",
@@ -994,23 +992,23 @@
             "password": "your password"
         },
         "FR": {
-            "title": "Settings",
-            "unpaid": "You're an unpaid member! Enter the registration code that you got from your regional director or officials manager for a free upgrade.",
-            "code": "Registration Code",
+            "title": "Panneau de configuration",
+            "unpaid": "Vous n’avez pas payé de souscription ! Avez-vous un code d’inscription distribué par votre directeur régional ou manager officiel ? Si oui, validez-le ci-dessous pour accéder à la version complète.",
+            "code": "Code d’Inscription",
 
-            "update": "You can update your email (at which teams/TD's will contact you) here. If you need to change your region/team affiliation, contact",
-            "necessary": "with all necessary information",
+            "update": "Vous pouvez mettre à jour votre adresse mail afin que les équipes/Directeurs de Tournois puissent vous contacter. Si vous désirez changer votre équipe affiliée, contactez",
+            "necessary": "avec toutes les informations nécessaires",
 
-            "lang": "Language",
+            "lang": "Langue",
 
-            "upload": "Below you can upload a profile picture. Aim for something mostly square and larger than 300px wide. You can use",
-            "this": "this",
-            "crop": "site to easily crop and edit your photo. Make sure it's a solo picture of you where your face is clear, un-obstructed, and facing forward. Preferably it's just of the shoulders and up.",
+            "upload": "Il vous est possible d’ajouter une photo de profil ci-dessous. Optez de préférence pour une image carrée et de plus de 300px de large. Vous pouvez utiliser ",
+            "this": "ce site",
+            "crop": "afin de facilement couper et éditer vos photos. Assurez-vous qu’il s’agisse d’une photo de vous uniquement, sur laquelle votre visage est visible (non-obstrué, faisant face à l’objectif). Cadrée de préférence à partir des épaules.",
 
-            "image": "Image (max file size 5MB)",
+            "image": "Photo (taille max 5MB)",
 
-            "reset": "Reset",
-            "password": "your password"
+            "reset": "Changer",
+            "password": "votre mot de passe"
         },
         "IT": {
             "title": "Impostazioni",
@@ -1072,42 +1070,42 @@
             "give": "Give it another go at "
         },
         "FR": {
-            "intro": "This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. ",
-            "remember": "Remember that upon creation of an account, you agreed to the",
-            "code": "Ref's Code", 
-            "therein": "and all articles therein. ",
+            "intro": "Cette page affichera un lien vers le test approprié si suffisament de temps s’est écoulé depuis votre dernière tentative (et si vous avez payé votre souscription et rempli les conditions d’accès). Autrement, cette page vous permettra de savoir quand ce test sera disponible. ",
+            "remember": "Pour rappel, en créant un compte, vous avez accepté de vous soumettre au ",
+            "code": "Code d’Arbitrage", 
+            "therein": "et à tous les articles qu’il contient. ",
 
-            "hint": "Hint, hint",
-            "comfortable":"be comfortable and familiar with our awesome",
-            "training": "training",
-            "before": "materials before attempting any written tests. We certify only the best, so these tests aren't easy.",
+            "hint": "Suggestion appuyée:",
+            "comfortable":"familiarisez-vous avec notre génial",
+            "training": "matériel de formation",
+            "before": "avant de vous plonger dans nos tests écrits. Nous ne certifions que les meilleurs, ces tests ne sont donc pas aisés.",
 
-            "also": "It's also",
-            "important": "incredibly important",
-            "click": "that you click the orange",
+            "also": "Il est également",
+            "important": "extrêmement important",
+            "click": "que vous cliquiez sur le bouton orange",
             "return": "\"return to refdevelopment.com\"",
-            "confirm": "at the end of the test and see confirmation back on this site or else your results will not be recorded in our system. ",
-            "if": "If you click the button multiple times (don't do that!) you may get a message about \"turning in your test too quicky\". If you're sure you only hit the button once, get in touch with",
-            "me": "me",
-            "confirmation": "You should also get an immediate confirmation email from us. Good luck!",
+            "confirm": "à la fin de votre test et qu’une page de confirmation s’affiche, sinon le résultat de votre test ne sera pas enregistré dans notre système. ",
+            "if": "Si vous cliquez sur le bouton à plusieurs reprises (ne le faites pas !) vous pourriez recevoir un massage d'avertissement : \"turning in your test too quicky\". Si vous êtes certains de n'avoir cliqué sur le bouton qu'une fois, contactez",
+            "me": "moi",
+            "confirmation": "Vous devriez également immédiatement recevoir un e-mail de confirmation de notre part. Bonne chance !",
 
-            "already": "You've already passed the",
-            "congrats": "Congrats",
-            "either": "It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.",
+            "already": "Vous avez déjà passé ce test pour ",
+            "congrats": "Félicitations !",
+            "either": "Il semblerait que vous n’ayez pas encore passé le test d’arbitre assistant et/ou d’arbitre de vif ! Vous devez d’abord passer ces deux tests avant de pouvoir vous soumettre au test d’arbitre principal.",
 
-            "none_left": "You have 0 HR Written Attempts Remaining.",
-            "applicable": "This purchase entitles you to be field tested WHERE APPLICABLE. Because this requires travel by our hardworking RDT members, field testing is not always an option based on your location (or may take a long time). If you're not sure that you live in a place where a field test is possible, don't hesitate to ",
-            "contact": "contact us!",
-            "hope": "You're welcome to take the HR written tests even if there's no hope for a field test this year, just note that you won't be a fully certified IRDP Head Referee until you pass a field test given by an authorized proctor.",
+            "none_left": "Il vous reste 0 tentative pour le test écrit d’arbitre principal. ",
+            "applicable": "Cet achat vous donne droit à un examen pratique LE CAS ÉCHÉANT. Étant donné que l’examen sur terrain requière un déplacement de la part d’un membre de notre RDT, l’examen pratique n’est pas disponible pour certaines localisations géographiques (ou devra attendre longtemps). Si vous n’êtes pas certain de vivre dans un lieu où il est possible de passer un examen pratique sur terrain, n’hésitez pas à ",
+            "contact": "nous contacter !",
+            "hope": "Vous pouvez passer le test écrit d’arbitre principal même si vous n’aurez pas l’occasion de passer un examen pratique sur terrain, sachez simplement que vous ne serez pas entièrement certifié comme arbitre principal par l'IRDP tant que vous n’aurez pas passé le dit test sous l’égide d’un examinateur approuvé.",
 
-            "rulebook": "This test is for Rulebook ",
+            "rulebook": "Ce test porte sur le Livre de Règle n°",
 
-            "here": "Here's the link to the ",
+            "here": "Voici le lien vers le ",
 
-            "long": "Looks like it hasn't been long enough since your last try!",
-            "attempted": "You last attempted the ",
-            "at": "at",
-            "give": "Give it another go at "
+            "long": "On dirait qu’un temps insuffisant s’est écoulé depuis votre dernière tentative ! ",
+            "attempted": "Votre dernière tentative remonte au ",
+            "at": "à",
+            "give": "Revenez le "
         },
         "IT": {
             "intro": "This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. ",
