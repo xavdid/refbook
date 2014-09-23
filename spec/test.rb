@@ -17,13 +17,13 @@ class RefbookTest < MiniTest::Test
   end
 
   def test_it_says_hello_world
-    get '/'
-    assert last_response.body.include?('IRDdP'), 'body had wrong text'
+    get '/', {}, "rack.session" => {user: {"lang" => "FR"}}
+    assert last_response.body.include?('Accueil'), 'body had wrong text'
   end
 
-  def test_it_says_hello_to_a_person
-    get '/search/ALL'
-    assert last_response.ok?
-  end
+  # def test_it_says_hello_to_a_person
+    # get '/search/ALL'
+    # assert last_response.ok?
+  # end
   
 end

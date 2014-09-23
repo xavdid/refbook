@@ -167,7 +167,9 @@ end
 # layout: whether or not to render with a layout
 # old: whether or not it uses the old haml format. Will depreciate later.
 def display(args = {})
-  pp args
+  if not settings.test?
+    pp args
+  end
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
   args[:old] ||= :t
@@ -355,6 +357,7 @@ end
 def before
 end
 before do 
+  # pp session
   if settings.development?
     # this is the local switch
     @killed = false
