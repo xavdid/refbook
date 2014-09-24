@@ -69,7 +69,7 @@
     %input{type: "text", name: "opponent"}
 
     %label{for: "rating"}
-      How did 
+      #{@text['how']}
       #{@ref.nil? ? @text['ref'] : "#{@ref['firstName']}"} 
       #{@text['do']}?
       %span.danger
