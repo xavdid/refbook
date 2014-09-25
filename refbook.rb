@@ -527,16 +527,14 @@ get '/cm' do
     flash[:issue] += settings.test_names[params[:cm_return_test_type].to_sym]
     flash[:issue] += @layout['ref_test']
     flash[:issue] += @layout['issues']['go_you']
-    # THIS IS THE BUG
-    # just pull user instead of saving session as is
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
-    session[:user] = user_to_update.save
+    user_to_update.save
   else
     pass = false
     flash[:issue] = @layout['issues']['fail']
   end
   email_results(@email, pass, params[:cm_return_test_type]) if not settings.development?
-  redirect '/' if pass
+  redirect '/pull' if pass
   redirect "/testing/#{params[:cm_return_test_type]}"
 end
 
@@ -695,7 +693,7 @@ post '/paid' do
   if id == 'Sb33WyBziN'
     return {status: 200, message: "ok"}.to_json
   end
-  user_to_update = Parse::Query.new("_User").eq("objectId", id).get.first
+  user_to_update = pull_user(id)
   # puts params
   if type == 'hr'
     user_to_update['hrWrittenAttemptsRemaining'] = 4
