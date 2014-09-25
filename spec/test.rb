@@ -83,7 +83,7 @@ class RefbookTest < MiniTest::Test
   end
   
   def test_en_public_profile
-    get '/profile/SOMETHING'
+    get '/profile/NDrskOZtwl'
     assert last_response.body.include?('review for')
   end
   
@@ -93,7 +93,7 @@ class RefbookTest < MiniTest::Test
   end
   
   def test_en_personal_review
-    get '/review/SOMETHING'
+    get '/review/NDrskOZtwl'
     assert last_response.body.include?('David')
   end
   
@@ -109,7 +109,7 @@ class RefbookTest < MiniTest::Test
   
   def test_en_testing
     get '/testing'
-    assert last_response.body.include?('funds for thd IRDP')
+    assert last_response.body.include?('funds for the IRDP')
     assert last_response.body.include?('use to evaluate')
   end
 

@@ -167,9 +167,7 @@ end
 # layout: whether or not to render with a layout
 # old: whether or not it uses the old haml format. Will depreciate later.
 def display(args = {})
-  if not settings.test?
-    pp args
-  end
+  pp args unless settings.test?
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
   args[:old] ||= :t
@@ -937,8 +935,6 @@ get '/reviews/:review_id' do
     @r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
     q = Parse::Query.new("_User").eq("objectId",@r['referee'].parse_object_id).get.first
     @name = name_maker(q)
-    pp @r
-    pp session[:user]['objectId']
     @r['reviewerName'] = 'REDACTED' if @r['referee'].parse_object_id == session[:user]['objectId']
     @review = @r.to_json
     display({path: :edit_review, old: :t})
@@ -946,7 +942,6 @@ get '/reviews/:review_id' do
 end
 
 post '/reviews/:review_id' do
-  pp "params!",params
   r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
   reviewee = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first['email']
   r['show'] = to_bool(params[:show])
@@ -1004,7 +999,6 @@ get '/search/:region' do
   end
 
   @refs = []
-  pp q
   # build each row of the table
   q.each do |person|
     if person["assRef"] or person["snitchRef"]
