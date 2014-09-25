@@ -111,7 +111,7 @@
       %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
         #{@text['positioning']}
         #{@text['guide']}
-  #{display({path: :help, layout: :f, old: :f})}
+  #{display({path: :help, layout: :f, old: :f, alt: :t})}
 
 %h3
   #{@text['field']}
@@ -140,5 +140,5 @@
     
 
   - else
-    #{display({path: :help_small, layout: :f, old: :f})}
+    #{display({path: :help_small, layout: :f, old: :f, alt: :t})}
 

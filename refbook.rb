@@ -120,12 +120,12 @@ def validate(key, region)
     keys = settings.keys.find_one
 
     #re-format just in case
+
+    key.strip!
     key.gsub!('-','')
     key.insert(9,'-')
     key.insert(6,'-')
     key.insert(4,'-')
-
-    key.strip!
 
     if keys[region].include? key
       keys[region].delete key
@@ -171,11 +171,17 @@ def display(args = {})
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
   args[:old] ||= :t
-  if not sym_to_bool(args[:old])
-    # pp 'asdf',settings.text_hash
-    @text = settings.text_hash[path.to_s][@lang]
+  args[:alt] ||= :f
+
+  if sym_to_bool(args[:alt])
+    @alt_text = settings.text_hash[path.to_s][@lang]
   else
-    @text = {}
+    if not sym_to_bool(args[:old])
+      # pp 'asdf',settings.text_hash
+      @text = settings.text_hash[path.to_s][@lang]
+    else
+      @text = {}
+    end
   end
 
   @layout = settings.layout_hash[@lang]
