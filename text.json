@@ -370,7 +370,7 @@
     },
     "help_small": {
         "EN":{"paid": "This is paid content"},
-        "FR":{"paid": "This is paid content"},
+        "FR":{"paid": "Ce contenu est payant"},
         "IT":{"paid": "Questo è un contenuto a pagamento"}
     },
     "index" : {
