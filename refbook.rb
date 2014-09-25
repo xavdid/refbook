@@ -419,7 +419,7 @@ get '/admin' do
   if not logged_in?
     redirect '/login?d=/admin'
   elsif not admin?
-    flash[:issue] = "Admins only"
+    flash[:issue] = @layout['issues']['admin']
     redirect '/'
   else
     @review_list = []
@@ -481,7 +481,7 @@ get '/cm' do
   #   C: attempted this test
 
   if not params.include? 'cm_user_id'
-    flash[:issue] = "Error, no user ID. If you feel like you've reached this in error, contact an administrator"
+    flash[:issue] = @layout['issues']['cm']
     redirect '/'
   end
 
@@ -501,7 +501,7 @@ get '/cm' do
       att["taker"] = params[:cm_user_id]  
     else
       if Time.now.utc - Time.parse(att['time']) < settings.waiting - 500
-        flash[:issue] = "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email david@relateiq.com for more info."
+        flash[:issue] = @layout['issues']['quick']
         report_bad(att['taker'])
         redirect '/'
       end
@@ -523,12 +523,17 @@ get '/cm' do
   puts 'to', @email, @score
   if params[:cm_tp].to_i >= 80
     pass = true
-    flash[:issue] = "You passed the #{settings.test_names[params[:cm_return_test_type].to_sym]} ref test, go you!"
+    flash[:issue] = @layout['issues']['pass']
+    flash[:issue] += settings.test_names[params[:cm_return_test_type].to_sym]
+    flash[:issue] += @layout['ref_test']
+    flash[:issue] += @layout['issues']['go_you']
+    # THIS IS THE BUG
+    # just pull user instead of saving session as is
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     session[:user] = user_to_update.save
   else
     pass = false
-    flash[:issue] = "You were unsuccessful in your attempt. Try again in a week!"
+    flash[:issue] = @layout['issues']['fail']
   end
   email_results(@email, pass, params[:cm_return_test_type]) if not settings.development?
   redirect '/' if pass
@@ -583,12 +588,14 @@ post '/create' do
 
   begin
     session[:user] = user.save
-    flash[:issue] = "Account creation successful - #{session[:user]['paid'] ? '' : 'non'}paid version"
+    flash[:issue] = @layout['issues']['created']
+    flash[:issue] += session[:user]['paid'] ? '' : 'non'
+    flash[:issue] += @layout['issues']['version']
     redirect '/'
   rescue
     # usually only fails for invalid email, but it could be other stuff
     # may way to rescue specific parse errors
-    flash[:issue] = "Email already in use (or invalid)"
+    flash[:issue] = @layout['issues']['invalid']
     redirect back
   end
 end
@@ -628,7 +635,7 @@ get '/lock' do
   else
     settings.killed = true
   end
-  "Successful locked at #{Time.now} - #{settings.killed}"
+  "Successfuly locked at #{Time.now} - #{settings.killed}"
 end
 
 def login
@@ -644,7 +651,7 @@ post '/login' do
     session.options[:expire_after] = 2592000 # 30 days
     redirect params[:d]
   rescue
-    flash[:issue] = "Invalid login credentials"
+    flash[:issue] = @layout['issues']['credentials']
     redirect "/login?d=#{params[:d]}"
   end
 end
@@ -653,7 +660,7 @@ def logout
 end
 get '/logout' do 
   session[:user] = nil
-  flash[:issue] = "Successfully logged out!"
+  flash[:issue] = @layout['issues']['logout']
   redirect '/'
 end
 
@@ -738,7 +745,7 @@ end
 get '/profile/:ref_id' do
   @ref = Parse::Query.new('_User').eq("objectId",params[:ref_id]).get.first
   if @ref.nil?
-    flash[:issue] = "Profile not found"
+    flash[:issue] = @layout['issues']['not_found']
     redirect '/search/ALL'
   else
     @title = "#{@ref['firstName']} #{@ref['lastName']}"
@@ -752,11 +759,11 @@ def pull
 end
 get '/pull' do 
   if not logged_in? 
-    flash[:issue] = "Must be logged in to refresh"
+    flash[:issue] = @layout['issues']['refresh']
     redirect '/login?d=/pull'
   else
     session[:user] = pull_user
-    flash[:issue] = "User object sucessfully updated"
+    flash[:issue] = @layout['issues']['pull']
     redirect '/'
   end
 end
@@ -777,9 +784,9 @@ def refresh
 end
 get '/refresh' do
   # just to make sure we beat the paypal ping
-  sleep(2.5) 
+  sleep(3.5) 
   session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
-  flash[:issue] = 'Payment confirmed. Thank you! You may need to logout and back in to register the upgrade.'
+  flash[:issue] = @layout['issues']['confirm']
   redirect '/'
 end
 
@@ -793,10 +800,10 @@ end
 post '/reset' do
   begin
     Parse::User.reset_password(params[:email])
-    flash[:issue] = "You have been logged out, log in with new credentials"
+    flash[:issue] = @layout['issues']['reset']
     redirect '/logout'
   rescue
-    flash[:issue] = "No user with that email"
+    flash[:issue] = @layout['issues']['reset_fail']
     redirect back
   end
 end
@@ -893,7 +900,7 @@ post '/review' do
   rev['now'] = Time.now.utc.strftime(settings.time_string)
   rev.save
 
-  flash[:issue] = "Thanks for your review!"
+  flash[:issue] = @layout['issues']['review']
   redirect back
 end
 
@@ -926,7 +933,7 @@ get '/reviews/:review_id' do
   if not admin?
     # still using old bounce because there's no way someone is linking
     # right to this page. hopefully.
-    flash[:issue] = "Admins only, kid"
+    flash[:issue] = @layout['issues']['admin']
     redirect '/'
   else
     @r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
@@ -1070,11 +1077,11 @@ post '/settings' do
       session[:user]['lang'] = params[:lang]
     end
     session[:user] = session[:user].save
-    flash[:issue] = "Settings sucessfully updated!"
+    flash[:issue] = @layout['issues']['settings']
     redirect '/'
   rescue
     session[:user] = Parse::Query.new("_User").eq("objectId",session[:user]['objectId']).get.first
-    flash[:issue] = "There was an error (possibly because that email is improperly formatted or already in use by another user). Try again, then contact the administrator if the problem persists."
+    flash[:issue] = @layout['issues']['invalid']
     redirect '/settings'
   end
 end
@@ -1094,7 +1101,7 @@ get '/testing/:which' do
   #   update the relevent test entry wtih the most recent test
 
   if not logged_in?
-    flash[:issue] = "Must log in to test"
+    flash[:issue] = @layout['issues']['test_login']
     redirect "/login?d=/testing/#{params[:which]}"
   end
 
@@ -1184,10 +1191,10 @@ get '/validate' do
     user_to_update = pull_user
     user_to_update['paid'] = true
     session[:user] = user_to_update.save
-    flash[:issue] = 'Registration Successful'
+    flash[:issue] = @layout['issues']['validate']
     redirect '/'
   else
-    flash[:issue] = 'Invalid or already used code'
+    flash[:issue] = @layout['issues']['validont']
     redirect '/settings'
   end
 end

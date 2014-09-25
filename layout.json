@@ -29,7 +29,30 @@
         "readme": "in this handy README!",
         "here": "here",
         "reserved": "all rights reserved",
-        "flash": {}
+        "issues": {
+            "admin": "Admins only",
+            "cm": "Error, no user ID. If you feel like you've reached this in error, contact an administrator",
+            "quick": "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email david@relateiq.com for more info.",
+            "pass": "You passed the ",
+            "go_you": "go you!",
+            "fail": "You were unsuccessful in your attempt. Try again in a week!",
+            "crated": "Account creation successful - ",
+            "version": "paid version",
+            "invalid": "Email already in use (or invalid)",
+            "credentials": "Invalid login credentials",
+            "logout": "Successfully logged out!",
+            "not_found": "Profile not found",
+            "refresh": "Must be logged in to refresh",
+            "pull": "User object sucessfully updated",
+            "confirm": "Payment confirmed. Thank you! You may need to logout and back in to register the upgrade.",
+            "reset": "You have been logged out, log in with new credentials",
+            "reset_fail": "No user with that email",
+            "review": "Thanks for your review!",
+            "settings": "Settings sucessfully updated!",
+            "test_login": "Must log in to test",
+            "validate": "Registration Successful",
+            "validont": "Invalid or already used code"
+        }
     },
     "FR": {
         "irdp": "IRDP",
@@ -59,7 +82,30 @@
         "readme": "dans ce guide très pratique !",
         "here": "ici",
         "reserved": "Tous droits réservés",
-        "flash": {}
+        "issues": {
+            "admin": "Admins only",
+            "cm": "Error, no user ID. If you feel like you've reached this in error, contact an administrator",
+            "quick": "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email david@relateiq.com for more info.",
+            "pass": "You passed the ",
+            "go_you": "go you!",
+            "fail": "You were unsuccessful in your attempt. Try again in a week!",
+            "crated": "Account creation successful - ",
+            "version": "paid version",
+            "invalid": "Email already in use (or invalid)",
+            "credentials": "Invalid login credentials",
+            "logout": "Successfully logged out!",
+            "not_found": "Profile not found",
+            "refresh": "Must be logged in to refresh",
+            "pull": "User object sucessfully updated",
+            "confirm": "Payment confirmed. Thank you! You may need to logout and back in to register the upgrade.",
+            "reset": "You have been logged out, log in with new credentials",
+            "reset_fail": "No user with that email",
+            "review": "Thanks for your review!",
+            "settings": "Settings sucessfully updated!",
+            "test_login": "Must log in to test",
+            "validate": "Registration Successful",
+            "validont": "Invalid or already used code"
+        }
     },
     "IT": {
         "irdp": "IRDP",
@@ -90,6 +136,29 @@
         "readme": "in questo comodo README!",
         "here": "qui",
         "reserved": "tutti i diritti riservati",
-        "flash": {}
+        "issues": {
+            "admin": "Admins only",
+            "cm": "Error, no user ID. If you feel like you've reached this in error, contact an administrator",
+            "quick": "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email david@relateiq.com for more info.",
+            "pass": "You passed the ",
+            "go_you": "go you!",
+            "fail": "You were unsuccessful in your attempt. Try again in a week!",
+            "crated": "Account creation successful - ",
+            "version": "paid version",
+            "invalid": "Email already in use (or invalid)",
+            "credentials": "Invalid login credentials",
+            "logout": "Successfully logged out!",
+            "not_found": "Profile not found",
+            "refresh": "Must be logged in to refresh",
+            "pull": "User object sucessfully updated",
+            "confirm": "Payment confirmed. Thank you! You may need to logout and back in to register the upgrade.",
+            "reset": "You have been logged out, log in with new credentials",
+            "reset_fail": "No user with that email",
+            "review": "Thanks for your review!",
+            "settings": "Settings sucessfully updated!",
+            "test_login": "Must log in to test",
+            "validate": "Registration Successful",
+            "validont": "Invalid or already used code"
+        }
     }
 }
