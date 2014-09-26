@@ -47,7 +47,8 @@ configure do
   
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
-           :master_key        => ENV['REFBOOK_PARSE_API_KEY']
+           :master_key        => ENV['REFBOOK_PARSE_API_KEY'],
+           :quiet => true
 
   if settings.development?
     # this is so we can test on multiple local computers
@@ -1009,7 +1010,6 @@ get '/search/:region' do
   # build each row of the table
   q.each do |person|
     if person["assRef"] or person["snitchRef"]
-      puts 'in'
       entry = [
         person["firstName"], # 0
         person["lastName"], # 1
