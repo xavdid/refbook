@@ -184,9 +184,6 @@ def display(args = {})
       @text = {}
     end
   end
-
-  @layout = settings.layout_hash[@lang]
-
   
   # pp @text
 
@@ -393,6 +390,9 @@ before do
     end
   end
 
+  @layout = settings.layout_hash[@lang]
+
+  
   # pp request
 
 end
@@ -1076,6 +1076,7 @@ post '/settings' do
       session[:user]['lang'] = params[:lang]
     end
     session[:user] = session[:user].save
+    pp @layout
     flash[:issue] = @layout['issues']['settings']
     redirect '/'
   rescue
