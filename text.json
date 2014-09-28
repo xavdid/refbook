@@ -348,6 +348,29 @@
             "a10": "L'IRDP ha completamente rivisto la struttura interna dei test scritti. Il nuovo sistema testa più efficacemente i candidati sulla propria conoscenza di regole specifiche, e segue un formato che garantirà una più facile comprensione. In aggiunta, il test pratico è stato razionalizzato, e vi è stata aggiunta una sesta sezione relativa all'abilità del candidato di fare le corrette chiamate nel corso di una partita. Inoltre, è tutto offerto tramite un comodo sito automatizzato (questo)."
         }
     },
+    "field_test": {
+        "EN": {
+            "title": "Field Test Signup",
+            "intro": "Sign up for a field test and an IRDP representative will be in touch soon.",
+            "tourney": "At what tournament do you want to field test at?",
+            "date": "What day do you want to field test on?",
+            "link": "Tournament Facebook event link"
+        },
+        "FR": {
+            "title": "Field Test Signup",
+            "intro": "Sign up for a field test and an IRDP representative will be in touch soon.",
+            "tourney": "At what tournament do you want to field test at?",
+            "date": "What day do you want to field test on?",
+            "link": "Tournament Facebook event link"
+        },
+        "IT": {
+            "title": "Field Test Signup",
+            "intro": "Sign up for a field test and an IRDP representative will be in touch soon.",
+            "tourney": "At what tournament do you want to field test at?",
+            "date": "What day do you want to field test on?",
+            "link": "Tournament Facebook event link"
+        }
+    },
     "help" : {
         "EN": {
             "paid": "This is paid content",
@@ -802,7 +825,7 @@
             "intro": "Here you can provide feedback for any referee that has been IRDP certified at any level. Please keep reviews as specific and calm as possible. All data is anonymous to the reviewee.",
             "required": "Required",
 
-            "yn": "Your Name",
+            "yn": "Your Full Name",
             "ye": "Your Email",
             "captain": "I am my team's captain/coach",
 
