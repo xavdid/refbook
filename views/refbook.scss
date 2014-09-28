@@ -419,6 +419,11 @@ html, body {
         list-style-type: disc;
         padding-left: 80px;
     }
+
+    .required:after {
+        content: "*";
+        color: red;
+    }
 }
 
 
