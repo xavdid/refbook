@@ -645,8 +645,19 @@ get '/field_test' do
 end
 
 post '/field_test' do
-  # test = Parse::Object.new("fieldTestSignup")
-  params.to_json
+  test = Parse::Object.new("fieldTestSignup")
+  test["region"] = session[:user]["region"]
+  test["name"] = name_maker(session[:user])
+  test["email"] = session[:user]["email"]
+
+  test["tournament"] = params[:tournament]
+  test["tournamentDate"] = params[:date]
+  test["link"] = params[:link]
+
+  test.save
+
+  flash[:issue] = @layout["issues"]["test_signup"]
+  redirect '/profile'
 end
 
 def info
@@ -893,20 +904,6 @@ get '/review' do
   display({old: :f})
 end
 
-get '/review/:id' do 
-  @ref = Parse::Query.new("_User").eq("objectId", params[:id]).get.first
-  halt 404 if @ref.nil?
-
-  @url = @ref['profPic'] ? 
-      @ref['profPic'] : '/images/person_blank.png'
-
-  @title = "Review #{@ref['firstName']} #{@ref['lastName']}"
-  @region_keys = settings.region_names
-  # this is included so there's no error because of a missinv variable
-  @refs = {}
-  display({path: :review ,old: :f})
-end
-
 post '/review' do 
   rev = Parse::Object.new('review')
   rev['reviewerName'] = params[:name]
@@ -934,6 +931,20 @@ post '/review' do
 
   flash[:issue] = @layout['issues']['review']
   redirect back
+end
+
+get '/review/:id' do 
+  @ref = Parse::Query.new("_User").eq("objectId", params[:id]).get.first
+  halt 404 if @ref.nil?
+
+  @url = @ref['profPic'] ? 
+      @ref['profPic'] : '/images/person_blank.png'
+
+  @title = "Review #{@ref['firstName']} #{@ref['lastName']}"
+  @region_keys = settings.region_names
+  # this is included so there's no error because of a missinv variable
+  @refs = {}
+  display({path: :review ,old: :f})
 end
 
 # def reviews

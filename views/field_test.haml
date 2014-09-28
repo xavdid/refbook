@@ -1,0 +1,17 @@
+%p
+  #{@text['intro']}
+
+.form_box
+  %form{name: "field_test", action: "/field_test", method: "post"}
+    %label.required{for: "tournament"}
+      #{@text['tournament']} 
+    %input{type: "text", name: "tournament", placeholder:"Super Awesome Tournament", required: ""}
+
+    %label.required{for: "date"}
+      #{@text['date']} 
+    %input{type: "text", name: "date", placeholder: "#{Time.now.strftime('%e %b, %Y')}", required: ""}
+    
+    %label{for: "link"}
+      #{@text['link']} 
+    %input{type: "text", name: "link"}    
+    %input.button{type: "submit", value: "Signup!"}
