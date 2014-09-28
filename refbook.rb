@@ -122,6 +122,10 @@ def validate(key, region)
 
     #re-format just in case
 
+    if key == ''
+      return false
+    end
+
     key.strip!
     key.gsub!('-','')
     key.insert(9,'-')
@@ -392,7 +396,7 @@ before do
 
   @layout = settings.layout_hash[@lang]
 
-  
+
   # pp request
 
 end
@@ -591,9 +595,13 @@ post '/create' do
 
   begin
     session[:user] = user.save
-    flash[:issue] = @layout['issues']['created']
-    flash[:issue] += session[:user]['paid'] ? '' : 'non'
-    flash[:issue] += @layout['issues']['version']
+    t_flash = @layout['issues']['created']
+    # pp "flash is #{@layout}"
+    pp @layout
+    t_flash += session[:user]['paid'] ? '' : 'non'
+    t_flash += @layout['issues']['version']
+
+    flash[:issue] = t_flash
     redirect '/'
   rescue
     # usually only fails for invalid email, but it could be other stuff
@@ -613,12 +621,32 @@ end
 def field
 end
 get '/field/:referee' do 
+  if not admin?
+    redirect back
+  end
   ref = Parse::Query.new("_User").eq("objectId", params[:referee]).get.first
   puts ref
   ref['passedFieldTest'] = true
   ref.save
   flash[:issue] = "#{name_maker(ref)} has passed their field test!"
   redirect "/search/#{params[:reg]}"
+end
+
+get '/field_test' do
+  if not logged_in?
+    flash[:issue] = @layout['issues']['test_login']
+    redirect "/login?d=/field_test"
+  elsif session[:user]['headRef']
+    flash[:issue] = @layout['issues']['hr_first']
+    redirect '/'
+  end
+
+  display({old: :f})
+end
+
+post '/field_test' do
+  # test = Parse::Object.new("fieldTestSignup")
+  params.to_json
 end
 
 def info
