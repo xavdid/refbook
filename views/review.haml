@@ -9,29 +9,22 @@
     * #{@text['required']}
 
 .form_box
-  %form{name: "review", action: "/review", method: "post", onsubmit: "return validate();", id: "rater"}
-    %label{for: "name"}
+  %form{name: "review", action: "/review", method: "post", id: "rater"}
+    %label.required{for: "name"}
       #{@text['yn']}
-      %span.danger
-        *
+    %input{type: "text", name: "name", placeholder:"Andrew Canto", required: ""}
 
-    %input{type: "text", name: "name", placeholder:"first and last"}
-
-    %label{for: "email"}
+    %label.required{for: "email"}
       #{@text['ye']}
-      %span.danger
-        *
-    %input{type: "email", name: "email", placeholder:"name@example.com"}
+    %input{type: "email", name: "email", placeholder:"name@example.com", required: ""}
 
     %label{for: "captain"}
       #{@text['captain']}
     %input{type: "checkbox", name: "captain", id: "captain", form: "rater"}
     - if @ref.nil?
-      %label{for: "region"}
+      %label.required{for: "region"}
         #{@text['region']}
-        %span.danger
-          *
-      %select{name: "region", id: "region"}
+      %select{name: "region", id: "region", required: ""}
 
       %label{for: "referee"}
         #{@text['rn']}
@@ -41,11 +34,9 @@
       %input{type: "hidden", name: "referee", value: "#{@ref['objectId']}"}
 
 
-    %label{for: "type"}
+    %label.required{for: "type"}
       #{@text['rp']}
-      %span.danger
-        *
-    %select{name: "type", id: "type"}
+    %select{name: "type", id: "type", required: ""}
       %option{value: ""}
 
       %option{value: "head"}
@@ -68,17 +59,15 @@
       #{@text['otn']}
     %input{type: "text", name: "opponent"}
 
-    %label{for: "rating"}
+    %label.required{for: "rating"}
       #{@text['how']}
       #{@ref.nil? ? @text['ref'] : "#{@ref['firstName']}"} 
       #{@text['do']}?
-      %span.danger
-        *
-    %select{name: "rating", id: "rating"}
+    %select{name: "rating", id: "rating", required: ""}
       %option{value: ""}
 
       %option{value: "excellent"}
-        #{@text['excellend']}
+        #{@text['excellent']}
       %option{value: "good"}
         #{@text['good']}
       %option{value: "average"}
@@ -130,35 +119,35 @@
     return el;
   };
 
-  function validate() {
-    // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
-    var f = $("form")[0];
-    var filled = true;
+  // function validate() {
+  //   // NEED TO ADD ALL FUTURE FORM ENTRIES TO THIS
+  //   var f = $("form")[0];
+  //   var filled = true;
 
-    var n = f["name"].value;
-    var e = f["email"].value;
-    var r = f["region"].value;
-    var ra = f["rating"].value;
-    var ty = f["type"].value;
+  //   var n = f["name"].value;
+  //   var e = f["email"].value;
+  //   var r = f["region"].value;
+  //   var ra = f["rating"].value;
+  //   var ty = f["type"].value;
 
-    var fields = [n, e, r, ra, ty];
+  //   var fields = [n, e, r, ra, ty];
 
-    fields.forEach(function(field){
-      if (field == null || field == "") {
-        filled = false;
-      }
-    });
+  //   fields.forEach(function(field){
+  //     if (field == null || field == "") {
+  //       filled = false;
+  //     }
+  //   });
 
-    // checking forms are full
+  //   // checking forms are full
 
-    if (!filled) {
-      $(".issue").text("#{@text['missing']}");
-      return false;
-    }
+  //   if (!filled) {
+  //     $(".issue").text("#{@text['missing']}");
+  //     return false;
+  //   }
 
-    else {
-      return true;
-    }    
+  //   else {
+  //     return true;
+  //   }    
 
-  }
+  // }
 
