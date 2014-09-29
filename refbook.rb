@@ -69,7 +69,7 @@ configure do
     }
   end
 
-  # use Rack::GoogleAnalytics, :tracker => 'UA-42341849-2'
+  use Rack::GoogleAnalytics, :tracker => 'UA-42341849-2'
 end
 
 # helpers
