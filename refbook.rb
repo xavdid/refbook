@@ -218,13 +218,15 @@ end
 
 # For whatever reason, we need the mail gem in it's own little function
 # this is just for test results, could add other message stuff
+
+# on pass, shows testing page for other opportunities. On fail, shows link to test you failed for cooldown timer
 def email_results(email, pass, test)
   mail = Mail.deliver do
     to email
     from 'IRDP <irdp.rdt@gmail.com>'
     subject 'Referee Test Results'
     html_part do
-      body "Hey there!<br><br>The IRDP has received and recorded your results. You can see your #{pass ? 'other testing opporunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
+      body "Hey there!<br><br>The IRDP has received and recorded your results for the #{settings.test_names[test]} Referee Test. You can see your #{pass ? 'other testing opporunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
     end
   end
 end
@@ -262,7 +264,7 @@ def report_bad(user_id)
   end
 end
 
-def weekly_testing_update()
+def weekly_testing_update
   # some nice email styling
   td_start = '<td style="background-color: white; padding: 3px;">'
   table_start = '<table style="width: 800px; background-color: darkgray;">'
@@ -532,10 +534,11 @@ get '/cm' do
   puts 'to', @email, @score
   if params[:cm_tp].to_i >= 80
     pass = true
-    flash[:issue] = @layout['issues']['pass']
-    flash[:issue] += settings.test_names[params[:cm_return_test_type].to_sym]
-    flash[:issue] += @layout['ref_test']
-    flash[:issue] += @layout['issues']['go_you']
+    t_flash = @layout['issues']['pass']
+    t_flash += settings.test_names[params[:cm_return_test_type].to_sym]
+    t_flash += @layout['ref_test']
+    t_flash += @layout['issues']['go_you']
+    flash[:issue] = t_flash
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
     user_to_update.save
   else
