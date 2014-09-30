@@ -17,6 +17,7 @@
         "snitch": "Snitch",
         "head": "Head",
         "ref_test": "Ref Test",
+        "field_test": "Field Test Signup",
 
         "nsi": "Not Signed In",
         "logout": "Logout",
@@ -72,6 +73,7 @@
         "ass": "Test d'Arbitre Assistant",
         "snitch": "Test d'Arbitre de Vif",
         "head": "Test d'Arbitre Principal",
+        "field_test": "Field Test Signup",
 
         "nsi": "Hors ligne",
         "logout": "Déconnexion",
@@ -128,6 +130,7 @@
         "snitch": "arbitro del boccino",
         "head": "arbitro principale",
         "ref_test": "Test per",
+        "field_test": "Field Test Signup",
 
         "nsi": "Login non effettuato",
         "logout": "Logout",
