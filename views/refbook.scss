@@ -98,6 +98,14 @@ html, body {
     .hang {
         margin-left: -30px;
     }
+
+    .unstarred {
+        color: white;
+    }
+
+    .starred {
+        color: cyan;
+    }
 }
 
 .content {
@@ -369,7 +377,7 @@ html, body {
 
     #theTable {
         td {
-            padding: 10px;
+            vertical-align: inherit;
         }
         thead {
             // border-bottom: 1px solid #000;

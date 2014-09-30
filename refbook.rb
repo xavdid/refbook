@@ -39,6 +39,7 @@ configure do
   begin
     set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
     set :keys, settings.conn.db('kinect')['refbook_keys']
+    set :stars, settings.conn.db('kinect')['refbook_stars']
   rescue
     set :conn, nil
     set :keys, nil
@@ -1056,29 +1057,31 @@ get '/search/:region' do
   # build each row of the table
   q.each do |person|
     if person["assRef"] or person["snitchRef"]
-      entry = [
-        person["firstName"], # 0
-        person["lastName"], # 1
-        person["team"], # 2
-        person["username"] # 3
-      ]
+      # entry = [
+      #   person["firstName"], # 0
+      #   person["lastName"], # 1
+      #   person["team"], # 2
+      #   person["username"] # 3
+      # ]
       
-      # assignment because reuby returns are weird
-      entry << j = person['assRef'] ? 'Y' : 'N' # 4
-      entry << j = person['snitchRef'] ? 'Y' : 'N' # 5
-      entry << j = person['headRef'] ? 'Y' : 'N' # 6
+      # # assignment because reuby returns are weird
+      # entry << j = person['assRef'] ? 'Y' : 'N' # 4
+      # entry << j = person['snitchRef'] ? 'Y' : 'N' # 5
+      # entry << j = person['headRef'] ? 'Y' : 'N' # 6
 
       
-      entry << reg_reverse(person['region']) # 7
+      # entry << reg_reverse(person['region']) # 7
       
 
-      entry << person["objectId"] # 8
+      # entry << person["objectId"] # 8
 
-      entry << j = person['passedFieldTest'] ? 'Y' : 'N' # 9
+      # entry << j = person['passedFieldTest'] ? 'Y' : 'N' # 9
 
-      @refs << entry
+      @refs << person
     end
   end
+
+  pp @refs
 
   display({path: :search, old: :f})
 end
