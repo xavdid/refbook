@@ -448,8 +448,6 @@ get '/admin' do
       refs[r['objectId']] = r
     end
 
-
-
     reviews.each do |r|
       q = refs[r['referee'].parse_object_id]
       
@@ -652,6 +650,7 @@ post '/field_test' do
   test["region"] = session[:user]["region"]
   test["name"] = name_maker(session[:user])
   test["email"] = session[:user]["email"]
+  test["taker"] = session[:user]["objectId"]
 
   test["tournament"] = params[:tournament]
   test["tournamentDate"] = params[:date]
@@ -770,6 +769,10 @@ get '/profile' do
     }))
   end.get
 
+  @field_tests = Parse::Query.new("fieldTestSignup").tap do |q|
+    q.eq("taker",session[:user]["objectId"])
+  end.get
+
   # count reviews
   @total = 0
   @counts = {'excellent'=> 0, 'good' => 0, 'average' => 0, 'poor' => 0}
@@ -777,8 +780,9 @@ get '/profile' do
     if r['comments'].size == 0
       @counts[r['rating']] += 1
     elsif r['show']
-      a = [r['rating'].capitalize, r['comments'], settings.test_names[r['type'].to_sym]]
-      @review_list << a
+      r['rating'].capitalize!
+      r['type'] = settings.test_names[r['type'].to_sym]
+      @review_list << r
       @total += 1
     end
   end

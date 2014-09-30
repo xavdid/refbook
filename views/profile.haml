@@ -8,34 +8,74 @@
       #{@text['settings']}
     #{@text['page']}.
 
-%p
-  %a{href: "/profile/#{session[:user]['objectId']}"}<
-    #{@text['this']}
-  #{@text['is_your']}
-  %strong
-    #{@text['profile_page']}.
+%h3
+  Links
 
 %p
+  %a{href: "/profile/#{session[:user]['objectId']}"}<
+    #{@text['profile_page']}
+%p
   %a{href: "/review/#{session[:user]['objectId']}"}<
-    #{@text['this']}
-  #{@text['is_your']}
-  %strong
-    #{@text['review_page']}.
-  #{@text['bookmark']}
+    #{@text['review_page']}
+%p
   %a{href: "/qr", target: "_blank"}<
-    QR
-  #{@text['code']}
+    (QR)
+  #{@text['code']}  
+
+%h3
+  Field Tests
+%p
+  - if @field_tests.size > 0
+    %table.mini.table-background
+      %thead
+        %tr
+          %td
+            Date
+          %td
+            Tournament
+      %tbody
+        - @field_tests.each do |t|
+          %tr
+            %td
+              #{t['tournamentDate']}
+            %td
+              #{t['tournament']}
+
+  - elsif @user[:session]['headRef']
+    You haven't 
+    %a{href: "/field_test"}<
+      signed up 
+    for a field test yet!
+  - else
+    Become a certified 
+    %a{href: "/testing"}<
+      Head Referee
+    to sign up for a field test.
+
+
+
+%h3
+  Reviews
+
 %p
   #{@text['empty']}
   %br
   %table.mini.table-background
-    - @counts.each do |grade, num|
+    %thead
       %tr
         %td
-          = @text[grade]
+          Rating
         %td
-          %strong
-            = num
+          :plain
+            #
+    %tbody
+      - @counts.each do |grade, num|
+        %tr
+          %td
+            = @text[grade]
+          %td
+            %strong
+              = num
 %p
   #{@text['you']}
   %strong
@@ -59,23 +99,18 @@
           #{@text['comments']}
         
     %tbody
+      - @review_list.each do |r|
+        %tr
+          %td
+            #{r['type']}
+          %td
+            #{r['rating']}
+          %td
+            #{r['comments']}
+
 
 
 :javascript
-  var reviews = #{@review_list};
-  var odd = false;
-  for (var i = 0; i < reviews.length; i++) {
-    var r = [
-      "<tr>",
-        "<td>",reviews[i][2],"Referee</td>", //type
-        "<td>",reviews[i][0],"</td>", //rating
-        "<td>",reviews[i][1],"</td>", //comments
-      "</tr>"
-    ].join(' ');
-    
-    $("#theTable tbody").append(r);
-  };
-
   $('#theTable').tablesorter({
     ignoreCase: true,
     widthFixed: false,

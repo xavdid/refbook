@@ -352,13 +352,18 @@ html, body {
 
     .table-background {
         background-color: darkgray;
+        thead {
+            td {
+                font-weight: bold;
+            }
+        }
         td {
             padding: 8px;
             background-color: white;
         }
     }
 
-    .table_box {
+    .table-box {
         width: 85%;
     }
 
