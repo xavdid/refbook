@@ -14,9 +14,20 @@
     #{@text['review']} #{@ref['firstName']}
 
 - if logged_in? and session[:user]['headRef']
-  %p
-    %a{href: "/star/#{@ref['objectId']}"}
-      #{@text['star']} #{@ref['firstName']}
+  - if not @star
+    %p
+      %a{href: "/star/#{@ref['objectId']}"}
+        %span.fa-stack
+          %i.fa.fa-circle.fa-stack-2x
+          %i.fa.fa-star.fa-stack-1x.unstarred
+        #{@text['star']} #{@ref['firstName']}
+  - else 
+    %p
+      %a{href: "/star/#{@ref['objectId']}?pop=1"}
+        %span.fa-stack
+          %i.fa.fa-circle.fa-stack-2x
+          %i.fa.fa-star.fa-stack-1x.starred
+        un-#{@text['star']} #{@ref['firstName']}
 
 %h3
   Certifications

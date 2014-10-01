@@ -792,8 +792,6 @@ get '/profile' do
     end
   end
 
-  # @mine = 
-
   @url = session[:user]['profPic'] ? session[:user]['profPic'] : '/images/person_blank.png'
   display({old: :f})
 end
@@ -804,6 +802,11 @@ get '/profile/:ref_id' do
     flash[:issue] = @layout['issues']['not_found']
     redirect '/search/ALL'
   else
+    if logged_in?
+      @star = settings.stars.find_one({to: params[:ref_id], from: session[:user]['objectId']})
+    else
+      @star = nil
+    end
     @title = "#{@ref['firstName']} #{@ref['lastName']}"
     @url = @ref['profPic'] ? @ref['profPic'] : '/images/person_blank.png'
 

@@ -72,7 +72,11 @@
             %td
               #{r['headRef'] ? 'Y' : 'N'}
             %td
-              Field Test
+              - if admin? and not r['passedFieldTest']
+                %a{href: "/field/#{r['objectId']}?reg=#{@reg}", onclick: "return confirm('#{r['firstName']} #{r['lastName']} passed their field test?');"}
+                  Passed?
+              - else
+                #{r['passedFieldTest'] ? 'Y' : 'N'}
             %td
               #{r['stars']}
             - if ['ALL', 'USQ'].include? @reg
