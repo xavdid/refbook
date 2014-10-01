@@ -43,6 +43,7 @@ configure do
   rescue
     set :conn, nil
     set :keys, nil
+    set :stars, nil
     puts 'Mongo offline!'
   end
   
@@ -638,9 +639,12 @@ get '/field_test' do
   if not logged_in?
     flash[:issue] = @layout['issues']['test_login']
     redirect "/login?d=/field_test"
-  elsif session[:user]['headRef']
+  elsif not session[:user]['headRef']
     flash[:issue] = @layout['issues']['hr_first']
     redirect '/'
+  elsif session[:user]['passedFieldTest']
+    flash[:issue] = @layout['issues']['field_test_passed']
+    redirect back
   end
 
   display({old: :f})
@@ -788,8 +792,9 @@ get '/profile' do
     end
   end
 
-  @url = session[:user]['profPic'] ? 
-    session[:user]['profPic'] : '/images/person_blank.png'
+  # @mine = 
+
+  @url = session[:user]['profPic'] ? session[:user]['profPic'] : '/images/person_blank.png'
   display({old: :f})
 end
 
@@ -1036,12 +1041,27 @@ get '/search/:region' do
     halt 404
   end
 
-  
+  stars_dump = settings.stars.find.to_a
+
+  @stars = {}
+
+  @mine = Set.new
+
+  stars_dump.each do |s|
+    if @stars.include? s['to']
+      @stars[s['to']] += 1
+    else
+      @stars[s['to']] = 1
+    end
+
+    if logged_in? and s['from'] == session[:user]['objectId']
+      @mine << s['to']
+    end
+  end
+
   q = Parse::Query.new("_User").tap do |r|
     r.limit = 1000
   end.get
-
-  @total = q.size
   
   if @reg == "USQ"
     q = Parse::Query.new("_User").tap do |r|
@@ -1057,31 +1077,16 @@ get '/search/:region' do
   # build each row of the table
   q.each do |person|
     if person["assRef"] or person["snitchRef"]
-      # entry = [
-      #   person["firstName"], # 0
-      #   person["lastName"], # 1
-      #   person["team"], # 2
-      #   person["username"] # 3
-      # ]
-      
-      # # assignment because reuby returns are weird
-      # entry << j = person['assRef'] ? 'Y' : 'N' # 4
-      # entry << j = person['snitchRef'] ? 'Y' : 'N' # 5
-      # entry << j = person['headRef'] ? 'Y' : 'N' # 6
-
-      
-      # entry << reg_reverse(person['region']) # 7
-      
-
-      # entry << person["objectId"] # 8
-
-      # entry << j = person['passedFieldTest'] ? 'Y' : 'N' # 9
-
+      if @stars.include? person['objectId']
+        person['stars'] = @stars[person['objectId']]
+      else
+        person['stars'] = 0
+      end
       @refs << person
     end
   end
 
-  pp @refs
+  @total = @refs.size
 
   display({path: :search, old: :f})
 end
@@ -1134,6 +1139,40 @@ post '/settings' do
     redirect '/settings'
   end
 end
+
+def star
+end
+get '/star/:id' do 
+  if not logged_in?
+    redirect "/login?d=/star/#{params[:id]}"
+  end
+
+  if not session[:user]['headRef']
+    # probably a better thing to do
+    flash[:issue] = "You heed to be an HR before you can star people"
+    redirect '/'
+  end
+
+  star = {to: params[:id], from: session[:user]['objectId']}
+
+  if params[:pop] == "1"
+    begin
+      settings.stars.remove(star)
+      flash[:issue] = "Successfully unstarred"
+      redirect "/profile/#{params[:id]}"
+    # rescue
+    end
+  else
+    begin
+      settings.stars.save(star)
+      flash[:issue] = "Successfully starred"
+      redirect "/profile/#{params[:id]}"
+    rescue
+      {status: 403, message: "You've already starred them"}.to_json
+    end
+  end
+
+end  
 
 def testing
 end

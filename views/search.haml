@@ -34,8 +34,6 @@
     %table#theTable
       %thead
         %tr
-          %td
-            Star?
           %td{title: "Profile Link"}
             #{@text['fn']}
           %td
@@ -50,6 +48,10 @@
             #{@text['hr']}
           %td{title: "Passed Field Test"}
             #{@text['ft']}
+          %td
+            %span.fa-stack
+              %i.fa.fa-circle.fa-stack-2x
+              %i.fa.fa-star.fa-stack-1x.unstarred
           - if ['ALL', 'USQ'].include? @reg
             %td
               #{@text['region']}
@@ -57,11 +59,7 @@
         - @refs.each do |r|
           %tr{"class" => "#{r['headRef'] ? 'Y' : 'N'}"}
             %td
-              %span.fa-stack
-                %i.fa.fa-circle.fa-stack-2x
-                %i.fa.fa-star.fa-stack-1x.unstarred
-            %td
-              %a{href: "/#{r['objectId']}"}<
+              %a{href: "/profile/#{r['objectId']}"}<
                 #{r['firstName']}
             %td
               #{r['lastName']}
@@ -75,6 +73,8 @@
               #{r['headRef'] ? 'Y' : 'N'}
             %td
               Field Test
+            %td
+              #{r['stars']}
             - if ['ALL', 'USQ'].include? @reg
               %td
                 #{r['region']}
@@ -144,6 +144,6 @@
     ignoreCase: true,
     widthFixed: false,
     widgets: ['stickyHeaders'],
-    sortList: [[2,0]]
+    sortList: [[1,0]]
   });
 

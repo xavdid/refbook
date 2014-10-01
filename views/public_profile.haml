@@ -13,8 +13,13 @@
   %a{href: "/review/#{@ref['objectId']}"}
     #{@text['review']} #{@ref['firstName']}
 
+- if logged_in? and session[:user]['headRef']
+  %p
+    %a{href: "/star/#{@ref['objectId']}"}
+      #{@text['star']} #{@ref['firstName']}
+
 %h3
-  Qualifications
+  Certifications
 
 .form_box.small
   .table-background

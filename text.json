@@ -795,17 +795,20 @@
         "EN": {
             "region": "Region",
             "email": "Send an email to",
-            "review": "Write a review for"
+            "review": "Write a review for",
+            "star": "Star"
         },
         "FR": {
             "region": "Région:",
             "email": "Envoyer un email à",
-            "review": "Évaluer"
+            "review": "Évaluer",
+            "star": "Star"
         },
         "IT": {
             "region": "Regione",
             "email": "Manda un'email a",
-            "review": "Scrivi una valutazione per"
+            "review": "Scrivi una valutazione per",
+            "star": "Star"
         }
     },
     "reset" : {

@@ -23,6 +23,45 @@
   #{@text['code']}  
 
 %h3
+  Certifications
+
+.form_box.small
+  .table-background
+    %table
+      %tr
+        %td
+          Assistant Referee
+        %td
+          - if session[:user]['assRef']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Snitch Referee
+        %td
+          - if session[:user]['snitchRef']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Head Referee Written
+        %td
+          - if session[:user]['headRef']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Head Referee Field
+        %td
+          - if session[:user]['passedFieldTest']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+
+%h3
   Field Tests
 %p
   - if @field_tests.size > 0
