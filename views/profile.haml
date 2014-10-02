@@ -80,7 +80,7 @@
             %td
               #{t['tournament']}
 
-  - elsif @user[:session]['headRef']
+  - elsif session[:user]['headRef']
     You haven't 
     %a{href: "/field_test"}<
       signed up 
@@ -90,8 +90,6 @@
     %a{href: "/testing"}<
       Head Referee
     to sign up for a field test.
-
-
 
 %h3
   Reviews
