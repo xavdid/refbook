@@ -150,20 +150,6 @@ def validate(key, region)
   end
 end
 
-# IMPORTANT
-# renders the view and layout in the correct language
-# views are in the following setup:
-# /views
-# |-- /EN
-#   |--a.haml
-#   |--b.haml
-# |-- /FR
-#   |--a.haml
-#   |--b.haml
-# 
-# and so forth for all language codes available
-# (which will probably be [EN|FR|IT|ES])
-
 def sym_to_bool(b)
   b == :t
 end
