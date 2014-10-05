@@ -417,6 +417,33 @@ html, body {
         width: 60%;
     }
 
+  #world-map {
+        width: 80%;
+        height: 550px;
+    }
+
+    .key {
+        height: 25px;
+        width: 25px;
+    }
+
+    #established {
+        background-color: #9FC5E8;
+    }
+
+    #developing {
+        background-color: #FF9900;
+    }
+
+    .line {
+        padding-bottom: 20px;
+
+        li {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+
     .mini {
         width: 15%;
         margin-left: 60px;

@@ -1,0 +1,33 @@
+%ul.line
+  %li
+    .key#developing
+  %li
+    Developing
+  %li
+    .key#established
+  %li
+    Established
+  %li
+
+#world-map
+
+
+:javascript
+  $(function(){
+    $('#world-map').vectorMap({
+      map: 'world_mill_en',
+      series: {
+        regions: [{
+          values: {
+              // established
+              CA:'#9FC5E8',
+              IT:'#9FC5E8',
+              AU:'#9FC5E8',
+              GB:'#9FC5E8',
+              // developing
+              NO:'#FF9900'
+          }
+        }]
+      }
+    });
+  });

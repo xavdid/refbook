@@ -1008,6 +1008,14 @@ post '/reviews/:review_id' do
   redirect '/admin'
 end
 
+def risk
+end
+get '/risk' do 
+  @title = "IRDP Territories"
+  display({old: :t})
+end
+
+
 def search
 end
 get '/search/:region' do 
