@@ -13,7 +13,7 @@
   %a{href: "/review/#{@ref['objectId']}"}
     #{@text['review']} #{@ref['firstName']}
 
-- if logged_in? and session[:user]['headRef']
+- if logged_in? and session[:user]['headRef'] and @ref['objectId'] != session[:user]['objectId']
   - if not @star
     %p
       %a{href: "/star/#{@ref['objectId']}"}

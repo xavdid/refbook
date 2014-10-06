@@ -96,15 +96,18 @@ class RefbookTest < MiniTest::Test
     get '/review/NDrskOZtwl'
     assert last_response.body.include?('David')
   end
+
+  def test_en_risk
+    get '/risk'
+    assert last_response.ok?
+  end
   
   def test_en_search
     get '/search/ALL'
     assert last_response.body.include?('currently')
-  end
-  
-  def test_en_search_usmw
-    get '/search/USMW'
-    assert last_response.body.include?('West')
+
+    get '/search/USWE'
+    assert last_response.body.include?('David')
   end
   
   def test_en_testing
