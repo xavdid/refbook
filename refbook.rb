@@ -210,12 +210,13 @@ end
 
 # on pass, shows testing page for other opportunities. On fail, shows link to test you failed for cooldown timer
 def email_results(email, pass, test)
+  tests = {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
   mail = Mail.deliver do
     to email
     from 'IRDP <irdp.rdt@gmail.com>'
     subject 'Referee Test Results'
     html_part do
-      body "Hey there!<br><br>The IRDP has received and recorded your results for the #{settings.test_names[test]} Referee Test. You can see your #{pass ? 'other testing opporunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
+      body "Hey there!<br><br>The IRDP has received and recorded your results for the #{tests[test]} Referee Test. You can see your #{pass ? 'other testing opporunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
     end
   end
 end
@@ -861,7 +862,7 @@ end
 get '/release' do 
   # this isn't display because all the languages are already there
   # it could be updated if we add a language we didn't press release in
-  haml :'EN/release', layout: false
+  haml :release, layout: false
 end
 
 def report
