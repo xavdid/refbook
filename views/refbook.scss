@@ -472,8 +472,8 @@ html, body {
     bottom: 0;
     width: 100%;
     height: $footer-height;
-    background: black;
-    color: white;
+    background: #000;
+    color: #fff;
 
     p {
         padding-left: 10px; 
@@ -486,6 +486,14 @@ html, body {
         &:visited {
             color: #fff;
         }
+        &:hover{
+            text-decoration: none;
+            color: #fff;
+        }
+    }
+
+    i {
+        padding-right: 8px;
     }
 
 }

@@ -146,6 +146,14 @@
 
   .bot
     %p
+      %a{href: "https://www.facebook.com/refdevelopment", target: "_blank"}<
+        %i.fa.fa-lg.fa-facebook
+
+      %a{href: "https://www.twitter.com/refdevelopment", target: "_blank"}<
+        %i.fa.fa-lg.fa-twitter
+      
+      ||
+
       %a{href: "http://davidbrownman.com", target: "_blank"}<
         David Brownman
       #{@layout['made']}
@@ -159,6 +167,8 @@
         #{@layout['contact']}
       us!
 
+    
+    
 
 :javascript
   $('##{@section}').addClass('active');
