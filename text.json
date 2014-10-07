@@ -794,18 +794,21 @@
     "public_profile" : {
         "EN": {
             "region": "Region",
+            "team": "Team",
             "email": "Send an email to",
             "review": "Write a review for",
             "star": "Star"
         },
         "FR": {
             "region": "Région:",
+            "team": "Équipe",
             "email": "Envoyer un email à",
             "review": "Évaluer",
             "star": "Star"
         },
         "IT": {
-            "region": "Regione",
+            "region": "Squadra",
+            "team": "Team",
             "email": "Manda un'email a",
             "review": "Scrivi una valutazione per",
             "star": "Star"
