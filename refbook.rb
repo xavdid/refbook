@@ -276,7 +276,8 @@ def weekly_testing_update
     end
 
     test_dump = Parse::Query.new("testAttempt").tap do |q|
-      q.greater_than("createdAt", Parse::Date.new((Time.now - 604800).to_datetime))
+      q.limit = 1000
+      q.greater_than("updatedAt", Parse::Date.new((Time.now - 604800).to_datetime))
     end.get
     tests = []
 
