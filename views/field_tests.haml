@@ -1,0 +1,44 @@
+%p
+  There's no consistency to the date they put in, so make your best guess based on where they live. Dates submitted is
+  %strong
+    mm/dd/yy.
+  Sorry non-Americans. 
+
+
+.table-box
+  %table#theTable
+    %thead
+      %th
+        Date Submitted
+      %th
+        Name (click to email)
+      %th
+        Region
+      %th
+        Tournament Name
+      %th
+        Tournament Date
+
+    - @tests.each do |t|
+      %tr
+        %td
+          #{Time.parse(t['createdAt']).strftime("%m/%d/%y")}
+        %td
+          %a{href: "mailto:#{t['email']}"}
+            #{t['name']}
+        %td
+          #{t['region']}
+        %td
+          #{t['tournament']}
+          - if t['link'] != ''
+            (<a href="#{t['link']}">Link</a>)
+        %td
+          #{t['tournamentDate']}
+
+:javascript
+  $("#theTable").tablesorter({
+    ignoreCase: true,
+    widthFixed: false,
+    widgets: ['stickyHeaders'],
+    sortList: [[0,1]]
+  });

@@ -658,6 +658,22 @@ post '/field_test' do
   redirect '/profile'
 end
 
+get '/field_tests' do 
+  @title = "Field Test Signups"
+  if not logged_in?
+    redirect '/login?d=/admin'
+  elsif not admin?
+    flash[:issue] = @layout['issues']['admin']
+    redirect '/'
+  else
+    @tests = Parse::Query.new("fieldTestSignup").tap do |r|
+      r.limit = 1000
+    end.get
+  end
+  pp @tests
+  display({old: :t})
+end
+
 def info
 end
 get '/info' do 
