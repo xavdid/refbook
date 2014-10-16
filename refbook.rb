@@ -753,17 +753,23 @@ post '/paid' do
   end
   user_to_update = pull_user(id)
   # puts params
-  if type == 'hr'
-    user_to_update['hrWrittenAttemptsRemaining'] = 4
-  elsif type == 'ac'
-    user_to_update['paid'] = true
-  else
-    halt 500
+  begin
+    if type == 'hr'
+      user_to_update['hrWrittenAttemptsRemaining'] = 4
+    elsif type == 'ac'
+      user_to_update['paid'] = true
+    else
+      halt 500
+    end
+    user_to_update.save
+    pp "payment registered for #{user_to_update['firstName']} #{user_to_update['lastName']}"
+    register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']} ||| #{user_to_update['region']}")
+    return {status: 200, message: "ok"}.to_json
+  rescue Exception => e 
+    puts e.message  
+    puts e.backtrace.inspect
+    return {status: 500, message: "not ok"}.to_json
   end
-  user_to_update.save
-  pp "payment registered for #{user_to_update['firstName']} #{user_to_update['lastName']}"
-  register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']} ||| #{user_to_update['region']}")
-  return {status: 200, message: "ok"}.to_json
 end
 
 def profile
