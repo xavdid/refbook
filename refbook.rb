@@ -223,7 +223,7 @@ end
 
 def register_purchase(text)
   mail = Mail.deliver do 
-    to "trigger@ifttt.com"
+    to "trigger@recipe.ifttt.com"
     from 'beamneocube@gmail.com'
     subject text
     html_part do 
