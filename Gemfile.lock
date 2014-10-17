@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:Xavdidtheshadow/parse-ruby-client.git
+  remote: git://github.com/xavdidtheshadow/parse-ruby-client.git
   revision: 48add33380e168c168ad10bf9b850162de5ccf09
   specs:
     parse-ruby-client (0.3.0)
