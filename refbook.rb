@@ -1008,9 +1008,10 @@ get '/reviews/:review_id' do
     flash[:issue] = @layout['issues']['admin']
     redirect '/'
   else
-    @r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
-    q = Parse::Query.new("_User").eq("objectId",@r['referee'].parse_object_id).get.first
-    @name = name_maker(q)
+    @r = Parse::Query.new("review").eq("objectId", params[:review_id]).tap do |r|
+      r.include = "referee"
+    end.get.first
+    @name = name_maker(@r['referee'])
     @r['reviewerName'] = 'REDACTED' if @r['referee'].parse_object_id == session[:user]['objectId']
     @review = @r.to_json
     display({path: :edit_review, old: :t})
@@ -1083,17 +1084,23 @@ get '/search/:region' do
     end
   end
 
+  # this wasn't working- it's either a limitation of the gem or of parse
+  fields = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region"
+
   q = Parse::Query.new("_User").tap do |r|
     r.limit = 1000
+    r.keys = fields
   end.get
   
   if @reg == "USQ"
     q = Parse::Query.new("_User").tap do |r|
       r.limit = 1000
+      r.keys = fields
     end.get.select{|p| p['region'][0..1] == "US"}
   elsif @reg != "ALL"
     q = Parse::Query.new("_User").tap do |r|
       r.limit = 1000
+      r.keys = fields
     end.eq("region",@reg).get
   end
 
