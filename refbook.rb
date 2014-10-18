@@ -605,6 +605,12 @@ post '/create' do
   end
 end
 
+def donate
+end
+get '/donate' do
+  display({old: :f})
+end
+
 def faq
 end
 get '/faq' do

@@ -181,6 +181,26 @@
             "agree2": "e di essere d'accordo con tutte le dichiarazioni in esso contenute."
         }
     },
+    "donate": {
+        "EN": {
+            "title": "Donations",
+            "accept": "If you feel so inclined, we're always accepting donations. If you're curious as to where your money goes, head over to our",
+            "payment": "payment",
+            "page": "page"
+        },
+        "FR": {
+            "title": "Donations",
+            "accept": "If you feel so inclined, we're always accepting donations. If you're curious as to where your money goes, head over to our",
+            "payment": "payment",
+            "page": "page"
+        },
+        "IT": {
+            "title": "Donations",
+            "accept": "If you feel so inclined, we're always accepting donations. If you're curious as to where your money goes, head over to our",
+            "payment": "payment",
+            "page": "page"
+        }    
+    },
     "faq" : {
         "EN": {
             "title": "FAQ",
