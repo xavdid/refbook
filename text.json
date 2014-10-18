@@ -255,7 +255,10 @@
             "a9": "For any referee within a league the IRDP has a contract with, all content is free and the Head Referee test is offered for a small fee. For any referee within a league the IRDP has not contracted with, the Scorekeeper content and Goal referee content is offered for free along with a sneak peek at our five pillar guides. These referees may purchase access to Assistant, Snitch, and Head referee training resources for $5USD, and the Head referee written test will be available for $20USD.",
             
             "q10": "How is testing different from the last season with the IQA?",
-            "a10": "The IRDP has completely revamped the internal structure of the written tests. The new system more effectively tests candidates on their knowledge of specific rules, and follows a question format that will allow for easier understanding. In addition, the field test has been streamlined, as well as a sixth section that has been added to test a candidate's ability to make the correct calls in a game. Additionally, it's all offered through one convenient, automated site (this one)."
+            "a10": "The IRDP has completely revamped the internal structure of the written tests. The new system more effectively tests candidates on their knowledge of specific rules, and follows a question format that will allow for easier understanding. In addition, the field test has been streamlined, as well as a sixth section that has been added to test a candidate's ability to make the correct calls in a game. Additionally, it's all offered through one convenient, automated site (this one).",
+            "q11": "Can I donate to the IRDP?",
+            "a11": "Of course! We've got a",
+            "a11p2": "donation"
         },
         "FR": {
             "title": "FAQ",
@@ -310,7 +313,10 @@
             "a9": "Pour tout arbitre attaché à une ligue ayant établit un contrat avec l'IRDP, tout le contenu est gratuit et l’examen d’arbitre principal est offert pour un coût modeste. Pour tout arbitre attaché à une ligue n’ayant pas de contrat avec le PIDA,  les contenus concernant les arbitres de buts et l’arbitre de marquoir sont disponibles gratuitement, le tout accompagné d’un aperçu de nos cinq guides ‘piliers’. Ces arbitres peuvent se procurer un accès à notre matériel de formation pour les arbitres assistants, arbitres de vif et arbitres principaux au prix de 5$ ; l’examen d’arbitre principal leur sera proposé au prix de 20$.",
             
             "q10": "En quoi le système de testes diffère-t-il de celui des saisons précédentes avec l’IQA ? ",
-            "a10": "L'IRDP a complètement revu la structure interne des examens écrits. Le nouveau système teste les candidats de manière plus efficace sur leur connaissance de règles spécifiques, selon un format de question plus facile à comprendre. De plus, l’examen pratique a été épuré et voit l’ajout d’une sixième section destinée à évaluer la capacité du candidat à prendre la bonne décision en cours de jeu. Le tout est offert via un site internet pratique et automatisé (que vous consultez actuellement)."
+            "a10": "L'IRDP a complètement revu la structure interne des examens écrits. Le nouveau système teste les candidats de manière plus efficace sur leur connaissance de règles spécifiques, selon un format de question plus facile à comprendre. De plus, l’examen pratique a été épuré et voit l’ajout d’une sixième section destinée à évaluer la capacité du candidat à prendre la bonne décision en cours de jeu. Le tout est offert via un site internet pratique et automatisé (que vous consultez actuellement).",
+            "q11": "Can I donate to the IRDP?",
+            "a11": "Of course! We've got a",
+            "a11p2": "donation"
         },
         "IT": {
             "title": "FAQ",
@@ -365,7 +371,10 @@
             "a9": "Per ogni arbitro in un'organizzazione che ha un contratto con l'IRDP, tutti i contenuti sono gratuiti e il test di arbitro principale è disponibile per una modesta quota. Per gli arbitri appartenenti a una lega senza contratto con l'IRDP, i contenuti relativi al segnapunti e ai guardaanelli sono offerti gratuitamente, così come un'anteprima alle guide dei nostri \"cinque pilastri\". Questi arbitri possono acquistare l'accesso alle risorse per assistente, guardaboccino e arbitro principale per 5$, mentre il test per arbitro principale sarà disponibile al prezzo di 20$.",
             
             "q10": "Qual è la differenza dei test rispetto alla scorsa stagione con la IQA?",
-            "a10": "L'IRDP ha completamente rivisto la struttura interna dei test scritti. Il nuovo sistema testa più efficacemente i candidati sulla propria conoscenza di regole specifiche, e segue un formato che garantirà una più facile comprensione. In aggiunta, il test pratico è stato razionalizzato, e vi è stata aggiunta una sesta sezione relativa all'abilità del candidato di fare le corrette chiamate nel corso di una partita. Inoltre, è tutto offerto tramite un comodo sito automatizzato (questo)."
+            "a10": "L'IRDP ha completamente rivisto la struttura interna dei test scritti. Il nuovo sistema testa più efficacemente i candidati sulla propria conoscenza di regole specifiche, e segue un formato che garantirà una più facile comprensione. In aggiunta, il test pratico è stato razionalizzato, e vi è stata aggiunta una sesta sezione relativa all'abilità del candidato di fare le corrette chiamate nel corso di una partita. Inoltre, è tutto offerto tramite un comodo sito automatizzato (questo).",
+            "q11": "Can I donate to the IRDP?",
+            "a11": "Of course! We've got a",
+            "a11p2": "donation"
         }
     },
     "field_test": {
@@ -649,7 +658,9 @@
 
             "ub3": "Other electronic resources. In order to provide the best possible online experience, we've got the latest web technologies powering an awesome stack. We decided not to sacrifice quality in any way (we know how frustrating that can be!), so we pay a bit for our tech (this is our smallest monthly expense).",
 
-            "stress": "We also want to stress that every IRDP employee is a volunteer and none of us are compensated for our time. We do what we do because we love quidditch and believe the system we are building will produce the best referees possible.",
+            "stress": "We also want to stress that every IRDP employee is a volunteer, and while we accept",
+            "donations": "donations,",
+            "stress2": "none of us are compensated for our time. We do what we do because we love quidditch and believe the system we are building will produce the best referees possible.",
 
             "help": "So, help us help you. Skip that latte tomorrow and be part of something awesome.",
             "be": "Be part of the"
@@ -683,7 +694,9 @@
 
             "ub3": "Autres ressources informatiques. Afin de procurer la meilleure une expérience en ligne possible, nous utilisons des technologies de pointe. Nous avons décidé de ne pas regarder à la dépense en matière de qualité (nous savons que le contraire peut vite devenir frustrant), nous payons donc un peu pour notre support technique (la plus petite partie de notre budget mensuel).",
 
-            "stress": "Nous souhaitons souligner que tout employé du PIDA est volontaire et nul ne reçoit de compensation financière pour le temps investi. Nous donnons de notre temps parce que nous aimons le quididtch et estimons que le système que nous mettons en place produira les meilleurs arbitres possible. ",
+            "stress": "Nous souhaitons souligner que tout employé du PIDA est volontaire et nul ne reçoit de compensation",
+            "donations": "donations,",
+            "stress2": "financière pour le temps investi. Nous donnons de notre temps parce que nous aimons le quididtch et estimons que le système que nous mettons en place produira les meilleurs arbitres possible.",
 
             "help": "Donc, aidez-nous à vous aider. N’achetez pas votre latte demain et participez à un projet génial.",
             "be": "Rejoignez l'"
@@ -717,7 +730,9 @@
 
             "ub3": "Altre risorse elettroniche. Per fornire la miglior possibile esperienza online, usiamo alcune delle più recenti tecnologie web. Abbiamo deciso di non sacrificare in alcun modo la qualità (sappiamo quanto frustrante può essere!), dunque paghiamo una certa somma per l'aspetto tecnologico (è la nostra spesa mensile più piccola).",
 
-            "stress": "Vogliamo anche sottolineare che ogni membro dello staff IRDP è un volontario e nessuno di noi riceve un compenso per il proprio tempo. Facciamo quello che facciamo perché amiamo il quidditch e crediamo che il sistema che stiamo costruendo produrrà i migliori arbitri possibili.",
+            "stress": "Vogliamo anche sottolineare che ogni membro dello staff IRDP è un volontario e nessuno di",
+            "donations": "donations,",
+            "stress2": "noi riceve un compenso per il proprio tempo. Facciamo quello che facciamo perché amiamo il quidditch e crediamo che il sistema che stiamo costruendo produrrà i migliori arbitri possibili.",
 
             "help": "Quindi, aiutaci ad aiutarti. Rinuncia al tuo caffè di domani e diventa parte di qualcosa di grandioso.",
             "be": "Diventa parte dell'"
