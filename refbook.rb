@@ -164,6 +164,7 @@ def display(args = {})
   pp args unless settings.test?
   path = args[:path] || request.path_info[1..-1]
   args[:layout] ||= :t
+  # old is default to prevent breaking, this will change eventually
   args[:old] ||= :t
   args[:alt] ||= :f
 
@@ -436,37 +437,27 @@ get '/admin' do
     end.get
 
     refs = {}
-
+    # turn refs inside out
     ref_dump.each do |r|
       refs[r['objectId']] = r
     end
 
     reviews.each do |r|
-      q = refs[r['referee'].parse_object_id]
-      
-      a = [
-        r['reviewerName'], #0
-        r['reviewerEmail'], #1
-        r['isCaptain'], #2
-        r['region'], #3
-        name_maker(q), #4
-        r['team'], #5
-        r['opponent'], #6
-        r['rating'], #7
-        r['comments'], #8
-        r['show'], #9
-        r['objectId'], #10
-        q['objectId'], #11
-        Time.parse(r['now']).strftime("%m/%d/%y"), #12
-        r['type'] #13
-      ]
-      # hide the name of reviews made about you
-      if r['referee'].parse_object_id == session[:user]['objectId']
-        a[0] = "REDACTED"
-        a[1] = "REDACTED"
-      end
       if r['comments'].size > 0
-        @review_list << a
+        ref = refs[r['referee'].parse_object_id]
+        rid = ref['objectId']
+
+        r['refName'] = name_maker(ref)
+        r['now'] = Time.parse(r['now']).strftime("%m/%d/%y")
+        r['rid'] = rid
+
+        # hide the name of reviews made about you
+        if r['referee'].parse_object_id == session[:user]['objectId']
+          r['reviewerName'] = "REDACTED"
+          r['reviewerEmail'] = "REDACTED"
+        end
+
+        @review_list << r
       end
     end
 

@@ -3,7 +3,13 @@
   %strong
     mm/dd/yy.
   Sorry non-Americans. 
-
+  %br
+  %br
+  There are 
+  %strong
+    #{@review_list.size}
+  total reviews with comments. 
+  %hr
 
 %p
   %a.more{href: "#"}
@@ -45,56 +51,56 @@
           Link
         
     %tbody
+      - @review_list.each do |r|
+        %tr
+          %td
+            #{r['now']}
+          %td
+            #{r['reviewerName']}
+          %td.small
+            #{r['reviewerEmail']}
+          %td.small
+            #{r['isCaptain']}
+          %td
+            #{r['region']}
+          - if r['rid'] == session[:user]['objectId']
+            %td.name.mine
+              #{r['refName']}
+          - else
+            %td.name.ref-name
+              #{r['refName']}
+          %td
+            #{r['type']}
+          %td.small
+            #{r['team']}
+          %td.small
+            #{r['opponent']}
+          %td
+            #{r['rating']}
+          %td
+            #{r['comments']}
+          %td
+            #{r['show'] ? 'Y' : 'N'}
+          %td
+            %a{href: "/reviews/#{r['objectId']}"}
+              Edit
 
+:coffeescript
   
-:javascript
-  // this can all be redone in haml like a regular goddam person
-  var reviews = #{@review_list};
-  var odd = false;
-  // $("#theTable tbody").empty();
-  for (var i = 0; i < reviews.length; i++) {
-    var r = [
-      // "<tr class=\"",(odd) ? "odd" : "even","\">",
-      "<tr>",
-      "<td>",reviews[i][12],"</td>",
-      "<td>",reviews[i][0],"</td>", //reviewer
-      "<td class=\"small\"><a href=\"mailto:",reviews[i][1],"\">email</a></td>",
-      "<td class=\"small",(reviews[i][2]) ? "y" : "n","\">",(reviews[i][2]) ? "Y" : "N","</td>", //captain?
-      "<td>",reviews[i][3],"</td>", //region
-      "<td class=\"name ", (reviews[i][11] == "#{session[:user]['objectId']}") ? "mine" : "ref-name",
-      "\">",reviews[i][4],"</td>", //referee
-      "<td>",reviews[i][13],"</td>", //type
-      "<td class=\"small\">",reviews[i][5],"</td>", //team
-      "<td class=\"small\">",reviews[i][6],"</td>", //opponent
-      "<td>",reviews[i][7],"</td>", //rating
-      "<td>",reviews[i][8],"</td>", //comments
-      "<td class=\"",(reviews[i][9]) ? "y" : "n","\">",(reviews[i][9]) ? "Y" : "N","</td>", //show?
-      "<td><a href=\"/reviews/"+reviews[i][10],"\">Edit</a></td>", //link
-    ].join(' ');
-    
+  $('.small').hide()
 
-    r += "</tr>";
-    odd = !odd;
-    $("#theTable tbody").append(r);
-  };
+  $('.more').click ->
+    $('.less').removeClass 'mode'
+    $(this).addClass 'mode'
+    $('.small').show()
 
-  $('.small').hide();
+  $('.less').click ->
+    $('.more').removeClass 'mode'
+    $(this).addClass 'mode'
+    $('.small').hide()
 
-  $('.more').click(function(){
-    $('.less').removeClass('mode');
-    $(this).addClass('mode');
-    $('.small').show();
-  });
-
-  $('.less').click(function(){
-    $('.more').removeClass('mode');
-    $(this).addClass('mode');
-    $('.small').hide();
-  });
-
-  $('#theTable').tablesorter({
-    ignoreCase: true,
-    widthFixed: false,
-    widgets: ['stickyHeaders'],
+  $('#theTable').tablesorter
+    ignoreCase: true
+    widthFixed: false
+    widgets: ['stickyHeaders']
     sortList: [[0,1]]
-  });
