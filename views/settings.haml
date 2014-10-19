@@ -68,7 +68,7 @@
   #{@text['crop']}
 
 .form_box
-  %form{id: "profPic", method: "post", enctype: "multipart/form-data", action: "/upload", onsubmit: "return validate();"}
+  %form{id: "profPic", method: "post", enctype: "multipart/form-data", action: "/upload", required: ''}
     %label{for: "myfile"}
       #{@text['image']}
     %input{type: "file", name: "myfile", id: "fileBox"}   
@@ -81,26 +81,21 @@
     #{@text['reset']}
   #{@text['password']}
 
+/ coffeescript would just double the lines used
 :javascript
   // fill fields
   $('#email').val("#{session[:user]['username']}");
   $('#lang').val("#{session[:user]['lang']}");
 
-  // check test buttons for aussies
-  $('#ar').prop('checked',#{session[:user]['assRef'] ? 'true' : 'false' });
-  $('#sr').prop('checked',#{session[:user]['snitchRef'] ? 'true' : 'false' });
-  $('#hr').prop('checked',#{session[:user]['headRef'] ? 'true' : 'false' });
-  $('#ft').prop('checked',#{session[:user]['passedFieldTest'] ? 'true' : 'false' });
-
   //make sure they uploaded _something_ 
-  function validate(){
-    var f = $("#fileBox")[0].files[0];
-    if (f) {
-      return true;
-    }
-    else {
-      $(".issue").text("Must select a file");
-      return false;
-    }
-  };
+  //function validate(){
+    //var f = $("#fileBox")[0].files[0];
+    //if (f) {
+      //return true;
+    //}
+    //else {
+      //$(".issue").text("Must select a file");
+      //return false;
+    //}
+  //};
 

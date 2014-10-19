@@ -35,10 +35,9 @@
         %td
           #{t['tournamentDate']}
 
-:javascript
-  $("#theTable").tablesorter({
-    ignoreCase: true,
-    widthFixed: false,
-    widgets: ['stickyHeaders'],
+:coffeescript
+  $('#theTable').tablesorter
+    ignoreCase: true
+    widthFixed: false
+    widgets: ['stickyHeaders']
     sortList: [[0,1]]
-  });

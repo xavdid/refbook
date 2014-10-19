@@ -2,7 +2,7 @@
   %form{name: "login", action: "/login", method: "post"}
     %label{for: "Email"}
       Email
-    %input{type: "email", name: "username", placeholder:"email", id:"start"}
+    %input#start{type: "email", name: "username", placeholder:"email"}
 
     %label{for: "Password:"}
       Password
@@ -25,5 +25,6 @@
     #{@text['reset']}
   #{@text['it']}.
 
-:javascript
-  $('#start').focus();
+/ this doesn't matter, but I wanna be hip
+:coffeescript
+  $('#start').focus()
