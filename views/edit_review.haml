@@ -38,6 +38,7 @@
 :javascript
   var r = #{@review};
 
-  $((r['show']) ? "#Y" : "#N").prop("checked", true);
+:coffeescript
+  $(if r['show'] then "#Y" else "#N").prop "checked", true
 
-  $("#comments").text(r['comments']);
+  $("#comments").text r['comments']
