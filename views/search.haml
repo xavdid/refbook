@@ -5,8 +5,11 @@
 %p
   #{@text['current']}
   %strong
-    #{@total} 
-  #{@text['world']}
+    #{@total}
+  - if @reg == "ALL"
+    #{@text['world']}
+  - else
+    #{@text['not_world']}
 
 %hr
 

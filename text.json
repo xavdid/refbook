@@ -969,6 +969,7 @@
 
             "current": "There are currently",
             "world": "referees around the world with some amount of IRDP certification.",
+            "not_world": "referees in this region with some amount of IRDP certification.",
 
             "all_refs": "Show all IRDP certified refs",
             "head_refs": "Show only IRDP certified head refs",
@@ -993,6 +994,7 @@
 
             "current": "Il y a actuellement",
             "world": "arbitres dans le monde ayant décroché un certificat IRDP de type indéfini.",
+            "not_world": "arbitres ayant décroché un certificat IRDP de type indéfini.",
 
             "all_refs": "Voir tous les arbitres certifiés par l'IRDP",
             "head_refs": "Voir uniquement les Arbitres Principaux certifiés par l'IRDP",
@@ -1017,6 +1019,7 @@
 
             "current": "Ci sono attualmente",
             "world": "arbitri al mondo con qualche tipo di certificazione IRDP.",
+            "not_world": "arbitri con qualche tipo di certificazione IRDP.",
 
             "all_refs": "Mostra tutti gli arbitri IRDP",
             "head_refs": "Mostra solo gli arbitri principali (HR) IRDP",
