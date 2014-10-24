@@ -1081,7 +1081,7 @@ get '/search/:region' do
     end
   end
 
-  # this wasn't working- it's either a limitation of the gem or of parse
+  # this currently works only with my version of the gem until the PR is merged
   fields = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region"
 
   q = Parse::Query.new("_User").tap do |r|
@@ -1104,7 +1104,7 @@ get '/search/:region' do
   @refs = []
   # build each row of the table
   q.each do |person|
-    if person["assRef"] or person["snitchRef"]
+    if person["assRef"] or person["snitchRef"] or params[:show] == "all"
       if @stars.include? person['objectId']
         person['stars'] = @stars[person['objectId']]
       else
