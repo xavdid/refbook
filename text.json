@@ -195,10 +195,10 @@
             "page": "page"
         },
         "IT": {
-            "title": "Donations",
-            "accept": "If you feel so inclined, we're always accepting donations. If you're curious as to where your money goes, head over to our",
-            "payment": "payment",
-            "page": "page"
+            "title": "Donazioni",
+            "accept": "Se ti senti incline ad aiutarci, accettiamo sempre donazioni. Se sei curioso di sapere dove finiscono i tuoi soldi, vai alla pagina dei",
+            "payment": "pagamenti",
+            "page": ""
         }    
     },
     "faq" : {
@@ -372,9 +372,9 @@
             
             "q10": "Qual è la differenza dei test rispetto alla scorsa stagione con la IQA?",
             "a10": "L'IRDP ha completamente rivisto la struttura interna dei test scritti. Il nuovo sistema testa più efficacemente i candidati sulla propria conoscenza di regole specifiche, e segue un formato che garantirà una più facile comprensione. In aggiunta, il test pratico è stato razionalizzato, e vi è stata aggiunta una sesta sezione relativa all'abilità del candidato di fare le corrette chiamate nel corso di una partita. Inoltre, è tutto offerto tramite un comodo sito automatizzato (questo).",
-            "q11": "Can I donate to the IRDP?",
-            "a11": "Of course! We've got a",
-            "a11p2": "donation"
+            "q11": "Posso fare donazioni a favore dell'IRDP?",
+            "a11": "Certo! Abbiamo una pagina per le ",
+            "a11p2": "donazioni"
         }
     },
     "field_test": {
@@ -393,11 +393,11 @@
             "link": "Tournament Facebook event link"
         },
         "IT": {
-            "title": "Field Test Signup",
-            "intro": "Sign up for a field test and an IRDP representative will be in touch soon.",
-            "tournament": "At what tournament do you want to field test at?",
-            "date": "What day do you want to field test on?",
-            "link": "Tournament Facebook event link"
+            "title": "Registrazione test pratico",
+            "intro": "Registrati per un test pratico ed un rappresentante IRDP ti contatterà presto.",
+            "tournament": "Presso quale torneo vorresti svolgere il tuo test pratico?",
+            "date": "In che giornata vorresti svolgere il tuo test pratico?",
+            "link": "Link all'evento Facebook del torneo"
         }
     },
     "help" : {
@@ -1175,42 +1175,42 @@
             "give": "Revenez le "
         },
         "IT": {
-            "intro": "This page will show a link to the appropriate test if it's been long enough since your last attempt (and you're qualified/paid). Otherwise, it'll tell you when this test will be available. ",
-            "remember": "Remember that upon creation of an account, you agreed to the",
-            "code": "Ref's Code", 
-            "therein": "and all articles therein. ",
+            "intro": "Questa pagina mostrerà un link al test corretto se è trascorso un tempo sufficiente dall'ultimo tentativo (e rispetti i pre-requisiti/hai effettuato il pagamento). In caso contrario, ti informerà di quando questo test sarà disponibile. ",
+            "remember": "Ricorda che alla creazione dell'account hai sottoscritto il ",
+            "code": "Codice arbitrale", 
+            "therein": "e tutti gli articoli in esso contenuti. ",
 
-            "hint": "Hint, hint",
-            "comfortable":"be comfortable and familiar with our awesome",
-            "training": "training",
-            "before": "materials before attempting any written tests. We certify only the best, so these tests aren't easy.",
+            "hint": "Un suggerimento",
+            "comfortable":"prendi familiarità con i nostri fantastici materiali per la",
+            "training": "formazione",
+            "before": "prima di tentare qualsiasi test scritto. Certifichiamo solo i migliori, quindi i test non sono semplici.",
 
-            "also": "It's also",
-            "important": "incredibly important",
-            "click": "that you click the orange",
-            "return": "\"return to refdevelopment.com\"",
-            "confirm": "at the end of the test and see confirmation back on this site or else your results will not be recorded in our system. ",
-            "if": "If you click the button multiple times (don't do that!) you may get a message about \"turning in your test too quicky\". If you're sure you only hit the button once, get in touch with",
-            "me": "me",
-            "confirmation": "You should also get an immediate confirmation email from us. Good luck!",
+            "also": "È anche",
+            "important": "molto importante",
+            "click": "che clicchi sulla scritta arancione",
+            "return": "\"ritorna a refdevelopment.com\"",
+            "confirm": "alla fine del test e visualizzi la conferma su questo sito, o i tuoi risultati non saranno registrati nel nostro sistema. ",
+            "if": "Se clicchi sul link più di una volta (non farlo!) potresti visualizzare un messaggio a proposito di \"concludere il test troppo velocemente\". Se sei certo di avere cliccato una volta sola, contatta",
+            "me": "l'admin",
+            "confirmation": "Dovresti anche ricevere una conferma immediata tramite email. Buona fortuna!",
 
-            "already": "You've already passed the",
-            "congrats": "Congrats",
-            "either": "It looks like you haven't passed either the assistant referee or the snitch referee tests! You need to pass both of them before you can attempt he head referee test.",
+            "already": "Hai già superato il",
+            "congrats": "Congratulazioni",
+            "either": "Sembra che tu non abbia passato il test per assistente arbitrale o quello per arbitro del boccino! Devi superarli entrambi prima di tentare il test per arbitro principale.",
 
-            "none_left": "You have 0 HR Written Attempts Remaining.",
-            "applicable": "This purchase entitles you to be field tested WHERE APPLICABLE. Because this requires travel by our hardworking RDT members, field testing is not always an option based on your location (or may take a long time). If you're not sure that you live in a place where a field test is possible, don't hesitate to ",
-            "contact": "contact us!",
-            "hope": "You're welcome to take the HR written tests even if there's no hope for a field test this year, just note that you won't be a fully certified IRDP Head Referee until you pass a field test given by an authorized proctor.",
+            "none_left": "Hai 0 tentativi rimasti per il test di arbitro principale.",
+            "applicable": "Questo acquisto ti dà diritto a sostenere il test pratico DOVE POSSIBILE. Poiché questo richiede ai gran lavoratori del nostro gruppo RDT svariati spostamenti, il test pratico non è sempre possibile a seconda della tua posizione geografica (o potrebbe richiedere un lungo periodo d'attesa). Se non sei certo di vivere in un luogo dove il test pratico è possibile, non esitare a ",
+            "contact": "contattarci!",
+            "hope": "Puoi tentare il test scritto anche se non avrai la possibilità di sostenere un test pratico quest'anno, ma ricorda che non sarai un arbitro IRDP pienamente certificato fino a quando avrai superato un test pratico tenuto da un osservatore autorizzato.",
 
-            "rulebook": "This test is for Rulebook ",
+            "rulebook": "Questo test è per il Regolamento ",
 
-            "here": "Here's the link to the ",
+            "here": "Ecco il link al ",
 
-            "long": "Looks like it hasn't been long enough since your last try!",
-            "attempted": "You last attempted the ",
-            "at": "at",
-            "give": "Give it another go at "
+            "long": "Pare che non sia trascorso abbastanza tempo dal tuo ultimo tentativo!",
+            "attempted": "Hai tentato per l'ultima volta il ",
+            "at": "a",
+            "give": "Tenta nuovamente a "
         }
     },
     "testing" : {
@@ -1325,59 +1325,59 @@
             "rtc": "RTC Training Guide"
         },
         "IT": {
-            "process": "The Testing Process",
-            "order": "In order to become an IRDP certified Head Referee, a candidate must pass both the Assistant Referee and Snitch Referee tests before taking the Head Referee test.",
-            "fails": "If the candidate fails any test, there is a mandatory one-week waiting period before that test may be attempted again.",
-            "the": "The",
-            "assistant": "Assistant",
-            "refand": "Referee and ",
-            "snitch": "Snitch",
-            "independant": "Referee tests are taken independent of each other, and have no pre-requisites. Therefore, it is not necessary for a Snitch Referee to be an Assistant Referee as well, or vice versa. These tests are free for members belonging to a contracted league. For non-contract members, there is a $5USD training/membership fee. Each non-HR test can be taken 6 times per person.",
-            "head": "Head",
-            "costs": "Referee test costs $21AUD/$20USD/£12/$22CAD, and allows that candidate to take the written Head Referee test 4 times.",
-            "fail": "If the candidate fails any test more than the allotted attempts, they may not attempt to certify at that position again for the remainder of that season.",
-            "goes": "For more information on where your money goes, check out our",
-            "payment": "payment",
-            "page": "page",
-            "rb8": "Rulebook 8 testing is available for anyone outside of Australia. Rulebook 7 tests are available only to Australians.",
+            "process": "Il processo di test",
+            "order": "Per diventare un arbitro principale IRDP, un candidato deve superare entrami i test per assistente arbitrale e arbitro del boccino, prima di tentare quello per arbitro principale.",
+            "fails": "Se il candidato fallisce un test, vi è un periodo obbligatorio di attesa di una settimana prima di poter tentare nuovamente quel test.",
+            "the": "I test per",
+            "assistant": "assistente",
+            "refand": "arbitrale e arbitro del ",
+            "snitch": "boccino",
+            "independant": "sono indipendenti l'uno dall'altro e non hanno pre-requisiti.. Dunque, non è necessario per un arbitro del boccino essere anche un assitente arbitrale, e viceversa. Questi test sono gratuiti per i membri di organizzazioni che hanno firmato un contratto. Per membri non facenti parte di queste organizzazioni, vi è una quota di registrazione di 5$. Ogni test a esclusione di quello per arbitro principale può essere sostenuto 6 volte a persona.",
+            "head": "arbitro principale",
+            "costs": "costano $21AUD/$20USD/£12/$22CAD/€15, e consentono al candidato di sostenere il test scritto un massimo di 4 volte.",
+            "fail": "Se il candidato fallisce un test per un numero di volte pari al massimo di tentativi, non possono tentare nuovamente di venire certificati per tale ruolo nella parte restante della stagione.",
+            "goes": "Per avere ulteriori informazioni sulla destinazione dei tuoi soldi, leggi la nostra pagina",
+            "payment": "pagamenti",
+            "page": "",
+            "rb8": "I test relativo al Regolamento 8 sono disponibili per chiunque al di fuori dell'associazione Australiana. I test per il Regolamento 7 sono disponibili solo in Australia.",
 
-            "training": "Training Materials",
-            "overview": "Overview",
-            "goal": "The IRDP's main goal is to certify as many elite refs as possible. To this end, we've produced a suite of resources that applicants should be comfortable with before attempting any written test.",
-            "encouraged": "All interested IRDP referee candidates are encouraged to study the current version of the rules that are out for their league.",
-            "here": "Here",
-            "rulebook8": "is a PDF of USQ's rulebook v8 (PDF). This is used in all official USQ matches beginning 1 July, 2014",
-            "rulebook7": "is a PDF of the IQA's rulebook v7 (PDF). This is currently only used for the remainder of the Australian season (calendar year 2014).",
-            "collection": "is a collection of corner cases and clarifications related to rules.",
+            "training": "Materiali formativi",
+            "overview": "Sommario",
+            "goal": "L'bbiettivo principale dell'IRDP è certificare quanti più arbitri d'elite possibile. Per raggiungere tale scopo, abbiamo prodotto un insieme di risorse che i candidati dovrebbero conoscere adeguatamente prima di tentare qualsiasi test scritto.",
+            "encouraged": "Tutti i candidati sono incoraggiati a studiare la versione attuale del regolamento per la propria organizzazione.",
+            "here": "Qui",
+            "rulebook8": "è disponibile un PDF del Regolamento 8 della USQ (PDF). Questo è usato in tutti gli incontri ufficiali USQ a partire dal 1° Luglio 2014",
+            "rulebook7": "è disponibile un PDF del Regolamento 7 della IQA (PDF). Questo è in uso solo per la rimanente parte della stagione AQA (anno solare 2014).",
+            "collection": "è disponibile una collezione di casi particolari e chiarimenti relativi alle regole.",
 
-            "scorekeeper": "Scorekeepers and Goal Referees",
-            "often": "Often the foundation on which a referee squad is either built or broken, goal refs and scorekeepers are key to a well officiated game. IRDP has written goal referee and scorekeeper guides for distribution so you can make sure everyone at your tournament is in top form.",
-            "scorekeeper_guide": "Scorekeeper Guide",
-            "goal_ref_guide": "Goal Referee Guide",
-            "refresher": "The IRDP is happy to provide refresher quizzes for scorekeepers and goal refs. These quizzes are aimed at people who have little to no experience with either position and will make sure that everyone on your referee squad or volunteer crew is up to speed on the rules. Note that these quizzes offer no formal certification and are provided for convenience only.",
-            "feel": "Feel free to post these quizzes to your event pages or wherever else you'd like!",
-            "scorekeeper_quiz": "Scorekeeper Quiz",
-            "gr_guide": "Goal Referee Quiz",
+            "scorekeeper": "Segnapunti e arbitri degli anelli",
+            "often": "Spesso la base su cui si regge o crolla un team arbitrale, arbitri degli anelli e segnapunti sono essenziali per una partita ben arbitrata.. L'IRDP ha prodotto delle guide per entrambe le posizioni perché possano essere distribuite ai tornei, al fine di assicurarsi che tutti i presenti siano in grado di svolgere tale ruolo.",
+            "scorekeeper_guide": "Guida per segnapunti",
+            "goal_ref_guide": "Guida per arbitro degli anelli",
+            "refresher": "L'IRDP è lieta di fornire quiz di ripasso per segnapunti e arbitri degli anelli. Questi quiz sono indirizzati a chi ha poca esperienza in queste posizioni, e si assicurano che tutti i membri del team arbitrale e i volontari siano al corrente delle regole. Nota che questi quiz non garantiscono alcuna certificazione formale e sono forniti solo per comodità.",
+            "feel": "Puoi pubblicare questi quiz sulla pagina del tuo evento o in qualsiasi altro posto tu voglia!",
+            "scorekeeper_quiz": "Quiz per segnapunti",
+            "gr_guide": "Quiz per arbitro degli anelli",
 
-            "pillars": "Five Pillar Guides",
-            "formed": "As the IRDP has framed itself around the five pillars of the field test, we want to share with you how to best exemplify the traits of a great referee using these pillars. The following are guides created to train referees to reach their greatest potential in each area.",
-            "paying": "These files are for paying members only, so we would really appreciate you not spreading them around. Thanks!",
-            "guide": "Guide",
-            "positioning": "Positioning",
-            "confidence": "Confidence",
-            "communication": "Communication",
-            "professionalism": "Professionalism",
-            "consistency": "Consistency",
+            "pillars": "Guide sui cinque pilastri",
+            "formed": "Poiché si è formata attorno ai cinque pilastri del test pratico, l'IRDP vuole condividere con te il modo migliore di esemplificare i tratti di un ottimo arbitro usando questi pilastri. Le guide seguenti sono create per formare gli arbitri al fine di raggiungere il proprio massimo potenziale in ognuno di questi aspetti.",
+            "paying": "Questi file sono solo per membri paganti, per favore non distribuirli a nessuno. Grazie!",
+            "guide": "",
+            "positioning": "Guida al posizionamento",
+            "confidence": "Guida alla confidenza",
+            "communication": "Guida alla comunicazione",
+            "professionalism": "Guida al professionalismo",
+            "consistency": "Guida alla costanza",
 
-            "field": "On the Field",
-            "got": "We've got the rubric we use to evaluate Head Referee candidates during their field test, along with a Match Responsibilities Guide.",
-            "members": "These files are for paying members only, so we would really appreciate you not spreading them around. Thanks!",
-            "health": "Health and Wellness",
-            "pitch": "Pitch Marker Tutorial",
-            "allie": "made by Allie Nelson (of Charlotte Quidditch)",
-            "match": "Match Responsibilities",
-            "rubric": "Field Test Rubric",
-            "rtc": "RTC Training Guide"
+            "field": "Sul campo",
+            "got": "Abbiamo una scheda che usiamo per valutare i candidati arbitri principali durante il loro test pratico, assieme a una guida delle responsabilità durante la partita.",
+            "members": "Questi file sono solo per membri paganti, per favore non distribuirli a nessuno. Grazie!",
+            "health": "Salute e benessere",
+            "pitch": "Tutorial di preparazione del campo",
+            "allie": "di Allie Nelson (Charlotte Quidditch)",
+            "match": "Responsabilità in partita",
+            "rubric": "Scheda di valutazione per test pratico",
+            "rtc": "Guida alla formazione RTC"
         }
     }
 }
