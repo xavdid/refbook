@@ -465,6 +465,16 @@ get '/admin' do
   end
 end
 
+def api
+end
+get '/api/refs/:refs' do
+  ref_ids = params[:refs].split ','
+  refs = Parse::Query.new("_User").tap do |q|
+    q.value_in("objectId",ref_ids)
+    q.keys = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region"
+  end.get.to_json
+end
+
 def cm
 end
 get '/cm' do 
