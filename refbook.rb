@@ -102,7 +102,7 @@ def reg_reverse(reg)
   end.keys.first
 end
 
-# given a person (parse) object, returns their full name
+# given a (parse) person object, returns their full name
 def name_maker(person)
   "#{person['firstName']} #{person['lastName']}"
 end
@@ -124,7 +124,6 @@ def validate(key, region)
     keys = settings.keys.find_one
 
     #re-format just in case
-
     if key == ''
       return false
     end
@@ -183,26 +182,6 @@ def display(args = {})
 
   haml path.to_sym, layout: sym_to_bool(args[:layout])
 end
-
-# def display(path = request.path_info[1..-1], layout = true)
-#   if settings.development?
-#     if layout
-#       haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-#     else
-#       haml "#{@lang}/#{path}".to_sym, layout: false
-#     end
-#   else
-#     # begin
-#       if layout
-#         haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-#       else
-#         haml "#{@lang}/#{path}".to_sym, layout: false
-#       end
-#     # rescue
-#       # redirect '/logout'
-#     # end
-#   end
-# end
 
 # EMAIL FUNCTIONS #
 
@@ -684,7 +663,6 @@ end
 def info
 end
 get '/info' do 
-  # @title = {"EN" => "Information", "FR" => "Infos"}[@lang]
   @section = 'info'
   display({old: :f})
 end
@@ -897,8 +875,7 @@ end
 
 def report
 end
-# this is a post so it'll play nice with IFTTT
-# could eventually take in a region code so that this will work for anyone
+# this is a get cause it gets hit by Zapier right now, maybe change to ironworks soon?
 get '/report' do 
   good = weekly_testing_update
   if good
