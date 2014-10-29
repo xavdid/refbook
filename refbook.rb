@@ -17,7 +17,7 @@ configure do
   enable :sessions
   
   set :session_secret, 'this_is_secret'
-  set :region_hash, {"QuidditchUK" => "QUK","US Northwest" => "USNW","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "Norway" => "NORW", "Other" => "OTHR", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {"QuidditchUK" => "QUK","US Northwest" => "USNW","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "Norway" => "NORW", "Belgium" => "BELG", "Muggle Quidditch Netherlands" => "MQN", "Other" => "OTHR", "All Regions" => "ALL","None" => "NONE"}
   set :affiliate, ["QUK", "AUST", "CANA", "ITAL", "NORW"]
   # this is actually a little dumb because it's just lucky that both lists are the first letters and sort the same way. 
   set :region_names, settings.region_hash.keys[0..-3].sort
