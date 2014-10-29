@@ -91,6 +91,9 @@
   #{settings.updated_at.strftime(settings.time_string)} 
   #{local_time(settings.updated_at,@text['updated'])}
   #{@text['a7p2']} 
+  %p
+    %strong
+      #{@text['established']} 
   %ul.bullets
     %li
       %a{href: "http://www.quidditch.org.au/", target: "_blank"}<
@@ -104,6 +107,26 @@
       %a{href: "http://www.quidditchcanada.com", target: "_blank"}<
         #{@text['canada']}
       (<a href="/files/QuidditchCanadaAgreementSigned.pdf" target="_blank">#{@text['contract']}</a>)
+    %li
+      %a{href: "http://www.italiaquidditch.com/temp/index.html", target: "_blank"}<
+        #{@text['italy']}
+      (<a href="https://docs.google.com/document/d/1LFB8QX9EC16WUtgCb4LBZeRnTxZkuiw2SQx3dLHVWgQ/edit?usp=sharing" target="_blank">#{@text['contract']}</a>)
+  %p
+    %strong
+      #{@text['developing']} 
+  %ul.bullets
+    %li
+      %a{href: "#", target: "_blank"}<
+        #{@text['norway']}
+      (<a href="https://drive.google.com/file/d/131Qj76kArEct0SZQ6TBSx0rlQa7u5cMt34yVCSgUDd150AtZly_ImHzYHJV4/view?usp=sharing" target="_blank">#{@text['contract']}</a>)
+    %li
+      %a{href: "http://www.quidditch.be/", target: "_blank"}<
+        #{@text['belgium']}
+      (<a href="https://drive.google.com/file/d/1CX-8d7rj1jbuUX3YfO3M3G3REdyxcaZ255bnA_EMpRAEWveqWr8K920FsPzD/view?usp=sharing" target="_blank">#{@text['contract']}</a>)
+    %li
+      %a{href: "http://quidditch.nl/home/index.html", target: "_blank"}<
+        #{@text['netherlands']}
+      (<a href="https://drive.google.com/file/d/1Pd_Jc14jJv_GOHk_letEBRH7hl7J4KQEBeU11DHs9cMFgcPVmo9MS5ctekys/view?usp=sharing" target="_blank">#{@text['contract']}</a>)
 
   %p
     #{@text['a7p3']}
