@@ -9,7 +9,7 @@
 
     %label.required{for: "date"}
       #{@text['date']} 
-    %input{type: "text", name: "date", placeholder: "#{Time.now.strftime('%e %b, %Y')}", required: ""}
+    %input{type: "date", name: "date", placeholder: "#{Time.now.strftime('%e %b, %Y')}", required: ""}
     
     %label{for: "link"}
       #{@text['link']} 

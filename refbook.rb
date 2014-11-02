@@ -559,8 +559,8 @@ post '/create' do
     :admin => false,
     :paid => validate(params[:code],settings.region_hash[params[:region]]),
     :lang => params[:lang] || 'EN',
-    :firstName => params[:fn].capitalize,
-    :lastName => params[:ln].capitalize,
+    :firstName => params[:fn],
+    :lastName => params[:ln],
     :team => params[:team],
     # because of dropdown, there shouldn't ever be no region, but this is 
     # just in case. Region errors really break stuff.
