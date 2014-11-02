@@ -28,8 +28,6 @@
         %td
           Reviewer Name
         %td.small
-          Reviewer Email
-        %td.small
           Team Captain?
         %td
           Ref Region
@@ -56,9 +54,8 @@
           %td
             #{r['now']}
           %td
-            #{r['reviewerName']}
-          %td.small
-            #{r['reviewerEmail']}
+            %a{href: "mailto:#{r['reviewerEmail']}"}
+              #{r['reviewerName']}
           %td.small
             #{r['isCaptain']}
           %td

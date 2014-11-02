@@ -496,6 +496,18 @@ html, body {
         padding-right: 8px;
     }
 
+    #fb {
+        &:hover {
+            color: dodgerblue;
+        }
+    }
+
+    #tw {
+        &:hover {
+            color: lightblue;
+        }
+    }
+
 }
 
 
