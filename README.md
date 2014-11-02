@@ -36,19 +36,52 @@ Instead of having to pay through another site or worry about waiting for a human
 ### Internationality
 Because the IRDP is a global organization, being able to easily display translated versions of all our pages was an important goal. 
 
-When HAML renders a page, all it needs is a symbol that represents the file, so with some clever helper methods we can extensibly render all versions of a page with a single controller.
+While we originally had a copy of each page in each language, we quickly realized this wasn't scaleable (not to mention any functional changes needed be made 3x). Instead, we moved all text into `text.json` and changed all of the haml layouts to use organized keys to display text. Even though translation takes time, functionality is consistent across languages because each page is only a single file.
 
-    # part of the display helper, with filesystem map    
-    
-    # |-- /EN
-    #   |--a.haml
-    #   |--b.haml
-    # |-- /FR
-    #   |--a.haml
-    #   |--b.haml
-    
-    haml "#{@lang}/#{path}".to_sym, layout: "#{@lang}/layout".to_sym
-    
+The layout of the json, for example, is this:
+
+	{
+		"help_small": {
+        	"EN": {
+        		"paid": "This is paid content"
+	        },
+	        "FR": {
+	        	"paid": "Ce contenu est payant"
+	        },
+	        "IT": {
+	        	"paid": "Questo è un contenuto a pagamento"
+	        }
+        }
+	}
+	
+## API
+Though still in a pre-alpha state, we're developing an API so you can use some of the information in our database for your own projects! The routes are as follows: 
+
+* `/api/refs/:IDS`:: return basic info about certain refs. Takes a comma separated list of ref ids and returns a json object. For example, `http://refdevelopment.com/api/refs/NDrskOZtwl` yields 
+
+		{
+			assRef: true,
+			email: "beamneocube@gmail.com",
+			firstName: "David",
+			headRef: true,
+			lastName: "Brownman",
+			passedFieldTest: true,
+			profPic: "http://files.parse.com/5a1b2718-8b9b-422f-86a8-cfc9465cbfa4/538b6f48-540b-4c14-ab21-eaad155a3645-1425654_10201546798646515_711026637_n.jpg",
+			region: "USWE",
+			snitchRef: true,
+			team: "Michigan Quidditch",
+			createdAt: "2014-03-31T07:38:41.928Z",
+			updatedAt: "2014-10-01T09:15:02.988Z",
+			objectId: "NDrskOZtwl",
+			className: "_User"
+		}
+			
+There will be more routes (including a way to easily surface those ids) soon&trade;		.
+
+
+	
+
+
 ## Contributions
 Want to help? Because a lot of the database info is very sensitive, it's hard to get local copies working for other developers. If you've got a great idea for a feature, feel free to open an issue or [contact](mailto:beamneocube@gmail.com?subject=Ref%20Dev%20Feature) me personally. If you're really devoted to progressing reffing standards around the world and have web dev experience (especially with either the technologies we use), reach out to me and we'll talk about a volunteer position with the IRDP.
 

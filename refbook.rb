@@ -451,7 +451,7 @@ get '/api/refs/:refs' do
   ref_ids = params[:refs].split ','
   refs = Parse::Query.new("_User").tap do |q|
     q.value_in("objectId",ref_ids)
-    q.keys = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region"
+    q.keys = "email,firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region,profPic"
   end.get.to_json
 end
 
