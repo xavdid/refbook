@@ -843,7 +843,7 @@ end
 get '/refresh' do
   # just to make sure we beat the paypal ping
   sleep(3.5) 
-  session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+  session[:user] = pull_user
   flash[:issue] = @layout['issues']['confirm']
   redirect '/'
 end
