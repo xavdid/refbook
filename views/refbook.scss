@@ -425,14 +425,15 @@ html, body {
     .key {
         height: 25px;
         width: 25px;
+        border: 1px solid black;
     }
 
     #established {
-        background-color: #9FC5E8;
+        background-color: #ffcb05;
     }
 
     #developing {
-        background-color: #FF9900;
+        background-color: #cc6600;
     }
 
     .line {

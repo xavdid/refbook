@@ -46,6 +46,7 @@ configure do
     set :conn, nil
     set :keys, nil
     set :stars, nil
+    # this should only happen on planes and stuff. Otherwise it's probably bad. 
     puts 'Mongo offline!'
   end
   

@@ -13,19 +13,23 @@
 
 :coffeescript
   $ ->
+    vals = {}
+
+    est = ["CA", "IT", "AU", "GB"]
+    dev = ["NO", "BE", "NL", "PL"]
+    
+    est_col = '#ffcb05'
+    dev_col = '#cc6600'
+    
+    (vals[i] = est_col for i in est)
+    (vals[j] = dev_col for j in dev)
+
     $('#world-map').vectorMap
       map: 'world_mill_en'
+      backgroundColor: '#00274c'
+      zoomAnimate: true
       series: 
         regions: [
-          values: 
-            # established
-            CA:'#9FC5E8',
-            IT:'#9FC5E8',
-            AU:'#9FC5E8',
-            GB:'#9FC5E8',
-
-            # developing
-            NO:'#FF9900',
-            BE:'#FF9900',
-            NL:'#FF9900'
+          {values: vals}
         ]
+      
