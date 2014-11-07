@@ -8,6 +8,12 @@
   %li
     Established
   %li
+    ||
+  %li
+    Total contracts:
+  %li
+    %strong
+      #num
 
 #world-map
 
@@ -32,4 +38,6 @@
         regions: [
           {values: vals}
         ]
+
+    $('#num').text(Object.keys(vals).length)
       
