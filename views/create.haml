@@ -30,6 +30,11 @@
     %label{for: "region"}
       #{@text['region']}
     %select{name: "region", id: "region", required: ""}
+      %option{value: ""}
+
+      - @region_keys.each do |r|
+        %option{value: "#{r}"}
+          #{r}
 
     %label{for: "code"}
       #{@text['code']}
@@ -54,13 +59,6 @@
 
   // pop pop!
   // this doesn't actually make sense anymore.
-  
-  for (var i = 0; i < region_keys.length; i++) {
-    var el = document.createElement("option");
-    el.textContent = region_keys[i];
-    el.value = region_keys[i];
-    $("#region").append(el);
-  }
 
   function validate() {
     var f = $("form")[0];
