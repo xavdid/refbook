@@ -113,7 +113,7 @@
   $('#regions').append("<li> | </li><li><a id=\"USQ\" href=\"/search/USQ\">USQ</a></li>");
 
   if(#{@us}) {
-    $('#sub-regions').append("<li><a id=\"aUSQ\" href=\"/search/USQ\">All</a></li>");
+    $('#sub-regions').append("<li><a id=\"subUSQ\" href=\"/search/USQ\">All</a></li>");
     for (var i = 0; i < us_region_keys.length; i++) {
       var s = "<li> | </li>";
       $("#sub-regions").append(s);
@@ -123,11 +123,12 @@
       ].join(' ');
       $("#sub-regions").append(s);
     };
+    $("#USQ").addClass('active');
   }
 
   // probably something about always active USQ on subregion
   $("##{@reg}").addClass("active");
-  if ("#{@reg}" == "USQ") {$("#aUSQ").addClass("active");}
+  if ("#{@reg}" == "USQ") {$("#subUSQ").addClass("active");}
   
   // click handlers
   $('.all').click(function(){

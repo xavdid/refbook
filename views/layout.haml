@@ -133,10 +133,7 @@
         browser. Please
         %a{href:"http://browsehappy.com/?locale=en"}
           upgrade your browser
-        as the one you are using isn't supported (and causes errors) on our site. If you're curious, we follow Google's
-        %a{href: "https://support.google.com/a/answer/33864?hl=en", target: "_blank"}<
-          browser support
-        timeline.
+        as the one you are using isn't supported (and causes errors) on our site.
     
     %h1#the_title
       -# this could prioritize @title or @text, idk which i prefer
@@ -144,8 +141,11 @@
 
     .issue
       %h3
-        = flash[:issue]
+        =flash[:issue]
 
+    =haml :js
+
+    / Render the partial
     #{yield}
 
   .bot
