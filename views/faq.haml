@@ -186,3 +186,12 @@
     #{@text['a11p2']}
   #{@text['a6p2']}
 
+%p
+  %strong
+    JS
+  
+  .aang{"ng-controller" => "JSController"}
+    name: {{scope.j}}
+    %br
+    %input{type: "text", "ng-model" => "info"}
+    {{info}}

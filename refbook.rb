@@ -261,7 +261,6 @@ def weekly_testing_update
       q.limit = 1000
       q.greater_than("updatedAt", Parse::Date.new((Time.now - 604800).to_datetime))
     end.get
-    tests = []
 
     test_dump.each do |t|
       if users.include? t['taker']
