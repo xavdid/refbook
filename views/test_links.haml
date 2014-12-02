@@ -24,6 +24,7 @@
   <a href="mailto:david@relateiq.com">#{@text['me']}</a>. 
   #{@text['confirmation']}
 %hr
+/ TODO: this could probably be untangled
 - if paid?
   %p
     - if session[:user][params[:which]+"Ref"]
@@ -47,8 +48,12 @@
         %br
         %br
         #{@text['hope']}
-        .paypal
-          #{paypal_button}        
+        %hr
+        .paypal{"ng-controller" => "PaypalController"}
+          %select{"ng-model" => "currency", "ng-options" => "opt as opt.label for opt in currencies"}
+          .selection
+            {{ currency.quan + " " + currency.label }}
+          #{paypal_button}
       - elsif @good and @attempts_remaining
         - if params[:which] == 'head'
           You've got 

@@ -17,7 +17,7 @@ configure do
   enable :sessions
   
   set :session_secret, 'this_is_secret'
-  # this really needs to be redone
+  # TODO: this really needs to be redone
   set :region_hash, {"QuidditchUK" => "QUK","US Northwest" => "USNW","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "Norway" => "NORW", "Belgium" => "BQF", "Netherlands" => "MQN", "Poland" => "PLQ", "Other" => "OTHR", "All Regions" => "ALL","None" => "NONE"}
   set :affiliate, ["QUK", "AUST", "CANA", "ITAL", "NORW", "BQF", "MQN"]
   # this is actually a little dumb because it's just lucky that both lists are the first letters and sort the same way. 
@@ -316,15 +316,7 @@ end
 
 def paypal_button
   @id = session[:user]['objectId']
-  if session[:user]['region'] == 'AUST'
-    display({path: :AU_paypal})
-  elsif session[:user]['region'] == 'QUK'
-    display({path: :QU_paypal})
-  elsif session[:user]['region'] == 'CANA'
-    display({path: :CA_paypal})
-  else
-    display({path: :US_paypal})
-  end
+  haml :_paypal
 end
 
 not_found do
@@ -585,6 +577,24 @@ post '/create' do
     redirect back
   end
 end
+
+def currency
+end
+get '/currency' do 
+  # @c is the index for the currency as seen in app.js
+  if ['AUST'].include? session[:user]['region']
+    i = 0
+  elsif ['CANA'].include? session[:user]['region']
+    i = 1
+  elsif ['ITAL', 'NORW', 'BQF', 'MQN', 'PLQ', 'OTHR'].include? session[:user]['region']
+    i = 2
+  elsif ['QUK'].include? session[:user]['region']
+    i = 3
+  else # US 
+    i = 4
+  end
+  {i: i}.to_json
+end  
 
 def donate
 end

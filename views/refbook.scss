@@ -321,7 +321,18 @@ html, body {
     .paypal {
         padding-left: 27%;
         padding-top: 15px;
-
+        // width of the paypal image
+        width: 171px;
+        select {
+            width: 100%;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .selection {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
     }
 
     .name {
