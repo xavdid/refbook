@@ -1210,18 +1210,12 @@ get '/testing/:which' do
   @attempts_remaining = true
   @prereqs_passed = true
 
-  if session[:user]['region'] == "AUST"
-    # rulebook 7!
-    @tests = {ass: 'ap953ab5d46d258b', snitch: "yqc53ab5e83e8128", head: "6b953ab5f5bbd1c4", sample: "xnj533d065451038"}
-    @rb = 7
-  else
-    # rulebook 8!
-    @tests = {ass: 'jmk53c853467f7c6', snitch: "6kr53c853f4914d8", head: "qjp53c854a5530ff", sample: "xnj533d065451038"}
-    # if session[:user]['region'] == "CANA"
-    #   @tests[:snitch] = CANADIAN TEST # test w/ off pitch
-    # end
-    @rb = 8.1
-  end
+  # Everyone is on rulebook 8!
+  @tests = {ass: 'jmk53c853467f7c6', snitch: "6kr53c853f4914d8", head: "qjp53c854a5530ff", sample: "xnj533d065451038"}
+  # if session[:user]['region'] == "CANA"
+  #   @tests[:snitch] = CANADIAN TEST # test w/ off pitch
+  # end
+  @rb = 8.1
   
   # refresh user object
   if params[:which] == 'head'
