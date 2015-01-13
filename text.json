@@ -1288,7 +1288,8 @@
             "allie": "made by Allie Nelson (of Charlotte Quidditch)",
             "match": "Match Responsibilities",
             "rubric": "Field Test Rubric",
-            "rtc": "RTC Training Guide"
+            "rtc": "RTC Training Guide",
+            "discussion": "Referee Discussion Guide"
         },
         "FR": {
             "process": "The Testing Process",
@@ -1343,7 +1344,8 @@
             "allie": "made by Allie Nelson (of Charlotte Quidditch)",
             "match": "Match Responsibilities",
             "rubric": "Field Test Rubric",
-            "rtc": "RTC Training Guide"
+            "rtc": "RTC Training Guide",
+            "discussion": "Referee Discussion Guide"
         },
         "IT": {
             "process": "Il processo di test",
@@ -1398,7 +1400,8 @@
             "allie": "di Allie Nelson (Charlotte Quidditch)",
             "match": "Responsabilità in partita",
             "rubric": "Scheda di valutazione per test pratico",
-            "rtc": "Guida alla formazione RTC"
+            "rtc": "Guida alla formazione RTC",
+            "discussion": "Referee Discussion Guide"
         }
     }
 }

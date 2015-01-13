@@ -106,7 +106,7 @@
             %i.fa.fa-sign-out.fa-lg
             
         - else
-          %a{href: '/login'}<
+          %a{href: "/login?d=/#{request.path_info}"}<
             #{@layout['login']} 
           or
           %a{href: '/create'}
