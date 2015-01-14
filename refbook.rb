@@ -354,6 +354,11 @@ before do
     end
   end
 
+  # there's an easier way to do this but whatever
+  if logged_in? and !['/layout','/pull','/login','/logout','/styles.css'].include? request.path_info and session[:user]['region'] == 'AUST' and not session[:user].include? 'cookie_v'
+    redirect '/pull'
+  end
+
   # subdomain redirection
   if not settings.development?
     url = Domainatrix.parse(request.url)
@@ -831,6 +836,7 @@ get '/pull' do
     redirect '/login?d=/pull'
   else
     session[:user] = pull_user
+    session[:user]['cookie_v'] = 6
     flash[:issue] = @layout['issues']['pull']
     redirect '/'
   end
