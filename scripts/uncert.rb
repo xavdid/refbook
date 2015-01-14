@@ -1,5 +1,7 @@
 # move australian refs to RB 8 certs
 
+require 'parse-ruby-client'
+
 Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY'],
            :quiet => true
@@ -17,7 +19,7 @@ a.each do |u|
     u['snitchRef'] = false
     u['headRef'] = false
     u['passedFieldTest'] = false
-    u['hrWrittenAttemptsRemaining'] = false
+    u['hrWrittenAttemptsRemaining'] = 0 
 
     u.save
     users += 1
