@@ -30,6 +30,8 @@ a.each do |u|
       t.parse_delete
       tests += 1
     end
+
+    puts "finished #{u['firstName']} #{u['lastName']}"
   end
 end
 
