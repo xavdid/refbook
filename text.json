@@ -1270,6 +1270,14 @@
             "scorekeeper_quiz": "Scorekeeper Quiz",
             "gr_guide": "Goal Referee Quiz",
 
+            "videos": "Videos",
+
+
+"video": "Videos",
+"video_desc": "Sometimes, the best way to learn is by watching. To this end, we've begun a series of videos that highlight specific situations and how you can best prepare yourself for them.",
+"vid": "Video #",
+"over": "Overview",
+
             "pillars": "Five Pillar Guides",
             "formed": "As the IRDP has framed itself around the five pillars of the field test, we want to share with you how to best exemplify the traits of a great referee using these pillars. The following are guides created to train referees to reach their greatest potential in each area.",
             "paying": "These files are for paying members only, so we would really appreciate you not spreading them around. Thanks!",
@@ -1289,7 +1297,8 @@
             "match": "Match Responsibilities",
             "rubric": "Field Test Rubric",
             "rtc": "RTC Training Guide",
-            "discussion": "Referee Discussion Guide"
+            "discussion": "Referee Discussion",
+            "post_game": "Post-Game"
         },
         "FR": {
             "process": "The Testing Process",
@@ -1326,6 +1335,11 @@
             "scorekeeper_quiz": "Scorekeeper Quiz",
             "gr_guide": "Goal Referee Quiz",
 
+            "video": "Videos",
+            "video_desc": "Sometimes, the best way to learn is by watching. To this end, we've begun a series of videos that highlight specific situations and how you can best prepare yourself for them.",
+            "vid": "Video #",
+            "over": "Overview",
+
             "pillars": "Five Pillar Guides",
             "formed": "As the IRDP has framed itself around the five pillars of the field test, we want to share with you how to best exemplify the traits of a great referee using these pillars. The following are guides created to train referees to reach their greatest potential in each area.",
             "paying": "These files are for paying members only, so we would really appreciate you not spreading them around. Thanks!",
@@ -1345,7 +1359,8 @@
             "match": "Match Responsibilities",
             "rubric": "Field Test Rubric",
             "rtc": "RTC Training Guide",
-            "discussion": "Referee Discussion Guide"
+            "discussion": "Referee Discussion",
+            "post_game": "Post-Game"
         },
         "IT": {
             "process": "Il processo di test",
@@ -1382,6 +1397,11 @@
             "scorekeeper_quiz": "Quiz per segnapunti",
             "gr_guide": "Quiz per arbitro degli anelli",
 
+            "video": "Videos",
+            "video_desc": "Sometimes, the best way to learn is by watching. To this end, we've begun a series of videos that highlight specific situations and how you can best prepare yourself for them.",
+            "vid": "Video #",
+            "over": "Overview",
+
             "pillars": "Guide sui cinque pilastri",
             "formed": "Poiché si è formata attorno ai cinque pilastri del test pratico, l'IRDP vuole condividere con te il modo migliore di esemplificare i tratti di un ottimo arbitro usando questi pilastri. Le guide seguenti sono create per formare gli arbitri al fine di raggiungere il proprio massimo potenziale in ognuno di questi aspetti.",
             "paying": "Questi file sono solo per membri paganti, per favore non distribuirli a nessuno. Grazie!",
@@ -1401,7 +1421,8 @@
             "match": "Responsabilità in partita",
             "rubric": "Scheda di valutazione per test pratico",
             "rtc": "Guida alla formazione RTC",
-            "discussion": "Referee Discussion Guide"
+            "discussion": "Referee Discussion",
+            "post_game": "Post-Game"
         }
     }
 }

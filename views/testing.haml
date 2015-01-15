@@ -80,6 +80,17 @@
       #{@text['gr_guide']}
 
 %h3
+  #{@text['video']}
+
+%p
+  #{@text['video_desc']}
+
+  %ul.bullets
+    %li
+      %a{href: 'https://www.youtube.com/watch?v=eitUfSXNwAI', target: '_blank'}<
+        #{@text['vid']}1 - #{@text['over']}
+
+%h3
   #{@text['pillars']}
 %p
   #{@text['formed']}
@@ -139,7 +150,10 @@
         #{@text['rtc']}
     %li
       %a{href: 'https://docs.google.com/document/d/17G_WcTeb-JtlbfcpTeRenc-mHHvcm3NIzzmx0D6riso/edit', target: '_blank'}<
-        #{@text['discussion']}
+        #{@text['discussion']} #{@text['guide']}
+    %li
+      %a{href: 'https://docs.google.com/document/d/1J3nR0MaAlEOiuZhFI8QPSKqNd5HkG9YOyL4mxxDPQ5Y/edit', target: '_blank'}<
+        #{@text['post_game']} #{@text['guide']}
     
 
   - else
