@@ -12,6 +12,7 @@ require 'uri'
 require 'mongo'
 require 'open-uri'
 require 'domainatrix'
+require 'httparty'
 
 configure do
   enable :sessions
@@ -935,6 +936,17 @@ get '/review' do
 end
 
 post '/review' do 
+  # process recapcha
+  verify_url = "https://www.google.com/recaptcha/api/siteverify?secret=#{ENV['REFBOOK_RECAPTCHA_SECRET']}&response=#{params[:'g-recaptcha-response']}"
+  resp = HTTParty.get(verify_url)
+
+  # down with robots!
+  if !resp['success']
+    flash[:issue] = 'Invalid ReCaptcha, try again'
+    redirect back
+  end
+
+  # save the review
   rev = Parse::Object.new('review')
   rev['reviewerName'] = params[:name]
   rev['reviewerEmail'] = params[:email]
@@ -956,8 +968,6 @@ post '/review' do
   rev['comments'] = params[:comments]
   # show should be false by default, true for testing
   rev['show'] = false
-  # don't need this, can just use object's created date
-  # rev['now'] = Time.now.utc.strftime(settings.time_string)
   rev.save
 
   flash[:issue] = @layout['issues']['review']

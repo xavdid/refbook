@@ -48,6 +48,9 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     haml (4.0.5)
       tilt
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.11)
     json (1.8.1)
     mail (2.6.3)
@@ -56,6 +59,7 @@ GEM
     minitest (5.4.2)
     mongo (1.11.1)
       bson (= 1.11.1)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     rack (1.5.2)
     rack-google-analytics (1.2.0)
@@ -89,6 +93,7 @@ DEPENDENCIES
   coffee-filter
   domainatrix
   haml (>= 4)
+  httparty
   json
   mail
   minitest
