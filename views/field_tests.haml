@@ -22,7 +22,7 @@
     - @tests.each do |t|
       %tr
         %td
-          #{Time.parse(t['createdAt']).strftime("%m/%d/%y")}
+          #{Time.parse(t['createdAt']).strftime("%m/%d/%Y")}
         %td
           %a{href: "mailto:#{t['email']}"}
             #{t['name']}
@@ -39,5 +39,9 @@
   $('#theTable').tablesorter
     ignoreCase: true
     widthFixed: false
+    dateFormat: 'mmddyyyy'
+    headers:
+      0:
+        sorter: 'shortDate'
     widgets: ['stickyHeaders']
     sortList: [[0,1]]

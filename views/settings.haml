@@ -8,32 +8,27 @@
       %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
       %input.button{type: "submit", value: "Register!"}
       
--# - if session[:user]['region'] == 'AUST'
--#   %p
--#     Australians! Because you're in the middle of your season, you've got the special (temporary) opportunity to mark yourself as having passed your tests. 
--#     %b
--#       NOTE
--#     only check these boxes if you've actually passed the corresponding test. Falsifying information will result in penalties and a possible ban from IRDP certification.
--#   .form_box
--#     %form{name: 'tests', action: '/settings', method: 'post'}
--#       %label{for: "ar"}
--#         Certified Assistant Referee
--#       %input{type: "checkbox", name: "ar", id: "ar"}
+- if settings.development?
+  .form_box
+    %form{name: 'tests', action: '/settings', method: 'post'}
+      %label{for: "ar"}
+        Certified Assistant Referee
+      %input{type: "checkbox", name: "ar", id: "ar"}
 
--#       %label{for: "sr"} 
--#         Certified Snitch Referee
--#       %input{type: "checkbox", name: "sr", id: "sr"}
+      %label{for: "sr"} 
+        Certified Snitch Referee
+      %input{type: "checkbox", name: "sr", id: "sr"}
 
--#       %label{for: "hr"}
--#         Passed Head Referee Written Teset
--#       %input{type: "checkbox", name: "hr", id: "hr"}
+      %label{for: "hr"}
+        Passed Head Referee Written Teset
+      %input{type: "checkbox", name: "hr", id: "hr"}
 
--#       %label{for: "ft"}
--#         Passed Head Referee Field Test
--#       %input{type: "checkbox", name: "ft", id: "ft"}
--#       %input{type: "hidden", name:"tests", value: "yep"}
+      %label{for: "ft"}
+        Passed Head Referee Field Test
+      %input{type: "checkbox", name: "ft", id: "ft"}
+      %input{type: "hidden", name:"tests", value: "yep"}
       
--#       %input.button{type: "submit", value: "Save Tests"}
+      %input.button{type: "submit", value: "Save Tests"}
 
 
 %p

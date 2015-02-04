@@ -1,7 +1,7 @@
 %p
   Here are all reviews (viewable only if you're an admin). There'll be other info. Dates are 
   %strong
-    mm/dd/yy.
+    mm/dd/yyyy.
   Sorry non-Americans. 
   %br
   %br
@@ -52,7 +52,7 @@
       - @review_list.each do |r|
         %tr
           %td
-            #{r['now']}
+            #{r['created']}
           %td
             %a{href: "mailto:#{r['reviewerEmail']}"}
               #{r['reviewerName']}
@@ -99,5 +99,9 @@
   $('#theTable').tablesorter
     ignoreCase: true
     widthFixed: false
+    dateFormat: 'mmddyyyy'
+    headers:
+      0:
+        sorter: 'shortDate'
     widgets: ['stickyHeaders']
     sortList: [[0,1]]

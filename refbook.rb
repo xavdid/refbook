@@ -342,7 +342,7 @@ before do
 
   # so we never have a null language
   if logged_in?
-    @lang = session[:user]['lang']
+    @lang = session[:user]['lang'] || 'EN'
   else
     @lang = "EN"
   end
@@ -425,7 +425,7 @@ get '/admin' do
         rid = ref['objectId']
 
         r['refName'] = name_maker(ref)
-        r['now'] = Time.parse(r['now']).strftime("%m/%d/%y")
+        r['created'] = Time.parse(r['createdAt']).strftime("%m/%d/%Y")
         r['rid'] = rid
 
         # hide the name of reviews made about you
@@ -956,7 +956,8 @@ post '/review' do
   rev['comments'] = params[:comments]
   # show should be false by default, true for testing
   rev['show'] = false
-  rev['now'] = Time.now.utc.strftime(settings.time_string)
+  # don't need this, can just use object's created date
+  # rev['now'] = Time.now.utc.strftime(settings.time_string)
   rev.save
 
   flash[:issue] = @layout['issues']['review']
