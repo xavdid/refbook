@@ -1273,10 +1273,10 @@
             "videos": "Videos",
 
 
-"video": "Videos",
-"video_desc": "Sometimes, the best way to learn is by watching. To this end, we've begun a series of videos that highlight specific situations and how you can best prepare yourself for them.",
-"vid": "Video #",
-"over": "Overview",
+            "video": "Videos",
+            "video_desc": "Sometimes, the best way to learn is by watching. To this end, we've begun a series of videos that highlight specific situations and how you can best prepare yourself for them.",
+            "vid": "Video #",
+            "over": "Overview",
 
             "pillars": "Five Pillar Guides",
             "formed": "As the IRDP has framed itself around the five pillars of the field test, we want to share with you how to best exemplify the traits of a great referee using these pillars. The following are guides created to train referees to reach their greatest potential in each area.",
@@ -1298,7 +1298,9 @@
             "rubric": "Field Test Rubric",
             "rtc": "RTC Training Guide",
             "discussion": "Referee Discussion",
-            "post_game": "Post-Game"
+            "post_game": "Post-Game",
+            "multi_lang": "Reffing in Multiple Languages",
+            "back_to_hoops": "Back to Hoops"
         },
         "FR": {
             "process": "The Testing Process",
@@ -1360,7 +1362,9 @@
             "rubric": "Field Test Rubric",
             "rtc": "RTC Training Guide",
             "discussion": "Referee Discussion",
-            "post_game": "Post-Game"
+            "post_game": "Post-Game",
+            "multi_lang": "Reffing in Multiple Languages",
+            "back_to_hoops": "Back to Hoops"
         },
         "IT": {
             "process": "Il processo di test",
@@ -1422,7 +1426,9 @@
             "rubric": "Scheda di valutazione per test pratico",
             "rtc": "Guida alla formazione RTC",
             "discussion": "Referee Discussion",
-            "post_game": "Post-Game"
+            "post_game": "Post-Game",
+            "multi_lang": "Reffing in Multiple Languages",
+            "back_to_hoops": "Back to Hoops"
         }
     }
 }
