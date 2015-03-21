@@ -199,7 +199,7 @@ def email_results(email, pass, test)
     from 'IRDP <irdp.rdt@gmail.com>'
     subject 'Referee Test Results'
     html_part do
-      body "Hey there!<br><br>The IRDP has received and recorded your results for the #{tests[test]} Referee Test. You can see your #{pass ? 'other testing opporunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
+      body "Hey there!<br><br>The IRDP has received and recorded your results for the #{tests[test]} Referee Test. You can see your #{pass ? 'other testing opportunities' : 'cooldown timer'} on the <a href=\"http://refdevelopment.com/testing/#{pass ? '' : test}\">testing page</a>.<br><br>Thank you for choosing the International Referee Development Program for your referee training needs.<br><br>Until next time,<br><br>~the IRDP<br><br>"
     end
   end
 end
