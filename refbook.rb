@@ -85,15 +85,15 @@ def logged_in?
 end
 
 def admin?
-  logged_in? and session[:user]['admin']
+  logged_in? && session[:user]['admin']
 end
 
 def paid?
-  logged_in? and session[:user]['paid']
+  logged_in? && session[:user]['paid']
 end
 
 def affiliate?
-  logged_in? and settings.affiliate.include? session[:user]['region']
+  logged_in? && settings.affiliate.include? session[:user]['region']
 end
 # gets the nice name from the key
 # passing "USMW" returns "US Midwest"
@@ -121,33 +121,25 @@ def to_bool(str)
 end
 
 def validate(key, region)
-  begin
-    # pull from mongo
-    keys = settings.keys.find_one
+  # pull from mongo
+  keys = settings.keys.find_one
 
-    #re-format just in case
-    if key == ''
-      return false
-    end
+  #re-format just in case
+  if key == ''
+    return false
+  end
 
-    key.strip!
-    key.gsub!('-','')
-    key.insert(9,'-')
-    key.insert(6,'-')
-    key.insert(4,'-')
+  key.strip!
+  key.gsub!('-','')
+  key.insert(9,'-')
+  key.insert(6,'-')
+  key.insert(4,'-')
 
-    if keys[region].include? key
-      keys[region].delete key
-      settings.keys.save(keys)
-      return true
-    else
-      return false
-    end
-  rescue Exception => e
-    puts 'VALIDATION ERROR'
-    puts key
-    puts region
-    puts e
+  if keys[region].include? key
+    keys[region].delete key
+    settings.keys.save(keys)
+    return true
+  else
     return false
   end
 end
@@ -232,6 +224,17 @@ def report_bad(user_id)
     subject 'Someone submitted a test early!'
     html_part do
       body "User #{user_id} just tried to finish a test before the alotted amount of time. Check it out!"
+    end
+  end
+end
+
+def report_hr(user_id)
+  mail = Mail.deliver do
+    to 'beamneocube@gmail.com'
+    from 'IRDP <irdp.rdt@gmail.com>'
+    subject 'HR failure?'
+    html_part do
+      body "User #{user_id} just maybe didn't get recognized for their hr completion!"
     end
   end
 end
@@ -349,13 +352,13 @@ before do
 
   # admins can use site even when it's locked
   if not admin?
-    if @killed and !['/layout','/login','/logout','/release','/paid','/styles.css', '/off'].include? request.path_info
+    if @killed && !['/layout','/login','/logout','/release','/paid','/styles.css', '/off'].include?(request.path_info)
       redirect '/off'
     end
   end
 
   # there's an easier way to do this but whatever
-  if logged_in? and !['/layout','/pull','/login','/logout','/styles.css'].include? request.path_info and session[:user]['region'] == 'AUST' and not session[:user].include? 'cookie_v'
+  if logged_in? && !['/layout','/pull','/login','/logout','/styles.css'].include?(request.path_info) && session[:user]['region'] == 'AUST' && !session[:user].include?('cookie_v')
     redirect '/pull'
   end
 
@@ -471,7 +474,6 @@ get '/cm' do
     att = Parse::Object.new("testAttempt")
     att["taker"] = params[:cm_user_id]
   else
-    # C
     att = attempt_list.select do |a|
       a["type"] == params[:cm_return_test_type]
     end.first
@@ -480,13 +482,13 @@ get '/cm' do
       att = Parse::Object.new("testAttempt")
       att["taker"] = params[:cm_user_id]  
     else
+      # C
       if Time.now.utc - Time.parse(att['time']) < settings.waiting - 500
         flash[:issue] = @layout['issues']['quick']
         report_bad(att['taker'])
         redirect '/'
       end
     end
-
   end
 
   att["score"] = params[:cm_ts].to_i
@@ -514,7 +516,8 @@ get '/cm' do
     pass = false
     flash[:issue] = @layout['issues']['fail']
   end
-  email_results(@email, pass, params[:cm_return_test_type]) if not settings.development?
+  email_results(@email, pass, params[:cm_return_test_type]) if !settings.development?
+  report_hr(att['taker']) if att['type'] == 'head'
   redirect '/pull' if pass
   redirect "/testing/#{params[:cm_return_test_type]}"
 end
@@ -703,14 +706,14 @@ get '/login' do
 end
 
 post '/login' do
-  begin
+  # begin
     session[:user] = Parse::User.authenticate(params[:username].downcase, params[:password].rstrip)
     session.options[:expire_after] = 2592000 # 30 days
     redirect params[:d]
-  rescue
+  # rescue
     flash[:issue] = @layout['issues']['credentials']
     redirect "/login?d=#{params[:d]}"
-  end
+  # end
 end
 
 def logout
@@ -1049,7 +1052,7 @@ get '/search/:region' do
     @us_region_keys << r[2..r.size] 
   end
   
-  if @region_title.nil? and @reg != "USQ"
+  if @region_title.nil? && @reg != "USQ"
     halt 404
   end
 
@@ -1066,7 +1069,7 @@ get '/search/:region' do
       @stars[s['to']] = 1
     end
 
-    if logged_in? and s['from'] == session[:user]['objectId']
+    if logged_in? && s['from'] == session[:user]['objectId']
       @mine << s['to']
     end
   end
@@ -1121,7 +1124,7 @@ end
 
 post '/settings' do  
   begin
-    if params.include? 'tests'
+    if params.include? 'tests' && settings.development?
       if params.include? 'ar'
         session[:user]['assRef'] = true 
       else

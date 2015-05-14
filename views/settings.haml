@@ -9,7 +9,7 @@
       %input.button{type: "submit", value: "Register!"}
       
 - if settings.development?
-  .form_box
+  .form_box{style: 'border: 1px dashed blue;'}
     %form{name: 'tests', action: '/settings', method: 'post'}
       %label{for: "ar"}
         Certified Assistant Referee
@@ -81,6 +81,11 @@
   // fill fields
   $('#email').val("#{session[:user]['username']}");
   $('#lang').val("#{session[:user]['lang']}");
+
+  $('#ar').prop('checked',#{session[:user]['assRef'] ? 'true' : 'false' });
+  $('#sr').prop('checked',#{session[:user]['snitchRef'] ? 'true' : 'false' });
+  $('#hr').prop('checked',#{session[:user]['headRef'] ? 'true' : 'false' });
+  $('#ft').prop('checked',#{session[:user]['passedFieldTest'] ? 'true' : 'false' });
 
   //make sure they uploaded _something_ 
   //function validate(){
