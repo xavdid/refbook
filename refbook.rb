@@ -93,7 +93,7 @@ def paid?
 end
 
 def affiliate?
-  logged_in? && settings.affiliate.include? session[:user]['region']
+  logged_in? && settings.affiliate.include?(session[:user]['region'])
 end
 # gets the nice name from the key
 # passing "USMW" returns "US Midwest"
