@@ -19,7 +19,7 @@ configure do
   
   set :session_secret, 'this_is_secret'
   # TODO: this really needs to be redone
-  set :region_hash, {"QuidditchUK" => "QUK","US Northwest" => "USNW","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "Norway" => "NORW", "Belgium" => "BQF", "Netherlands" => "MQN", "Poland" => "PLQ", "Catalonia" => "AQC", "Other" => "OTHR", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {"QuidditchUK" => "QUK","US Northwest" => "USNW","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "Norway" => "NORW", "Belgium" => "BQF", "Netherlands" => "MQN", "Poland" => "PLQ", "Catalonia" => "AQC", "Germany" => "DQB", "Other" => "OTHR", "All Regions" => "ALL","None" => "NONE"}
   set :affiliate, ["QUK", "AUST", "CANA", "ITAL", "NORW", "BQF", "MQN", "AQC"]
   set :region_names, settings.region_hash.keys[0..-3].sort
   set :region_codes, settings.region_names.map{|r| settings.region_hash[r]}
