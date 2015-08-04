@@ -713,14 +713,14 @@ get '/login' do
 end
 
 post '/login' do
-  # begin
+  begin
     session[:user] = Parse::User.authenticate(params[:username].downcase, params[:password].rstrip)
     session.options[:expire_after] = 2592000 # 30 days
     redirect params[:d]
-  # rescue
+  rescue
     flash[:issue] = @layout['issues']['credentials']
     redirect "/login?d=#{params[:d]}"
-  # end
+  end
 end
 
 def logout
