@@ -138,8 +138,10 @@ def validate(key, region)
   if keys[region].include? key
     keys[region].delete key
     settings.keys.save(keys)
+    puts "JUST USED KEY #{key}"
     return true
   else
+    puts "FAILED ON KEY #{key}"
     return false
   end
 end
@@ -1289,14 +1291,17 @@ end
 
 def valid
 end
-get '/validate' do 
+get '/validate' do
+  puts "TRYING TO VALIDATE #{session[:user]['objectId']}"
   if validate(params[:code],session[:user]['region'])
     user_to_update = pull_user
     user_to_update['paid'] = true
     session[:user] = user_to_update.save
     flash[:issue] = @layout['issues']['validate']
+    puts "DID VALIDATE"
     redirect '/'
   else
+    puts "DID NOT VALIDATE"
     flash[:issue] = @layout['issues']['validont']
     redirect '/settings'
   end
