@@ -378,7 +378,7 @@ before do
   @layout = settings.layout_hash[@lang]
 
 
-  pp request if settings.development?
+  # pp request if settings.development?
 
 end
 
@@ -1297,7 +1297,7 @@ end
 def valid
 end
 get '/validate' do
-  puts "TRYING TO VALIDATE #{session[:user]['objectId']}"
+  puts "TRYING TO VALIDATE #{session[:user]['objectId']} WITH CODE #{params[:code]}"
   if validate(params[:code],session[:user]['region'])
     user_to_update = pull_user
     user_to_update['paid'] = true
@@ -1310,6 +1310,14 @@ get '/validate' do
     flash[:issue] = @layout['issues']['validont']
     redirect '/settings'
   end
+end
+
+get '/impersonate' do
+  if settings.development?
+    session[:user] = pull_user(params[:id])
+  end
+
+  redirect '/'
 end
 
 # renders css

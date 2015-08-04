@@ -2,5 +2,5 @@
 # require 'rubygems'
 # Bundler.require
 
-require './refbook.rb'
+require './refbook'
 run Sinatra::Application
