@@ -135,7 +135,8 @@ def validate(key, region)
   key.insert(6,'-')
   key.insert(4,'-')
 
-  if keys[region].include? key
+  pp keys[region]
+  if keys[region].include?(key)
     keys[region].delete key
     settings.keys.save(keys)
     puts "JUST USED KEY #{key}"
@@ -548,6 +549,8 @@ get '/create' do
 end
 
 post '/create' do
+  puts "SIGNING UP WITH KEY #{params[:code]}"if params[:code]
+  
   user = Parse::User.new({
     # username is actually email, secretly
     :username => params[:username].downcase,
