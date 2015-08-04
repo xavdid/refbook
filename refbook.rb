@@ -58,6 +58,8 @@ configure do
   if settings.development?
     # this is so we can test on multiple local computers
     set :bind, '0.0.0.0'
+    # foreman output
+    $stdout.sync = true
   # else
     # require 'newrelic_rpm'
   end
@@ -125,7 +127,7 @@ def validate(key, region)
   keys = settings.keys.find_one
 
   #re-format just in case
-  if key == ''
+  if key == '' || key.nil?
     return false
   end
 
@@ -376,7 +378,7 @@ before do
   @layout = settings.layout_hash[@lang]
 
 
-  # pp request
+  pp request if settings.development?
 
 end
 
@@ -549,8 +551,8 @@ get '/create' do
 end
 
 post '/create' do
-  puts "SIGNING UP WITH KEY #{params[:code]}"if params[:code]
-  
+  puts "SIGNING UP WITH KEY #{params[:registration]} FOR REGION #{params[:region]}"if params[:registration]
+
   user = Parse::User.new({
     # username is actually email, secretly
     :username => params[:username].downcase,
@@ -562,7 +564,7 @@ post '/create' do
     :hrWrittenAttemptsRemaining => 0,
     :passedFieldTest => false,
     :admin => false,
-    :paid => validate(params[:code],settings.region_hash[params[:region]]),
+    :paid => validate(params[:registration],settings.region_hash[params[:region]]),
     :lang => params[:lang] || 'EN',
     :firstName => params[:fn],
     :lastName => params[:ln],
