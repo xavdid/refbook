@@ -429,18 +429,20 @@ get '/admin' do
 
     reviews.each do |r|
       if r['comments'].size > 0
-        ref = refs[r['referee'].parse_object_id]
-        rid = ref['objectId']
-
-        r['refName'] = name_maker(ref)
-        r['created'] = Time.parse(r['createdAt']).strftime("%m/%d/%Y")
-        r['rid'] = rid
-
-        # hide the name of reviews made about you
-        if r['referee'].parse_object_id == session[:user]['objectId']
-          r['reviewerName'] = "REDACTED"
-          r['reviewerEmail'] = "REDACTED"
+        if r['referee'] && refs.include?(r['referee'].parse_object_id)        
+          ref = refs[r['referee'].parse_object_id]
+          rid = ref['objectId']
+          r['refName'] = name_maker(ref)
+          r['rid'] = rid
+          
+          # hide the name of reviews made about you
+          if r['referee'].parse_object_id == session[:user]['objectId']
+            r['reviewerName'] = "REDACTED"
+            r['reviewerEmail'] = "REDACTED"
+          end
         end
+
+        r['created'] = Time.parse(r['createdAt']).strftime("%m/%d/%Y")
 
         @review_list << r
       end
@@ -454,7 +456,7 @@ def api
 end
 get '/api/refs/:refs' do
   ref_ids = params[:refs].split ','
-  refs = Parse::Query.new("_User").tap do |q|
+  Parse::Query.new("_User").tap do |q|
     q.value_in("objectId",ref_ids)
     q.keys = "email,firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region,profPic"
   end.get.to_json
