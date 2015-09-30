@@ -1161,11 +1161,10 @@ post '/settings' do
       session[:user]['lang'] = params[:lang] unless params[:lang].nil?
     end
     session[:user] = session[:user].save
-    pp @layout
     flash[:issue] = @layout['issues']['settings']
     redirect '/'
   rescue
-    session[:user] = Parse::Query.new("_User").eq("objectId",session[:user]['objectId']).get.first
+    session[:user] = pull_user
     flash[:issue] = @layout['issues']['invalid']
     redirect '/settings'
   end
