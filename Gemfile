@@ -20,3 +20,6 @@ gem 'thin'
 # I shouldn't need this, but I do. 
 gem 'coffee-filter'
 gem 'httparty'
+group :development do
+  gem 'dotenv'
+end

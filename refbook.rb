@@ -15,6 +15,17 @@ require 'domainatrix'
 require 'httparty'
 
 configure do
+  if settings.development?
+    # this is so we can test on multiple local computers
+    set :bind, '0.0.0.0'
+    # foreman output
+    # $stdout.sync = true
+    require 'dotenv'
+    Dotenv.load
+  # else
+    # require 'newrelic_rpm'
+  end
+
   enable :sessions
   
   set :session_secret, 'this_is_secret'
@@ -49,20 +60,10 @@ configure do
     # this should only happen on planes and stuff. Otherwise it's probably bad. 
     puts 'Mongo offline!'
   end
-  
 
   Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
            :master_key        => ENV['REFBOOK_PARSE_API_KEY'],
            :quiet => true
-
-  if settings.development?
-    # this is so we can test on multiple local computers
-    set :bind, '0.0.0.0'
-    # foreman output
-    $stdout.sync = true
-  # else
-    # require 'newrelic_rpm'
-  end
 
   Mail.defaults do
     delivery_method :smtp, { 
@@ -83,7 +84,7 @@ end
 
 # returns true if and only if the user is logged in
 def logged_in?
-  session[:user] != nil
+  session[:user] != nil 
 end
 
 def admin?

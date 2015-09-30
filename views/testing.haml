@@ -43,13 +43,13 @@
       -# This
     -# is a copy of the Referee Training Packet.
   %li
-    %a{href: "http://www.usquidditch.org/files/USQ_Rulebook_8.pdf", target: "_blank"}<
+    %a{href: "http://www.usquidditch.org/files/USQ_Rulebook_9.pdf", target: "_blank"}<
+      #{@text['here']}
+    #{@text['rulebook9']}
+  %li
+    %a{href: "http://usquidditch.com/files/IQA_Rulebook_8_web.pdf", target: "_blank"}<
       #{@text['here']}
     #{@text['rulebook8']}
-  %li
-    %a{href: "http://usquidditch.com/files/IQA_Rulebook_7_web.pdf", target: "_blank"}<
-      #{@text['here']}
-    #{@text['rulebook7']}
   %li
     %a{href: "http://usquidditch.com/about/rules/rulebook-faq/", target: "_blank"}<
       #{@text['here']}
@@ -94,35 +94,34 @@
   #{@text['pillars']}
 %p
   #{@text['formed']}
-- if paid?
-  %p
-    %span.fa-stack
-      %i.fa.fa-circle.fa-stack-2x.go
-      %i.fa.fa-exclamation-triangle.fa-stack-1x.warning
-    #{@text['members']}
-  %ul.bullets
-    %li
-      %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
-        #{@text['positioning']} #{@text['guide']}
-    %li
-      %a{href: "/files/IRDPConfidenceGuide.pdf", target: '_blank'}<
-        #{@text['confidence']} #{@text['guide']}
-    %li
-      %a{href: "/files/IRDPCommunicationGuide.pdf", target: '_blank'}<
-        #{@text['communication']} #{@text['guide']}
-    %li
-      %a{href: "/files/IRDPProfessionalismGuide.pdf", target: '_blank'}<
-        #{@text['professionalism']} #{@text['guide']}
-    %li
-      %a{href: "/files/IRDPConsistencyGuide.pdf", target: '_blank'}<
-        #{@text['consistency']} #{@text['guide']}
-- else
-  %ul.bullets
-    %li
-      %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
-        #{@text['positioning']}
-        #{@text['guide']}
-  #{display({path: :help, layout: :f, old: :f, alt: :t})}
+-# %p
+-#   %span.fa-stack
+-#     %i.fa.fa-circle.fa-stack-2x.go
+-#     %i.fa.fa-exclamation-triangle.fa-stack-1x.warning
+-#   #{@text['members']}
+%ul.bullets
+  %li
+    %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
+      #{@text['positioning']} #{@text['guide']}
+  %li
+    %a{href: "/files/IRDPConfidenceGuide.pdf", target: '_blank'}<
+      #{@text['confidence']} #{@text['guide']}
+  %li
+    %a{href: "/files/IRDPCommunicationGuide.pdf", target: '_blank'}<
+      #{@text['communication']} #{@text['guide']}
+  %li
+    %a{href: "/files/IRDPProfessionalismGuide.pdf", target: '_blank'}<
+      #{@text['professionalism']} #{@text['guide']}
+  %li
+    %a{href: "/files/IRDPConsistencyGuide.pdf", target: '_blank'}<
+      #{@text['consistency']} #{@text['guide']}
+-# - else
+-#   %ul.bullets
+-#     %li
+-#       %a{href: "/files/IRDPRefereePositioningGuide.pdf", target: '_blank'}<
+-#         #{@text['positioning']}
+-#         #{@text['guide']}
+-#   #{display({path: :help, layout: :f, old: :f, alt: :t})}
 
 %h3
   #{@text['field']}
@@ -141,27 +140,27 @@
       #{@text['pitch']}
     #{@text['allie']}
 
-  -if paid?
-    %li
-      %a{href: '/files/IRDPRefereeGameResponsibilitiesGuide.pdf', target: '_blank'}<
-        #{@text['match']} #{@text['guide']}
-    %li
-      %a{href: '/files/RefereeTrainingCoordinatorsTrainingGuide.pdf'}
-        #{@text['rtc']}
-    %li
-      %a{href: 'https://docs.google.com/document/d/17G_WcTeb-JtlbfcpTeRenc-mHHvcm3NIzzmx0D6riso/edit', target: '_blank'}<
-        #{@text['discussion']} #{@text['guide']}
-    %li
-      %a{href: 'https://docs.google.com/document/d/1J3nR0MaAlEOiuZhFI8QPSKqNd5HkG9YOyL4mxxDPQ5Y/edit', target: '_blank'}<
-        #{@text['post_game']} #{@text['guide']}
-    %li
-      %a{href: '/files/IRDPMultiLangGuide.pdf', target: '_blank'}<
-        #{@text['multi_lang']} #{@text['guide']}  
-    %li
-      %a{href: 'https://docs.google.com/a/fandm.edu/document/d/1FrjMPZLdZiy5vM-4mVR24CvQ7c_eOYdfN0UsGxH0Yi0/edit', target: '_blank'}<
-        #{@text['back_to_hoops']} #{@text['guide']}
+  -# -if paid?
+  %li
+    %a{href: '/files/IRDPRefereeGameResponsibilitiesGuide.pdf', target: '_blank'}<
+      #{@text['match']} #{@text['guide']}
+  %li
+    %a{href: '/files/RefereeTrainingCoordinatorsTrainingGuide.pdf'}
+      #{@text['rtc']}
+  %li
+    %a{href: 'https://docs.google.com/document/d/17G_WcTeb-JtlbfcpTeRenc-mHHvcm3NIzzmx0D6riso/edit', target: '_blank'}<
+      #{@text['discussion']} #{@text['guide']}
+  %li
+    %a{href: 'https://docs.google.com/document/d/1J3nR0MaAlEOiuZhFI8QPSKqNd5HkG9YOyL4mxxDPQ5Y/edit', target: '_blank'}<
+      #{@text['post_game']} #{@text['guide']}
+  %li
+    %a{href: '/files/IRDPMultiLangGuide.pdf', target: '_blank'}<
+      #{@text['multi_lang']} #{@text['guide']}  
+  %li
+    %a{href: 'https://docs.google.com/a/fandm.edu/document/d/1FrjMPZLdZiy5vM-4mVR24CvQ7c_eOYdfN0UsGxH0Yi0/edit', target: '_blank'}<
+      #{@text['back_to_hoops']} #{@text['guide']}
     
 
-  - else
-    #{display({path: :help_small, layout: :f, old: :f, alt: :t})}
+  -# - else
+    -# #{display({path: :help_small, layout: :f, old: :f, alt: :t})}
 

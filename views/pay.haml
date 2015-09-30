@@ -1,81 +1,85 @@
-- if paid?
-  %p
-    #{@text['already']}
-  %p
-    #{@text['hr']}
-    %a{href: "/testing/head"}<
-      #{@text['hr_link']}
-    #{@text['complete']}
-- else
-  -# not paid
-  - if logged_in?
-    - if affiliate?
-      %p
-        #{@text['affiliate']}
-    - else
-      .paypal
-        -# this isn't sensitive to language, which is OK I think?
-        =haml :access
-  - else
+-# - if paid?
+-#   %p
+-#     #{@text['already']}
+-#   %p
+-#     #{@text['hr']}
+-#     %a{href: "/testing/head"}<
+-#       #{@text['hr_link']}
+-#     #{@text['complete']}
+-# - else
+-#   -# not paid
+-#   - if logged_in?
+-#     - if affiliate?
+-#       %p
+-#         #{@text['affiliate']}
+-#     - else
+-#       .paypal
+-#         -# this isn't sensitive to language, which is OK I think?
+-#         =haml :access
+-#   - else
+-#     %p
+-#       %a{href: '/create'}<
+-#         #{@text['create']}
+-#       #{@text['account']}
+-#       %a{href: '/login'}<
+-#         #{@text['login']}
+-#       #{@text['purchase']}
+
+%p
+  #{@text['thanks']}
+  %u<
+    #{@text['note']}
+  #{@text['paypal']}
+
+%p
+  %strong
+    #{@text['used']}
+  %br
+  #{@text['upkeep']}
+%ul.bullets
+  %li
     %p
-      %a{href: '/create'}<
-        #{@text['create']}
-      #{@text['account']}
-      %a{href: '/login'}<
-        #{@text['login']}
-      #{@text['purchase']}
-
-  %p
-    #{@text['thanks']}
-    %u<
-      #{@text['note']}
-    #{@text['paypal']}
-
-  %p
-    %strong
-      #{@text['used']}
-    %br
-    #{@text['upkeep']}
-  %ul.bullets
-    %li
-      %p
-        #{@text['ub1']}
-        %a{href: 'http://i.imgur.com/w5lz48W.png', target: '_blank'}<
-          #{@text['paid']}
-        #{@text['ub12']}
-    %li
-      %p
-        #{@text['ub2']}
-    %li
-      %p
-        #{@text['ub3']}
-
-  %p
-    #{@text['stress']}
-    %a{href: "/donate"}<
-      #{@text['donations']}
-    #{@text['stress2']}
-
-  %p
-    #{@text['help']}
-  %p
-    #{@text['be']}
-    %b
-      #{@layout['irdp']}.
-
-  - if logged_in?
-    - if affiliate?
-      %p
-        #{@text['affiliate']}
-    - else
-      .paypal
-        -# this isn't sensitive to language, which is OK I think?
-        =haml :access
-  - else
+      #{@text['ub1']}
+      %a{href: 'http://i.imgur.com/w5lz48W.png', target: '_blank'}<
+        #{@text['paid']}
+      #{@text['ub12']}
+  %li
     %p
-      %a{href: '/create'}<
-        #{@text['create']}
-      #{@text['account']}
-      %a{href: '/login'}<
-        #{@text['login']}
-      #{@text['purchase']}
+      #{@text['ub2']}
+  %li
+    %p
+      #{@text['ub3']}
+
+%p
+  #{@text['stress']}
+  %a{href: "/donate"}<
+    #{@text['donations']}
+  #{@text['stress2']}
+
+%p
+  #{@text['help']}
+%p
+  #{@text['be']}
+  %b
+    #{@layout['irdp']}.
+
+-# - if logged_in?
+-#   - if affiliate?
+-#     %p
+-#       #{@text['affiliate']}
+-#   - else
+-#     .paypal
+-#       -# this isn't sensitive to language, which is OK I think?
+-#       =haml :access
+-# - else
+-#   %p
+-#     %a{href: '/create'}<
+-#       #{@text['create']}
+-#     #{@text['account']}
+-#     %a{href: '/login'}<
+-#       #{@text['login']}
+-#     #{@text['purchase']}
+
+%p
+  %i.fa.fa-warning.fa-2x.go
+  For now, all our materials are open to everyone! No need to pay anymore. 
