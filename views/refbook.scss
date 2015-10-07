@@ -3,7 +3,6 @@
 $footer-height: 36px;
 $slide-left: 30px;
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext");
-@import url("http://fonts.googleapis.com/css?family=Exo+2:400,700&subset=latin,latin-ext");
 
 // colors
 $orange: #ff6600; //orange
@@ -13,6 +12,8 @@ $cyan: cyan;
 $gray: #767676; //gray
 // $links: #000066;
 // $links: #ff8000;
+$green: #267f01;
+$yellow: #fec200;
 $links: #000;
 
 * {
@@ -25,14 +26,12 @@ html, body {
     height: 100%;
     font-size: 18px;
     // background-image: url("../images/satinweave.png"); 
-    
-    
 
     a {
-        color: $gray;
+        color: $green;
         &:hover {
-            color: $links;
-            // text-decoration: none;
+            // color: $links;
+            text-decoration: none;
         }
     }
 
@@ -128,14 +127,14 @@ html, body {
         }
 
         .no-kids {
-            border-bottom: 1px solid #fff;
-            &:hover {
-                border-bottom: 1px solid #000;
+            // border-bottom: 1px solid #fff;
+            &:hover:not(.iqa) {
+                border-bottom: 1px solid #fff;
             }
         }
 
         .kids {
-            border-bottom: 1px solid $cyan;
+            border-bottom: 1px solid $yellow;
             &:hover {
                 & > a {
                     // color: $cyan;
@@ -151,7 +150,7 @@ html, body {
         }
 
         .kids.active {
-            border-bottom: 1px dashed $cyan;
+            border-bottom: 1px dashed $yellow;
         }
 
         ul {
@@ -167,9 +166,9 @@ html, body {
             }
             .icon {
                 padding: 0;
-                border-bottom: 1px solid #fff; 
+                // border-bottom: 1px solid #fff; 
                 &:hover {
-                    border-bottom: 1px solid #000;
+                    border-bottom: 1px solid #fff;
                 }
             }
         }
@@ -180,7 +179,7 @@ html, body {
                 text-decoration: none;
                 padding: 5px;
                 display: inline-block;
-            }            
+            }
 
             li {
                 position: relative;
@@ -189,6 +188,14 @@ html, body {
                     .sub-menu {
                         display: block;
                     }
+                }
+            }
+
+            li.iqa {
+                background-color: white;
+                border-radius: 10px;
+                a {
+                    color: $green;
                 }
             }
 
@@ -205,7 +212,7 @@ html, body {
                 a {
                     // padding: 5px;
                     &:hover {
-                        color: $cyan;
+                        color: $yellow;
                     }
                 }
                 li {
@@ -214,7 +221,9 @@ html, body {
             }
         }
 
-        
+        .logo {
+            height: 28px;
+        }
     }
     // login/logout text
     .header {
@@ -223,7 +232,7 @@ html, body {
         text-align: right;
         width: 200px;
         a {
-            color: $gray;
+            color: $green;
             &:hover {
                 color: $links;
             }
