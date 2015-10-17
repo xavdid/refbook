@@ -647,7 +647,7 @@ get '/field_test' do
     redirect "/login?d=/field_test"
   elsif not session[:user]['headRef']
     flash[:issue] = @layout['issues']['hr_first']
-    redirect '/'
+    redirect '/testing/head'
   elsif session[:user]['passedFieldTest']
     flash[:issue] = @layout['issues']['field_test_passed']
     redirect back
@@ -1134,7 +1134,7 @@ end
 
 post '/settings' do  
   begin
-    if params.include? 'tests' && settings.development?
+    if params.include?('tests') && settings.development?
       if params.include? 'ar'
         session[:user]['assRef'] = true 
       else
@@ -1156,9 +1156,9 @@ post '/settings' do
         session[:user]['passedFieldTest'] = false
       end
     else
-      session[:user]['email'] = params[:username]
-      session[:user]['username'] = params[:username]
-      session[:user]['lang'] = params[:lang]
+      session[:user]['email'] = params[:username] unless params[:username].nil?
+      session[:user]['username'] = params[:username] unless params[:username].nil?
+      session[:user]['lang'] = params[:lang] unless params[:lang].nil?
     end
     session[:user] = session[:user].save
     pp @layout
@@ -1228,7 +1228,7 @@ get '/testing/:which' do
   @section = 'testing'
   # right now, which can be anything. Nbd?
   
-  if !["head", "snitch", "ass", "sample"].include? params[:which]
+  unless["head", "snitch", "ass", "sample"].include?(params[:which])
     halt 404
   end
 
@@ -1248,13 +1248,9 @@ get '/testing/:which' do
   
   # refresh user object
   if params[:which] == 'head'
-    session[:user] = Parse::Query.new("_User").eq("objectId", session[:user]['objectId']).get.first
+    session[:user] = pull_user
 
-    if session[:user]['hrWrittenAttemptsRemaining'] <= 0
-      @attempts_remaining = false
-    end
-
-    if not session[:user]['assRef'] or not session[:user]['snitchRef']
+    if !session[:user]['assRef'] || !session[:user]['snitchRef']
       @prereqs_passed = false
     end
   end

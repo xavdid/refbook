@@ -39,31 +39,14 @@
   - else
     - if not @prereqs_passed
       #{@text['either']}
-    - elsif not @attempts_remaining
-      #{@text['none_left']}
-      %br
-      %br
-      #{@text['applicable']}
-      #{email_link({text: @text['contact']})}
-      %br
-      %br
-      #{@text['hope']}
-      %hr
-      .paypal{"ng-controller" => "PaypalController"}
-        %select{"ng-model" => "currency", "ng-options" => "opt as opt.label for opt in currencies"}
-        .selection
-          {{ currency.quan + " " + currency.label }}
-        #{paypal_button}
-    - elsif @good and @attempts_remaining
+    - elsif @good
       - if params[:which] == 'head'
-        You've got 
-        #{session[:user]['hrWrittenAttemptsRemaining']} 
-        HR attempts left.
+        You've got 4 HR attempts left.
         %br
         %br
       #{@text['rulebook']}
       %strong
-        #{@rb.to_s}
+        #{@rb}
       %br
       %br
       #{@text['here']}
