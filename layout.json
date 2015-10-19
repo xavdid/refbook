@@ -74,6 +74,7 @@
         "ass": "Test d'Arbitre Assistant",
         "snitch": "Test d'Arbitre de Vif",
         "head": "Test d'Arbitre Principal",
+        "ref_test": "Ref Test",
         "field_test": "Field Test Signup",
 
         "nsi": "Hors ligne",
