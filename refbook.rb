@@ -363,11 +363,6 @@ before do
     end
   end
 
-  # there's an easier way to do this but whatever
-  if logged_in? && !['/layout','/pull','/login','/logout','/styles.css'].include?(request.path_info) && session[:user]['region'] == 'AUST' && !session[:user].include?('cookie_v')
-    redirect '/pull'
-  end
-
   # subdomain redirection
   if not settings.development?
     url = Domainatrix.parse(request.url)
