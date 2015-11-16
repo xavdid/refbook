@@ -615,12 +615,12 @@ get '/donate' do
   display({old: :f})
 end
 
-def faq
-end
-get '/faq' do
-  @section = "info"
-  display({old: :f})
-end
+# def faq
+# end
+# get '/faq' do
+#   @section = "info"
+#   display({old: :f})
+# end
 
 def field
 end
