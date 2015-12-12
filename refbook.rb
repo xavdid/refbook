@@ -1,8 +1,8 @@
 require 'sinatra'
 require 'json'
-require 'sass'
+require 'tilt/sass'
 require 'parse-ruby-client'
-require 'haml'
+require 'tilt/haml'
 require 'sinatra/flash'
 require 'pp'
 require 'time'
@@ -138,7 +138,6 @@ def validate(key, region)
   key.insert(6,'-')
   key.insert(4,'-')
 
-  pp keys[region]
   if keys[region].include?(key)
     keys[region].delete key
     settings.keys.save(keys)
@@ -191,7 +190,7 @@ end
 # on pass, shows testing page for other opportunities. On fail, shows link to test you failed for cooldown timer
 def email_results(email, pass, test)
   tests = {ass: "Assistant", snitch: "Snitch", head: "Head", sample: "Sample"}
-  mail = Mail.deliver do
+  Mail.deliver do
     to email
     from 'IRDP <irdp.rdt@gmail.com>'
     subject 'Referee Test Results'
@@ -202,7 +201,7 @@ def email_results(email, pass, test)
 end
 
 def register_purchase(text)
-  mail = Mail.deliver do 
+  Mail.deliver do 
     to "trigger@recipe.ifttt.com"
     from 'beamneocube@gmail.com'
     subject text
@@ -213,7 +212,7 @@ def register_purchase(text)
 end
 
 def notify_of_review(reviewee)
-  mail = Mail.deliver do 
+  Mail.deliver do 
     to reviewee
     from 'IRDP <irdp.rdt@gmail.com>'
     subject "You've been reviewed!"
@@ -224,7 +223,7 @@ def notify_of_review(reviewee)
 end
 
 def report_bad(user_id)
-  mail = Mail.deliver do
+  Mail.deliver do
     to 'beamneocube@gmail.com'
     from 'IRDP <irdp.rdt@gmail.com>'
     subject 'Someone submitted a test early!'
@@ -235,7 +234,7 @@ def report_bad(user_id)
 end
 
 def report_hr(user_id)
-  mail = Mail.deliver do
+  Mail.deliver do
     to 'beamneocube@gmail.com'
     from 'IRDP <irdp.rdt@gmail.com>'
     subject 'HR failure?'
@@ -283,7 +282,7 @@ def weekly_testing_update
 
     body_text += "</table><br><br>If you've got any questions, reach out to David at david@salesforceiq.com.<br><br> ~IRDP"
 
-    mail = Mail.deliver do
+    Mail.deliver do
       # to 'beamneocube@gmail.com'
       to 'gameplay@quidditchuk.org'
       from 'IRDP <irdp.rdt@gmail.com>'
@@ -294,6 +293,7 @@ def weekly_testing_update
       end
     end
 
+    # this is for zapier
     return 1
   rescue
     return nil
@@ -549,7 +549,7 @@ get '/create' do
 end
 
 post '/create' do
-  puts "SIGNING UP WITH KEY #{params[:registration]} FOR REGION #{params[:region]}"if params[:registration]
+  puts "SIGNING UP WITH KEY #{params[:registration]} FOR REGION #{params[:region]}" if params[:registration] && params[:registration].size > 0
 
   user = Parse::User.new({
     # username is actually email, secretly
@@ -577,7 +577,6 @@ post '/create' do
     session[:user] = user.save
     t_flash = @layout['issues']['created']
     # pp "flash is #{@layout}"
-    pp @layout
     t_flash += session[:user]['paid'] ? '' : 'non'
     t_flash += @layout['issues']['version']
 
@@ -680,7 +679,6 @@ get '/field_tests' do
       r.limit = 1000
     end.get
   end
-  pp @tests
   display({old: :t})
 end
 
