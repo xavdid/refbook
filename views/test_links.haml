@@ -25,58 +25,74 @@
   #{@text['confirmation']}
 %hr
 / TODO: this could probably be untangled
--# - if paid?
-%p
-  - if session[:user][params[:which]+"Ref"]
-    #{@text['already']}
-    - if @lang == "EN"
-      #{@layout[params[:which]]}
-      #{@layout['ref_test']}
-    - else
-      #{@layout['ref_test']}
-      #{@layout[params[:which]]}
-    #{@layout['congrats']}!
-  - else
-    - if not @prereqs_passed
-      #{@text['either']}
-    - elsif @good
-      - if params[:which] == 'head'
-        You've got 4 HR attempts left.
-        %br
-        %br
-      #{@text['rulebook']}
-      %strong
-        #{@rb}
-      %br
-      %br
-      #{@text['here']}
-      %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
-        - if @lang == "EN"
-          #{@layout[params[:which]]}
-          #{@layout['ref_test']}
-        - else
-          #{@layout['ref_test']}
-          #{@layout[params[:which]]}
-    - else
-      #{@text['long']}
-      %br
-      %br
-      #{@text['attempted']}
+- if paid?
+  %p
+    - if session[:user][params[:which]+"Ref"]
+      #{@text['already']}
       - if @lang == "EN"
         #{@layout[params[:which]]}
         #{@layout['ref_test']}
       - else
         #{@layout['ref_test']}
         #{@layout[params[:which]]}
-      #{@text['at']}
-      #{@t2.strftime(settings.time_string)}
-      #{local_time(@try_unlocked,"Last+#{settings.test_names[params[:which]]}+Referee+Test+Attempt")}
-      %br
-      %br
-      #{@text['give']}
-      #{@try_unlocked.strftime(settings.time_string)}
-      #{local_time(@try_unlocked,"#{settings.test_names[params[:which]]}+Referee+Test+Unlocks")}
--# - else
-  -# #{display({path: :help, layout: :f, old: :f, alt: :t})}
+      #{@layout['congrats']}!
+    - else
+      - if !@prereqs_passed
+        #{@text['either']}
+      - elsif !@attempts_remaining
+        #{@text['none_left']}
+        %br
+        %br
+        -# #{@text['applicable']}
+        -# #{email_link({text: @text['contact']})}
+        -# %br
+        -# %br
+        -# #{@text['hope']}
+        -# %hr
+        .paypal{"ng-controller" => "PaypalController"}
+          %select{"ng-model" => "currency", "ng-options" => "opt as opt.label for opt in currencies"}
+          .selection
+            {{ currency.quan + " " + currency.label }}
+          #{paypal_button}
+     
+      - elsif @good and @attempts_remaining
+        - if params[:which] == 'head'
+          You've got 
+          #{session[:user]['hrWrittenAttemptsRemaining']} 
+          HR attempts left.
+        #{@text['rulebook']}
+        %strong
+          #{@rb}
+        %br
+        %br
+        #{@text['here']}
+        %a{href: "http://www.classmarker.com/online-test/start/?quiz=#{@tests[params[:which].to_sym]}&cm_return_test_type=#{params[:which].to_sym}&cm_user_id=#{session[:user]['objectId']}"}<
+          - if @lang == "EN"
+            #{@layout[params[:which]]}
+            #{@layout['ref_test']}
+          - else
+            #{@layout['ref_test']}
+            #{@layout[params[:which]]}
+      - else
+        #{@text['long']}
+        %br
+        %br
+        #{@text['attempted']}
+        - if @lang == "EN"
+          #{@layout[params[:which]]}
+          #{@layout['ref_test']}
+        - else
+          #{@layout['ref_test']}
+          #{@layout[params[:which]]}
+        #{@text['at']}
+        #{@t2.strftime(settings.time_string)}
+        #{local_time(@try_unlocked,"Last+#{settings.test_names[params[:which]]}+Referee+Test+Attempt")}
+        %br
+        %br
+        #{@text['give']}
+        #{@try_unlocked.strftime(settings.time_string)}
+        #{local_time(@try_unlocked,"#{settings.test_names[params[:which]]}+Referee+Test+Unlocks")}
+- else
+  #{display({path: :help, layout: :f, old: :f, alt: :t})}
+          
         
-      

@@ -1,12 +1,12 @@
--# - if not paid? and affiliate?
--#   %p
--#     #{@text['unpaid']}
--#   .form_box
--#     %form{name: "validate", action: "/validate", method: "get"}
--#       %label{for: "code"}
--#         #{@text['code']}
--#       %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
--#       %input.button{type: "submit", value: "Register!"}
+- if not paid? and affiliate?
+  %p
+    #{@text['unpaid']}
+  .form_box
+    %form{name: "validate", action: "/validate", method: "get"}
+      %label{for: "code"}
+        #{@text['code']}
+      %input{type: "text", name: "code", placeholder: "XXXX-XX-XXX-XXXXXXX", id: "code"}
+      %input.button{type: "submit", value: "Register!"}
       
 - if settings.development?
   .form_box{style: 'border: 1px dashed blue;'}

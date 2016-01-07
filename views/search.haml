@@ -10,10 +10,9 @@
     #{@text['world']}
   - else
     #{@text['not_world']}
+%p
+  If you want to see all uncertified refs, add "<a id="all-button" href="#">?show=all</a>" to any search url
 
-- if admin?
-  %p
-    If you want to see all certified refs, add "?show=all" to any search url
 %hr
 
 %ul.regions#regions
@@ -52,11 +51,11 @@
             #{@text['hr']}
           %td{title: "Passed Field Test"}
             #{@text['ft']}
-          %td
-            %span.fa-stack
-              %i.fa.fa-circle.fa-stack-2x
-              %i.fa.fa-star.fa-stack-1x.unstarred
-          - if ['ALL', 'USQ'].include? @reg
+          -# %td
+          -#   %span.fa-stack
+          -#     %i.fa.fa-circle.fa-stack-2x
+          -#     %i.fa.fa-star.fa-stack-1x.unstarred
+          - if @reg == 'ALL'
             %td
               #{@text['region']}
       %tbody
@@ -81,9 +80,7 @@
                   Passed?
               - else
                 #{r['passedFieldTest'] ? 'Y' : 'N'}
-            %td
-              #{r['stars']}
-            - if ['ALL', 'USQ'].include? @reg
+            - if @reg == 'ALL'
               %td
                 #{r['region']}
 - else
@@ -93,10 +90,8 @@
 :javascript
   // I apologize for the following code
   
-  var region_keys = #{@region_keys};
-  var region_values = #{@region_values};
-  var us_region_keys = #{@us_region_keys};
-  var us_region_values = #{@us_region_values}
+  var region_keys = #{settings.region_names};
+  var region_values = #{settings.region_codes};
 
   // fill region list
   // All regions is special and goes first
@@ -110,25 +105,6 @@
     ].join(' ');
     $("#regions").append(s);
   };
-  $('#regions').append("<li> | </li><li><a id=\"USQ\" href=\"/search/USQ\">USQ</a></li>");
-
-  if(#{@us}) {
-    $('#sub-regions').append("<li><a id=\"subUSQ\" href=\"/search/USQ\">All</a></li>");
-    for (var i = 0; i < us_region_keys.length; i++) {
-      var s = "<li> | </li>";
-      $("#sub-regions").append(s);
-      s = [
-        "<li><a id=\""+us_region_values[i]+"\" href=\"/search/"+us_region_values[i],"\">",
-        us_region_keys[i]+"</a></li>"
-      ].join(' ');
-      $("#sub-regions").append(s);
-    };
-    $("#USQ").addClass('active');
-  }
-
-  // probably something about always active USQ on subregion
-  $("##{@reg}").addClass("active");
-  if ("#{@reg}" == "USQ") {$("#subUSQ").addClass("active");}
   
   // click handlers
   $('.all').click(function(){
@@ -156,3 +132,10 @@
     sortList: [[1,0]]
   });
 
+  $('#all-button')[0].addEventListener('click', function(event) {
+    // Stop the link from redirecting
+    event.preventDefault();
+
+    // Redirect instead with JavaScript
+    window.location.href = window.location.href + "?show=all"
+  }, false);

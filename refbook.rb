@@ -30,9 +30,30 @@ configure do
   
   set :session_secret, 'this_is_secret'
   # TODO: this really needs to be redone
-  set :region_hash, {"QuidditchUK" => "QUK","US Northwest" => "USNW","US West" => "USWE", "US Midwest" => "USMW", "US Southwest" => "USSW", "US South" => "USSO", "US Northeast" => "USNE", "US Mid-Atlantic" => "USMA", "Canada" => "CANA", "Australia" => "AUST", "Italy" => "ITAL", "Norway" => "NORW", "Belgium" => "BQF", "Netherlands" => "MQN", "Poland" => "PLQ", "Catalonia" => "AQC", "Germany" => "DQB", "Other" => "OTHR", "All Regions" => "ALL","None" => "NONE"}
+  set :region_hash, {
+    "Argentina" => "AAQ",
+    "Australia" => "AUST",
+    "Austria" => "QA",
+    "Belgium" => "BQF", 
+    "Brazil" => "ABQ",
+    "Canada" => "CANA", 
+    "Catalonia" => "AQC", 
+    "France" => "FQF",
+    "Germany" => "DQB", 
+    "Italy" => "ITAL", 
+    "Mexico" => "MEX",
+    "Netherlands" => "MQN", 
+    "Norway" => "NORW", 
+    "Poland" => "PLQ", 
+    "Spain" => "AQE",
+    "Turkey" => "QD",
+    "United Kingdom" => "QUK",
+    "United States" => "USQ",
+    "Other" => "OTHR", 
+    "All Regions" => "ALL"
+  }
   set :affiliate, ["QUK", "AUST", "CANA", "ITAL", "NORW", "BQF", "MQN", "AQC"]
-  set :region_names, settings.region_hash.keys[0..-3].sort
+  set :region_names, settings.region_hash.keys[0..-2].sort
   set :region_codes, settings.region_names.map{|r| settings.region_hash[r]}
   # TIME BETWEEN ATTEMPTS
   # 604800 sec = 1 week
@@ -96,7 +117,7 @@ def paid?
 end
 
 def affiliate?
-  logged_in? && settings.affiliate.include?(session[:user]['region'])
+  logged_in? && session[:user]['region'] != 'OTHR'
 end
 # gets the nice name from the key
 # passing "USMW" returns "US Midwest"
@@ -503,9 +524,7 @@ get '/cm' do
 
   user_to_update = pull_user(params[:cm_user_id])
 
-  @email = user_to_update['email']
-  @score = params[:cm_tp]
-  puts 'to', @email, @score
+  email = user_to_update['email']
   if params[:cm_tp].to_i >= 80
     pass = true
     t_flash = @layout['issues']['pass']
@@ -514,12 +533,16 @@ get '/cm' do
     t_flash += @layout['issues']['go_you']
     flash[:issue] = t_flash
     user_to_update[params[:cm_return_test_type].to_s+"Ref"] = true
-    user_to_update.save
   else
     pass = false
     flash[:issue] = @layout['issues']['fail']
   end
-  email_results(@email, pass, params[:cm_return_test_type]) if !settings.development?
+
+  user_to_update['hrWrittenAttemptsRemaining'] -= 1 if att['type'] == 'head'
+
+  user_to_update.save
+
+  email_results(email, pass, params[:cm_return_test_type]) if !settings.development?
   report_hr(att['taker']) if att['type'] == 'head'
   redirect '/pull' if pass
   redirect "/testing/#{params[:cm_return_test_type]}"
@@ -536,14 +559,15 @@ end
 def create
 end
 get '/create' do
-  @team_list = []
-  teams = Parse::Query.new("_User").tap do |team|
-    team.exists("team")
+  @team_list = Set.new
+  teams = Parse::Query.new("_User").tap do |u|
+    u.exists("team")
+    u.limit = 1000
   end.get
   teams.each do |t|
     @team_list << t["team"]
   end
-  @team_list = @team_list.to_set.to_a
+  @team_list = @team_list.to_a
   @region_keys = settings.region_names
   display(old: :f)
 end
@@ -842,9 +866,8 @@ get '/pull' do
     redirect '/login?d=/pull'
   else
     session[:user] = pull_user
-    session[:user]['cookie_v'] = 6
     flash[:issue] = @layout['issues']['pull']
-    redirect '/'
+    redirect back
   end
 end
 
@@ -1041,41 +1064,33 @@ get '/search/:region' do
   @section = 'search'
 
   @reg = params[:region].upcase
-  @us = @reg[0..1] == 'US'
   @region_title = reg_reverse(@reg)
   
   @region_values = settings.region_codes.reject{|p| p[0..1] == "US"}
   @region_keys = []
   @region_values.each{|r| @region_keys << reg_reverse(r)}
-
-  @us_region_values = settings.region_codes.select{|p| p[0..1] == "US"}
-  @us_region_keys = []
-  @us_region_values.each do |r| 
-    r = reg_reverse(r)
-    @us_region_keys << r[2..r.size] 
-  end
   
-  if @region_title.nil? && @reg != "USQ"
+  if @region_title.nil?
     halt 404
   end
 
-  stars_dump = settings.stars.find.to_a
+  # stars_dump = settings.stars.find.to_a
 
-  @stars = {}
+  # @stars = {}
 
-  @mine = Set.new
+  # @mine = Set.new
 
-  stars_dump.each do |s|
-    if @stars.include? s['to']
-      @stars[s['to']] += 1
-    else
-      @stars[s['to']] = 1
-    end
+  # stars_dump.each do |s|
+  #   if @stars.include? s['to']
+  #     @stars[s['to']] += 1
+  #   else
+  #     @stars[s['to']] = 1
+  #   end
 
-    if logged_in? && s['from'] == session[:user]['objectId']
-      @mine << s['to']
-    end
-  end
+  #   if logged_in? && s['from'] == session[:user]['objectId']
+  #     @mine << s['to']
+  #   end
+  # end
 
   # this currently works only with my version of the gem until the PR is merged
   fields = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region"
@@ -1083,29 +1098,15 @@ get '/search/:region' do
   q = Parse::Query.new("_User").tap do |r|
     r.limit = 1000
     r.keys = fields
-  end.get
-  
-  if @reg == "USQ"
-    q = Parse::Query.new("_User").tap do |r|
-      r.limit = 1000
-      r.keys = fields
-    end.get.select{|p| p['region'][0..1] == "US"}
-  elsif @reg != "ALL"
-    q = Parse::Query.new("_User").tap do |r|
-      r.limit = 1000
-      r.keys = fields
-    end.eq("region",@reg).get
   end
+  q.eq("region", @reg) if @reg != 'ALL'
+
+  q = q.get
 
   @refs = []
   # build each row of the table
   q.each do |person|
-    if person["assRef"] or person["snitchRef"] or params[:show] == "all"
-      if @stars.include? person['objectId']
-        person['stars'] = @stars[person['objectId']]
-      else
-        person['stars'] = 0
-      end
+    if person["assRef"] || person["snitchRef"] || params[:show] == "all"
       @refs << person
     end
   end
@@ -1228,15 +1229,27 @@ get '/testing/:which' do
   display({path: :test_links, old: :f}) if session[:user][params[:which]+"Ref"]
 
   @good = true
-  @attempts_remaining = true
+  @attempts_remaining = session[:user]['hrWrittenAttemptsRemaining'] > 0
   @prereqs_passed = true
 
   # Everyone is on rulebook 8!
-  @tests = {ass: 'jmk53c853467f7c6', snitch: "6kr53c853f4914d8", head: "qjp53c854a5530ff", sample: "xnj533d065451038"}
+  # @tests = {
+  #   ass: 'jmk53c853467f7c6', 
+  #   snitch: "6kr53c853f4914d8", 
+  #   head: "qjp53c854a5530ff", 
+  #   sample: "xnj533d065451038"
+  # }
+  # RB9
+  @tests = {
+    ass: 't7k567bb8b3b0fa1', 
+    snitch: '7kf567bb80a6c994', 
+    head: '9gj567bb974ad8e2', 
+    sample: "xnj533d065451038"
+  }
   # if session[:user]['region'] == "CANA"
   #   @tests[:snitch] = CANADIAN TEST # test w/ off pitch
   # end
-  @rb = 8.1
+  @rb = 9.0
   
   # refresh user object
   if params[:which] == 'head'

@@ -144,7 +144,7 @@
             "firstname": "First Name",
             "lastname": "Last Name",
             "team": "Associated Team/Alma Mater (or none). The team to whom we shouldn't assign you games to referee.",
-            "region": "Region",
+            "region": "NGB",
             "registration": "Registration Code (optional; you can also do it later)",
             "agree": "I agree that I've read the",
             "code": "Referee's Code",

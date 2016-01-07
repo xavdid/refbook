@@ -1,29 +1,29 @@
--# - if paid?
--#   %p
--#     #{@text['already']}
--#   %p
--#     #{@text['hr']}
--#     %a{href: "/testing/head"}<
--#       #{@text['hr_link']}
--#     #{@text['complete']}
--# - else
--#   -# not paid
--#   - if logged_in?
--#     - if affiliate?
--#       %p
--#         #{@text['affiliate']}
--#     - else
--#       .paypal
--#         -# this isn't sensitive to language, which is OK I think?
--#         =haml :access
--#   - else
--#     %p
--#       %a{href: '/create'}<
--#         #{@text['create']}
--#       #{@text['account']}
--#       %a{href: '/login'}<
--#         #{@text['login']}
--#       #{@text['purchase']}
+- if paid?
+  %p
+    #{@text['already']}
+  %p
+    #{@text['hr']}
+    %a{href: "/testing/head"}<
+      #{@text['hr_link']}
+    #{@text['complete']}
+- else
+  -# not paid
+  - if logged_in?
+    - if affiliate?
+      %p
+        #{@text['affiliate']}
+    - else
+      .paypal
+        -# this isn't sensitive to language, which is OK I think?
+        =haml :access
+  - else
+    %p
+      %a{href: '/create'}<
+        #{@text['create']}
+      #{@text['account']}
+      %a{href: '/login'}<
+        #{@text['login']}
+      #{@text['purchase']}
 
 %p
   #{@text['thanks']}
@@ -63,23 +63,29 @@
   %b
     #{@layout['irdp']}.
 
--# - if logged_in?
--#   - if affiliate?
--#     %p
--#       #{@text['affiliate']}
--#   - else
--#     .paypal
--#       -# this isn't sensitive to language, which is OK I think?
--#       =haml :access
--# - else
--#   %p
--#     %a{href: '/create'}<
--#       #{@text['create']}
--#     #{@text['account']}
--#     %a{href: '/login'}<
--#       #{@text['login']}
--#     #{@text['purchase']}
-
-%p
-  %i.fa.fa-warning.fa-2x.go
-  For now, all our materials are open to everyone! No need to pay anymore. 
+- if paid?
+  %p
+    #{@text['already']}
+  %p
+    #{@text['hr']}
+    %a{href: "/testing/head"}<
+      #{@text['hr_link']}
+    #{@text['complete']}
+- else
+  -# not paid
+  - if logged_in?
+    - if affiliate?
+      %p
+        #{@text['affiliate']}
+    - else
+      .paypal
+        -# this isn't sensitive to language, which is OK I think?
+        =haml :access
+  - else
+    %p
+      %a{href: '/create'}<
+        #{@text['create']}
+      #{@text['account']}
+      %a{href: '/login'}<
+        #{@text['login']}
+      #{@text['purchase']}
