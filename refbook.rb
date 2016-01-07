@@ -618,16 +618,19 @@ def currency
 end
 get '/currency' do 
   # @c is the index for the currency as seen in app.js
-  if ['AUST'].include? session[:user]['region']
+  reg = session[:user]['region']
+  if ['AUST'].include?(reg)
     i = 0
-  elsif ['CANA'].include? session[:user]['region']
+  elsif ['CANA'].include?(reg)
     i = 1
-  elsif ['ITAL', 'NORW', 'BQF', 'MQN', 'PLQ', 'OTHR'].include? session[:user]['region']
-    i = 2
-  elsif ['QUK'].include? session[:user]['region']
+  # elsif ['ITAL', 'NORW', 'BQF', 'MQN', 'PLQ', 'OTHR'].include?(reg)
+  #   i = 2
+  elsif ['QUK'].include?(reg)
     i = 3
-  else # US 
+  elsif ['USQ'].include?(reg)
     i = 4
+  else # EUR 
+    i = 2
   end
   {i: i}.to_json
 end  

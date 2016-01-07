@@ -5,27 +5,27 @@ var app = angular
             {
                 label: "AUD",
                 code: "K5UBECVDPZEGN",
-                quan: "$21"
+                quan: "$23"
             },
             {
                 label: "CAD",
                 code: "S4D7VGQ33DLXG",
-                quan: "$22"
+                quan: "$23"
             },
             {
                 label: "EUR",
                 code: "LXQLYPBHFSFNQ",
-                quan: "€16"
+                quan: "€15"
             },
             {
                 label: "GBP",
                 code: "RZ8NXMVPA5TYW",
-                quan: "£12"
+                quan: "£10"
             },
             {
                 label: "USD",
                 code: "WRVHF3X2SS2FS",
-                quan: "$20"
+                quan: "$16"
             }
         ];
 

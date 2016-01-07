@@ -17,26 +17,27 @@
   %a{href: "/review/#{@ref['objectId']}"}
     #{@text['review']} #{@ref['firstName']}
 
-- if logged_in? and session[:user]['headRef'] and @ref['objectId'] != session[:user]['objectId']
-  - if not @star
-    %p
-      %a{href: "/star/#{@ref['objectId']}"}
-        %span.fa-stack
-          %i.fa.fa-circle.fa-stack-2x
-          %i.fa.fa-star.fa-stack-1x.unstarred
-        #{@text['star']} #{@ref['firstName']}
-  - else 
-    %p
-      %a{href: "/star/#{@ref['objectId']}?pop=1"}
-        %span.fa-stack
-          %i.fa.fa-circle.fa-stack-2x
-          %i.fa.fa-star.fa-stack-1x.starred
-        un-#{@text['star']} #{@ref['firstName']}
+-# - if logged_in? and session[:user]['headRef'] and @ref['objectId'] != session[:user]['objectId']
+-#   - if not @star
+-#     %p
+-#       %a{href: "/star/#{@ref['objectId']}"}
+-#         %span.fa-stack
+-#           %i.fa.fa-circle.fa-stack-2x
+-#           %i.fa.fa-star.fa-stack-1x.unstarred
+-#         #{@text['star']} #{@ref['firstName']}
+-#   - else 
+-#     %p
+-#       %a{href: "/star/#{@ref['objectId']}?pop=1"}
+-#         %span.fa-stack
+-#           %i.fa.fa-circle.fa-stack-2x
+-#           %i.fa.fa-star.fa-stack-1x.starred
+-#         un-#{@text['star']} #{@ref['firstName']}
 
 %h3
   Certifications
 
 .form_box.small
+  Current
   .table-background
     %table
       %tr
@@ -68,6 +69,42 @@
           Head Referee Field
         %td
           - if @ref['passedFieldTest']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+  %br
+  Rulebook 8
+  .table-background
+    %table
+      %tr
+        %td
+          Assistant Referee
+        %td
+          - if @ref['rb8Ass']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Snitch Referee
+        %td
+          - if @ref['rb8Snitch']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Head Referee Written
+        %td
+          - if @ref['rb8Head']
+            %i.fa.fa-check
+          - else
+            %i.fa.fa-clock-o
+      %tr
+        %td
+          Head Referee Field
+        %td
+          - if @ref['rb8Field']
             %i.fa.fa-check
           - else
             %i.fa.fa-clock-o
