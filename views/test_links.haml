@@ -39,7 +39,7 @@
     - else
       - if !@prereqs_passed
         #{@text['either']}
-      - elsif !@attempts_remaining
+      - elsif !@attempts_remaining && params[:which] == 'head'
         #{@text['none_left']}
         %br
         %br
@@ -55,7 +55,7 @@
             {{ currency.quan + " " + currency.label }}
           #{paypal_button}
      
-      - elsif @good and @attempts_remaining
+      - elsif @good
         - if params[:which] == 'head'
           You've got 
           #{session[:user]['hrWrittenAttemptsRemaining']} 
