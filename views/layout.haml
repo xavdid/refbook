@@ -119,14 +119,14 @@
       - if @killed
         %p
           %i.fa.fa-warning.fa-2x.danger
-      -# - if affiliate? and not paid?
-      -#   %p
-      -#     %i.fa.fa-warning.fa-2x.go
-      -#     %br
-      -#     #{@layout['affiliate']} 
-      -#     %a{href: '/settings'}<
-      -#       #{@layout['settings']} 
-      -#     #{@layout['page']}. 
+      - if affiliate? && !paid?
+        %p
+          %i.fa.fa-warning.fa-2x.go
+          %br
+          #{@layout['affiliate']} 
+          %a{href: '/settings'}<
+            #{@layout['settings']} 
+          #{@layout['page']}. 
 
         
   .mid
