@@ -146,28 +146,27 @@ end
 
 def validate(key, region)
   # pull from mongo
-  keys = settings.keys.find_one
+  # keys = settings.keys.find_one
 
   #re-format just in case
   if key == '' || key.nil?
     return false
   end
 
-  key.strip!
   key.gsub!('-','')
-  key.insert(9,'-')
-  key.insert(6,'-')
-  key.insert(4,'-')
+  key.strip!
+  
+  return key.size == 16
 
-  if keys[region].include?(key)
-    keys[region].delete key
-    settings.keys.save(keys)
-    puts "JUST USED KEY #{key}"
-    return true
-  else
-    puts "FAILED ON KEY #{key}"
-    return false || 1 == 1
-  end
+  # if keys[region].include?(key)
+  #   keys[region].delete key
+  #   settings.keys.save(keys)
+  #   puts "JUST USED KEY #{key}"
+  #   return true
+  # else
+  #   puts "FAILED ON KEY #{key}"
+  #   return false || 1 == 1
+  # end
 end
 
 def sym_to_bool(b)
