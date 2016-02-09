@@ -189,7 +189,7 @@ def display(args = {})
   if sym_to_bool(args[:alt])
     @alt_text = settings.text_hash[path.to_s][@lang]
   else
-    if not sym_to_bool(args[:old])
+    if !sym_to_bool(args[:old])
       # pp 'asdf',settings.text_hash
       @text = settings.text_hash[path.to_s][@lang]
     else
@@ -253,13 +253,13 @@ def report_bad(user_id)
   end
 end
 
-def report_hr(user_id)
+def report_paypal
   Mail.deliver do
     to 'beamneocube@gmail.com'
     from 'IRDP <irdp.rdt@gmail.com>'
-    subject 'HR failure?'
+    subject 'paypal failure?'
     html_part do
-      body "User #{user_id} just maybe didn't get recognized for their hr completion!"
+      body "User just maybe didn't get recognized for their hr payment!"
     end
   end
 end
@@ -291,7 +291,7 @@ def weekly_testing_update
     end.get
 
     test_dump.each do |t|
-      if users.include? t['taker']
+      if users.include?(t['taker'])
         body_text += "<tr>#{td_start}#{users[t['taker']]}</td>
           #{td_start}#{settings.test_names[t['type'].to_sym]}</td>
           #{td_start}#{t['percentage']}%</td>
@@ -322,13 +322,13 @@ end
 
 # Rendering helpers
 def email_link(a={})
-  if a.include? :subject
+  if a.include?(:subject)
     @subject = URI.encode("?subject=#{a[:subject]}")
   else
     @subject = ''
   end
 
-  if a.include? :text
+  if a.include?(:text)
     @display_text = a[:text]
   else
     @display_text = 'irdp.rdt@gmail.com'
@@ -377,14 +377,14 @@ before do
   end
 
   # admins can use site even when it's locked
-  if not admin?
+  if !admin?
     if @killed && !['/layout','/login','/logout','/release','/paid','/styles.css', '/off'].include?(request.path_info)
       redirect '/off'
     end
   end
 
   # subdomain redirection
-  if not settings.development?
+  if !settings.development?
     url = Domainatrix.parse(request.url)
     if url.subdomain.size > 0
       redirect 'http://refdevelopment.com'+url.path
@@ -422,9 +422,9 @@ def admin
 end
 get '/admin' do
   @title = "Admin"
-  if not logged_in?
+  if !logged_in?
     redirect '/login?d=/admin'
-  elsif not admin?
+  elsif !admin?
     flash[:issue] = @layout['issues']['admin']
     redirect '/'
   else
@@ -486,7 +486,7 @@ get '/cm' do
   #   B: no attempts for this test
   #   C: attempted this test
 
-  if not params.include? 'cm_user_id'
+  if !params.include?('cm_user_id')
     flash[:issue] = @layout['issues']['cm']
     redirect '/'
   end
@@ -500,7 +500,7 @@ get '/cm' do
     att = attempt_list.select do |a|
       a["type"] == params[:cm_return_test_type]
     end.first
-    if not att
+    if att.nil?
       # B
       att = Parse::Object.new("testAttempt")
       att["taker"] = params[:cm_user_id]  
@@ -542,7 +542,6 @@ get '/cm' do
   user_to_update.save
 
   email_results(email, pass, params[:cm_return_test_type]) if !settings.development?
-  report_hr(att['taker']) if att['type'] == 'head'
   redirect '/pull' if pass
   redirect "/testing/#{params[:cm_return_test_type]}"
 end
@@ -650,7 +649,7 @@ end
 def field
 end
 get '/field/:referee' do 
-  if not admin?
+  if !admin?
     redirect back
   end
   ref = Parse::Query.new("_User").eq("objectId", params[:referee]).get.first
@@ -662,10 +661,10 @@ get '/field/:referee' do
 end
 
 get '/field_test' do
-  if not logged_in?
+  if !logged_in?
     flash[:issue] = @layout['issues']['test_login']
     redirect "/login?d=/field_test"
-  elsif not session[:user]['headRef']
+  elsif !session[:user]['headRef']
     flash[:issue] = @layout['issues']['hr_first']
     redirect '/testing/head'
   elsif session[:user]['passedFieldTest']
@@ -695,9 +694,9 @@ end
 
 get '/field_tests' do 
   @title = "Field Test Signups"
-  if not logged_in?
+  if !logged_in?
     redirect '/login?d=/admin'
-  elsif not admin?
+  elsif !admin?
     flash[:issue] = @layout['issues']['admin']
     redirect '/'
   else
@@ -756,7 +755,7 @@ end
 def off
 end
 get '/off' do
-  if not @killed
+  if !@killed
     # flash[:issue] = "Maintenance is done, carry on!"
     redirect '/'
   else
@@ -778,8 +777,14 @@ def paid
 end
 # get ca$h get m0ney
 post '/paid' do
-  id = params["custom"].split('|')[0].split('=')[1]
-  type = params["custom"].split('|')[1].split('=')[1]
+  begin
+    id = params["custom"].split('|')[0].split('=')[1]
+    type = params["custom"].split('|')[1].split('=')[1]
+  rescue
+    puts "IPN FAILURE"
+    pp params
+    report_paypal
+  end
   # unnamed ref payments don't count
   if id == 'Sb33WyBziN'
     return {status: 200, message: "ok"}.to_json
@@ -792,7 +797,7 @@ post '/paid' do
     elsif type == 'ac'
       user_to_update['paid'] = true
     else
-      halt 500
+      halt 400
     end
     user_to_update.save
     pp "payment registered for #{user_to_update['firstName']} #{user_to_update['lastName']}"
@@ -801,6 +806,7 @@ post '/paid' do
   rescue Exception => e 
     puts e.message  
     puts e.backtrace.inspect
+    status 500
     return {status: 500, message: "not ok"}.to_json
   end
 end
@@ -808,7 +814,7 @@ end
 def profile
 end
 get '/profile' do
-  if not logged_in?
+  if !logged_in?
     redirect '/login?d=/profile'
   end
   @review_list = []
@@ -863,7 +869,7 @@ end
 def pull
 end
 get '/pull' do 
-  if not logged_in? 
+  if !logged_in? 
     flash[:issue] = @layout['issues']['refresh']
     redirect '/login?d=/pull'
   else
@@ -877,7 +883,7 @@ def qr
 end
 get '/qr' do
   @title = "QR"
-  if not logged_in?
+  if !logged_in?
     redirect '/login?d=/qr'
   end
   u = "http://refdevelopment.com/review/#{session[:user]['objectId']}"
@@ -1020,7 +1026,7 @@ end
 
 get '/reviews/:review_id' do
   @title = "Edit a Review"
-  if not admin?
+  if !admin?
     # still using old bounce because there's no way someone is linking
     # right to this page. hopefully.
     flash[:issue] = @layout['issues']['admin']
@@ -1083,7 +1089,7 @@ get '/search/:region' do
   # @mine = Set.new
 
   # stars_dump.each do |s|
-  #   if @stars.include? s['to']
+  #   if @stars.include?(s['to'])
   #     @stars[s['to']] += 1
   #   else
   #     @stars[s['to']] = 1
@@ -1121,7 +1127,7 @@ end
 def settings
 end
 get '/settings' do 
-  if not logged_in?
+  if !logged_in?
     redirect '/login?d=/settings'
   end
   @title = "Settings"
@@ -1131,22 +1137,22 @@ end
 post '/settings' do  
   begin
     if params.include?('tests') && settings.development?
-      if params.include? 'ar'
+      if params.include?('ar')
         session[:user]['assRef'] = true 
       else
         session[:user]['assRef'] = false
       end
-      if params.include? 'sr'
+      if params.include?('sr')
         session[:user]['snitchRef'] = true 
       else
         session[:user]['snitchRef'] = false
       end
-      if params.include? 'hr'
+      if params.include?('hr')
         session[:user]['headRef'] = true 
       else
         session[:user]['headRef'] = false
       end
-      if params.include? 'ft'
+      if params.include?('ft')
         session[:user]['passedFieldTest'] = true 
       else
         session[:user]['passedFieldTest'] = false
@@ -1169,11 +1175,11 @@ end
 def star
 end
 get '/star/:id' do 
-  if not logged_in?
+  if !logged_in?
     redirect "/login?d=/star/#{params[:id]}"
   end
 
-  if not session[:user]['headRef']
+  if !session[:user]['headRef']
     # probably a better thing to do
     flash[:issue] = "You heed to be an HR before you can star people"
     redirect '/'
@@ -1214,7 +1220,7 @@ get '/testing/:which' do
   #   If they pass, display the link for the relevant test(s). When they finish, 
   #   update the relevent test entry wtih the most recent test
 
-  if not logged_in?
+  if !logged_in?
     flash[:issue] = @layout['issues']['test_login']
     redirect "/login?d=/testing/#{params[:which]}"
   end
@@ -1231,7 +1237,7 @@ get '/testing/:which' do
   display({path: :test_links, old: :f}) if session[:user][params[:which]+"Ref"]
 
   @good = true
-  @attempts_remaining = session[:user]['hrWrittenAttemptsRemaining'] > 0
+  @attempts_remaining = session[:user]['hrWrittenAttemptsRemaining'].to_i > 0
   @prereqs_passed = true
 
   # Everyone is on rulebook 8!
@@ -1262,13 +1268,13 @@ get '/testing/:which' do
     end
   end
   attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
-  if not attempt_list.empty?
+  if !attempt_list.empty?
     # at least 1 attempt
     att = attempt_list.select do |a|
       # hardcoded - will do actual test discrim later
       a['type'] == params[:which]
     end
-    if not att.empty?
+    if !att.empty?
       # they've taken this test sometime
       att = att.first
       
