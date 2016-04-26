@@ -784,6 +784,8 @@ post '/paid' do
     puts "IPN FAILURE"
     pp params
     report_paypal
+    status 500
+    return {status: 500, message: "not ok"}.to_json
   end
   # unnamed ref payments don't count
   if id == 'Sb33WyBziN'
