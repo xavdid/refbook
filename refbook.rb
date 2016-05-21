@@ -300,7 +300,7 @@ def weekly_testing_update
       end
     end
 
-    body_text += "</table><br><br>If you've got any questions, reach out to David at david@salesforceiq.com.<br><br> ~IRDP"
+    body_text += "</table><br><br>If you've got any questions, reach out to David at beamneocube@gmail.com.<br><br> ~IRDP"
 
     Mail.deliver do
       # to 'beamneocube@gmail.com'
