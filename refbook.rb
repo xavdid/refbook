@@ -27,29 +27,29 @@ configure do
   end
 
   enable :sessions
-  
+
   set :session_secret, 'this_is_secret'
   # TODO: this really needs to be redone
   set :region_hash, {
     "Argentina" => "AAQ",
     "Australia" => "AUST",
     "Austria" => "QA",
-    "Belgium" => "BQF", 
+    "Belgium" => "BQF",
     "Brazil" => "ABQ",
-    "Canada" => "CANA", 
-    "Catalonia" => "AQC", 
+    "Canada" => "CANA",
+    "Catalonia" => "AQC",
     "France" => "FQF",
-    "Germany" => "DQB", 
-    "Italy" => "ITAL", 
+    "Germany" => "DQB",
+    "Italy" => "ITAL",
     "Mexico" => "MEX",
-    "Netherlands" => "MQN", 
-    "Norway" => "NORW", 
-    "Poland" => "PLQ", 
+    "Netherlands" => "MQN",
+    "Norway" => "NORW",
+    "Poland" => "PLQ",
     "Spain" => "AQE",
     "Turkey" => "QD",
     "United Kingdom" => "QUK",
     "United States" => "USQ",
-    "Other" => "OTHR", 
+    "Other" => "OTHR",
     "All Regions" => "ALL"
   }
   set :affiliate, ["QUK", "AUST", "CANA", "ITAL", "NORW", "BQF", "MQN", "AQC"]
@@ -78,7 +78,7 @@ configure do
     set :conn, nil
     set :keys, nil
     set :stars, nil
-    # this should only happen on planes and stuff. Otherwise it's probably bad. 
+    # this should only happen on planes and stuff. Otherwise it's probably bad.
     puts 'Mongo offline!'
   end
 
@@ -87,14 +87,14 @@ configure do
            :quiet => true
 
   Mail.defaults do
-    delivery_method :smtp, { 
+    delivery_method :smtp, {
       :address   => "smtp.sendgrid.net",
       :port      => 587,
       :domain    => "refdevelopment.com",
       :user_name => ENV['SENDGRID_USERNAME'],
       :password  => ENV['SENDGRID_PASSWORD'],
       :authentication => 'plain',
-      :enable_starttls_auto => true 
+      :enable_starttls_auto => true
     }
   end
 
@@ -105,7 +105,7 @@ end
 
 # returns true if and only if the user is logged in
 def logged_in?
-  session[:user] != nil 
+  session[:user] != nil
 end
 
 def admin?
@@ -138,7 +138,7 @@ def pull_user(id=nil)
   Parse::Query.new("_User").eq("objectId", uid).get.first
 end
 
-# originally created to ease the transition between js bools and 
+# originally created to ease the transition between js bools and
 # ruby bools, I'm not sure if I need it anymore
 def to_bool(str)
   str.downcase == 'true' || str == '1'
@@ -155,7 +155,7 @@ def validate(key, region)
 
   key.gsub!('-','')
   key.strip!
-  
+
   return key.size == 16
 
   # if keys[region].include?(key)
@@ -196,7 +196,7 @@ def display(args = {})
       @text = {}
     end
   end
-  
+
   # pp @text
 
   haml path.to_sym, layout: sym_to_bool(args[:layout])
@@ -221,22 +221,22 @@ def email_results(email, pass, test)
 end
 
 def register_purchase(text)
-  Mail.deliver do 
+  Mail.deliver do
     to "trigger@recipe.ifttt.com"
     from 'beamneocube@gmail.com'
     subject text
-    html_part do 
+    html_part do
       body "asdf"
     end
   end
 end
 
 def notify_of_review(reviewee)
-  Mail.deliver do 
+  Mail.deliver do
     to reviewee
     from 'IRDP <irdp.rdt@gmail.com>'
     subject "You've been reviewed!"
-    html_part do 
+    html_part do
       body "Hey there!<br><br>Someone has written a review about you and it's been approved (or recently edited) by an IRDP RDT member. Head over to your <a href=\"http://refdevelopment.com/profile\">profile</a> to read it!<br><br>~the IRDP<br><br>"
     end
   end
@@ -307,7 +307,7 @@ def weekly_testing_update
       to 'gameplay@quidditchuk.org'
       from 'IRDP <irdp.rdt@gmail.com>'
       subject 'Weekly Test Result Update'
-      html_part do 
+      html_part do
         content_type 'text/html; charset=UTF-8'
         body body_text
       end
@@ -359,7 +359,7 @@ end
 # kill switch
 def before
 end
-before do 
+before do
   # pp session
   if settings.development?
     # this is the local switch
@@ -399,7 +399,7 @@ before do
 end
 
 # routes
-def index 
+def index
 end
 get '/' do
   @section = "index"
@@ -413,7 +413,7 @@ get '/about' do
   display({old: :f})
 end
 
-get '/break' do 
+get '/break' do
   halt 500
 end
 
@@ -445,12 +445,12 @@ get '/admin' do
 
     reviews.each do |r|
       if r['comments'].size > 0
-        if r['referee'] && refs.include?(r['referee'].parse_object_id)        
+        if r['referee'] && refs.include?(r['referee'].parse_object_id)
           ref = refs[r['referee'].parse_object_id]
           rid = ref['objectId']
           r['refName'] = name_maker(ref)
           r['rid'] = rid
-          
+
           # hide the name of reviews made about you
           if r['referee'].parse_object_id == session[:user]['objectId']
             r['reviewerName'] = "REDACTED"
@@ -480,7 +480,7 @@ end
 
 def cm
 end
-get '/cm' do 
+get '/cm' do
   # cases:
   #   A: no attempts at all
   #   B: no attempts for this test
@@ -503,7 +503,7 @@ get '/cm' do
     if att.nil?
       # B
       att = Parse::Object.new("testAttempt")
-      att["taker"] = params[:cm_user_id]  
+      att["taker"] = params[:cm_user_id]
     else
       # C
       if Time.now.utc - Time.parse(att['time']) < settings.waiting - 500
@@ -589,14 +589,14 @@ post '/create' do
     :firstName => params[:fn],
     :lastName => params[:ln],
     :team => params[:team],
-    # because of dropdown, there shouldn't ever be no region, but this is 
+    # because of dropdown, there shouldn't ever be no region, but this is
     # just in case. Region errors really break stuff.
     :region => settings.region_hash[params[:region]] || "NONE"
   })
 
 
   begin
-    session[:user] = user.save
+    session[:user] = user.save.to_h
     t_flash = @layout['issues']['created']
     # pp "flash is #{@layout}"
     t_flash += session[:user]['paid'] ? '' : 'non'
@@ -614,7 +614,7 @@ end
 
 def currency
 end
-get '/currency' do 
+get '/currency' do
   # @c is the index for the currency as seen in app.js
   reg = session[:user]['region']
   if ['AUST'].include?(reg)
@@ -627,11 +627,11 @@ get '/currency' do
     i = 3
   elsif ['USQ'].include?(reg)
     i = 4
-  else # EUR 
+  else # EUR
     i = 2
   end
   {i: i}.to_json
-end  
+end
 
 def donate
 end
@@ -648,7 +648,7 @@ end
 
 def field
 end
-get '/field/:referee' do 
+get '/field/:referee' do
   if !admin?
     redirect back
   end
@@ -692,7 +692,7 @@ post '/field_test' do
   redirect '/profile'
 end
 
-get '/field_tests' do 
+get '/field_tests' do
   @title = "Field Test Signups"
   if !logged_in?
     redirect '/login?d=/admin'
@@ -709,7 +709,7 @@ end
 
 def info
 end
-get '/info' do 
+get '/info' do
   @section = 'info'
   display({old: :f})
 end
@@ -735,10 +735,11 @@ end
 
 post '/login' do
   begin
-    session[:user] = Parse::User.authenticate(params[:username].downcase, params[:password].rstrip)
+    session[:user] = Parse::User.authenticate(params[:username].downcase, params[:password].rstrip).to_h
     session.options[:expire_after] = 2592000 # 30 days
     redirect params[:d]
   rescue
+    puts 'rescuing!'
     flash[:issue] = @layout['issues']['credentials']
     redirect "/login?d=#{params[:d]}"
   end
@@ -746,7 +747,7 @@ end
 
 def logout
 end
-get '/logout' do 
+get '/logout' do
   session[:user] = nil
   flash[:issue] = @layout['issues']['logout']
   redirect '/'
@@ -805,8 +806,8 @@ post '/paid' do
     pp "payment registered for #{user_to_update['firstName']} #{user_to_update['lastName']}"
     register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']} ||| #{user_to_update['region']}")
     return {status: 200, message: "ok"}.to_json
-  rescue Exception => e 
-    puts e.message  
+  rescue Exception => e
+    puts e.message
     puts e.backtrace.inspect
     status 500
     return {status: 500, message: "not ok"}.to_json
@@ -870,12 +871,12 @@ end
 
 def pull
 end
-get '/pull' do 
-  if !logged_in? 
+get '/pull' do
+  if !logged_in?
     flash[:issue] = @layout['issues']['refresh']
     redirect '/login?d=/pull'
   else
-    session[:user] = pull_user
+    session[:user] = pull_user.to_h
     flash[:issue] = @layout['issues']['pull']
     redirect back
   end
@@ -897,15 +898,15 @@ def refresh
 end
 get '/refresh' do
   # just to make sure we beat the paypal ping
-  sleep(3.5) 
-  session[:user] = pull_user
+  sleep(3.5)
+  session[:user] = pull_user.to_h
   flash[:issue] = @layout['issues']['confirm']
   redirect '/'
 end
 
 def reset
 end
-get '/reset' do 
+get '/reset' do
   @title = "Reset Your Password"
   display
 end
@@ -923,7 +924,7 @@ end
 
 def release
 end
-get '/release' do 
+get '/release' do
   # this isn't display because all the languages are already there
   # it could be updated if we add a language we didn't press release in
   haml :release, layout: false
@@ -932,7 +933,7 @@ end
 def report
 end
 # this is a get cause it gets hit by Zapier right now, maybe change to ironworks soon?
-get '/report' do 
+get '/report' do
   good = weekly_testing_update
   if good
     {status: 200}.to_json
@@ -943,7 +944,7 @@ end
 
 def review
 end
-get '/review' do 
+get '/review' do
   @title = "Review a Referee"
   @section = 'review'
 
@@ -973,7 +974,7 @@ get '/review' do
   display({old: :f})
 end
 
-post '/review' do 
+post '/review' do
   # process recapcha
   verify_url = "https://www.google.com/recaptcha/api/siteverify?secret=#{ENV['REFBOOK_RECAPTCHA_SECRET']}&response=#{params[:'g-recaptcha-response']}"
   resp = HTTParty.get(verify_url)
@@ -991,12 +992,12 @@ post '/review' do
   rev['isCaptain'] = params[:captain] ? true : false
   rev['region'] = params[:region] || "None"
 
-  p = Parse::Pointer.new({})
-  p.class_name = "_User"
+  point = Parse::Pointer.new({})
+  point.class_name = "_User"
   # the correct user_id or hardcoded Unnamed Ref
-  p.parse_object_id = params[:referee] || "Sb33WyBziN"
+  point.parse_object_id = params[:referee] || "Sb33WyBziN"
 
-  rev['referee'] = p
+  rev['referee'] = point
   rev['type'] = params[:type]
 
   rev['date'] = params[:date]
@@ -1012,11 +1013,11 @@ post '/review' do
   redirect back
 end
 
-get '/review/:id' do 
+get '/review/:id' do
   @ref = Parse::Query.new("_User").eq("objectId", params[:id]).get.first
   halt 404 if @ref.nil?
 
-  @url = @ref['profPic'] ? 
+  @url = @ref['profPic'] ?
       @ref['profPic'] : '/images/person_blank.png'
 
   @title = "Review #{@ref['firstName']} #{@ref['lastName']}"
@@ -1052,16 +1053,16 @@ post '/reviews/:review_id' do
   r['comments'] = params[:comments]
 
   notify_of_review(reviewee) if r['show']
-  
+
   r.save
-  
+
   flash[:issue] = "Review saved, it will #{r['show'] ? "" : "not"} be shown"
   redirect '/admin'
 end
 
 def risk
 end
-get '/risk' do 
+get '/risk' do
   @title = "IRDP Territories"
   display({old: :t})
 end
@@ -1069,17 +1070,17 @@ end
 
 def search
 end
-get '/search/:region' do 
+get '/search/:region' do
   @title = "Directory by Region"
   @section = 'search'
 
   @reg = params[:region].upcase
   @region_title = reg_reverse(@reg)
-  
+
   @region_values = settings.region_codes.reject{|p| p[0..1] == "US"}
   @region_keys = []
   @region_values.each{|r| @region_keys << reg_reverse(r)}
-  
+
   if @region_title.nil?
     halt 404
   end
@@ -1128,7 +1129,7 @@ end
 
 def settings
 end
-get '/settings' do 
+get '/settings' do
   if !logged_in?
     redirect '/login?d=/settings'
   end
@@ -1136,26 +1137,26 @@ get '/settings' do
   display({old: :f})
 end
 
-post '/settings' do  
-  begin
+post '/settings' do
+  # begin
     if params.include?('tests') && settings.development?
       if params.include?('ar')
-        session[:user]['assRef'] = true 
+        session[:user]['assRef'] = true
       else
         session[:user]['assRef'] = false
       end
       if params.include?('sr')
-        session[:user]['snitchRef'] = true 
+        session[:user]['snitchRef'] = true
       else
         session[:user]['snitchRef'] = false
       end
       if params.include?('hr')
-        session[:user]['headRef'] = true 
+        session[:user]['headRef'] = true
       else
         session[:user]['headRef'] = false
       end
       if params.include?('ft')
-        session[:user]['passedFieldTest'] = true 
+        session[:user]['passedFieldTest'] = true
       else
         session[:user]['passedFieldTest'] = false
       end
@@ -1164,19 +1165,20 @@ post '/settings' do
       session[:user]['username'] = params[:username] unless params[:username].nil?
       session[:user]['lang'] = params[:lang] unless params[:lang].nil?
     end
-    session[:user] = session[:user].save
+    u = Parse::Object.new('_User', session[:user])
+    session[:user] = u.save.to_h
     flash[:issue] = @layout['issues']['settings']
     redirect '/'
-  rescue
-    session[:user] = pull_user
-    flash[:issue] = @layout['issues']['invalid']
-    redirect '/settings'
-  end
+  # rescue
+  #   session[:user] = pull_user
+  #   flash[:issue] = @layout['issues']['invalid']
+  #   redirect '/settings'
+  # end
 end
 
 def star
 end
-get '/star/:id' do 
+get '/star/:id' do
   if !logged_in?
     redirect "/login?d=/star/#{params[:id]}"
   end
@@ -1206,7 +1208,7 @@ get '/star/:id' do
     end
   end
 
-end  
+end
 
 def testing
 end
@@ -1217,9 +1219,9 @@ get '/testing' do
 end
 
 get '/testing/:which' do
-  #   find all test attempts from that user id, find the (single) type attempt, 
+  #   find all test attempts from that user id, find the (single) type attempt,
   #   then, update it with most recent attempt (and Time.now) for comparison.
-  #   If they pass, display the link for the relevant test(s). When they finish, 
+  #   If they pass, display the link for the relevant test(s). When they finish,
   #   update the relevent test entry wtih the most recent test
 
   if !logged_in?
@@ -1230,7 +1232,7 @@ get '/testing/:which' do
   @title = "#{settings.test_names[params[:which].to_sym]} Referee Test"
   @section = 'testing'
   # right now, which can be anything. Nbd?
-  
+
   unless["head", "snitch", "ass", "sample"].include?(params[:which])
     halt 404
   end
@@ -1244,26 +1246,26 @@ get '/testing/:which' do
 
   # Everyone is on rulebook 8!
   # @tests = {
-  #   ass: 'jmk53c853467f7c6', 
-  #   snitch: "6kr53c853f4914d8", 
-  #   head: "qjp53c854a5530ff", 
+  #   ass: 'jmk53c853467f7c6',
+  #   snitch: "6kr53c853f4914d8",
+  #   head: "qjp53c854a5530ff",
   #   sample: "xnj533d065451038"
   # }
   # RB9
   @tests = {
-    ass: 't7k567bb8b3b0fa1', 
-    snitch: '7kf567bb80a6c994', 
-    head: '9gj567bb974ad8e2', 
+    ass: 'kcp57ec4ee09e4ba',
+    snitch: '4ng57ec4c84268e0',
+    head: 'kxc57ec51f7cfdec',
     sample: "xnj533d065451038"
   }
   # if session[:user]['region'] == "CANA"
   #   @tests[:snitch] = CANADIAN TEST # test w/ off pitch
   # end
-  @rb = 9.0
-  
+  @rb = 10.0
+
   # refresh user object
   if params[:which] == 'head'
-    session[:user] = pull_user
+    session[:user] = pull_user.to_h
 
     if !session[:user]['assRef'] || !session[:user]['snitchRef']
       @prereqs_passed = false
@@ -1279,7 +1281,7 @@ get '/testing/:which' do
     if !att.empty?
       # they've taken this test sometime
       att = att.first
-      
+
       if Time.now.utc - Time.parse(att['time']) < settings.waiting
         @good = false
         @try_unlocked = Time.parse(att['time']) + settings.waiting
@@ -1304,7 +1306,8 @@ post '/upload' do
   h = photo.save
   puts h
   session[:user]['profPic'] = photo.url
-  session[:user] = session[:user].save
+  u = Parse::Object.new('_User', session[:user])
+  session[:user] = u.save
   redirect '/profile'
 end
 
@@ -1328,7 +1331,7 @@ end
 
 get '/impersonate' do
   if settings.development?
-    session[:user] = pull_user(params[:id])
+    session[:user] = pull_user(params[:id]).to_h
   end
 
   redirect '/'

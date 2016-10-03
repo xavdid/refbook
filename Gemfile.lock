@@ -1,10 +1,11 @@
 GIT
-  remote: git://github.com/xavdidtheshadow/parse-ruby-client.git
-  revision: 1698619b22e00ea985136778f89945e20ad957f2
+  remote: https://github.com/adelevie/parse-ruby-client.git
+  revision: 30998e5ca6cc06c090f91e0b0eac93164e002476
+  ref: 30998e5ca6cc06c090f91e0b0eac93164e002476
   specs:
-    parse-ruby-client (0.3.0)
-      faraday
-      faraday_middleware
+    parse-ruby-client (1.0.0)
+      faraday (= 0.9.1)
+      faraday_middleware (~> 0.10.0)
 
 GEM
   remote: https://rubygems.org/
@@ -125,5 +126,8 @@ DEPENDENCIES
   sinatra-flash
   thin
 
+RUBY VERSION
+   ruby 2.2.5p319
+
 BUNDLED WITH
-   1.10.6
+   1.12.5
