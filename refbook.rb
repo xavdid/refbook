@@ -191,7 +191,7 @@ end
 # old: whether or not it uses the old haml format. Will depreciate later.
 def display(args = {})
   pp args unless settings.test?
-  path = args[:path] || request.path_info[1..-1]
+  path = args[:path] || request.path_info[1..-1].chomp('/')
   args[:layout] ||= :t
   # old is default to prevent breaking, this will change eventually
   args[:old] ||= :t
@@ -1235,7 +1235,7 @@ end
 
 def testing
 end
-get '/testing' do
+get '/testing/?' do
   @title = "Testing Information Center"
   @section = 'testing'
   display({old: :f})
@@ -1246,6 +1246,10 @@ get '/testing/:which' do
   #   then, update it with most recent attempt (and Time.now) for comparison.
   #   If they pass, display the link for the relevant test(s). When they finish,
   #   update the relevent test entry wtih the most recent test
+
+  # if params[:which].nil?
+  #   redirect '/testing'
+  # end
 
   if !logged_in?
     flash[:issue] = @layout['issues']['test_login']
