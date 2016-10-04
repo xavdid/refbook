@@ -42,7 +42,7 @@ configure do
     "Germany" => "DQB",
     "Italy" => "ITAL",
     "Mexico" => "MEX",
-    "Netherlands" => "MQN",
+    "Netherlands" => "QNL",
     "Norway" => "NORW",
     "Poland" => "PLQ",
     "Spain" => "AQE",
@@ -52,7 +52,7 @@ configure do
     "Other" => "OTHR",
     "All Regions" => "ALL"
   }
-  set :affiliate, ["QUK", "AUST", "CANA", "ITAL", "NORW", "BQF", "MQN", "AQC"]
+  set :affiliate, ["QUK", "AUST", "CANA", "ITAL", "NORW", "BQF", "QNL", "AQC"]
   set :region_names, settings.region_hash.keys[0..-2].sort
   set :region_codes, settings.region_names.map{|r| settings.region_hash[r]}
   # TIME BETWEEN ATTEMPTS
@@ -138,6 +138,13 @@ def pull_user(id=nil)
   Parse::Query.new("_User").eq("objectId", uid).get.first
 end
 
+def refresh_session!
+  puts 'refreshing!', session[:user]['team']
+  u = Parse::Object.new('_User', session[:user])
+  puts u.inspect
+  session[:user] = u.save.to_h
+end
+
 # originally created to ease the transition between js bools and
 # ruby bools, I'm not sure if I need it anymore
 def to_bool(str)
@@ -156,6 +163,7 @@ def validate(key, region)
   key.gsub!('-','')
   key.strip!
 
+  # basically any 16 digit number. it's fine.
   return key.size == 16
 
   # if keys[region].include?(key)
@@ -372,6 +380,12 @@ before do
   # so we never have a null language
   if logged_in?
     @lang = session[:user]['lang'] || 'EN'
+
+    # check for updated region
+    if session[:user]['region'] == 'MQN'
+      session[:user]['region'] = 'QNL'
+      refresh_session!
+    end
   else
     @lang = "EN"
   end
@@ -1138,42 +1152,49 @@ get '/settings' do
 end
 
 post '/settings' do
-  # begin
+  begin
     if params.include?('tests') && settings.development?
+
       if params.include?('ar')
         session[:user]['assRef'] = true
       else
         session[:user]['assRef'] = false
       end
+
       if params.include?('sr')
         session[:user]['snitchRef'] = true
       else
         session[:user]['snitchRef'] = false
       end
+
       if params.include?('hr')
         session[:user]['headRef'] = true
       else
         session[:user]['headRef'] = false
       end
+
       if params.include?('ft')
         session[:user]['passedFieldTest'] = true
       else
         session[:user]['passedFieldTest'] = false
       end
+
     else
       session[:user]['email'] = params[:username] unless params[:username].nil?
       session[:user]['username'] = params[:username] unless params[:username].nil?
       session[:user]['lang'] = params[:lang] unless params[:lang].nil?
+      session[:user]['team'] = params[:team] unless params[:team].nil?
     end
-    u = Parse::Object.new('_User', session[:user])
-    session[:user] = u.save.to_h
+
+    refresh_session!
     flash[:issue] = @layout['issues']['settings']
     redirect '/'
-  # rescue
-  #   session[:user] = pull_user
-  #   flash[:issue] = @layout['issues']['invalid']
-  #   redirect '/settings'
-  # end
+
+  rescue
+    session[:user] = pull_user.to_h
+    flash[:issue] = @layout['issues']['invalid']
+    redirect '/settings'
+  end
 end
 
 def star
@@ -1261,7 +1282,7 @@ get '/testing/:which' do
   # if session[:user]['region'] == "CANA"
   #   @tests[:snitch] = CANADIAN TEST # test w/ off pitch
   # end
-  @rb = 10.0
+  @rb = 'IQARB16-18'
 
   # refresh user object
   if params[:which] == 'head'
@@ -1306,8 +1327,7 @@ post '/upload' do
   h = photo.save
   puts h
   session[:user]['profPic'] = photo.url
-  u = Parse::Object.new('_User', session[:user])
-  session[:user] = u.save
+  refresh_session!
   redirect '/profile'
 end
 
