@@ -133,15 +133,18 @@ def name_maker(person)
   "#{person['firstName']} #{person['lastName']}"
 end
 
+# this fetches a raw Parse object
+# to save it to the session, tack on .to_h
 def pull_user(id=nil)
   uid = id || session[:user]['objectId']
   Parse::Query.new("_User").eq("objectId", uid).get.first
 end
 
+# this takes the current session (theoretically with edits), saves it,
+# and stores it back in the session. If you're not changing anything, safer
+# to use #pull_user
 def refresh_session!
-  puts 'refreshing!', session[:user]['team']
   u = Parse::Object.new('_User', session[:user])
-  puts u.inspect
   session[:user] = u.save.to_h
 end
 
@@ -383,8 +386,7 @@ before do
 
     # check for updated region
     if session[:user]['region'] == 'MQN'
-      session[:user]['region'] = 'QNL'
-      refresh_session!
+      session[:user] = pull_user.to_h
     end
   else
     @lang = "EN"
