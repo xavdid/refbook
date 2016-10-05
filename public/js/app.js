@@ -4,27 +4,27 @@ var app = angular
         $scope.currencies = [
             {
                 label: "AUD",
-                code: "K5UBECVDPZEGN",
+                code: "AS9ML7EUA3L8E",
                 quan: "$23"
             },
             {
                 label: "CAD",
-                code: "S4D7VGQ33DLXG",
+                code: "UJE6ZNE497XSQ",
                 quan: "$23"
             },
             {
                 label: "EUR",
-                code: "LXQLYPBHFSFNQ",
+                code: "J2DZLFHGF6GYG",
                 quan: "€15"
             },
             {
                 label: "GBP",
-                code: "RZ8NXMVPA5TYW",
+                code: "WK532LMGBZLTE",
                 quan: "£10"
             },
             {
                 label: "USD",
-                code: "WRVHF3X2SS2FS",
+                code: "4AFVSRFMP4WDC",
                 quan: "$16"
             }
         ];
