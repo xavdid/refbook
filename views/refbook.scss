@@ -25,7 +25,7 @@ html, body {
     padding: 0;
     height: 100%;
     font-size: 18px;
-    // background-image: url("../images/satinweave.png"); 
+    // background-image: url("../images/satinweave.png");
 
     a {
         color: $green;
@@ -46,9 +46,9 @@ html, body {
         background: #333;
         margin-left: 0;
         width: 80%;
-        background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); 
-        background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc); 
-        background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc); 
+        background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+        background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc);
+        background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc);
         background-image:      -o-linear-gradient(left, #ccc, #333, #ccc);
     }
 
@@ -57,7 +57,7 @@ html, body {
         margin: 0 auto;
         padding-bottom: 50px;
         h1, h2 {
-            text-align: center; 
+            text-align: center;
             padding-top: 60px;
         }
         .left {
@@ -74,7 +74,7 @@ html, body {
     }
 
     // span.ex {
-        // color: red; 
+        // color: red;
         // font-weight: bold;
     // }
 
@@ -138,14 +138,14 @@ html, body {
             &:hover {
                 & > a {
                     // color: $cyan;
-                    
+
                     // border-bottom: 1px solid #fff;
                 }
            }
         }
 
         .active {
-            border-bottom: 1px solid #000; 
+            border-bottom: 1px solid #000;
             // color: $cyan;
         }
 
@@ -166,7 +166,7 @@ html, body {
             }
             .icon {
                 padding: 0;
-                // border-bottom: 1px solid #fff; 
+                // border-bottom: 1px solid #fff;
                 &:hover {
                     border-bottom: 1px solid #fff;
                 }
@@ -248,7 +248,7 @@ html, body {
         color: #fff;
         background: #000;
     }
-    
+
     ::-moz-selection {
         color: #fff;
         background: #000;
@@ -285,7 +285,7 @@ html, body {
     .form_box {
         padding-left: 30px;
         padding-right: 30px;
-        // thought I might like these, I don't. 
+        // thought I might like these, I don't.
         // border-left: 1px solid black;
         // border-right: 1px solid black;
         width: 250px;
@@ -497,7 +497,7 @@ html, body {
     color: #fff;
 
     p {
-        padding-left: 10px; 
+        padding-left: 10px;
         font-size: 12px;
         margin-top: 10px;
     }

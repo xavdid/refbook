@@ -1076,6 +1076,20 @@ post '/reviews/:review_id' do
   redirect '/admin'
 end
 
+def revoke
+end
+get '/revoke/:uid' do
+  redirect back unless admin?
+
+  user_to_update = pull_user(params[:uid])
+  user_to_update["#{params[:which]}Ref"] = false
+  user_to_update.save
+
+  flash[:issue] = "#{settings.test_names[params[:which].to_sym]} ref certification revoked!"
+
+  redirect back
+end
+
 def risk
 end
 get '/risk' do
@@ -1271,14 +1285,6 @@ get '/testing/:which' do
   @attempts_remaining = session[:user]['hrWrittenAttemptsRemaining'].to_i > 0
   @prereqs_passed = true
 
-  # Everyone is on rulebook 8!
-  # @tests = {
-  #   ass: 'jmk53c853467f7c6',
-  #   snitch: "6kr53c853f4914d8",
-  #   head: "qjp53c854a5530ff",
-  #   sample: "xnj533d065451038"
-  # }
-  # RB9
   @tests = {
     ass: 'kcp57ec4ee09e4ba',
     snitch: '4ng57ec4c84268e0',
@@ -1291,9 +1297,9 @@ get '/testing/:which' do
   @rb = 'IQARB16-18'
 
   # refresh user object
-  if params[:which] == 'head'
-    session[:user] = pull_user.to_h
+  session[:user] = pull_user.to_h
 
+  if params[:which] == 'head'
     if !session[:user]['assRef'] || !session[:user]['snitchRef']
       @prereqs_passed = false
     end

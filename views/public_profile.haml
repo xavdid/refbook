@@ -48,6 +48,9 @@
             %i.fa.fa-check
           - else
             %i.fa.fa-clock-o
+          - if admin? && @ref['assRef']
+            %a{href: "/revoke/#{@ref['objectId']}?which=ass", onclick: "return confirm('Are you sure?')"}
+              Revoke
       %tr
         %td
           Snitch Referee
@@ -56,6 +59,9 @@
             %i.fa.fa-check
           - else
             %i.fa.fa-clock-o
+          - if admin? && @ref['snitchRef']
+            %a{href: "/revoke/#{@ref['objectId']}?which=snitch", onclick: "return confirm('Are you sure?')"}
+              Revoke
       %tr
         %td
           Head Referee Written
@@ -64,6 +70,9 @@
             %i.fa.fa-check
           - else
             %i.fa.fa-clock-o
+          - if admin? && @ref['headRef']
+            %a{href: "/revoke/#{@ref['objectId']}?which=head", onclick: "return confirm('Are you sure?')"}
+              Revoke
       %tr
         %td
           Head Referee Field
