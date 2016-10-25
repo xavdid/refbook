@@ -231,16 +231,16 @@ def email_results(email, pass, test)
   end
 end
 
-def register_purchase(text)
-  Mail.deliver do
-    to "trigger@recipe.ifttt.com"
-    from 'beamneocube@gmail.com'
-    subject text
-    html_part do
-      body "asdf"
-    end
-  end
-end
+# def register_purchase(text)
+#   Mail.deliver do
+#     to "trigger@recipe.ifttt.com"
+#     from 'beamneocube@gmail.com'
+#     subject text
+#     html_part do
+#       body "asdf"
+#     end
+#   end
+# end
 
 def notify_of_review(reviewee)
   Mail.deliver do
@@ -253,27 +253,27 @@ def notify_of_review(reviewee)
   end
 end
 
-def report_bad(user_id)
-  Mail.deliver do
-    to 'beamneocube@gmail.com'
-    from 'IRDP <irdp.rdt@gmail.com>'
-    subject 'Someone submitted a test early!'
-    html_part do
-      body "User #{user_id} just tried to finish a test before the alotted amount of time. Check it out!"
-    end
-  end
-end
+# def report_bad(user_id)
+#   Mail.deliver do
+#     to 'beamneocube@gmail.com'
+#     from 'IRDP <irdp.rdt@gmail.com>'
+#     subject 'Someone submitted a test early!'
+#     html_part do
+#       body "User #{user_id} just tried to finish a test before the alotted amount of time. Check it out!"
+#     end
+#   end
+# end
 
-def report_paypal
-  Mail.deliver do
-    to 'beamneocube@gmail.com'
-    from 'IRDP <irdp.rdt@gmail.com>'
-    subject 'paypal failure?'
-    html_part do
-      body "User just maybe didn't get recognized for their hr payment!"
-    end
-  end
-end
+# def report_paypal
+#   Mail.deliver do
+#     to 'beamneocube@gmail.com'
+#     from 'IRDP <irdp.rdt@gmail.com>'
+#     subject 'paypal failure?'
+#     html_part do
+#       body "User just maybe didn't get recognized for their hr payment!"
+#     end
+#   end
+# end
 
 def weekly_testing_update
   # some nice email styling
@@ -524,7 +524,7 @@ get '/cm' do
       # C
       if Time.now.utc - Time.parse(att['time']) < settings.waiting - 500
         flash[:issue] = @layout['issues']['quick']
-        report_bad(att['taker'])
+        # report_bad(att['taker'])
         redirect '/'
       end
     end
@@ -798,11 +798,12 @@ post '/paid' do
     id = params["custom"].split('|')[0].split('=')[1]
     type = params["custom"].split('|')[1].split('=')[1]
   rescue
-    puts "IPN FAILURE"
-    pp params
-    report_paypal
-    status 500
-    return {status: 500, message: "not ok"}.to_json
+    # puts "IPN FAILURE"
+    # pp params
+    # report_paypal
+    # status 500
+    # return {status: 500, message: "not ok"}.to_json
+    return 200
   end
   # unnamed ref payments don't count
   if id == 'Sb33WyBziN'
@@ -819,8 +820,8 @@ post '/paid' do
       halt 400
     end
     user_to_update.save
-    pp "payment registered for #{user_to_update['firstName']} #{user_to_update['lastName']}"
-    register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']} ||| #{user_to_update['region']}")
+    # pp "payment registered for #{user_to_update['firstName']} #{user_to_update['lastName']}"
+    # register_purchase("#irdp #{user_to_update['firstName']} #{user_to_update['lastName']} ||| #{type} ||| #{user_to_update['objectId']} ||| #{user_to_update['region']}")
     return {status: 200, message: "ok"}.to_json
   rescue Exception => e
     puts e.message
