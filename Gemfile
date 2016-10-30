@@ -4,7 +4,7 @@ ruby '2.2.5'
 gem 'sinatra'
 gem 'json'
 gem 'sass'
-gem 'parse-ruby-client', git: 'https://github.com/adelevie/parse-ruby-client.git', ref: '30998e5ca6cc06c090f91e0b0eac93164e002476'
+gem 'parse-ruby-client', git: 'https://github.com/adelevie/parse-ruby-client.git', ref: '6762affe7dc3f51b340cec50ba8509972e55e363'
 # this version should let coffeescript just work, but it doesn't
 gem 'haml', '>= 4'
 gem 'sinatra-flash'

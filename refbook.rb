@@ -82,9 +82,13 @@ configure do
     puts 'Mongo offline!'
   end
 
-  Parse.init :application_id => ENV['REFBOOK_PARSE_APP_ID'],
-           :master_key        => ENV['REFBOOK_PARSE_API_KEY'],
-           :quiet => true
+  set :client, Parse.create({
+    application_id: ENV['REFBOOK_PARSE_APP_ID'],
+    master_key: ENV['REFBOOK_PARSE_API_KEY'],
+    host: ENV['PARSE_HOST'],
+    quiet: true
+  })
+
 
   Mail.defaults do
     delivery_method :smtp, {
@@ -137,14 +141,14 @@ end
 # to save it to the session, tack on .to_h
 def pull_user(id=nil)
   uid = id || session[:user]['objectId']
-  Parse::Query.new("_User").eq("objectId", uid).get.first
+  settings.client.query("_User").eq("objectId", uid).get.first
 end
 
 # this takes the current session (theoretically with edits), saves it,
 # and stores it back in the session. If you're not changing anything, safer
 # to use #pull_user
 def refresh_session!
-  u = Parse::Object.new('_User', session[:user])
+  u = settings.client.object('_User', session[:user])
   session[:user] = u.save.to_h
 end
 
@@ -290,13 +294,13 @@ def weekly_testing_update
       #{td_start}<strong>Time (UTC)</strong></td>
       </tr>"
   begin
-    user_dump = Parse::Query.new("_User").eq('region','QUK').get
+    user_dump = settings.client.query("_User").eq('region','QUK').get
     users = {}
     user_dump.each do |u|
       users[u['objectId']] = name_maker(u)
     end
 
-    test_dump = Parse::Query.new("testAttempt").tap do |q|
+    test_dump = settings.client.query("testAttempt").tap do |q|
       q.limit = 1000
       q.greater_than("updatedAt", Parse::Date.new((Time.now - 604800).to_datetime))
     end.get
@@ -445,11 +449,11 @@ get '/admin' do
     redirect '/'
   else
     @review_list = []
-    reviews = Parse::Query.new("review").tap do |r|
+    reviews = settings.client.query("review").tap do |r|
       r.limit = 1000
     end.get
 
-    ref_dump = Parse::Query.new("_User").tap do |r|
+    ref_dump = settings.client.query("_User").tap do |r|
       r.limit = 1000
     end.get
 
@@ -488,7 +492,7 @@ def api
 end
 get '/api/refs/:refs' do
   ref_ids = params[:refs].split ','
-  Parse::Query.new("_User").tap do |q|
+  settings.client.query("_User").tap do |q|
     q.value_in("objectId",ref_ids)
     q.keys = "email,firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region,profPic"
   end.get.to_json
@@ -507,10 +511,10 @@ get '/cm' do
     redirect '/'
   end
 
-  attempt_list = Parse::Query.new("testAttempt").eq("taker", params[:cm_user_id]).get
+  attempt_list = settings.client.query("testAttempt").eq("taker", params[:cm_user_id]).get
   if attempt_list.empty?
     # A
-    att = Parse::Object.new("testAttempt")
+    att = settings.client.object("testAttempt")
     att["taker"] = params[:cm_user_id]
   else
     att = attempt_list.select do |a|
@@ -518,7 +522,7 @@ get '/cm' do
     end.first
     if att.nil?
       # B
-      att = Parse::Object.new("testAttempt")
+      att = settings.client.object("testAttempt")
       att["taker"] = params[:cm_user_id]
     else
       # C
@@ -574,7 +578,7 @@ def create
 end
 get '/create' do
   @team_list = Set.new
-  teams = Parse::Query.new("_User").tap do |u|
+  teams = settings.client.query("_User").tap do |u|
     u.exists("team")
     u.limit = 1000
   end.get
@@ -589,7 +593,7 @@ end
 post '/create' do
   puts "SIGNING UP WITH KEY #{params[:registration]} FOR REGION #{params[:region]}" if params[:registration] && params[:registration].size > 0
 
-  user = Parse::User.new({
+  user = settings.client.user({
     # username is actually email, secretly
     :username => params[:username].downcase,
     :password => params[:password].rstrip,
@@ -668,7 +672,7 @@ get '/field/:referee' do
   if !admin?
     redirect back
   end
-  ref = Parse::Query.new("_User").eq("objectId", params[:referee]).get.first
+  ref = settings.client.query("_User").eq("objectId", params[:referee]).get.first
   puts ref
   ref['passedFieldTest'] = true
   ref.save
@@ -692,7 +696,7 @@ get '/field_test' do
 end
 
 post '/field_test' do
-  test = Parse::Object.new("fieldTestSignup")
+  test = settings.client.object("fieldTestSignup")
   test["region"] = session[:user]["region"]
   test["name"] = name_maker(session[:user])
   test["email"] = session[:user]["email"]
@@ -716,7 +720,7 @@ get '/field_tests' do
     flash[:issue] = @layout['issues']['admin']
     redirect '/'
   else
-    @tests = Parse::Query.new("fieldTestSignup").tap do |r|
+    @tests = settings.client.query("fieldTestSignup").tap do |r|
       r.limit = 1000
     end.get
   end
@@ -751,11 +755,10 @@ end
 
 post '/login' do
   begin
-    session[:user] = Parse::User.authenticate(params[:username].downcase, params[:password].rstrip).to_h
+    session[:user] = Parse::User.authenticate(params[:username].downcase, params[:password].rstrip, settings.client).to_h
     session.options[:expire_after] = 2592000 # 30 days
     redirect params[:d]
   rescue
-    puts 'rescuing!'
     flash[:issue] = @layout['issues']['credentials']
     redirect "/login?d=#{params[:d]}"
   end
@@ -839,14 +842,14 @@ get '/profile' do
   end
   @review_list = []
 
-  reviews = Parse::Query.new("review").tap do |q|
+  reviews = settings.client.query("review").tap do |q|
     q.eq("referee", Parse::Pointer.new({
       "className" => "_User",
       "objectId"  => session[:user]['objectId']
     }))
   end.get
 
-  @field_tests = Parse::Query.new("fieldTestSignup").tap do |q|
+  @field_tests = settings.client.query("fieldTestSignup").tap do |q|
     q.eq("taker",session[:user]["objectId"])
   end.get
 
@@ -869,7 +872,7 @@ get '/profile' do
 end
 
 get '/profile/:ref_id' do
-  @ref = Parse::Query.new('_User').eq("objectId",params[:ref_id]).get.first
+  @ref = settings.client.query('_User').eq("objectId",params[:ref_id]).get.first
   if @ref.nil?
     flash[:issue] = @layout['issues']['not_found']
     redirect '/search/ALL'
@@ -967,7 +970,7 @@ get '/review' do
 
   @region_keys = settings.region_names
   @region_codes = settings.region_codes
-  q = Parse::Query.new("_User").tap do |u|
+  q = settings.client.query("_User").tap do |u|
     u.limit = 1000
   end.get
   @refs = {}
@@ -1003,7 +1006,7 @@ post '/review' do
   end
 
   # save the review
-  rev = Parse::Object.new('review')
+  rev = settings.client.object('review')
   rev['reviewerName'] = params[:name]
   rev['reviewerEmail'] = params[:email]
   rev['isCaptain'] = params[:captain] ? true : false
@@ -1031,7 +1034,7 @@ post '/review' do
 end
 
 get '/review/:id' do
-  @ref = Parse::Query.new("_User").eq("objectId", params[:id]).get.first
+  @ref = settings.client.query("_User").eq("objectId", params[:id]).get.first
   halt 404 if @ref.nil?
 
   @url = @ref['profPic'] ?
@@ -1052,7 +1055,7 @@ get '/reviews/:review_id' do
     flash[:issue] = @layout['issues']['admin']
     redirect '/'
   else
-    @r = Parse::Query.new("review").eq("objectId", params[:review_id]).tap do |r|
+    @r = settings.client.query("review").eq("objectId", params[:review_id]).tap do |r|
       r.include = "referee"
     end.get.first
     @name = name_maker(@r['referee'])
@@ -1063,8 +1066,8 @@ get '/reviews/:review_id' do
 end
 
 post '/reviews/:review_id' do
-  r = Parse::Query.new("review").eq("objectId", params[:review_id]).get.first
-  reviewee = Parse::Query.new("_User").eq("objectId",r['referee'].parse_object_id).get.first['email']
+  r = settings.client.query("review").eq("objectId", params[:review_id]).get.first
+  reviewee = settings.client.query("_User").eq("objectId",r['referee'].parse_object_id).get.first['email']
   r['show'] = to_bool(params[:show])
   puts "show: ",r['show']
   r['comments'] = params[:comments]
@@ -1137,7 +1140,7 @@ get '/search/:region' do
   # this currently works only with my version of the gem until the PR is merged
   fields = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region"
 
-  q = Parse::Query.new("_User").tap do |r|
+  q = settings.client.query("_User").tap do |r|
     r.limit = 1000
     r.keys = fields
   end
@@ -1305,7 +1308,7 @@ get '/testing/:which' do
       @prereqs_passed = false
     end
   end
-  attempt_list = Parse::Query.new("testAttempt").eq("taker", session[:user]['objectId']).get
+  attempt_list = settings.client.query("testAttempt").eq("taker", session[:user]['objectId']).get
   if !attempt_list.empty?
     # at least 1 attempt
     att = attempt_list.select do |a|
@@ -1331,7 +1334,7 @@ end
 def upload
 end
 post '/upload' do
-  photo = Parse::File.new({
+  photo = settings.client.file({
     body: IO.read(params[:myfile][:tempfile]),
     local_filename: URI.encode(params[:myfile][:filename]),
     content_type: params[:myfile][:type]
