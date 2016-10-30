@@ -913,14 +913,14 @@ get '/reset' do
 end
 
 post '/reset' do
-  begin
-    Parse::User.reset_password(params[:email])
+  # begin
+    Parse::User.reset_password(params[:email], settings.client)
     flash[:issue] = @layout['issues']['reset']
     redirect '/logout'
-  rescue
-    flash[:issue] = @layout['issues']['reset_fail']
-    redirect back
-  end
+  # rescue
+  #   flash[:issue] = @layout['issues']['reset_fail']
+  #   redirect back
+  # end
 end
 
 def release
