@@ -93,7 +93,7 @@ end
 
 # returns true if and only if the user is logged in
 def logged_in?
-  session[:user] != nil
+  !session[:user].nil?
 end
 
 def admin?
@@ -892,7 +892,7 @@ get '/qr' do
   end
   u = "http://refdevelopment.com/review/#{session[:user]['objectId']}"
   @review_qr = "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=#{URI::encode(u)}"
-  display(:qr, false)
+  display
 end
 
 def refresh
@@ -1321,11 +1321,17 @@ post '/upload' do
     content_type: params[:myfile][:type]
   })
 
-  h = photo.save
-  puts h
-  session[:user]['profPic'] = photo.url
-  refresh_session!
-  redirect '/profile'
+  begin
+    h = photo.save
+    puts h
+    session[:user]['profPic'] = photo.url
+    refresh_session!
+    redirect '/profile'
+  rescue Parse::ParseProtocolError
+    puts "INVALID FILENAME #{params[:myfile][:filename]}"
+    flash[:issue] = 'Filename has invalid characters. Can only use letters, numbers, underscores'
+    redirect back
+  end
 end
 
 def valid
@@ -1335,7 +1341,7 @@ get '/validate' do
   if validate(params[:code],session[:user]['region'])
     user_to_update = pull_user
     user_to_update['paid'] = true
-    session[:user] = user_to_update.save
+    session[:user] = user_to_update.save.to_h
     flash[:issue] = @layout['issues']['validate']
     puts "DID VALIDATE"
     redirect '/'
