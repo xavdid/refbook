@@ -9,7 +9,6 @@ require 'time'
 require 'mail'
 require 'rack-google-analytics'
 require 'uri'
-require 'mongo'
 require 'open-uri'
 require 'domainatrix'
 require 'httparty'
@@ -22,8 +21,6 @@ configure do
     # $stdout.sync = true
     require 'dotenv'
     Dotenv.load
-  # else
-    # require 'newrelic_rpm'
   end
 
   enable :sessions
@@ -68,19 +65,6 @@ configure do
   set :layout_hash, JSON.parse(File.read('layout.json'))
 
   set :killed, false
-
-  # mongo is just for registration codes
-  begin
-    set :conn, Mongo::MongoClient.from_uri(ENV['KINECT_URI'])
-    set :keys, settings.conn.db('kinect')['refbook_keys']
-    set :stars, settings.conn.db('kinect')['refbook_stars']
-  rescue
-    set :conn, nil
-    set :keys, nil
-    set :stars, nil
-    # this should only happen on planes and stuff. Otherwise it's probably bad.
-    puts 'Mongo offline!'
-  end
 
   set :client, Parse.create({
     application_id: ENV['REFBOOK_PARSE_APP_ID'],
@@ -159,9 +143,6 @@ def to_bool(str)
 end
 
 def validate(key, region)
-  # pull from mongo
-  # keys = settings.keys.find_one
-
   #re-format just in case
   if key == '' || key.nil?
     return false
@@ -494,7 +475,7 @@ get '/api/refs/:refs' do
   ref_ids = params[:refs].split ','
   settings.client.query("_User").tap do |q|
     q.value_in("objectId",ref_ids)
-    q.keys = "email,firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region,profPic"
+    q.keys = "email,firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,region,profPic"
   end.get.to_json
 end
 
@@ -878,9 +859,9 @@ get '/profile/:ref_id' do
     redirect '/search/ALL'
   else
     if logged_in?
-      @star = settings.stars.find_one({to: params[:ref_id], from: session[:user]['objectId']})
+      # @star = settings.stars.find_one({to: params[:ref_id], from: session[:user]['objectId']})
     else
-      @star = nil
+      # @star = nil
     end
     @title = "#{@ref['firstName']} #{@ref['lastName']}"
     @url = @ref['profPic'] ? @ref['profPic'] : '/images/person_blank.png'
@@ -1138,7 +1119,7 @@ get '/search/:region' do
   # end
 
   # this currently works only with my version of the gem until the PR is merged
-  fields = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,stars,region"
+  fields = "firstName,lastName,team,assRef,snitchRef,headRef,passedFieldTest,region"
 
   q = settings.client.query("_User").tap do |r|
     r.limit = 1000
@@ -1234,14 +1215,14 @@ get '/star/:id' do
 
   if params[:pop] == "1"
     begin
-      settings.stars.remove(star)
+      # settings.stars.remove(star)
       flash[:issue] = "Successfully unstarred"
       redirect "/profile/#{params[:id]}"
     # rescue
     end
   else
     begin
-      settings.stars.save(star)
+      # settings.stars.save(star)
       flash[:issue] = "Successfully starred"
       redirect "/profile/#{params[:id]}"
     rescue
