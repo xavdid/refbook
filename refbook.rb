@@ -219,7 +219,7 @@ end
 # def register_purchase(text)
 #   Mail.deliver do
 #     to "trigger@recipe.ifttt.com"
-#     from 'beamneocube@gmail.com'
+#     from 'irdp.rdt@gmail.com'
 #     subject text
 #     html_part do
 #       body "asdf"
@@ -240,7 +240,7 @@ end
 
 # def report_bad(user_id)
 #   Mail.deliver do
-#     to 'beamneocube@gmail.com'
+#     to 'irdp.rdt@gmail.com'
 #     from 'IRDP <irdp.rdt@gmail.com>'
 #     subject 'Someone submitted a test early!'
 #     html_part do
@@ -251,7 +251,7 @@ end
 
 # def report_paypal
 #   Mail.deliver do
-#     to 'beamneocube@gmail.com'
+#     to 'irdp.rdt@gmail.com'
 #     from 'IRDP <irdp.rdt@gmail.com>'
 #     subject 'paypal failure?'
 #     html_part do
@@ -296,10 +296,10 @@ def weekly_testing_update
       end
     end
 
-    body_text += "</table><br><br>If you've got any questions, reach out to David at beamneocube@gmail.com.<br><br> ~IRDP"
+    body_text += "</table><br><br>If you've got any questions, reach out to David at irdp.rdt@gmail.com.<br><br> ~IRDP"
 
     Mail.deliver do
-      # to 'beamneocube@gmail.com'
+      # to 'irdp.rdt@gmail.com'
       to 'gameplay@quidditchuk.org'
       from 'IRDP <irdp.rdt@gmail.com>'
       subject 'Weekly Test Result Update'

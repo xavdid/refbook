@@ -50,8 +50,8 @@
           #{@text['rtc']}
         #{@text['rtc_blurb']}
   %p
-    #{@text['a4p2']} 
-    #{email_link({subject:'Job Application'})} 
+    #{@text['a4p2']}
+    #{email_link({subject:'Job Application'})}
     #{@text['a4p3']}
 /5
 %p
@@ -63,7 +63,7 @@
   %strong
     #{@text['a']}:
   #{@text['a5']}
-  #{email_link({subject: "New IRDP Contract", text: @text['here']})} 
+  #{email_link({subject: "New IRDP Contract", text: @text['here']})}
   #{@text['a5p2']}
 /6
 %p
@@ -88,12 +88,12 @@
   %strong
     #{@text['a']}:
   #{@text['a7']}
-  #{settings.updated_at.strftime(settings.time_string)} 
+  #{settings.updated_at.strftime(settings.time_string)}
   #{local_time(settings.updated_at,@text['updated'])}
-  #{@text['a7p2']} 
+  #{@text['a7p2']}
   %p
     %strong
-      #{@text['established']} 
+      #{@text['established']}
   %ul.bullets
     %li
       %a{href: "http://www.quidditch.org.au/", target: "_blank"}<
@@ -113,7 +113,7 @@
       (<a href="https://docs.google.com/document/d/1LFB8QX9EC16WUtgCb4LBZeRnTxZkuiw2SQx3dLHVWgQ/edit?usp=sharing" target="_blank">#{@text['contract']}</a>)
   %p
     %strong
-      #{@text['developing']} 
+      #{@text['developing']}
   %ul.bullets
     %li
       %a{href: "#", target: "_blank"}<
@@ -147,11 +147,11 @@
   %br
   %strong
     #{@text['a']}:
-  #{@text['a8']} 
+  #{@text['a8']}
   %a{href: '/logout'}<
     #{@text['logout']}
   #{@text['a8p2']}
-  %a{href: 'mailto:beamneocube@gmail.com'}<
+  %a{href: 'mailto:irdp.rdt@gmail.com'}<
     #{@text['webmaster']}
   #{@text['a8p3']}
 /9
@@ -163,7 +163,7 @@
   %br
   %strong
     #{@text['a']}:
-  #{@text['a9']}  
+  #{@text['a9']}
 
 /10
 %p
@@ -189,4 +189,4 @@
   %a{href: '/donate'}<
     #{@text['a11p2']}
   #{@text['a6p2']}
-  
+

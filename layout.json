@@ -1,5 +1,5 @@
 {
-    
+
     "EN": {
         "irdp": "IRDP",
 
@@ -33,7 +33,7 @@
         "issues": {
             "admin": "Admins only",
             "cm": "Error, no user ID. If you feel like you've reached this in error, contact an administrator",
-            "quick": "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email beamneocube@gmail.com for more info.",
+            "quick": "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email irdp.rdt@gmail.com for more info.",
             "pass": "You passed the ",
             "go_you": "go you!",
             "fail": "You were unsuccessful in your attempt. Try again in a week!",
@@ -91,7 +91,7 @@
         "issues": {
             "admin": "Admins only",
             "cm": "Error, no user ID. If you feel like you've reached this in error, contact an administrator",
-            "quick": "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email beamneocube@gmail.com for more info.",
+            "quick": "I'm not sure how you took the test again so quicky, but it's possible that your results weren't recoreded. Check your status on the relevant testing page, then email irdp.rdt@gmail.com for more info.",
             "pass": "You passed the ",
             "go_you": "go you!",
             "fail": "You were unsuccessful in your attempt. Try again in a week!",
@@ -149,7 +149,7 @@
         "issues": {
             "admin": "Solo amministratori",
             "cm": "Errore, nessun ID utente. Se pensi di aver raggiunto questa pagina per errore, contatta un amministratore",
-            "quick": "Non sono certo di come tu abbia potuto rifare il test così velocemente, ma è possibile che i tuoi risultati non siano stati registrati. Controlla il tuo stato sulla relativa pagina di test, poi contatta tramite email beamneocube@gmail.com per ulteriori informazioni.",
+            "quick": "Non sono certo di come tu abbia potuto rifare il test così velocemente, ma è possibile che i tuoi risultati non siano stati registrati. Controlla il tuo stato sulla relativa pagina di test, poi contatta tramite email irdp.rdt@gmail.com per ulteriori informazioni.",
             "pass": "Hai passato il ",
             "go_you": "vai così!",
             "fail": "Non hai avuto successo nel tuo tentativo. Prova nuovamente in una settimana!",

@@ -21,7 +21,7 @@
   #{@text['confirm']}
 %p
   #{@text['if']}
-  <a href="mailto:beamneocube@gmail.com">#{@text['me']}</a>. 
+  <a href="mailto:irdp.rdt@gmail.com">#{@text['me']}</a>.
   #{@text['confirmation']}
 %hr
 / TODO: this could probably be untangled
@@ -54,11 +54,11 @@
           .selection
             {{ currency.quan + " " + currency.label }}
           #{paypal_button}
-     
+
       - elsif @good
         - if params[:which] == 'head'
-          You've got 
-          #{session[:user]['hrWrittenAttemptsRemaining']} 
+          You've got
+          #{session[:user]['hrWrittenAttemptsRemaining']}
           HR attempts left.
         #{@text['rulebook']}
         %strong
@@ -94,5 +94,5 @@
         #{local_time(@try_unlocked,"#{settings.test_names[params[:which]]}+Referee+Test+Unlocks")}
 - else
   #{display({path: :help, layout: :f, old: :f, alt: :t})}
-          
-        
+
+
